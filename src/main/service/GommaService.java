@@ -20,7 +20,6 @@ public class GommaService {
     public boolean insertGomma (Gomma gomma) {
         return this.gommaDAO.insertGomma(gomma);
     }
-    
 }
 
 

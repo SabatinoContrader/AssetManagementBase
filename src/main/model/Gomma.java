@@ -11,9 +11,6 @@ public class Gomma {
         this.manufacturer = manufacturer;
         this.price = price;
     }
-    
-    public Gomma() {
-    }
 
     public String getModel() {
         return model;
