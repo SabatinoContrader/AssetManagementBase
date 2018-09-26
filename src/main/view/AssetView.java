@@ -10,12 +10,13 @@ import java.util.Scanner;
 
 public class AssetView implements View {
 
-    private AssetService AssetService;
+    private AssetService assetService;
     private String mode;
+    private String tipo;
 
   public AssetView () {
-      this.AssetService = new AssetService();
-      this.mode = "viewAss";
+      this.assetService = new AssetService();
+      this.mode = "all";
   }
 
     @Override
@@ -27,7 +28,7 @@ public class AssetView implements View {
     public void showOptions() {
         switch (mode) {
             case "viewAss":
-                List<Asset> assets = AssetService.getAllAssets();
+                List<Asset> assets = assetService.getAllAssets();
                 System.out.println("----- Asset disponibili -----");
                 System.out.println();
                 assets.forEach(asset -> System.out.println(asset));
@@ -41,8 +42,19 @@ public class AssetView implements View {
             	double prezzo = Double.parseDouble(getInput());
             	System.out.println("descrizione");
             	String descrizione= getInput();
-            	AssetService.insertAsset(new Asset(tipo,prezzo,descrizione));
+            	assetService.insertAsset(new Asset(tipo,prezzo,descrizione));
             	break;
+            	
+            case "delAss":
+            	List<Asset> asset = assetService.getAllAssets();
+            	asset.forEach(u->System.out.println(u));
+            	System.out.println("inserire l'asset da eliminare");
+            	System.out.println("Id:");
+            	 int idasset = Integer.parseInt(getInput());
+            	assetService.DeleteAsset(idasset);
+            	System.out.println("Asset eliminato,ritorno al menu");
+            	
+            	
         }
     }
 
