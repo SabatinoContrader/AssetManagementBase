@@ -2,6 +2,7 @@ package main.controller;
 
 import main.MainDispatcher;
 
+
 public class LoginController implements Controller {
 
     public LoginController() {

@@ -3,9 +3,12 @@ package main;
 import main.controller.GestoreEccezioni;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
+import java.sql.Statement;
+
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.util.Properties;
 
 
@@ -36,6 +39,7 @@ public class ConnectionSingleton {
                 System.out.println("Ho caricato: " + c.getName());
                 String myUrl = "jdbc:" + vendor + "://" + host + ":" + port + "/" + dbName;
                 DriverManagerDataSource dataSource = new DriverManagerDataSource(myUrl, username, password);
+               
                 dataSource.setDriverClassName(driver);
                 connection = dataSource.getConnection();
             } catch (Exception e) {

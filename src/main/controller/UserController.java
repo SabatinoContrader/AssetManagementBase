@@ -2,7 +2,7 @@ package main.controller;
 
 import main.MainDispatcher;
 
-public class GommaController implements Controller {
+public class UserController implements Controller {
 
 
     @Override
@@ -15,8 +15,9 @@ public class GommaController implements Controller {
             case 2:
                 request.put("mode", "all");
                 break;
+            case 3:
+            	request.put("mode", "delete");
         }
-        MainDispatcher.getInstance().callView("Gomma", request);
-
+        MainDispatcher.getInstance().callView("User", request);
     }
 }
