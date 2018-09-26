@@ -26,19 +26,31 @@ public class HomeView implements View {
         System.out.println("");
         System.out.println("-------MENU-------");
         System.out.println("");
-        System.out.println("1) Inserisci Utente");
-        System.out.println("2) Visualizza tutti gli utenti");
-        System.out.println("3) Elimina un utente");
-        System.out.println("4) Logout");
+        System.out.println("1)  Inserisci Utente");
+        System.out.println("2)  Visualizza tutti gli utenti");
+        System.out.println("3)  Elimina un utente");
+        System.out.println("4)  Aggiorna un utente");
+        System.out.println("5)  Inserisci asset");
+        System.out.println("6)  Visualizza asset");
+        System.out.println("7)  Aggiorna asset");
+        System.out.println("8)  Elimina un asset");
+        System.out.println("9)  Assegna asset ad utente");
+        System.out.println("10) Esporta asset assegnati");
+        System.out.println("11) Logout");
         this.choice = Integer.parseInt(getInput());
     	
     }
 
     public void submit() {
-        if (choice < 1 || choice > 4)//ritorna alla home
+        if (choice < 1 || choice > 11)//ritorna alla home
             MainDispatcher.getInstance().callAction("Home", "doControl", null);
-        else if (choice == 4)//logout
+        else if (choice == 11)//logout
             MainDispatcher.getInstance().callAction("Login", "doControl", null);
+        else if (choice > 4 && choice < 9) { //gestione asset
+            Request request = new Request();
+            request.put("choice", choice);
+        	MainDispatcher.getInstance().callAction("Asset","doControl", request);
+        	}
         else {//gestione user
             Request request = new Request();
             request.put("choice", choice);
