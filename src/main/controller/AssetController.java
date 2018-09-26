@@ -15,6 +15,8 @@ public class AssetController implements Controller {
             case 6:
                 request.put("mode", "viewAss");
                 break;
+            case 8:
+            	request.put("mode", "delAss");
         }
         MainDispatcher.getInstance().callView("Asset", request);
 

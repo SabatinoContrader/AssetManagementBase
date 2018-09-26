@@ -20,6 +20,9 @@ public class AssetService {
     public boolean insertAsset (Asset asset) {
         return this.AssetDAO.insertAsset(asset);
     }
+    public boolean DeleteAsset (int idasset) {
+    	return this.AssetDAO.DeleteAsset(idasset);
+    }
 }
 
 

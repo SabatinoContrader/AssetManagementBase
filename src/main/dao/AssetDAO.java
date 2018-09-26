@@ -12,7 +12,7 @@ public class AssetDAO {
 
     private final String QUERY_ALL = "select * from asset";
     private final String QUERY_INSERT = "insert into asset (tipo,prezzo,descrizione) values (?,?,?)";
-
+    private final String QUERY_DEL = "delete from asset where idasset = ?";
     public AssetDAO() {
 
     }
@@ -51,4 +51,16 @@ public class AssetDAO {
         }
 
     }
+    public boolean DeleteAsset(int idasset) {
+    	Connection connection = ConnectionSingleton.getInstance();
+    	try {
+    		PreparedStatement preparedStatement = connection.prepareStatement(QUERY_DEL);
+            preparedStatement.setInt(1,idasset);
+            return preparedStatement.execute();
+    }
+        catch (SQLException e) {
+            GestoreEccezioni.getInstance().gestisciEccezione(e);
+            return false;
+        }	
+}
 }
