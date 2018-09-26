@@ -37,12 +37,17 @@ public class AssetView implements View {
             case "insAss":
             	System.out.println("inserisci dati del nuovo asset");
             	System.out.println("tipo");
+            	int id=0;
             	String tipo= getInput();
             	System.out.println("prezzo");
             	double prezzo = Double.parseDouble(getInput());
             	System.out.println("descrizione");
             	String descrizione= getInput();
+<<<<<<< Updated upstream
             	assetService.insertAsset(new Asset(tipo,prezzo,descrizione));
+=======
+            	AssetService.insertAsset(new Asset(id,tipo,prezzo,descrizione));
+>>>>>>> Stashed changes
             	break;
             	
             case "delAss":

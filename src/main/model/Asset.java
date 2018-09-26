@@ -5,13 +5,22 @@ public class Asset {
 	private String tipo;
 	private double prezzo;
 	private String descrizione;
-
-    public Asset(String tipo, double prezzo, String descrizione) {
+	private int id;
+	
+    public Asset(int id,String tipo, double prezzo, String descrizione) {
+    	this.id = id;
     	this.tipo = tipo;
     	this.prezzo = prezzo;
         this.descrizione = descrizione;
     }
-
+    public int getId() {
+    	return id;
+    	
+    }
+    public void setId(int id) {
+    this.id=id;
+    
+    }
     public String getTipo() {
         return tipo;
     }
@@ -60,6 +69,6 @@ public class Asset {
 
     @Override
     public String toString() {
-        return "\nTipo: " + tipo + "\nDescrizione: " + descrizione + "\nPrezzo: " + prezzo ;
+        return "\nId:" + id + "\nTipo: " + tipo + "\nDescrizione: " + descrizione + "\nPrezzo: " + prezzo ;
     }
 }

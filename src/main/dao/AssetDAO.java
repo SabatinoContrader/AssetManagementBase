@@ -24,10 +24,11 @@ public class AssetDAO {
            Statement statement = connection.createStatement();
            ResultSet resultSet = statement.executeQuery(QUERY_ALL);
            while (resultSet.next()) {
+        	   int id = resultSet.getInt("idasset");
         	   String tipo = resultSet.getString("tipo");
         	   double prezzo = resultSet.getDouble("prezzo");
                String descrizione = resultSet.getString("descrizione");
-               assets.add(new Asset(tipo,prezzo,descrizione));
+               assets.add(new Asset(id,tipo,prezzo,descrizione));
            }
         }
         catch (SQLException e) {

@@ -2,7 +2,7 @@ package main.view;
 
 import main.MainDispatcher;
 import main.controller.Request;
-import sun.applet.Main;
+//import sun.applet.Main;
 
 import java.util.Scanner;
 
@@ -51,6 +51,14 @@ public class HomeView implements View {
             request.put("choice", choice);
         	MainDispatcher.getInstance().callAction("Asset","doControl", request);
         	}
+        else if(choice == 9)
+        {
+        	Request request = new Request ();
+        	request.put("choice",choice);
+            MainDispatcher.getInstance().callAction("Userasset", "doControl", request);
+
+        	
+        }
         else {//gestione user
             Request request = new Request();
             request.put("choice", choice);
