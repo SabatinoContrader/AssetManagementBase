@@ -43,11 +43,8 @@ public class AssetView implements View {
             	double prezzo = Double.parseDouble(getInput());
             	System.out.println("descrizione");
             	String descrizione= getInput();
-<<<<<<< Updated upstream
-            	assetService.insertAsset(new Asset(tipo,prezzo,descrizione));
-=======
-            	AssetService.insertAsset(new Asset(id,tipo,prezzo,descrizione));
->>>>>>> Stashed changes
+            	assetService.insertAsset(new Asset(id,tipo,prezzo,descrizione));
+
             	break;
             	
             case "delAss":
