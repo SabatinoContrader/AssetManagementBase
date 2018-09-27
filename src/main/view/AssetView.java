@@ -44,7 +44,6 @@ public class AssetView implements View {
             	System.out.println("descrizione");
             	String descrizione= getInput();
             	assetService.insertAsset(new Asset(id,tipo,prezzo,descrizione));
-
             	break;
             	
             case "delAss":

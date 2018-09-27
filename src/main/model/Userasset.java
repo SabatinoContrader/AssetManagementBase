@@ -13,6 +13,7 @@ public class Userasset {
     	this.orainizio = orainizio;
         this.orafine = orafine;
     }
+    
     public int getIduser() {
     	return iduser;
     	

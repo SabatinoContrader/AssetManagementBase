@@ -41,6 +41,13 @@ public class UserassetView implements View {
                 System.out.println("----- Asset assegnati -----");
                 System.out.println();
                 userassets.forEach(userasset -> System.out.println(userasset));
+                
+                List<User> users = userService.getAllClientiAss();
+                System.out.println("i clienti con un asset assegnato sono:");
+                System.out.println();
+                users.forEach(user -> System.out.println(user));
+                
+                
                 break;
 
             case "insUserAss":
@@ -71,6 +78,8 @@ public class UserassetView implements View {
             	String orafine= getInput();
             	UserassetService.insertUserasset(new Userasset(iduser,idasset,orainizio,orafine));
             	break;
+            	
+            	
                 }
         }
     }

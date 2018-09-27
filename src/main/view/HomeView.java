@@ -35,16 +35,17 @@ public class HomeView implements View {
         System.out.println("7)  Aggiorna asset");
         System.out.println("8)  Elimina un asset");
         System.out.println("9)  Assegna asset ad utente");
-        System.out.println("10) Esporta asset assegnati");
-        System.out.println("11) Logout");
+        System.out.println("10) Visualizza asset assegnati");
+        System.out.println("11) Esporta asset assegnati");
+        System.out.println("12) Logout");
         this.choice = Integer.parseInt(getInput());
     	
     }
 
     public void submit() {
-        if (choice < 1 || choice > 11)//ritorna alla home
+        if (choice < 1 || choice > 12)//ritorna alla home
             MainDispatcher.getInstance().callAction("Home", "doControl", null);
-        else if (choice == 11)//logout
+        else if (choice == 12)//logout
             MainDispatcher.getInstance().callAction("Login", "doControl", null);
         else if (choice > 4 && choice < 9) { //gestione asset
             Request request = new Request();
@@ -53,6 +54,11 @@ public class HomeView implements View {
         	}
         else if(choice == 9)
         {
+        	Request request = new Request ();
+        	request.put("choice",choice);
+            MainDispatcher.getInstance().callAction("Userasset", "doControl", request);
+        }
+        else if(choice == 10) {
         	Request request = new Request ();
         	request.put("choice",choice);
             MainDispatcher.getInstance().callAction("Userasset", "doControl", request);

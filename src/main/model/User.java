@@ -24,6 +24,13 @@ public class User {
         this.ruolo = ruolo;
     }
 
+    public User(int idutente, String username, String nome, String cognome, String partitaiva) {
+    	this.idutente=idutente;
+    	this.username = username;
+    	this.nome = nome;
+        this.cognome = cognome;
+        this.partitaiva = partitaiva;
+    }
     
     
     
