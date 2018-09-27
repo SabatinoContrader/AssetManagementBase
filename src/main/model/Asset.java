@@ -63,12 +63,12 @@ public class Asset {
 //        result = model != null ? model.hashCode() : 0;
 //        result = 31 * result + (manufacturer != null ? manufacturer.hashCode() : 0);
 //        temp = Double.doubleToLongBits(price);
-//        result = 31 * result + (int) (temp ^ (temp >>> 32));
+//        result = 31 * result + (int) (temp ^ (temp >>> 32)); 
 //        return result;
 //    }
 
     @Override
     public String toString() {
-        return "\nId:" + id + "\nTipo: " + tipo + "\nDescrizione: " + descrizione + "\nPrezzo: " + prezzo ;
+        return "\nId:" + id + "\n1)Tipo: " + tipo + "\n2)Prezzo: " + prezzo + "\n3)Descrizione: " + descrizione +"\n";
     }
 }

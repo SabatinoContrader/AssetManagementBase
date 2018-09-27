@@ -1,5 +1,6 @@
 package main.view;
 import main.MainDispatcher;
+import main.controller.AssetController;
 import main.controller.Request;
 import main.model.Asset;
 import main.dao.AssetDAO;
@@ -13,6 +14,9 @@ public class AssetView implements View {
     private AssetService assetService;
     private String mode;
     private String tipo;
+    private List<Asset> listAsset;
+    
+    private Request request;
 
   public AssetView () {
       this.assetService = new AssetService();
@@ -22,16 +26,23 @@ public class AssetView implements View {
     @Override
     public void showResults(Request request) {
        this.mode  = (String) request.get("mode");
+       
+       this.request=request;
+       listAsset = (List<Asset>) request.get("visualizza");
+       
+       
+       
     }
 
     @Override
     public void showOptions() {
+    	
+    	
         switch (mode) {
             case "viewAss":
-                List<Asset> assets = assetService.getAllAssets();
                 System.out.println("----- Asset disponibili -----");
                 System.out.println();
-                assets.forEach(asset -> System.out.println(asset));
+                listAsset.forEach(asset -> System.out.println(asset));
                 break;
 
             case "insAss":
@@ -43,19 +54,80 @@ public class AssetView implements View {
             	double prezzo = Double.parseDouble(getInput());
             	System.out.println("descrizione");
             	String descrizione= getInput();
-            	assetService.insertAsset(new Asset(id,tipo,prezzo,descrizione));
+            	
+            	
+            	request = new Request();
+            	request.put("asset",new Asset(id,tipo,prezzo,descrizione));
+            	request.put("choice",10);
+            	
+            	MainDispatcher.getInstance().callAction("Asset", "doControl", request);
+            	
+            	//assetService.insertAsset(new Asset(id,tipo,prezzo,descrizione));
 
             	break;
             	
             case "delAss":
-            	List<Asset> asset = assetService.getAllAssets();
-            	asset.forEach(u->System.out.println(u));
+            	listAsset.forEach(asset -> System.out.println(asset));
+            	//List<Asset> asset = assetService.getAllAssets();
+            	//asset.forEach(u->System.out.println(u));
             	System.out.println("inserire l'asset da eliminare");
             	System.out.println("Id:");
-            	 int idasset = Integer.parseInt(getInput());
-            	assetService.DeleteAsset(idasset);
+            	int idasset = Integer.parseInt(getInput());
+            	 
+            	//assetService.DeleteAsset(idasset);
+            	
+            	request.put("idAsset",idasset);
+            	request.put("choice",11);
+            	MainDispatcher.getInstance().callAction("Asset", "doControl", request);
+            	
             	System.out.println("Asset eliminato,ritorno al menu");
             	
+            	break;
+            	
+            case "upAss":
+            	listAsset.forEach(asset -> System.out.println(asset));
+            	//listAsset = assetService.getAllAssets();
+                System.out.println();
+                
+                
+                try {
+                	System.out.println("Inserisci l'id dell'asset che vuoi aggiornare:");
+                	idasset = Integer.parseInt(getInput());
+                }catch(Exception e) {//Controllo id valido
+           		 System.out.println("L'ID dell'asset deve essere un intero");break;
+           	 	}
+                
+                System.out.println("Inserisci il numero del campo che vuoi modificare:");
+           	 	int num=Integer.parseInt(getInput());
+           	 	String campo="";
+           	 
+           	 	switch(num) {
+           	 		case 1: campo="tipo";break;
+           	 		case 2: campo="prezzo";break;
+           	 		case 3: campo="descrizione";break;
+           	 	}
+           	 	
+           	 	System.out.println("Inserisci il nuovo "+campo+" dell'asset:");
+           	 	String newCampo=getInput();
+        	 
+             
+             
+             
+           	 	//Request request = new Request();
+           	 	request.put("idasset", idasset);
+           	 	request.put("newCampo", newCampo);
+           	 	request.put("campo", campo);
+            
+           	 	
+           	 	
+           	 	request.put("choice",12);
+           	 	MainDispatcher.getInstance().callAction("Asset", "doControl", request);
+           	 	
+           	 	/*
+           	 	boolean flag = assetService.UpdateAsset(request);
+           	 	if(!flag)System.out.println("Id "+ idasset+" non trovato");
+           	 	break;
+           	 	*/
             	
         }
     }

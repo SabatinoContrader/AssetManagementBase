@@ -1,5 +1,6 @@
 package main.service;
 
+import main.controller.Request;
 import main.dao.AssetDAO;
 import main.model.Asset;
 
@@ -25,6 +26,10 @@ public class AssetService {
     }
     public boolean DeleteAsset (int idasset) {
     	return this.assetDAO.DeleteAsset(idasset);
+    }
+    
+    public boolean UpdateAsset(Request request) {
+    	return this.assetDAO.UpdateAsset(request);
     }
 }
 
