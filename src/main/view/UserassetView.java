@@ -43,9 +43,9 @@ public class UserassetView implements View {
                 userassets.forEach(userasset -> System.out.println(userasset));
                 
                 List<User> users = userService.getAllClientiAss();
-                System.out.println("i clienti con un asset assegnato sono:");
+                System.out.println("\n\ni clienti con un asset assegnato sono:");
                 System.out.println();
-                users.forEach(user -> System.out.println(user));
+                users.forEach(user -> System.out.println(user.stampa()));
                 
                 
                 break;

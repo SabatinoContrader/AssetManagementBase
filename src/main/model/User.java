@@ -205,4 +205,9 @@ public class User {
         		"\n7)Mail: "+mail+"\n8)Partita Iva: "+partitaiva+"\n9)Ruolo: "+ruolo + "\n";
 
     }
-}
+    public String stampa() {
+    return "\nId Utente"+idutente+"\nUsername: "+username+"\nNome: "+nome+"\nCognome: "+cognome+"\nPartita iva: "+partitaiva;
+    }
+    	
+    }
+
