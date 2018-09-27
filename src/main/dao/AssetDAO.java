@@ -2,6 +2,7 @@ package main.dao;
 
 import main.ConnectionSingleton;
 import main.controller.GestoreEccezioni;
+import main.controller.Request;
 import main.model.Asset;
 
 import java.sql.*;
@@ -10,6 +11,8 @@ import java.util.List;
 
 public class AssetDAO {
 
+	String param="";
+	
     private final String QUERY_ALL = "select * from asset";
     private final String QUERY_INSERT = "insert into asset (tipo,prezzo,descrizione) values (?,?,?)";
     private final String QUERY_DEL = "delete from asset where idasset = ?";
@@ -83,5 +86,28 @@ public class AssetDAO {
             GestoreEccezioni.getInstance().gestisciEccezione(e);
             return false;
         }	
-}
+    }
+    
+    public boolean UpdateAsset(Request request) {
+    	
+    	 Connection connection = ConnectionSingleton.getInstance();
+         try {
+             
+         	param=(String)request.get("campo");
+         	
+             PreparedStatement preparedStatement = connection.prepareStatement("update asset set "+param+"=? where idasset=?");
+             
+             preparedStatement.setString(1, (String)request.get("newCampo"));
+             preparedStatement.setInt(2, (Integer)request.get("idasset"));
+             
+             preparedStatement.execute();
+             
+             return true;
+         }
+         catch (SQLException e) {
+             GestoreEccezioni.getInstance().gestisciEccezione(e);
+             return false;
+         }
+    	
+    }
 }

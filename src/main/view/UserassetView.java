@@ -61,10 +61,10 @@ public class UserassetView implements View {
                 System.out.println();
                 assets.forEach(asset -> System.out.println(asset));
                 
-                List<User> users = userService.getAllClienti();
+                List<User> users2 = userService.getAllClienti();
                 System.out.println("----- Clienti -----");
                 System.out.println();
-                users.forEach(user -> System.out.println(user));
+                users2.forEach(user -> System.out.println(user));
                 
             	
             	System.out.println("\ninserisci dati");

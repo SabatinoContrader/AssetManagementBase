@@ -1,6 +1,7 @@
 package main.view;
 import main.MainDispatcher;
 import main.controller.Request;
+import main.model.Asset;
 import main.model.User;
 import main.dao.UserDAO;
 import main.service.UserService;
@@ -13,6 +14,10 @@ public class UserView implements View{
     private UserService userService;
     private String mode;
     private String username;
+    private List<User> listUser;
+    
+    private Request request;
+    
    
     
   public UserView () {
@@ -23,18 +28,20 @@ public class UserView implements View{
     @Override
     public void showResults(Request request) {
        this.mode  = (String) request.get("mode");
-  
+       listUser = (List<User>) request.get("visualizzaUtenti");
     }
 
     @Override
     public void showOptions() {
+    	
         switch (mode) {
             case "all":
                 List<User> users = userService.getAllUsers();
-                System.out.println("----- Utente che hanno avuto accesso ad un assets -----");
+                System.out.println("----- Ecco tutti gli utenti -----");
                 System.out.println();
-                users.forEach(u -> System.out.println(u));
+                listUser.forEach(user -> System.out.println(user));
                 break;
+                
             case "insert":
                 Scanner scanner = new Scanner(System.in);
                 System.out.println("Inserisci i dati dell'utente:");
@@ -54,25 +61,46 @@ public class UserView implements View{
                 String partitaiva = getInput();
                 System.out.println("Ruolo:");
                 String ruolo = getInput();
-       
-                userService.insertUser(new User(0,username,password,nome,cognome,telefono,mail,partitaiva,ruolo));
+                
+                request = new Request();
+            	request.put("user",new User(0,username,password,nome,cognome,telefono,mail,partitaiva,ruolo));
+            	request.put("choice",13);
+            	
+            	MainDispatcher.getInstance().callAction("User", "doControl", request);
+            	
+            	
+            	
+                //userService.insertUser(new User(0,username,password,nome,cognome,telefono,mail,partitaiva,ruolo));
                 break;
                 
             case "delete":
-            	List<User> listUser = userService.getAllUsers();
-            	listUser.forEach(u -> System.out.println(u));
+            	listUser.forEach(user -> System.out.println(user));
+            	//List<User> listUser = userService.getAllUsers();
+            	//listUser.forEach(u -> System.out.println(u));
             	System.out.println("Inserisci lo username dell'utente da eliminare:");
                 System.out.println("Username:");
                 username = getInput();
-            	userService.deleteUser(username);
+                
+                request = new Request();
+                request.put("myUsername",username);
+            	request.put("choice",14);
+            	MainDispatcher.getInstance().callAction("User", "doControl", request);
+            	
+            	
+                
+            	System.out.println("Utente eliminato,ritorno al menu");
+                
+            	//userService.deleteUser(username);
             	break;
             	
             case "update":
             	 scanner = new Scanner(System.in);
-            	 
+            	 listUser.forEach(user -> System.out.println(user));
+            	 /*
+            	 System.out.println(listUser.isEmpty());
             	 for(User u: userService.getAllUsers()) {
             		 System.out.println(u);
-            	 }
+            	 }*/
             	 
             	 int idutente=0;
             	 try {
@@ -89,10 +117,12 @@ public class UserView implements View{
             			 trovato=true;
             		 }
             	 }
+                 /*
                  if(!trovato) {//Controllo id presente nel db
                 	 System.out.println("ID "+idutente+" non trovato!"); 
                 	 break;
                  }
+                 */
                  
                  //Cambia il numero con il nome e effettua i controlli
             	 System.out.println("Inserisci il numero del campo che vuoi modificare:");
@@ -124,11 +154,11 @@ public class UserView implements View{
                  request.put("username", username);
                  request.put("campo", campo);
                 
-                 
+                 /*
                  boolean flag = userService.updateUser(request);
                  if(!flag)System.out.println("Id "+ idutente+" non trovato");
             	 break;
-            	 
+            	 */
         }
     }
 
