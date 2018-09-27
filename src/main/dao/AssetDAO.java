@@ -13,6 +13,8 @@ public class AssetDAO {
     private final String QUERY_ALL = "select * from asset";
     private final String QUERY_INSERT = "insert into asset (tipo,prezzo,descrizione) values (?,?,?)";
     private final String QUERY_DEL = "delete from asset where idasset = ?";
+    private final String QUERY_ALLUSERASSN = "select b.idasset,tipo,prezzo,descrizione from userasset as o right join asset as b on o.idasset=b.idasset where o.idasset is null";
+
     public AssetDAO() {
 
     }
@@ -36,7 +38,25 @@ public class AssetDAO {
         }
         return assets;
     }
-
+    public List<Asset> getAllAssetsN () {
+        List<Asset> assets = new ArrayList<>();
+        Connection connection = ConnectionSingleton.getInstance();
+        try {
+           Statement statement = connection.createStatement();
+           ResultSet resultSet = statement.executeQuery(QUERY_ALLUSERASSN);
+           while (resultSet.next()) {
+        	   int id = resultSet.getInt("idasset");
+        	   String tipo = resultSet.getString("tipo");
+        	   double prezzo = resultSet.getDouble("prezzo");
+               String descrizione = resultSet.getString("descrizione");
+               assets.add(new Asset(id,tipo,prezzo,descrizione));
+           }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return assets;
+    }
     public boolean insertAsset(Asset asset) {
         Connection connection = ConnectionSingleton.getInstance();
         try {

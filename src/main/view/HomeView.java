@@ -56,8 +56,6 @@ public class HomeView implements View {
         	Request request = new Request ();
         	request.put("choice",choice);
             MainDispatcher.getInstance().callAction("Userasset", "doControl", request);
-
-        	
         }
         else {//gestione user
             Request request = new Request();

@@ -1,8 +1,12 @@
 package main.view;
 import main.MainDispatcher;
 import main.controller.Request;
+import main.model.Asset;
+import main.model.User;
 import main.model.Userasset;
 import main.dao.UserassetDAO;
+import main.service.AssetService;
+import main.service.UserService;
 import main.service.UserassetService;
 
 import java.util.List;import java.util.Scanner;
@@ -10,12 +14,18 @@ import java.util.List;import java.util.Scanner;
 public class UserassetView implements View {
 
     private UserassetService UserassetService;
+    
+    private String username;
     private String mode;
+    private UserService userService;
+    private AssetService assetService;
 
-  public UserassetView () {
-      this.UserassetService = new UserassetService();
-      this.mode = "viewAss";
-  }
+	public UserassetView () {
+	    this.UserassetService = new UserassetService();
+	    this.userService = new UserService();
+	    this.assetService = new AssetService();
+	    this.mode = "viewAss";
+	}
 
     @Override
     public void showResults(Request request) {
@@ -24,7 +34,8 @@ public class UserassetView implements View {
 
     @Override
     public void showOptions() {
-        switch (mode) {
+    
+		switch (mode) {
             case "viewUserAss":
                 List<Userasset> userassets = UserassetService.getAllUserassets();
                 System.out.println("----- Asset assegnati -----");
@@ -33,7 +44,23 @@ public class UserassetView implements View {
                 break;
 
             case "insUserAss":
-            	System.out.println("inserisci dati");
+            	List<Asset> assets = assetService.getAllAssetsN();
+            	if(assets.isEmpty()) {
+                System.out.println("nessun asset disponibile");
+                break;}
+            	else 
+            	{
+                System.out.println("----- Asset non assegnati -----");
+                System.out.println();
+                assets.forEach(asset -> System.out.println(asset));
+                
+                List<User> users = userService.getAllClienti();
+                System.out.println("----- Clienti -----");
+                System.out.println();
+                users.forEach(user -> System.out.println(user));
+                
+            	
+            	System.out.println("\ninserisci dati");
             	System.out.println("inserisci id utente");
             	int iduser=Integer.parseInt(getInput());
             	System.out.println("inserisci id asset");
@@ -44,6 +71,7 @@ public class UserassetView implements View {
             	String orafine= getInput();
             	UserassetService.insertUserasset(new Userasset(iduser,idasset,orainizio,orafine));
             	break;
+                }
         }
     }
 

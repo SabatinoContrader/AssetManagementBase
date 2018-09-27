@@ -17,7 +17,7 @@ public class UserassetDAO {
 
     private final String QUERY_INSUSERASS = "insert into userasset(iduser,idasset,orainizio,orafine) values (?,?,?,?) ";
     private final String QUERY_ALLUSERASS = "select * from userasset";
-
+    
     
     public List<Userasset> getAllUserassets () {
         List<Userasset> userassets = new ArrayList<>();
@@ -38,6 +38,8 @@ public class UserassetDAO {
         }
         return userassets;
     }
+    
+   
     
     public boolean insertUserasset(Userasset userasset) {
         Connection connection = ConnectionSingleton.getInstance();

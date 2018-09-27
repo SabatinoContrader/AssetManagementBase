@@ -7,21 +7,24 @@ import java.util.List;
 
 public class AssetService {
 
-    private AssetDAO AssetDAO;
+    private AssetDAO assetDAO;
 
     public AssetService() {
-        this.AssetDAO = new AssetDAO();
+        this.assetDAO = new AssetDAO();
     }
 
     public List<Asset> getAllAssets () {
-        return this.AssetDAO.getAllAssets();
+        return this.assetDAO.getAllAssets();
+    }
+    public List<Asset> getAllAssetsN () {
+        return this.assetDAO.getAllAssetsN();
     }
 
     public boolean insertAsset (Asset asset) {
-        return this.AssetDAO.insertAsset(asset);
+        return this.assetDAO.insertAsset(asset);
     }
     public boolean DeleteAsset (int idasset) {
-    	return this.AssetDAO.DeleteAsset(idasset);
+    	return this.assetDAO.DeleteAsset(idasset);
     }
 }
 

@@ -17,6 +17,9 @@ public class UserService {
     public List<User> getAllUsers () {
         return this.userDAO.getAllUsers();
     }
+    public List<User> getAllClienti () {
+        return this.userDAO.getAllClienti();
+    }
 
     public boolean insertUser (User user) {
         return this.userDAO.insertUser(user);

@@ -16,12 +16,36 @@ public class UserDAO {
 	private final String QUERY_ALL = "select * from user";
     private final String QUERY_INSERT = "insert into user (idutente, username, password, nome, cognome, telefono, mail, partitaiva, ruolo) values (?,?,?,?,?,?,?,?,?)";
     private final String QUERY_DELETE = "delete from user where username=?";
+    private final String QUERY_CLIENTI = "select * from user where ruolo='cliente'";
     //private final String QUERY_UPDATE = "update user set "+param+"=? where idutente=?";
     
     public UserDAO() {
 
     }
-
+    public List<User> getAllClienti () {
+        List<User> listUsers = new ArrayList<>();
+        Connection connection = ConnectionSingleton.getInstance();
+        try {
+           Statement statement = connection.createStatement();
+           ResultSet resultSet = statement.executeQuery(QUERY_CLIENTI);
+           while (resultSet.next()) {
+        	   int idutente = resultSet.getInt("idutente");
+        	   String username = resultSet.getString("username");
+        	   String password = resultSet.getString("password");
+        	   String nome = resultSet.getString("nome");
+        	   String cognome = resultSet.getString("cognome");
+        	   String telefono = resultSet.getString("telefono");
+        	   String mail = resultSet.getString("mail");
+        	   String partitaiva = resultSet.getString("partitaiva");
+        	   String ruolo = resultSet.getString("ruolo");
+        	   listUsers.add(new User(idutente, username, password,nome,cognome,telefono,mail,partitaiva,ruolo));
+           }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return listUsers;
+    }
     public List<User> getAllUsers () {
         List<User> listUsers = new ArrayList<>();
         Connection connection = ConnectionSingleton.getInstance();

@@ -12,9 +12,6 @@ public class UserassetController implements Controller {
             case 9:
             	request.put("mode", "insUserAss");
             	break;
-            case 6:
-                request.put("mode", "viewAss");
-                break;
         }
         MainDispatcher.getInstance().callView("Userasset", request);
 
