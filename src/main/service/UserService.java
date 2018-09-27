@@ -1,5 +1,6 @@
 package main.service;
 
+import main.controller.Request;
 import main.dao.UserDAO;
 import main.model.User;
 
@@ -23,6 +24,10 @@ public class UserService {
     
     public boolean deleteUser(String username) {
     	return this.userDAO.deleteUser(username);
+    }
+    
+    public boolean updateUser(Request request) {
+    	return this.userDAO.udpateUser(request);
     }
 }
 

@@ -65,7 +65,70 @@ public class UserView implements View{
                 System.out.println("Username:");
                 username = getInput();
             	userService.deleteUser(username);
+            	break;
             	
+            case "update":
+            	 scanner = new Scanner(System.in);
+            	 
+            	 for(User u: userService.getAllUsers()) {
+            		 System.out.println(u);
+            	 }
+            	 
+            	 int idutente=0;
+            	 try {
+            		 System.out.println("Inserisci l'id riferito all'utente da aggiornare:");
+            		 idutente=Integer.parseInt(getInput());
+            	 }catch(Exception e) {//Controllo id valido
+            		 System.out.println("L'ID Utente deve essere un intero");break;
+            	 }
+                 
+                 
+                 boolean trovato=false;
+                 for(User u: userService.getAllUsers()) {
+            		 if(u.getIdutente() == idutente) {
+            			 trovato=true;
+            		 }
+            	 }
+                 if(!trovato) {//Controllo id presente nel db
+                	 System.out.println("ID "+idutente+" non trovato!"); 
+                	 break;
+                 }
+                 
+                 //Cambia il numero con il nome e effettua i controlli
+            	 System.out.println("Inserisci il numero del campo che vuoi modificare:");
+            	 int num=Integer.parseInt(getInput());
+            	 String campo="";
+            	 
+            	 switch(num) {
+            	 	case 1: campo="idutente";break;
+            	 	case 2: campo="username";break;
+            	 	case 3: campo="password";break;
+            	 	case 4: campo="nome";break;
+            	 	case 5: campo="cognome";break;
+            	 	case 6: campo="telefono";break;
+            	 	case 7: campo="mail";break;
+            	 	case 8: campo="partitaiva";break;
+            	 	case 9: campo="ruolo";break;
+            	 }
+            	 
+            	 
+            	 
+            	 System.out.println("Inserisci il nuovo "+campo+" dell'utente:");
+            	 username=getInput();
+            	 
+                 
+                 
+                 
+                 Request request = new Request();
+                 request.put("idutente", idutente);
+                 request.put("username", username);
+                 request.put("campo", campo);
+                
+                 
+                 boolean flag = userService.updateUser(request);
+                 if(!flag)System.out.println("Id "+ idutente+" non trovato");
+            	 break;
+            	 
         }
     }
 

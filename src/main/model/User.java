@@ -194,7 +194,8 @@ public class User {
 
     @Override
     public String toString() {
-        return "Username: " + username + "\nNome: " + nome + "\nCognome: "+cognome+"\n";
+        return "1)ID Utente: "+idutente+"\n2)Username: " + username + "\n3)Password: "+password+"\n4)Nome: " + nome + "\n5)Cognome: "+cognome+"\n6)Telefono: "+telefono+
+        		"\n7)Mail: "+mail+"\n8)Partita Iva: "+partitaiva+"\n9)Ruolo: "+ruolo + "\n";
 
     }
 }

@@ -2,6 +2,7 @@ package main.dao;
 
 import main.ConnectionSingleton;
 import main.controller.GestoreEccezioni;
+import main.controller.Request;
 import main.model.User;
 
 import java.sql.*;
@@ -9,11 +10,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDAO {
-
+	
+	String param="";
+	
 	private final String QUERY_ALL = "select * from user";
     private final String QUERY_INSERT = "insert into user (idutente, username, password, nome, cognome, telefono, mail, partitaiva, ruolo) values (?,?,?,?,?,?,?,?,?)";
     private final String QUERY_DELETE = "delete from user where username=?";
-
+    //private final String QUERY_UPDATE = "update user set "+param+"=? where idutente=?";
     
     public UserDAO() {
 
@@ -72,6 +75,26 @@ public class UserDAO {
             PreparedStatement preparedStatement = connection.prepareStatement(QUERY_DELETE);
             
             preparedStatement.setString(1, username);
+            return preparedStatement.execute();
+        }
+        catch (SQLException e) {
+            GestoreEccezioni.getInstance().gestisciEccezione(e);
+            return false;
+        }
+
+    }
+    
+    public boolean udpateUser(Request request) {
+        Connection connection = ConnectionSingleton.getInstance();
+        try {
+            
+        	param=(String)request.get("campo");
+        	
+            PreparedStatement preparedStatement = connection.prepareStatement("update user set "+param+"=? where idutente=?");
+            
+            preparedStatement.setString(1, (String)request.get("username"));
+            preparedStatement.setInt(2, (Integer)request.get("idutente"));
+            
             return preparedStatement.execute();
         }
         catch (SQLException e) {

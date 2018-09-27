@@ -17,6 +17,8 @@ public class UserController implements Controller {
                 break;
             case 3:
             	request.put("mode", "delete");
+            case 4:
+            	request.put("mode", "update");
         }
         MainDispatcher.getInstance().callView("User", request);
     }
