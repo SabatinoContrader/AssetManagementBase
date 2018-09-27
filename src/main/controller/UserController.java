@@ -8,42 +8,54 @@ import main.service.UserService;
 public class UserController implements Controller {
 
 	private UserService userService;
-
+	
     @Override
     public void doControl(Request request) {
-    	userService = new UserService();
-    	
-        int choice = (int) request.get("choice");
-        switch (choice) {
-            case 1:
-               request.put("mode", "insert");
-               MainDispatcher.getInstance().callView("User", request);
-               break;
-            case 2:
-                request.put("mode", "all");
-                request.put("visualizzaUtenti", userService.getAllUsers());
+    	this.userService = new UserService();
+    	String choice = request.get("choice").toString();
+        if (choice != null) {
+        	switch (choice) {
+            case "usersManagement":
+            	MainDispatcher.getInstance().callView("UserHome", request);
+            	break;
+            case "insert":
+                request.put("mode", "insert");
                 MainDispatcher.getInstance().callView("User", request);
                 break;
-            case 3:
-            	request.put("mode", "delete");
+            case "getList":
+                request.put("mode", "getList");
+                request.put("visualizzaUtenti", this.userService.getAllUsers());
+                MainDispatcher.getInstance().callView("User", request);
+                break;
+            case "update":
+                request.put("mode", "update");
             	request.put("visualizzaUtenti", userService.getAllUsers());
             	MainDispatcher.getInstance().callView("User", request);
-            	break;
-            case 4:
-            	request.put("mode", "update");
+                break;
+            case "delete":
             	request.put("visualizzaUtenti", userService.getAllUsers());
-            	MainDispatcher.getInstance().callView("User", request);
-            	break;
-            case 13:
-            	userService.insertUser((User)request.get("user"));
-            	break;
-            case 14:
-            	userService.deleteUser((String)request.get("myUsername"));
-            	break;
-            case 15:
-            	userService.updateUser(request);
-            	break;
+                request.put("mode", "delete");
+                MainDispatcher.getInstance().callView("User", request);
+                break;
+            case "insertUser":
+            	this.userService.insertUser((User)request.get("newUser"));
+            	MainDispatcher.getInstance().callView("UserHome", request);
+                break;
+            case "deleteUser":
+            	this.userService.deleteUser(request.get("delUser").toString());
+            	MainDispatcher.getInstance().callView("UserHome", request);
+                break;
+            case "updateUser":
+            	this.userService.updateUser(request);
+            	MainDispatcher.getInstance().callView("UserHome", request);
+                break;
+            case "getListUsers":
+            	MainDispatcher.getInstance().callView("UserHome", request);
+                break;
+        	}
         }
-        //MainDispatcher.getInstance().callView("User", request);
+        else {
+        	MainDispatcher.getInstance().callView("UserHome", null);
+        }
     }
 }

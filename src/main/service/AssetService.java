@@ -24,11 +24,11 @@ public class AssetService {
     public boolean insertAsset (Asset asset) {
         return this.assetDAO.insertAsset(asset);
     }
-    public boolean DeleteAsset (int idasset) {
+    public boolean deleteAsset (int idasset) {
     	return this.assetDAO.DeleteAsset(idasset);
     }
     
-    public boolean UpdateAsset(Request request) {
+    public boolean updateAsset(Request request) {
     	return this.assetDAO.UpdateAsset(request);
     }
 }

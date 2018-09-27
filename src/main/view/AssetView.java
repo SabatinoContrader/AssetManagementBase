@@ -15,7 +15,6 @@ public class AssetView implements View {
     private String mode;
     private String tipo;
     private List<Asset> listAsset;
-    
     private Request request;
 
   public AssetView () {
@@ -25,27 +24,22 @@ public class AssetView implements View {
 
     @Override
     public void showResults(Request request) {
-       this.mode  = (String) request.get("mode");
-       
-       this.request=request;
-       listAsset = (List<Asset>) request.get("visualizza");
-       
-       
-       
+       this.mode  = request.get("mode").toString();
+       this.listAsset = (List<Asset>) request.get("visualizzaAssets");
     }
 
     @Override
     public void showOptions() {
-    	
-    	
         switch (mode) {
-            case "viewAss":
+            case "getList":
                 System.out.println("----- Asset disponibili -----");
                 System.out.println();
-                listAsset.forEach(asset -> System.out.println(asset));
+                this.listAsset.forEach(asset -> System.out.println(asset));
+                this.request = new Request();
+                this.request.put("choice", "getListAssets");
+            	MainDispatcher.getInstance().callAction("Asset", "doControl", this.request);
                 break;
-
-            case "insAss":
+            case "insert":
             	System.out.println("inserisci dati del nuovo asset");
             	System.out.println("tipo");
             	int id=0;
@@ -55,36 +49,27 @@ public class AssetView implements View {
             	System.out.println("descrizione");
             	String descrizione= getInput();
             	assetService.insertAsset(new Asset(id,tipo,prezzo,descrizione));
-            	
-            	
             	request = new Request();
             	request.put("asset",new Asset(id,tipo,prezzo,descrizione));
-            	request.put("choice",10);
-            	
+            	request.put("choice", "insertAsset");
             	MainDispatcher.getInstance().callAction("Asset", "doControl", request);
-            	
             	//assetService.insertAsset(new Asset(id,tipo,prezzo,descrizione));
             	break;
-            	
-            case "delAss":
+            case "delete":
             	listAsset.forEach(asset -> System.out.println(asset));
             	//List<Asset> asset = assetService.getAllAssets();
             	//asset.forEach(u->System.out.println(u));
             	System.out.println("inserire l'asset da eliminare");
             	System.out.println("Id:");
             	int idasset = Integer.parseInt(getInput());
-            	 
             	//assetService.DeleteAsset(idasset);
-            	
-            	request.put("idAsset",idasset);
-            	request.put("choice",11);
+            	request = new Request();
+            	request.put("delAsset",idasset);
+            	request.put("choice", "deleteAsset");
             	MainDispatcher.getInstance().callAction("Asset", "doControl", request);
-            	
             	System.out.println("Asset eliminato,ritorno al menu");
-            	
             	break;
-            	
-            case "upAss":
+            case "update":
             	listAsset.forEach(asset -> System.out.println(asset));
             	//listAsset = assetService.getAllAssets();
                 System.out.println();
@@ -113,14 +98,11 @@ public class AssetView implements View {
              
              
              
-           	 	//Request request = new Request();
+           	 	Request request = new Request();
            	 	request.put("idasset", idasset);
            	 	request.put("newCampo", newCampo);
            	 	request.put("campo", campo);
-            
-           	 	
-           	 	
-           	 	request.put("choice",12);
+                request.put("choice", "updateAsset");
            	 	MainDispatcher.getInstance().callAction("Asset", "doControl", request);
            	 	
            	 	/*

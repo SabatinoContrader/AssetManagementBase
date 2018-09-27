@@ -15,11 +15,8 @@ public class UserView implements View{
     private String mode;
     private String username;
     private List<User> listUser;
-    
     private Request request;
-    
-   
-    
+     
   public UserView () {
       this.userService = new UserService();
       this.mode = "all";
@@ -27,23 +24,22 @@ public class UserView implements View{
 
     @Override
     public void showResults(Request request) {
-       this.mode  = (String) request.get("mode");
-       listUser = (List<User>) request.get("visualizzaUtenti");
+       this.mode  = request.get("mode").toString();
+       this.listUser = (List<User>) request.get("visualizzaUtenti");
     }
 
     @Override
-    public void showOptions() {
-    	
+    public void showOptions() {    	
         switch (mode) {
-            case "all":
-                List<User> users = userService.getAllUsers();
-                System.out.println("----- Ecco tutti gli utenti -----");
+            case "getList":
+                System.out.println("----- Lista Utenti -----");
                 System.out.println();
-                listUser.forEach(user -> System.out.println(user));
+                this.listUser.forEach(user -> System.out.println(user));
+                this.request = new Request();
+                this.request.put("choice", "getListUsers");
+            	MainDispatcher.getInstance().callAction("User", "doControl", this.request);
                 break;
-                
             case "insert":
-                Scanner scanner = new Scanner(System.in);
                 System.out.println("Inserisci i dati dell'utente:");
                 System.out.println("Username:");
                 username = getInput();
@@ -61,40 +57,27 @@ public class UserView implements View{
                 String partitaiva = getInput();
                 System.out.println("Ruolo:");
                 String ruolo = getInput();
-                
                 request = new Request();
-            	request.put("user",new User(0,username,password,nome,cognome,telefono,mail,partitaiva,ruolo));
-            	request.put("choice",13);
-            	
+            	request.put("newUser",new User(0,username,password,nome,cognome,telefono,mail,partitaiva,ruolo));
+            	request.put("choice", "insertUser");
             	MainDispatcher.getInstance().callAction("User", "doControl", request);
-            	
-            	
-            	
-                //userService.insertUser(new User(0,username,password,nome,cognome,telefono,mail,partitaiva,ruolo));
                 break;
-                
             case "delete":
-            	listUser.forEach(user -> System.out.println(user));
+            	this.listUser.forEach(user -> System.out.println(user));
             	//List<User> listUser = userService.getAllUsers();
             	//listUser.forEach(u -> System.out.println(u));
             	System.out.println("Inserisci lo username dell'utente da eliminare:");
                 System.out.println("Username:");
                 username = getInput();
-                
                 request = new Request();
-                request.put("myUsername",username);
-            	request.put("choice",14);
+                request.put("delUser",username);
+            	request.put("choice", "deleteUser");
             	MainDispatcher.getInstance().callAction("User", "doControl", request);
-            	
-            	
-                
             	System.out.println("Utente eliminato,ritorno al menu");
-                
             	//userService.deleteUser(username);
             	break;
-            	
             case "update":
-            	 scanner = new Scanner(System.in);
+            	 Scanner scanner = new Scanner(System.in);
             	 listUser.forEach(user -> System.out.println(user));
             	 /*
             	 System.out.println(listUser.isEmpty());
@@ -107,10 +90,10 @@ public class UserView implements View{
             		 System.out.println("Inserisci l'id riferito all'utente da aggiornare:");
             		 idutente=Integer.parseInt(getInput());
             	 }catch(Exception e) {//Controllo id valido
-            		 System.out.println("L'ID Utente deve essere un intero");break;
+            		 System.out.println("L'ID Utente deve essere un intero");
+            		 break;
             	 }
-                 
-                 
+               
                  boolean trovato=false;
                  for(User u: userService.getAllUsers()) {
             		 if(u.getIdutente() == idutente) {
@@ -141,18 +124,16 @@ public class UserView implements View{
             	 	case 9: campo="ruolo";break;
             	 }
             	 
-            	 
-            	 
             	 System.out.println("Inserisci il nuovo "+campo+" dell'utente:");
             	 username=getInput();
-            	 
-                 
-                 
-                 
+          
                  Request request = new Request();
                  request.put("idutente", idutente);
                  request.put("username", username);
                  request.put("campo", campo);
+                 request.put("choice", "updateUser");
+             	
+                 MainDispatcher.getInstance().callAction("User", "doControl", request);
                 
                  /*
                  boolean flag = userService.updateUser(request);
@@ -172,8 +153,6 @@ public class UserView implements View{
     public void submit() {
         MainDispatcher.getInstance().callAction("Home", "doControl", null);
     }
-
-
 
 }
 
