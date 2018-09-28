@@ -17,7 +17,7 @@ public class UserDAO {
     private final String QUERY_INSERT = "insert into user (iduser, username, password, nome, cognome, telefono, mail, partitaiva, ruolo) values (?,?,?,?,?,?,?,?,?)";
     private final String QUERY_DELETE = "delete from user where username=?";
     private final String QUERY_CLIENTI = "select * from user where ruolo='cliente'";
-    private final String QUERY_CLIENTIASS= "select distinct iduser,username,nome,cognome,partitaiva from user as u join userasset as us on u.iduser=us.iduser where ruolo='cliente'";
+    private final String QUERY_CLIENTIASS= "select distinct u.iduser,username,nome,cognome,partitaiva from user as u join userasset as us on u.iduser=us.iduser where ruolo='cliente'";
     //private final String QUERY_UPDATE = "update user set "+param+"=? where idutente=?";
     
     public UserDAO() {
