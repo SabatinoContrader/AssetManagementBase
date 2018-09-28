@@ -3,7 +3,7 @@ package main.dao;
 import main.ConnectionSingleton;
 import main.controller.GestoreEccezioni;
 import main.model.Asset;
-import main.model.Userasset;
+import main.model.UserAsset;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,14 +13,14 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserassetDAO {
+public class UserAssetDAO {
 
     private final String QUERY_INSUSERASS = "insert into userasset(iduser,idasset,orainizio,orafine) values (?,?,?,?) ";
     private final String QUERY_ALLUSERASS = "select * from userasset";
     
     
-    public List<Userasset> getAllUserassets () {
-        List<Userasset> userassets = new ArrayList<>();
+    public List<UserAsset> getAllUsersAssets () {
+        List<UserAsset> userassets = new ArrayList<>();
         Connection connection = ConnectionSingleton.getInstance();
         try {
            Statement statement = connection.createStatement();
@@ -30,7 +30,7 @@ public class UserassetDAO {
         	   int idasset = resultSet.getInt("idasset");
         	   String orainizio = resultSet.getString("orainizio");
                String orafine = resultSet.getString("orafine");
-               userassets.add(new Userasset(iduser,idasset,orainizio,orafine));
+               userassets.add(new UserAsset(iduser,idasset,orainizio,orafine));
            }
         }
         catch (SQLException e) {
@@ -39,16 +39,14 @@ public class UserassetDAO {
         return userassets;
     }
     
-   
-    
-    public boolean insertUserasset(Userasset userasset) {
+    public boolean insertUserAsset(UserAsset userAsset) {
         Connection connection = ConnectionSingleton.getInstance();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(QUERY_INSUSERASS);
-            preparedStatement.setInt(1, userasset.getIduser());
-            preparedStatement.setInt(2, userasset.getIdasset());
-            preparedStatement.setString(3, userasset.getOrainizio());
-            preparedStatement.setString(4, userasset.getOrafine());
+            preparedStatement.setInt(1, userAsset.getIduser());
+            preparedStatement.setInt(2, userAsset.getIdasset());
+            preparedStatement.setString(3, userAsset.getOrainizio());
+            preparedStatement.setString(4, userAsset.getOrafine());
             
             return preparedStatement.execute();
         }

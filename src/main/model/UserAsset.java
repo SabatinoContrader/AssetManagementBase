@@ -1,13 +1,13 @@
 package main.model;
 
-public class Userasset {
+public class UserAsset {
 
 	private int idasset;
 	private int iduser;
 	private String orainizio;
 	private String orafine;
 	
-    public Userasset(int iduser,int idasset, String orainizio, String orafine) {
+    public UserAsset(int iduser,int idasset, String orainizio, String orafine) {
     	this.iduser = iduser;
     	this.idasset = idasset;
     	this.orainizio = orainizio;

@@ -32,12 +32,9 @@ public class HomeView implements View {
         System.out.println("");
         System.out.println("1) Gestione Utenti");
         System.out.println("2) Gestione Asset");
-        System.out.println("3) Logout");
+        System.out.println("3) Associazione Utenti Asset");
+        System.out.println("4) Logout");
         /*
-        System.out.println("5)  Inserisci asset");
-        System.out.println("6)  Visualizza asset");
-        System.out.println("7)  Aggiorna asset");
-        System.out.println("8)  Elimina un asset");
         System.out.println("9)  Assegna asset ad utente");
         System.out.println("10) Visualizza asset assegnati");
         System.out.println("11) Esporta asset assegnati");
@@ -47,10 +44,10 @@ public class HomeView implements View {
 
     public void submit() {
     	this.request = new Request();
-        if (choice < 1 || choice > 3) {
+        if (choice < 1 || choice > 4) {
         	MainDispatcher.getInstance().callAction("Home", "doControl", null);
         }
-        else if (choice == 3) {
+        else if (choice == 4) {
             MainDispatcher.getInstance().callAction("Login", "doControl", null);
         }
         else if (choice == 1) {
@@ -61,17 +58,13 @@ public class HomeView implements View {
         	this.request.put("choice", "assetsManagement");
         	MainDispatcher.getInstance().callAction("Asset", "doControl", this.request);
         }
+        else if (choice == 3) {
+        	this.request.put("choice", "usersAssetsManagement");
+        	MainDispatcher.getInstance().callAction("UserAsset", "doControl", this.request);
+        }
     }
-    	/*
-        if (choice < 1 || choice > 12)//ritorna alla home
-            MainDispatcher.getInstance().callAction("Home", "doControl", null);
-        else if (choice == 12)//logout
-            MainDispatcher.getInstance().callAction("Login", "doControl", null);
-        else if (choice > 4 && choice < 9) { //gestione asset
-            Request request = new Request();
-            request.put("choice", choice);
-        	MainDispatcher.getInstance().callAction("Asset","doControl", request);
-        	}
+
+    /*
         else if(choice == 9)
         {
         	Request request = new Request ();
@@ -83,8 +76,7 @@ public class HomeView implements View {
         	request.put("choice",choice);
             MainDispatcher.getInstance().callAction("Userasset", "doControl", request);
         }
-     */
-
+    */
 
     public String getInput() {
         Scanner scanner = new Scanner(System.in);
