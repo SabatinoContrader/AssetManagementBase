@@ -14,10 +14,10 @@ public class UserDAO {
 	String param="";
 	
 	private final String QUERY_ALL = "select * from user";
-    private final String QUERY_INSERT = "insert into user (idutente, username, password, nome, cognome, telefono, mail, partitaiva, ruolo) values (?,?,?,?,?,?,?,?,?)";
+    private final String QUERY_INSERT = "insert into user (iduser, username, password, nome, cognome, telefono, mail, partitaiva, ruolo) values (?,?,?,?,?,?,?,?,?)";
     private final String QUERY_DELETE = "delete from user where username=?";
     private final String QUERY_CLIENTI = "select * from user where ruolo='cliente'";
-    private final String QUERY_CLIENTIASS= "select distinct idutente,username,nome,cognome,partitaiva from user as u join userasset as us on u.idutente=us.iduser where ruolo='cliente'";
+    private final String QUERY_CLIENTIASS= "select distinct iduser,username,nome,cognome,partitaiva from user as u join userasset as us on u.iduser=us.iduser where ruolo='cliente'";
     //private final String QUERY_UPDATE = "update user set "+param+"=? where idutente=?";
     
     public UserDAO() {
@@ -30,7 +30,7 @@ public class UserDAO {
            Statement statement = connection.createStatement();
            ResultSet resultSet = statement.executeQuery(QUERY_CLIENTI);
            while (resultSet.next()) {
-        	   int idutente = resultSet.getInt("idutente");
+        	   int idutente = resultSet.getInt("iduser");
         	   String username = resultSet.getString("username");
         	   String password = resultSet.getString("password");
         	   String nome = resultSet.getString("nome");
@@ -55,7 +55,7 @@ public class UserDAO {
            Statement statement = connection.createStatement();
            ResultSet resultSet = statement.executeQuery(QUERY_CLIENTIASS);
            while (resultSet.next()) {
-        	   int idutente = resultSet.getInt("idutente");
+        	   int idutente = resultSet.getInt("iduser");
         	   String username = resultSet.getString("username");
         	   String nome = resultSet.getString("nome");
         	   String cognome = resultSet.getString("cognome");
@@ -76,7 +76,7 @@ public class UserDAO {
            Statement statement = connection.createStatement();
            ResultSet resultSet = statement.executeQuery(QUERY_ALL);
            while (resultSet.next()) {
-        	   int idutente = resultSet.getInt("idutente");
+        	   int idutente = resultSet.getInt("iduser");
         	   String username = resultSet.getString("username");
         	   String password = resultSet.getString("password");
         	   String nome = resultSet.getString("nome");
@@ -137,7 +137,7 @@ public class UserDAO {
             
         	param=(String)request.get("campo");
         	
-            PreparedStatement preparedStatement = connection.prepareStatement("update user set "+param+"=? where idutente=?");
+            PreparedStatement preparedStatement = connection.prepareStatement("update user set "+param+"=? where iduser=?");
             
             preparedStatement.setString(1, (String)request.get("username"));
             preparedStatement.setInt(2, (Integer)request.get("idutente"));

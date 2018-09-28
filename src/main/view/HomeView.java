@@ -32,13 +32,8 @@ public class HomeView implements View {
         System.out.println("");
         System.out.println("1) Gestione Utenti");
         System.out.println("2) Gestione Asset");
-        System.out.println("3) Associazione Utenti Asset");
+        System.out.println("3) Gestione Utenti Asset");
         System.out.println("4) Logout");
-        /*
-        System.out.println("9)  Assegna asset ad utente");
-        System.out.println("10) Visualizza asset assegnati");
-        System.out.println("11) Esporta asset assegnati");
-        */
         this.choice = Integer.parseInt(getInput());
     }
 
@@ -63,20 +58,6 @@ public class HomeView implements View {
         	MainDispatcher.getInstance().callAction("UserAsset", "doControl", this.request);
         }
     }
-
-    /*
-        else if(choice == 9)
-        {
-        	Request request = new Request ();
-        	request.put("choice",choice);
-            MainDispatcher.getInstance().callAction("Userasset", "doControl", request);
-        }
-        else if(choice == 10) {
-        	Request request = new Request ();
-        	request.put("choice",choice);
-            MainDispatcher.getInstance().callAction("Userasset", "doControl", request);
-        }
-    */
 
     public String getInput() {
         Scanner scanner = new Scanner(System.in);

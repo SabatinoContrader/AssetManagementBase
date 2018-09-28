@@ -24,6 +24,9 @@ public class UserAssetService {
     public List<UserAsset> getAllUsersAssets () {
         return this.userAssetDAO.getAllUsersAssets();
     }
+    public List<UserAsset> getAllStorico () {
+        return this.userAssetDAO.getAllStorico();
+    }
     public List<Asset> getAllUsersAssetsN () {
         return (((AssetDAO) this.assetDAO).getAllAssetsN());
     }

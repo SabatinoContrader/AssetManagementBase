@@ -17,6 +17,7 @@ public class UserAssetDAO {
 
     private final String QUERY_INSUSERASS = "insert into userasset(iduser,idasset,orainizio,orafine) values (?,?,?,?) ";
     private final String QUERY_ALLUSERASS = "select * from userasset";
+    private final String QUERY_ALLSTORICO = "select * from storico";
     private final String QUERY_INSUSERASSS = "insert into storico(iduser,idasset,orainizio,orafine) values (?,?,?,?) ";
     
     public List<UserAsset> getAllUsersAssets () {
@@ -25,6 +26,26 @@ public class UserAssetDAO {
         try {
            Statement statement = connection.createStatement();
            ResultSet resultSet = statement.executeQuery(QUERY_ALLUSERASS);
+           while (resultSet.next()) {
+        	   int iduser = resultSet.getInt("iduser");
+        	   int idasset = resultSet.getInt("idasset");
+        	   String orainizio = resultSet.getString("orainizio");
+               String orafine = resultSet.getString("orafine");
+               userassets.add(new UserAsset(iduser,idasset,orainizio,orafine));
+           }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return userassets;
+    }
+    
+    public List<UserAsset> getAllStorico () {
+        List<UserAsset> userassets = new ArrayList<>();
+        Connection connection = ConnectionSingleton.getInstance();
+        try {
+           Statement statement = connection.createStatement();
+           ResultSet resultSet = statement.executeQuery(QUERY_ALLSTORICO);
            while (resultSet.next()) {
         	   int iduser = resultSet.getInt("iduser");
         	   int idasset = resultSet.getInt("idasset");

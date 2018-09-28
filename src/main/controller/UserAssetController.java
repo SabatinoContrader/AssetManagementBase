@@ -74,46 +74,28 @@ public class UserAssetController implements Controller {
     }
     
     public void writeOnExcel() {
-    	File f=new File("C:\\Users\\marco\\OneDrive\\Desktop\\test.xls");
+    	File f=new File("C:\\Users\\Public\\test.xls");
 		UserAssetService users = new UserAssetService();
 		try {
 			WritableWorkbook myexel = Workbook.createWorkbook(f);
 			WritableSheet mysheet = myexel.createSheet("mySheet", 0);
-			
 			Label l=null;
 			Label l2=null;
 			Label l3=null;
 			Label l4=null;
-			
-			
-			for(int i=0; i<users.getAllUsersAssets().size(); i++) {
+			for(int i=0; i<users.getAllStorico().size(); i++) {
 				for(int j=0; j<4; j++) {
-					
-					
-					l=new Label(0,i, String.valueOf(users.getAllUsersAssets().get(i).getIdasset()) );
-					l2=new Label(1,i, String.valueOf(users.getAllUsersAssets().get(i).getIduser()) );
-					l3=new Label(2,i, users.getAllUsersAssets().get(i).getOrainizio());
-					l4=new Label(3,i, users.getAllUsersAssets().get(i).getOrafine());
-					
+					l=new Label(0,i, String.valueOf(users.getAllStorico().get(i).getIdasset()) );
+					l2=new Label(1,i, String.valueOf(users.getAllStorico().get(i).getIduser()) );
+					l3=new Label(2,i, users.getAllStorico().get(i).getOrainizio());
+					l4=new Label(3,i, users.getAllStorico().get(i).getOrafine());
 					mysheet.addCell(l);
-					
 					mysheet.addCell(l2);
 					mysheet.addCell(l3);
 					mysheet.addCell(l4);
-					
 				}
-				
-				
 			}
-			
-			//Label l2=new Label(0,1,"data 2");
-			
-			
-			
-		
-			
-			myexel.write();
-			
+			myexel.write();	
 			myexel.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -124,10 +106,6 @@ public class UserAssetController implements Controller {
 		} catch (WriteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		
-		
-		
+		}	
 	}
-
 }
