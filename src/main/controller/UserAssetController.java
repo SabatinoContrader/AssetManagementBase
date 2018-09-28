@@ -4,7 +4,11 @@ import java.io.File;
 import java.io.IOException;
 
 import jxl.Workbook;
+import jxl.format.UnderlineStyle;
 import jxl.write.Label;
+import jxl.write.WritableCellFormat;
+import jxl.format.*;
+import jxl.write.WritableFont;
 import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
 import jxl.write.WriteException;
@@ -16,6 +20,10 @@ import main.service.UserAssetService;
 public class UserAssetController implements Controller {
 
 	private UserAssetService userAssetService;
+	private WritableFont wfont;
+	private WritableFont wc;
+	private WritableCellFormat wcfFC;
+	private WritableCellFormat wC;
 	
     @Override
     public void doControl(Request request) {
@@ -75,20 +83,41 @@ public class UserAssetController implements Controller {
     
     public void writeOnExcel() {
     	File f=new File("C:\\Users\\Public\\test.xls");
+
 		UserAssetService users = new UserAssetService();
 		try {
+	    	wfont = new WritableFont(WritableFont.createFont("Arial"), 12, WritableFont.BOLD, true,
+	        UnderlineStyle.NO_UNDERLINE, jxl.format.Colour.RED);
+	    	wc = new WritableFont(WritableFont.createFont("Arial"), 10, WritableFont.NO_BOLD, false,
+	    	        UnderlineStyle.NO_UNDERLINE, jxl.format.Colour.BLACK);
+	    
+	        wcfFC = new WritableCellFormat(wfont);
+	        wC = new WritableCellFormat(wc);
+	   	 wC.setAlignment(Alignment.CENTRE);
+	        wcfFC.setAlignment(Alignment.CENTRE);
+	        
+	        
 			WritableWorkbook myexel = Workbook.createWorkbook(f);
 			WritableSheet mysheet = myexel.createSheet("mySheet", 0);
+			mysheet.setColumnView(0, 15);
+			mysheet.setColumnView(1,15);
+			mysheet.setColumnView(2, 20);
+			mysheet.setColumnView(3,20);
 			Label l=null;
 			Label l2=null;
 			Label l3=null;
 			Label l4=null;
-			for(int i=0; i<users.getAllStorico().size(); i++) {
+			
+			mysheet.addCell(new Label(0,0,"ID User",wcfFC));
+			mysheet.addCell(new Label(1,0,"ID Asset",wcfFC));
+			mysheet.addCell(new Label(2,0,"Ora Inizio",wcfFC));
+			mysheet.addCell(new Label(3,0,"Ora Fine",wcfFC));
+			for(int i=1; i<=users.getAllStorico().size(); i++) {
 				for(int j=0; j<4; j++) {
-					l=new Label(0,i, String.valueOf(users.getAllStorico().get(i).getIdasset()) );
-					l2=new Label(1,i, String.valueOf(users.getAllStorico().get(i).getIduser()) );
-					l3=new Label(2,i, users.getAllStorico().get(i).getOrainizio());
-					l4=new Label(3,i, users.getAllStorico().get(i).getOrafine());
+					l=new Label(0,i, String.valueOf(users.getAllStorico().get(i-1).getIdasset()),wC );
+					l2=new Label(1,i, String.valueOf(users.getAllStorico().get(i-1).getIduser()),wC );
+					l3=new Label(2,i, users.getAllStorico().get(i-1).getOrainizio(),wC);
+					l4=new Label(3,i, users.getAllStorico().get(i-1).getOrafine(),wC);
 					mysheet.addCell(l);
 					mysheet.addCell(l2);
 					mysheet.addCell(l3);
