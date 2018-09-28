@@ -2,7 +2,7 @@ package main.view;
 
 import main.MainDispatcher;
 import main.controller.Request;
-import sun.applet.Main;
+//import sun.applet.Main;
 
 import java.util.Scanner;
 
@@ -25,17 +25,18 @@ public class UserAssetHomeView implements View {
         System.out.println("1) Associazione Asset Utente");
         System.out.println("2) Visualizzazione Asset Assegnati");
         System.out.println("3) Esportazione Asset Assegnati");
-        System.out.println("4) Indietro");
+        System.out.println("4) Disassociazione Asset Utente");
+        System.out.println("5) Indietro");
         this.choice = Integer.parseInt(getInput());
     }
 
     public void submit() {
-        if (choice < 1 || choice > 4) {
+        if (choice < 1 || choice > 5) {
         	this.request = new Request();
         	this.request.put("choice", "usersAssetsManagement");
             MainDispatcher.getInstance().callAction("UserAsset", "doControl", this.request);
         }
-        else if (choice == 4) {
+        else if (choice == 5) {
             MainDispatcher.getInstance().callAction("Home", "doControl", null);
         }
         else {
@@ -48,6 +49,9 @@ public class UserAssetHomeView implements View {
         	}
         	else if (this.choice == 3) {
         		request.put("choice", "export");
+        	}
+        	else if (this.choice == 4) {
+        		request.put("choice",  "delete");
         	}
         	MainDispatcher.getInstance().callAction("UserAsset", "doControl", request);        		
         }

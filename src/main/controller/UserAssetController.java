@@ -52,21 +52,25 @@ public class UserAssetController implements Controller {
 //            	request.put("visualizzaUtentiAssets", userAssetService.getAllUsersAssets());
 //            	MainDispatcher.getInstance().callView("User", request);
 //                break;
-//            case "delete":
-//            	request.put("visualizzaUtentiAssets", userAssetService.getAllUsersAssets());
-//                request.put("mode", "delete");
-//                MainDispatcher.getInstance().callView("User", request);
-//                break;
+            case "delete":
+            	request.put("visualizzaUtentiAssets", this.userAssetService.getAllUsersAssets());
+                request.put("mode", "delete");
+                MainDispatcher.getInstance().callView("UserAsset", request);
+                break;
             case "insertUserAsset":
             	UserAsset userAsset = (UserAsset)request.get("newUserAsset");
             	this.userAssetService.insertUserAsset(userAsset);
             	this.userAssetService.insertStorico(userAsset);
             	MainDispatcher.getInstance().callView("UserAssetHome", request);
                	break;
-//            case "deleteUserAsset":
-//            	this.userAssetService.deleteUserAsset(request.get("delUser").toString());
-//            	MainDispatcher.getInstance().callView("UserHome", request);
-//                break;
+            case "deleteUserAsset":
+            	int idUser = Integer.parseInt(request.get("delIdUser").toString());
+            	int idAsset = Integer.parseInt(request.get("delIdAsset").toString());
+            	System.out.println(idUser);
+            	System.out.println(idAsset);
+            	this.userAssetService.deleteUserAsset(idUser, idAsset);
+            	MainDispatcher.getInstance().callView("UserAssetHome", request);
+                break;
 //            case "updateUserAsset":
 //            	this.userAssetService.updateUserAsset(request);
 //            	MainDispatcher.getInstance().callView("UserHome", request);

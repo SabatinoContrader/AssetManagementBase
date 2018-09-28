@@ -34,6 +34,7 @@ public class HomeView implements View {
         System.out.println("2) Gestione Asset");
         System.out.println("3) Gestione Utenti Asset");
         System.out.println("4) Logout");
+        
         this.choice = Integer.parseInt(getInput());
     }
 

@@ -20,6 +20,8 @@ public class UserAssetView implements View {
     private AssetService assetService;
     private List<UserAsset> listUserAsset;
     private Request request;
+    private int iduser;
+    private int idasset;
 
 	public UserAssetView () {
 	    this.userAssetService = new UserAssetService();
@@ -79,8 +81,27 @@ public class UserAssetView implements View {
             	MainDispatcher.getInstance().callAction("UserAsset", "doControl", request);
             	break;
         	}	
+        	case "delete":
+            	this.listUserAsset.forEach(userasset -> System.out.println(userasset));
+            	//List<User> listUser = userService.getAllUsers();
+            	//listUser.forEach(u -> System.out.println(u));
+            	System.out.println("Inserisci l'associazione da eliminare:");
+                System.out.println("Id user:");
+                iduser = Integer.parseInt(getInput());
+                System.out.println("inserisci id asset:");
+                idasset = Integer.parseInt(getInput());
+        		request = new Request();
+        		request.put("delIdUser",iduser);
+        		request.put("delIdAsset",idasset);
+        	    request.put("choice", "deleteUserAsset");
+        	    MainDispatcher.getInstance().callAction("UserAsset", "doControl", request);
+        	    System.out.println("Utente eliminato,ritorno al menu");
+            	//userService.deleteUser(username);
+            	break;
+        	}	
+    
         }
-    }
+    
 
     @Override
     public String getInput() {
