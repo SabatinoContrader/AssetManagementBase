@@ -31,4 +31,8 @@ public class UserAssetService {
     public boolean insertUserAsset (UserAsset userAsset) {
         return this.userAssetDAO.insertUserAsset(userAsset);
     }
+    
+    public boolean insertStorico (UserAsset userAsset) {
+        return this.userAssetDAO.insertStorico(userAsset);
+    }
 }

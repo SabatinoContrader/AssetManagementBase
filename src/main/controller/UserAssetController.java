@@ -1,5 +1,14 @@
 package main.controller;
 
+import java.io.File;
+import java.io.IOException;
+
+import jxl.Workbook;
+import jxl.write.Label;
+import jxl.write.WritableSheet;
+import jxl.write.WritableWorkbook;
+import jxl.write.WriteException;
+import jxl.write.biff.RowsExceededException;
 import main.MainDispatcher;
 import main.model.UserAsset;
 import main.service.UserAssetService;
@@ -27,10 +36,9 @@ public class UserAssetController implements Controller {
                 MainDispatcher.getInstance().callView("UserAsset", request);
                 break;
             case "export":
-                request.put("mode", "getList");
-                request.put("visualizzaUtentiAssets", this.userAssetService.getAllUsersAssets());
-                MainDispatcher.getInstance().callView("UserAsset", request);
-                break;
+            	 writeOnExcel();
+                 MainDispatcher.getInstance().callView("UserAssetHome", request);
+                 break;
 //            case "update":
 //                request.put("mode", "update");
 //            	request.put("visualizzaUtentiAssets", userAssetService.getAllUsersAssets());
@@ -42,9 +50,11 @@ public class UserAssetController implements Controller {
 //                MainDispatcher.getInstance().callView("User", request);
 //                break;
             case "insertUserAsset":
-            	this.userAssetService.insertUserAsset((UserAsset)request.get("newUserAsset"));
+            	UserAsset userAsset = (UserAsset)request.get("newUserAsset");
+            	this.userAssetService.insertUserAsset(userAsset);
+            	this.userAssetService.insertStorico(userAsset);
             	MainDispatcher.getInstance().callView("UserAssetHome", request);
-                break;
+               	break;
 //            case "deleteUserAsset":
 //            	this.userAssetService.deleteUserAsset(request.get("delUser").toString());
 //            	MainDispatcher.getInstance().callView("UserHome", request);
@@ -62,4 +72,62 @@ public class UserAssetController implements Controller {
         	MainDispatcher.getInstance().callView("UserAssetHome", null);
         }
     }
+    
+    public void writeOnExcel() {
+    	File f=new File("C:\\Users\\marco\\OneDrive\\Desktop\\test.xls");
+		UserAssetService users = new UserAssetService();
+		try {
+			WritableWorkbook myexel = Workbook.createWorkbook(f);
+			WritableSheet mysheet = myexel.createSheet("mySheet", 0);
+			
+			Label l=null;
+			Label l2=null;
+			Label l3=null;
+			Label l4=null;
+			
+			
+			for(int i=0; i<users.getAllUsersAssets().size(); i++) {
+				for(int j=0; j<4; j++) {
+					
+					
+					l=new Label(0,i, String.valueOf(users.getAllUsersAssets().get(i).getIdasset()) );
+					l2=new Label(1,i, String.valueOf(users.getAllUsersAssets().get(i).getIduser()) );
+					l3=new Label(2,i, users.getAllUsersAssets().get(i).getOrainizio());
+					l4=new Label(3,i, users.getAllUsersAssets().get(i).getOrafine());
+					
+					mysheet.addCell(l);
+					
+					mysheet.addCell(l2);
+					mysheet.addCell(l3);
+					mysheet.addCell(l4);
+					
+				}
+				
+				
+			}
+			
+			//Label l2=new Label(0,1,"data 2");
+			
+			
+			
+		
+			
+			myexel.write();
+			
+			myexel.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (RowsExceededException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (WriteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+	}
+
 }
