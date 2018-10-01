@@ -1,6 +1,7 @@
 package main.service;
 
 import main.controller.Request;
+import main.dao.UserAssetDAO;
 import main.dao.UserDAO;
 import main.model.User;
 
@@ -9,6 +10,7 @@ import java.util.List;
 public class UserService {
 
     private UserDAO userDAO;
+    private UserAssetDAO userAssetDAO;
 
     public UserService() {
         this.userDAO = new UserDAO();
@@ -31,6 +33,10 @@ public class UserService {
     
     public boolean deleteUser(String username) {
     	return this.userDAO.deleteUser(username);
+    }
+    
+    public List<User> getAllUsersN(){
+    	return this.userAssetDAO.getAllUsersN();
     }
     
     public boolean updateUser(Request request) {

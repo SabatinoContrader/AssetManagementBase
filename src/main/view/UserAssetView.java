@@ -11,7 +11,9 @@ import main.service.UserAssetService;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;import java.util.Scanner;
+import java.util.StringTokenizer;
 
 public class UserAssetView implements View {
 
@@ -91,7 +93,7 @@ public class UserAssetView implements View {
         	System.out.println("Inserisci la data di inizio prenotazione(yyyy-mm-gg hh:mm:ss):");
         	orainizio=getInput();
         	
-        	while(!verificaPrenotazioni(orainizio)) {
+        	while(!verificaPrenotazioni(orainizio) && !orainizio.equals("")) {
         		System.out.println("La data deve essere maggiore rispetto a quella odierna");
         		orainizio=getInput();
         	}
@@ -115,7 +117,9 @@ public class UserAssetView implements View {
         	System.out.println("Inserisci la data di fine prenotazione(yyyy-mm-gg hh:mm:ss):");
         	String orafine= getInput();
         	
-        	while(orafine.compareTo(orainizio)<=0 || ( !controlloAssetDisponibile(idasset,userAssets, orafine, false) && !orafine.equals("") ) ) {
+        	
+        	
+        	while( !orafine.equals("") && ( orafine.compareTo(orainizio)<=0 || ( !controlloAssetDisponibile(idasset,userAssets, orafine, false) ) ) ) {
         		if(orafine.compareTo(orainizio)<=0) {
         			System.out.println("La data di fine prenotazione non può essere antecedente alla data di inizio ("+orainizio+")!");
         			System.out.println("Inserisci una data corretta o premi invio per annullare la prenotazione:");
@@ -219,15 +223,65 @@ public class UserAssetView implements View {
     	
     }
     
-    
+  
  private boolean verificaPrenotazioni(String date) {
-    	
+    	String dateNow=stringDate(LocalDateTime.now().toString());
+    	System.out.println(dateNow);
         //MyData dateNow=new MyData(LocalDateTime.now());
-        if( LocalDateTime.now().toString().compareTo( date )<0 ){
+        if( dateNow.compareTo( date )<0 ){
         		return true;
         }
         
         return false;
     }
 
+ public String stringDate(String date){
+		//String date = LocalDateTime.now().toString();
+		StringTokenizer st=new StringTokenizer(date,"T ");
+		//ArrayList<String> dateList=new ArrayList<>();
+		String dateS="";
+		
+		//VECCHIA DATA
+		//LocalDateTime --> yyyy-mm-ggThh:mm:ss.mls (es. 2018-09-29T10:29:51.025)
+		while(st.hasMoreTokens()) {
+			String tk=st.nextToken();
+			tk+=" ";
+			if(tk.length()>=3 && tk.charAt(2)==('.')) {
+				String temp=tk.substring(0, 1);
+				tk=temp+tk.substring(1,2);
+				dateS+=tk;
+				break;
+			}
+			dateS+=tk;
+		}
+		//NUOVA DATA
+		//dateList --> yyyy mm gg hh mm ss (es. 2018 09 29 10 29 51)
+		
+		return dateS;
+	}
+ 
 }
+
+
+
+/*
+private boolean verificaPrenotazioni(String date) {
+	
+    //MyData dateNow=new MyData(LocalDateTime.now());
+    if( LocalDateTime.now().toString().compareTo( date )<0 ){
+    	System.out.println("<");	
+    	return true;
+    }
+    if( LocalDateTime.now().toString().compareTo( date )==0 ){
+    	System.out.println("==");	
+    	return true;
+    }
+    if( LocalDateTime.now().toString().compareTo( date )>0 ){
+    	System.out.println(">");	
+    	return true;
+    }
+    
+    return false;
+}*/
+
+

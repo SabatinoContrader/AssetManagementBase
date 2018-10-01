@@ -1,5 +1,11 @@
 package main.controller;
 
+import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.List;
+
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
+
 import main.MainDispatcher;
 import main.model.Asset;
 import main.model.User;
@@ -10,7 +16,7 @@ public class UserController implements Controller {
 	private UserService userService;
 	
     @Override
-    public void doControl(Request request) {
+    public void doControl(Request request)  {
     	this.userService = new UserService();
     	String choice = request.get("choice").toString();
         if (choice != null) {
@@ -42,9 +48,21 @@ public class UserController implements Controller {
             	MainDispatcher.getInstance().callView("UserHome", request);
                 break;
             case "deleteUser":
+            	/*
+            	List<User> listUsers=this.userService.getAllUsersN();
+            	
+            	for(User u:listUsers) {
+            		if(request.get("delUser").toString().equals(u.getUsername())) {
+            			
+            		}
+            	}
+            	*/
+            	
             	this.userService.deleteUser(request.get("delUser").toString());
             	MainDispatcher.getInstance().callView("UserHome", request);
-                break;
+            	break;
+            	
+            	
             case "updateUser":
             	this.userService.updateUser(request);
             	MainDispatcher.getInstance().callView("UserHome", request);

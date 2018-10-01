@@ -72,6 +72,7 @@ public class UserView implements View{
                 request = new Request();
                 request.put("delUser",username);
             	request.put("choice", "deleteUser");
+            	
             	MainDispatcher.getInstance().callAction("User", "doControl", request);
             	System.out.println("Utente eliminato,ritorno al menu");
             	//userService.deleteUser(username);

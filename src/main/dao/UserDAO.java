@@ -125,6 +125,10 @@ public class UserDAO {
             return preparedStatement.execute();
         }
         catch (SQLException e) {
+        	if(e instanceof SQLIntegrityConstraintViolationException) {
+        		System.out.println("Impossibile eliminare utente in quanto associato ad un asset");
+        		return false;
+        	}
             GestoreEccezioni.getInstance().gestisciEccezione(e);
             return false;
         }
