@@ -49,11 +49,19 @@ public class UserAssetHomeView implements View {
         	}
         	else if (this.choice == 3) {
         		request.put("choice", "export");
+            	System.out.println("Inserire percorso dove si vuole esportare");
+            	String perc= getInput();
+            	System.out.println("Inserire nome file di output");
+            	String nome= getInput();
+            	request.put("perc", perc);
+            	request.put("nome", nome);
         	}
         	else if (this.choice == 4) {
         		request.put("choice",  "delete");
         	}
-        	MainDispatcher.getInstance().callAction("UserAsset", "doControl", request);        		
+        	MainDispatcher.getInstance().callAction("UserAsset", "doControl", request);   
+        	if(this.choice==3 && (boolean)request.get("ok")==true)
+        		System.out.println("Export effettuato con successo");
         }
     }
 

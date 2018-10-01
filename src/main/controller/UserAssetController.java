@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Scanner;
 
 import jxl.Workbook;
 import jxl.format.UnderlineStyle;
@@ -65,9 +66,9 @@ public class UserAssetController implements Controller {
                 request.put("visualizzaAssetsSenzaPrenotazioni", this.assetService.getAllAssetsN());
             	break;
             case "export":
-            	 writeOnExcel();
-                 MainDispatcher.getInstance().callView("UserAssetHome", request);
-                 break;
+           	 request.put("ok",writeOnExcel(request));
+                MainDispatcher.getInstance().callView("UserAssetHome", request);
+                break;
             case "update":
             	/*
                 request.put("mode", "update");
@@ -90,7 +91,6 @@ public class UserAssetController implements Controller {
             case "insertUserAsset":
             	UserAsset userAsset = (UserAsset)request.get("newUserAsset");
             	this.userAssetService.insertUserAsset(userAsset);
-            	this.userAssetService.insertStorico(userAsset);
             	MainDispatcher.getInstance().callView("UserAssetHome", request);
                	break;
             case "deleteUserAsset":
@@ -121,8 +121,10 @@ public class UserAssetController implements Controller {
         }
     }
     
-    public void writeOnExcel() {
-    	File f=new File("C:\\Users\\Public\\test.xls");
+    public boolean writeOnExcel(Request request) {
+    	String par=request.get("perc").toString();
+    	String storico=request.get("nome").toString();
+    	File f=new File(par+"\\"+storico+".xls");
 
 		UserAssetService users = new UserAssetService();
 		try {
@@ -133,7 +135,7 @@ public class UserAssetController implements Controller {
 	    
 	        wcfFC = new WritableCellFormat(wfont);
 	        wC = new WritableCellFormat(wc);
-	   	 wC.setAlignment(Alignment.CENTRE);
+	   	 	wC.setAlignment(Alignment.CENTRE);
 	        wcfFC.setAlignment(Alignment.CENTRE);
 	        
 	        
@@ -152,12 +154,12 @@ public class UserAssetController implements Controller {
 			mysheet.addCell(new Label(1,0,"ID Asset",wcfFC));
 			mysheet.addCell(new Label(2,0,"Ora Inizio",wcfFC));
 			mysheet.addCell(new Label(3,0,"Ora Fine",wcfFC));
-			for(int i=1; i<=users.getAllStorico().size(); i++) {
+			for(int i=1; i<=users.getAllUsersAssets().size(); i++) {
 				for(int j=0; j<4; j++) {
-					l=new Label(0,i, String.valueOf(users.getAllStorico().get(i-1).getIdasset()),wC );
-					l2=new Label(1,i, String.valueOf(users.getAllStorico().get(i-1).getIduser()),wC );
-					l3=new Label(2,i, users.getAllStorico().get(i-1).getOrainizio(),wC);
-					l4=new Label(3,i, users.getAllStorico().get(i-1).getOrafine(),wC);
+					l=new Label(0,i, String.valueOf(users.getAllUsersAssets().get(i-1).getIdasset()),wC );
+					l2=new Label(1,i, String.valueOf(users.getAllUsersAssets().get(i-1).getIduser()),wC );
+					l3=new Label(2,i, users.getAllUsersAssets().get(i-1).getOrainizio(),wC);
+					l4=new Label(3,i, users.getAllUsersAssets().get(i-1).getOrafine(),wC);
 					mysheet.addCell(l);
 					mysheet.addCell(l2);
 					mysheet.addCell(l3);
@@ -169,13 +171,23 @@ public class UserAssetController implements Controller {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return false;
 		} catch (RowsExceededException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return false;
 		} catch (WriteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return false;
 		}	
+		return true;
+    }
+
+	private String getInput() {
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextLine();
+		
 	}
     
     

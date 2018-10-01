@@ -226,7 +226,7 @@ public class UserAssetView implements View {
   
  private boolean verificaPrenotazioni(String date) {
     	String dateNow=stringDate(LocalDateTime.now().toString());
-    	System.out.println(dateNow);
+    	//System.out.println(dateNow);
         //MyData dateNow=new MyData(LocalDateTime.now());
         if( dateNow.compareTo( date )<0 ){
         		return true;

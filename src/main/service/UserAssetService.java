@@ -24,19 +24,12 @@ public class UserAssetService {
     public List<UserAsset> getAllUsersAssets () {
         return this.userAssetDAO.getAllUsersAssets();
     }
-    public List<UserAsset> getAllStorico () {
-        return this.userAssetDAO.getAllStorico();
-    }
     public List<Asset> getAllUsersAssetsN () {
         return (((AssetDAO) this.assetDAO).getAllAssetsN());
     }
 
     public boolean insertUserAsset (UserAsset userAsset) {
         return this.userAssetDAO.insertUserAsset(userAsset);
-    }
-    
-    public boolean insertStorico (UserAsset userAsset) {
-        return this.userAssetDAO.insertStorico(userAsset);
     }
     public boolean deleteUserAsset (int idUser, int idAsset, String idData) {
         return this.userAssetDAO.deleteUserAsset(idUser, idAsset, idData);
