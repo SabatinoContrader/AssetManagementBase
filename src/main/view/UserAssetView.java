@@ -23,6 +23,7 @@ public class UserAssetView implements View {
     private Request request;
     private int iduser;
     private int idasset;
+    private String iddata;
     String orainizio;
 
 	public UserAssetView () {
@@ -90,10 +91,18 @@ public class UserAssetView implements View {
         	System.out.println("Inserisci la data di inizio prenotazione(yyyy-mm-gg hh:mm:ss):");
         	orainizio=getInput();
         	
-        	while(!controlloAssetDisponibile(idasset,userAssets, orainizio, true) && !orainizio.equals("")) {
-        		System.out.println("L'asset con id "+idasset+" è già prenotato per la data: "+orainizio+ "!");
-        		System.out.println("Scegli un altra data di inizio prenotazione o premi invio per annullare la prenotazione:");
+        	while(!verificaPrenotazioni(orainizio)) {
+        		System.out.println("La data deve essere maggiore rispetto a quella odierna");
         		orainizio=getInput();
+        	}
+        	
+        	while(  !orainizio.equals("") &&  !controlloAssetDisponibile(idasset,userAssets, orainizio, true)  ) {
+        		
+            	System.out.println("L'asset con id "+idasset+" è già prenotato per la data: "+orainizio+ "!");
+            		
+        		
+        		System.out.println("Scegli un altra data di inizio prenotazione o premi invio per annullare la prenotazione:");
+    			orainizio=getInput();
         	}
         	if(orainizio.equals("")) {
         		request=new Request();
@@ -102,12 +111,11 @@ public class UserAssetView implements View {
         	}
         	
         	
-        	
         	System.out.println("Data inizio correttamente inserita ("+orainizio+")");
         	System.out.println("Inserisci la data di fine prenotazione(yyyy-mm-gg hh:mm:ss):");
         	String orafine= getInput();
         	
-        	while(orafine.compareTo(orainizio)<=0 || !controlloAssetDisponibile(idasset,userAssets, orafine, false) && !orafine.equals("")) {
+        	while(orafine.compareTo(orainizio)<=0 || ( !controlloAssetDisponibile(idasset,userAssets, orafine, false) && !orafine.equals("") ) ) {
         		if(orafine.compareTo(orainizio)<=0) {
         			System.out.println("La data di fine prenotazione non può essere antecedente alla data di inizio ("+orainizio+")!");
         			System.out.println("Inserisci una data corretta o premi invio per annullare la prenotazione:");
@@ -141,9 +149,25 @@ public class UserAssetView implements View {
                 iduser = Integer.parseInt(getInput());
                 System.out.println("inserisci id asset:");
                 idasset = Integer.parseInt(getInput());
+                System.out.println("inserisci la data di inizio della prenotazione che vuoi eliminare:");
+                iddata = getInput();
+                
+                for(UserAsset ua: listUserAsset) {
+                	if(iduser==ua.getIduser() && idasset==ua.getIdasset() && iddata.equals(ua.getOrainizio()))
+                	if(!verificaPrenotazioni(ua.getOrainizio())) {
+                		System.out.println("La data deve essere maggiore rispetto a quella odierna");
+                		request = new Request();
+                		request.put("choice","usersAssetsManagement");
+                		
+                		MainDispatcher.getInstance().callAction("UserAsset", "doControl", request);
+                		
+                	}
+                }
+                
         		request = new Request();
         		request.put("delIdUser",iduser);
         		request.put("delIdAsset",idasset);
+        		request.put("delIdData", iddata);
         	    request.put("choice", "deleteUserAsset");
         	    MainDispatcher.getInstance().callAction("UserAsset", "doControl", request);
         	    System.out.println("Utente eliminato,ritorno al menu");
@@ -193,6 +217,17 @@ public class UserAssetView implements View {
     	
     	return true;
     	
+    }
+    
+    
+ private boolean verificaPrenotazioni(String date) {
+    	
+        //MyData dateNow=new MyData(LocalDateTime.now());
+        if( LocalDateTime.now().toString().compareTo( date )<0 ){
+        		return true;
+        }
+        
+        return false;
     }
 
 }

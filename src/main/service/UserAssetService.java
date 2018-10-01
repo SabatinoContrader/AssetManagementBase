@@ -38,7 +38,7 @@ public class UserAssetService {
     public boolean insertStorico (UserAsset userAsset) {
         return this.userAssetDAO.insertStorico(userAsset);
     }
-    public boolean deleteUserAsset (int idUser, int idAsset) {
-        return this.userAssetDAO.deleteUserAsset(idUser, idAsset);
+    public boolean deleteUserAsset (int idUser, int idAsset, String idData) {
+        return this.userAssetDAO.deleteUserAsset(idUser, idAsset, idData);
     }
 }

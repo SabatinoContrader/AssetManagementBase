@@ -51,14 +51,14 @@ public class UserAssetController implements Controller {
                 break;
             case "getList":
             	
-            	aggiornaPrenotazioni();
+            	//aggiornaPrenotazioni();
                 
                 request.put("mode", "getList");
                 request.put("visualizzaUtentiAssets", this.userAssetService.getAllUsersAssets());
                 MainDispatcher.getInstance().callView("UserAsset", request);
                 break;
             case "getList2":
-            	aggiornaPrenotazioni();
+            	//aggiornaPrenotazioni();
                 request.put("visualizzaUtentiAssets", this.userAssetService.getAllUsersAssets());
             	break;
             case "getListSenzaPrenotazioni":
@@ -96,9 +96,8 @@ public class UserAssetController implements Controller {
             case "deleteUserAsset":
             	int idUser = Integer.parseInt(request.get("delIdUser").toString());
             	int idAsset = Integer.parseInt(request.get("delIdAsset").toString());
-            	System.out.println(idUser);
-            	System.out.println(idAsset);
-            	this.userAssetService.deleteUserAsset(idUser, idAsset);
+            	String idData = request.get("delIdData").toString();
+            	this.userAssetService.deleteUserAsset(idUser, idAsset, idData);
             	MainDispatcher.getInstance().callView("UserAssetHome", request);
                 break;
 //            case "updateUserAsset":
@@ -179,13 +178,7 @@ public class UserAssetController implements Controller {
 		}	
 	}
     
-    private void aggiornaPrenotazioni() {
-    	List<UserAsset> allUserAsset=this.userAssetService.getAllUsersAssets();
-        //MyData dateNow=new MyData(LocalDateTime.now());
-        for(UserAsset ua: allUserAsset) {
-        	if( LocalDateTime.now().toString().compareTo( ua.getOrafine() )>0 ){
-        		this.userAssetService.deleteUserAsset(ua.getIduser(), ua.getIdasset());
-        	}
-        }
-    }
+    
+   
+    
 }

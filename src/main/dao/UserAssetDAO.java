@@ -19,15 +19,16 @@ public class UserAssetDAO {
     private final String QUERY_ALLUSERASS = "select * from userasset";
     private final String QUERY_ALLSTORICO = "select * from storico";
     private final String QUERY_INSUSERASSS = "insert into storico(iduser,idasset,orainizio,orafine) values (?,?,?,?) ";
-    private final String QUERY_DELETE = "delete from userasset where iduser=? and idasset=?";
+    private final String QUERY_DELETE = "delete from userasset where iduser=? and idasset=? and orainizio=?";
     
-    public boolean deleteUserAsset(int idUser, int idAsset) {
+    public boolean deleteUserAsset(int idUser, int idAsset, String idData) {
     	 Connection connection = ConnectionSingleton.getInstance();
          try {
              PreparedStatement preparedStatement = connection.prepareStatement(QUERY_DELETE);
              
              preparedStatement.setInt(1, idUser);
              preparedStatement.setInt(2, idAsset);
+             preparedStatement.setString(3, idData);
              return preparedStatement.execute();
          }
          catch (SQLException e) {
