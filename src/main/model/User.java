@@ -206,7 +206,7 @@ public class User {
 
     }
     public String stampa() {
-    return "\nId Utente"+idutente+"\nUsername: "+username+"\nNome: "+nome+"\nCognome: "+cognome+"\nPartita iva: "+partitaiva;
+    return "\nId Utente"+idutente+"\nUsername: "+username+"\nNome: "+nome+"\nCognome: "+cognome+"\nPartita iva: "+partitaiva+"\n";
     }
     	
     }

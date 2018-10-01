@@ -9,18 +9,26 @@ public class LoginView implements View {
 
     private String nomeUtente;
     private String password;
-
+    private Request req;
+    
     public void showResults (Request request) {
-
+    	this.req = request;
     }
 
 
     public void showOptions () {
-        System.out.println("-----LOGIN----");
-        System.out.println("Nome utente:");
-        nomeUtente = getInput();
-        System.out.println("Password:");
-        password = getInput();
+    	if(req!=null) {
+    		if(req.get("controlloAccesso").equals("ERROR"))
+    			System.out.println("Accesso Negato");
+    	}
+    	
+    	System.out.println();
+    	System.out.println("-----LOGIN----");
+    	System.out.println("Nome utente:");
+    	nomeUtente = getInput();
+    	System.out.println("Password:");
+    	password = getInput();
+    	 	
     }
 
     public void submit() {

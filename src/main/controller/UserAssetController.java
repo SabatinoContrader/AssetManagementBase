@@ -2,6 +2,8 @@ package main.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.util.List;
 
 import jxl.Workbook;
 import jxl.format.UnderlineStyle;
@@ -15,19 +17,26 @@ import jxl.write.WriteException;
 import jxl.write.biff.RowsExceededException;
 import main.MainDispatcher;
 import main.model.UserAsset;
+import main.service.AssetService;
 import main.service.UserAssetService;
+import main.service.UserService;
 
 public class UserAssetController implements Controller {
 
 	private UserAssetService userAssetService;
+	private AssetService assetService;
 	private WritableFont wfont;
 	private WritableFont wc;
 	private WritableCellFormat wcfFC;
 	private WritableCellFormat wC;
+	private UserService userService;
 	
     @Override
     public void doControl(Request request) {
     	this.userAssetService = new UserAssetService();
+    	this.assetService = new AssetService();
+    	this.userService = new UserService();
+    	
     	String choice = request.get("choice").toString();
         if (choice != null) {
         	switch (choice) {
@@ -39,19 +48,38 @@ public class UserAssetController implements Controller {
                 MainDispatcher.getInstance().callView("UserAsset", request);
                 break;
             case "getList":
+            	
+            	aggiornaPrenotazioni();
+                
                 request.put("mode", "getList");
                 request.put("visualizzaUtentiAssets", this.userAssetService.getAllUsersAssets());
                 MainDispatcher.getInstance().callView("UserAsset", request);
                 break;
+            case "getList2":
+            	aggiornaPrenotazioni();
+                request.put("visualizzaUtentiAssets", this.userAssetService.getAllUsersAssets());
+            	break;
+            case "getListSenzaPrenotazioni":
+                request.put("visualizzaAssetsSenzaPrenotazioni", this.assetService.getAllAssetsN());
+            	break;
             case "export":
             	 writeOnExcel();
                  MainDispatcher.getInstance().callView("UserAssetHome", request);
                  break;
-//            case "update":
-//                request.put("mode", "update");
+            case "update":
+            	/*
+                request.put("mode", "update");
+                List<UserAsset> allUserAsset=this.userAssetService.getAllUsersAssets();
+                MyData dateNow=new MyData(LocalDateTime.now());
+                for(UserAsset ua: allUserAsset) {
+                	if( dateNow.compareTo( new MyData(ua.getOrafine()) )>0 ){
+                		this.userAssetService.deleteUserAsset(ua.getIduser(), ua.getIdasset());
+                	}
+                }
+                */
 //            	request.put("visualizzaUtentiAssets", userAssetService.getAllUsersAssets());
 //            	MainDispatcher.getInstance().callView("User", request);
-//                break;
+//              break;
             case "delete":
             	request.put("visualizzaUtentiAssets", this.userAssetService.getAllUsersAssets());
                 request.put("mode", "delete");
@@ -78,6 +106,13 @@ public class UserAssetController implements Controller {
             case "getListUsersAssets":
             	MainDispatcher.getInstance().callView("UserAssetHome", request);
                 break;
+        	
+        	case "userAssetHome":
+        		MainDispatcher.getInstance().callView("UserAssetHome", null);
+        		break;
+        	case "getClienti":
+        		request.put("visualizzaClienti", this.userService.getAllClientiAss());
+        		break;
         	}
         }
         else {
@@ -141,4 +176,14 @@ public class UserAssetController implements Controller {
 			e.printStackTrace();
 		}	
 	}
+    
+    private void aggiornaPrenotazioni() {
+    	List<UserAsset> allUserAsset=this.userAssetService.getAllUsersAssets();
+        //MyData dateNow=new MyData(LocalDateTime.now());
+        for(UserAsset ua: allUserAsset) {
+        	if( LocalDateTime.now().toString().compareTo( ua.getOrafine() )>0 ){
+        		this.userAssetService.deleteUserAsset(ua.getIduser(), ua.getIdasset());
+        	}
+        }
+    }
 }

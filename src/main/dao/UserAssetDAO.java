@@ -36,6 +36,8 @@ public class UserAssetDAO {
          }
     }
     
+    
+    
     public List<UserAsset> getAllUsersAssets () {
         List<UserAsset> userassets = new ArrayList<>();
         Connection connection = ConnectionSingleton.getInstance();

@@ -48,7 +48,7 @@ public class AssetView implements View {
             	double prezzo = Double.parseDouble(getInput());
             	System.out.println("descrizione");
             	String descrizione= getInput();
-            	assetService.insertAsset(new Asset(id,tipo,prezzo,descrizione));
+            	//assetService.insertAsset(new Asset(id,tipo,prezzo,descrizione));
             	request = new Request();
             	request.put("asset",new Asset(id,tipo,prezzo,descrizione));
             	request.put("choice", "insertAsset");

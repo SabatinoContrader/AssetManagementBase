@@ -22,11 +22,14 @@ public class HomeController implements Controller {
             if(request.get("myuser") instanceof User) {
             	userService.insertUser((User)request.get("myuser"));
             }
-            if (loginService.login(nomeUtente, password)) {
+            if (loginService.login(nomeUtente, password,"segretaria")) {
                 MainDispatcher.getInstance().callView("Home", request);
             }
-            else
+            else {
+            	request=new Request();
+            	request.put("controlloAccesso", "ERROR");
                 MainDispatcher.getInstance().callAction("Login", "doControl", request);
+            }
         }
         else {
         	MainDispatcher.getInstance().callView("Home", null);
