@@ -31,6 +31,8 @@ public class UserAssetController implements Controller {
 	private WritableCellFormat wC;
 	private UserService userService;
 	
+	//a
+	
     @Override
     public void doControl(Request request) {
     	this.userAssetService = new UserAssetService();
