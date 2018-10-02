@@ -107,7 +107,8 @@ public class UserDAO {
             preparedStatement.setString(7, user.getMail());
             preparedStatement.setString(8, user.getPartitaiva());
             preparedStatement.setString(9, user.getRuolo());
-            return preparedStatement.execute();
+            preparedStatement.execute();
+            return true;
         }
         catch (SQLException e) {
             GestoreEccezioni.getInstance().gestisciEccezione(e);
@@ -120,9 +121,9 @@ public class UserDAO {
         Connection connection = ConnectionSingleton.getInstance();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(QUERY_DELETE);
-            
             preparedStatement.setString(1, username);
-            return preparedStatement.execute();
+            preparedStatement.execute();
+            return true;
         }
         catch (SQLException e) {
         	if(e instanceof SQLIntegrityConstraintViolationException) {
@@ -138,15 +139,12 @@ public class UserDAO {
     public boolean udpateUser(Request request) {
         Connection connection = ConnectionSingleton.getInstance();
         try {
-            
-        	param=(String)request.get("campo");
-        	
-            PreparedStatement preparedStatement = connection.prepareStatement("update user set "+param+"=? where iduser=?");
-            
-            preparedStatement.setString(1, (String)request.get("username"));
-            preparedStatement.setInt(2, (Integer)request.get("idutente"));
-            
-            return preparedStatement.execute();
+            param=(String)request.get("campo");
+        	PreparedStatement preparedStatement = connection.prepareStatement("update user set "+param+"=? where iduser=?");
+            preparedStatement.setString(1, (String)request.get("newData"));
+            preparedStatement.setInt(2, (Integer)request.get("idUtente"));
+            preparedStatement.execute();
+            return true;
         }
         catch (SQLException e) {
             GestoreEccezioni.getInstance().gestisciEccezione(e);

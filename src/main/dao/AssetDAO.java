@@ -67,7 +67,8 @@ public class AssetDAO {
             preparedStatement.setString(1, asset.getTipo());
             preparedStatement.setDouble(2, asset.getPrezzo());
             preparedStatement.setString(3, asset.getDescrizione());
-            return preparedStatement.execute();
+            preparedStatement.execute();
+            return true;
         }
         catch (SQLException e) {
             GestoreEccezioni.getInstance().gestisciEccezione(e);
@@ -80,7 +81,8 @@ public class AssetDAO {
     	try {
     		PreparedStatement preparedStatement = connection.prepareStatement(QUERY_DEL);
             preparedStatement.setInt(1,idasset);
-            return preparedStatement.execute();
+            preparedStatement.execute();
+            return true;
     }
         catch (SQLException e) {
             GestoreEccezioni.getInstance().gestisciEccezione(e);
@@ -89,19 +91,13 @@ public class AssetDAO {
     }
     
     public boolean UpdateAsset(Request request) {
-    	
     	 Connection connection = ConnectionSingleton.getInstance();
          try {
-             
-         	param=(String)request.get("campo");
-         	
-             PreparedStatement preparedStatement = connection.prepareStatement("update asset set "+param+"=? where idasset=?");
-             
-             preparedStatement.setString(1, (String)request.get("newCampo"));
-             preparedStatement.setInt(2, (Integer)request.get("idasset"));
-             
+         	 param=(String)request.get("campo");
+         	 PreparedStatement preparedStatement = connection.prepareStatement("update asset set "+param+"=? where idasset=?");
+             preparedStatement.setString(1, (String)request.get("newData"));
+             preparedStatement.setInt(2, (Integer)request.get("idAsset"));
              preparedStatement.execute();
-             
              return true;
          }
          catch (SQLException e) {

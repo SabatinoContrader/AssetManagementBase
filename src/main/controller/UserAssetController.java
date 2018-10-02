@@ -31,24 +31,32 @@ public class UserAssetController implements Controller {
 	private WritableCellFormat wcfFC;
 	private WritableCellFormat wC;
 	private UserService userService;
-	
-	//a
-	
+	private String message;
+
     @Override
     public void doControl(Request request) {
     	this.userAssetService = new UserAssetService();
     	this.assetService = new AssetService();
     	this.userService = new UserService();
-    	
+    	this.message = "";
+
     	String choice = request.get("choice").toString();
         if (choice != null) {
         	switch (choice) {
             case "usersAssetsManagement":
+                request.put("visualizzaUtentiAssets", this.userAssetService.getAllUsersAssets());
+        		request.put("visualizzaClienti", this.userService.getAllClientiAss());
             	MainDispatcher.getInstance().callView("UserAssetHome", request);
             	break;
             case "insert"://assegna asset ad utente
-                request.put("mode", "insert");
-                MainDispatcher.getInstance().callView("UserAsset", request);
+                request.put("visualizzaAssetsSenzaPrenotazioni", this.assetService.getAllAssetsN());
+        		request.put("visualizzaClienti", this.userService.getAllClientiAss());
+                request.put("visualizzaUtentiAssets", this.userAssetService.getAllUsersAssets());
+                MainDispatcher.getInstance().callView("InsertUserAsset", request);
+                break;
+            case "delete":
+                request.put("visualizzaUtentiAssets", this.userAssetService.getAllUsersAssets());
+            	MainDispatcher.getInstance().callView("DeleteUserAsset", request);
                 break;
             case "getList":
             	
@@ -65,10 +73,6 @@ public class UserAssetController implements Controller {
             case "getListSenzaPrenotazioni":
                 request.put("visualizzaAssetsSenzaPrenotazioni", this.assetService.getAllAssetsN());
             	break;
-            case "export":
-           	 request.put("ok",writeOnExcel(request));
-                MainDispatcher.getInstance().callView("UserAssetHome", request);
-                break;
             case "update":
             	/*
                 request.put("mode", "update");
@@ -83,23 +87,46 @@ public class UserAssetController implements Controller {
 //            	request.put("visualizzaUtentiAssets", userAssetService.getAllUsersAssets());
 //            	MainDispatcher.getInstance().callView("User", request);
 //              break;
-            case "delete":
-            	request.put("visualizzaUtentiAssets", this.userAssetService.getAllUsersAssets());
-                request.put("mode", "delete");
-                MainDispatcher.getInstance().callView("UserAsset", request);
-                break;
             case "insertUserAsset":
-            	UserAsset userAsset = (UserAsset)request.get("newUserAsset");
-            	this.userAssetService.insertUserAsset(userAsset);
+            	if (this.userAssetService.insertUserAsset((UserAsset)request.get("newUserAsset"))) {
+            		this.message = "Inserimento utente asset avvenuto correttamente";
+            	}
+            	else {
+            		this.message = "Errore durante la procedura di inserimento utente asset";
+            	}	
+            	request.put("message", this.message);
+                request.put("visualizzaUtentiAssets", this.userAssetService.getAllUsersAssets());
+                request.put("visualizzaClienti", this.userService.getAllClientiAss());
             	MainDispatcher.getInstance().callView("UserAssetHome", request);
-               	break;
+            	break;
             case "deleteUserAsset":
             	int idUser = Integer.parseInt(request.get("delIdUser").toString());
             	int idAsset = Integer.parseInt(request.get("delIdAsset").toString());
             	String idData = request.get("delIdData").toString();
-            	this.userAssetService.deleteUserAsset(idUser, idAsset, idData);
+            	if (this.userAssetService.deleteUserAsset(idUser, idAsset, idData)) {
+            		this.message = "Cancellazione utente asset avvenuta correttamente";
+            	}
+            	else {
+            		this.message = "Errore durante la procedura di cancellazione utente asset";
+            	}	
+            	request.put("message", this.message);
+                request.put("visualizzaUtentiAssets", this.userAssetService.getAllUsersAssets());
+                request.put("visualizzaClienti", this.userService.getAllClientiAss());
             	MainDispatcher.getInstance().callView("UserAssetHome", request);
                 break;
+            case "export":
+            	if (writeOnExcel(request)) {
+            		this.message = "Export avvenuto correttamente";
+            	}
+            	else {
+            		this.message = "Errore durante la procedura di export";
+            	}
+            	request.put("message", this.message);
+            	request.put("visualizzaUtentiAssets", this.userAssetService.getAllUsersAssets());
+                request.put("visualizzaClienti", this.userService.getAllClientiAss());
+        		MainDispatcher.getInstance().callView("UserAssetHome", request);
+                break;
+
 //            case "updateUserAsset":
 //            	this.userAssetService.updateUserAsset(request);
 //            	MainDispatcher.getInstance().callView("UserHome", request);
@@ -122,7 +149,7 @@ public class UserAssetController implements Controller {
     }
     
     public boolean writeOnExcel(Request request) {
-    	String par=request.get("perc").toString();
+    	String par=request.get("path").toString();
     	String storico=request.get("nome").toString();
     	File f=new File(par+"\\"+storico+".xls");
 
@@ -187,10 +214,6 @@ public class UserAssetController implements Controller {
 	private String getInput() {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
-		
 	}
-    
-    
-   
     
 }

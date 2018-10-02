@@ -1,76 +1,68 @@
 package main.controller;
 
-import java.sql.SQLException;
-import java.sql.SQLIntegrityConstraintViolationException;
-import java.util.List;
-
-import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
-
 import main.MainDispatcher;
-import main.model.Asset;
 import main.model.User;
 import main.service.UserService;
 
 public class UserController implements Controller {
 
 	private UserService userService;
+	private String message;
 	
     @Override
     public void doControl(Request request)  {
     	this.userService = new UserService();
+    	this.message = "";
     	String choice = request.get("choice").toString();
         if (choice != null) {
         	switch (choice) {
             case "usersManagement":
+            	request.put("visualizzaUtenti", this.userService.getAllUsers());
             	MainDispatcher.getInstance().callView("UserHome", request);
             	break;
             case "insert":
-                request.put("mode", "insert");
-                MainDispatcher.getInstance().callView("User", request);
-                break;
-            case "getList":
-                request.put("mode", "getList");
-                request.put("visualizzaUtenti", this.userService.getAllUsers());
-                MainDispatcher.getInstance().callView("User", request);
+                MainDispatcher.getInstance().callView("InsertUser", request);
                 break;
             case "update":
-                request.put("mode", "update");
-            	request.put("visualizzaUtenti", userService.getAllUsers());
-            	MainDispatcher.getInstance().callView("User", request);
+            	MainDispatcher.getInstance().callView("UpdateUser", request);
                 break;
             case "delete":
-            	request.put("visualizzaUtenti", userService.getAllUsers());
-                request.put("mode", "delete");
-                MainDispatcher.getInstance().callView("User", request);
+                MainDispatcher.getInstance().callView("DeleteUser", request);
                 break;
             case "insertUser":
-            	this.userService.insertUser((User)request.get("newUser"));
-            	MainDispatcher.getInstance().callView("UserHome", request);
-                break;
-            case "deleteUser":
-            	/*
-            	List<User> listUsers=this.userService.getAllUsersN();
-            	
-            	for(User u:listUsers) {
-            		if(request.get("delUser").toString().equals(u.getUsername())) {
-            			
-            		}
+            	if (this.userService.insertUser((User)request.get("newUser"))) {
+            		this.message = "Inserimento utente avvenuto correttamente";
             	}
-            	*/
-            	
-            	this.userService.deleteUser(request.get("delUser").toString());
-            	MainDispatcher.getInstance().callView("UserHome", request);
+            	else {
+            		this.message = "Errore durante la procedura di inserimento utente";
+            	}
+            	request.put("message", this.message);
+            	request.put("visualizzaUtenti", this.userService.getAllUsers());
+        		MainDispatcher.getInstance().callView("UserHome", request);
             	break;
-            	
-            	
+            case "deleteUser":
+            	if (this.userService.deleteUser(request.get("delUser").toString())) {
+            		this.message = "Cancellazione utente avvenuta correttamente";
+            	}
+            	else {
+            		this.message = "Errore durante la procedura di cancellazione utente";
+            	}
+            	request.put("message", this.message);
+            	request.put("visualizzaUtenti", this.userService.getAllUsers());
+        		MainDispatcher.getInstance().callView("UserHome", request);
+            	break;
             case "updateUser":
-            	this.userService.updateUser(request);
-            	MainDispatcher.getInstance().callView("UserHome", request);
-                break;
-            case "getListUsers":
-            	MainDispatcher.getInstance().callView("UserHome", request);
-                break;
-        	}
+            	if (this.userService.updateUser(request)) {
+            		this.message = "Aggiornamento utente avvenuto correttamente";
+            	}
+            	else {
+            		this.message = "Errore durante la procedura di aggiornamento utente";
+            	}
+            	request.put("message", this.message);
+            	request.put("visualizzaUtenti", this.userService.getAllUsers());
+        		MainDispatcher.getInstance().callView("UserHome", request);
+            	break;
+            }
         }
         else {
         	MainDispatcher.getInstance().callView("UserHome", null);

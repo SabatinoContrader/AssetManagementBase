@@ -2,102 +2,71 @@ package main.controller;
 
 import main.MainDispatcher;
 import main.model.Asset;
-import main.model.User;
 import main.service.AssetService;
 
 public class AssetController implements Controller {
 	
 	private AssetService assetService;
-
+	private String message;
+	
     @Override
     public void doControl(Request request) {
     	this.assetService = new AssetService();
+    	this.message = "";
     	String choice = request.get("choice").toString();
         if (choice != null) {
         	switch (choice) {
             case "assetsManagement":
+            	request.put("visualizzaAssets", this.assetService.getAllAssets());
             	MainDispatcher.getInstance().callView("AssetHome", request);
             	break;
             case "insert":
-                request.put("mode", "insert");
-                MainDispatcher.getInstance().callView("Asset", request);
-                break;
-            case "getList":
-                request.put("mode", "getList");
-            	request.put("visualizzaAssets", this.assetService.getAllAssets());
-                MainDispatcher.getInstance().callView("Asset", request);
+                MainDispatcher.getInstance().callView("InsertAsset", request);
                 break;
             case "update":
-                request.put("mode", "update");
-            	request.put("visualizzaAssets", this.assetService.getAllAssets());
-                MainDispatcher.getInstance().callView("Asset", request);
+                MainDispatcher.getInstance().callView("UpdateAsset", request);
                 break;
             case "delete":
-                request.put("mode", "delete");
-            	request.put("visualizzaAssets", this.assetService.getAllAssets());
-                MainDispatcher.getInstance().callView("Asset", request);
+                MainDispatcher.getInstance().callView("DeleteAsset", request);
                 break;
             case "insertAsset":
-            	this.assetService.insertAsset((Asset)request.get("asset"));
+            	if (this.assetService.insertAsset((Asset)request.get("newAsset"))) {
+            		this.message = "Inserimento asset avvenuto correttamente";
+            	}
+            	else {
+            		this.message = "Errore durante la procedura di inserimento asset";
+            	}
+            	request.put("message", this.message);
+            	request.put("visualizzaAssets", this.assetService.getAllAssets());
             	MainDispatcher.getInstance().callView("AssetHome", request);
-                break;
+            	break;
             case "deleteAsset":
-            	this.assetService.deleteAsset((Integer) request.get("delAsset"));
+            	if (this.assetService.deleteAsset((Integer) request.get("delAsset"))) {
+            		this.message = "Cancellazione asset avvenuto correttamente";
+            	}
+            	else {
+            		this.message = "Errore durante la procedura di cancellazione asset";
+            	}
+            	request.put("message", this.message);
+            	request.put("visualizzaAssets", this.assetService.getAllAssets());
             	MainDispatcher.getInstance().callView("AssetHome", request);
-                break;
+            	break;
             case "updateAsset":
-            	assetService.updateAsset(request);
+            	if (assetService.updateAsset(request)) {
+            		this.message = "Aggiornamento asset avvenuto correttamente";
+            	}
+            	else {
+            		this.message = "Errore durante la procedura di aggiornamento asset";
+            	}
+            	request.put("message", this.message);
+            	request.put("visualizzaAssets", this.assetService.getAllAssets());
             	MainDispatcher.getInstance().callView("AssetHome", request);
-                break;
-            case "getListAssets":
-            	MainDispatcher.getInstance().callView("AssetHome", request);
-                break;
-        	}
+            	break;
+            }
         }
         else {
         	MainDispatcher.getInstance().callView("AssetHome", null);
         }
     }
 }
-    	/*
-    	this.assetService=new AssetService();
-    	int choice = (int) request.get("choice");
-        switch (choice) {
-            case 5:
-            	request.put("mode", "insAss");
-               	MainDispatcher.getInstance().callView("Asset", request);
-              	
-            	System.out.println((Asset)request.get("asset"));
-            	System.out.println("TEST4");
-            	assetService.insertAsset( (Asset)request.get("asset") );
-            	
-            	break;
-            case 6:
-                request.put("mode", "viewAss");
-            	request.put("visualizza", assetService.getAllAssets());
-                MainDispatcher.getInstance().callView("Asset", request);        
-                break;
-            case 7:
-            	request.put("mode", "upAss");
-            	request.put("visualizza", assetService.getAllAssets());
-            	MainDispatcher.getInstance().callView("Asset", request);
-            	break;
-            case 8:
-            	request.put("mode", "delAss");
-            	request.put("visualizza", assetService.getAllAssets());
-            	MainDispatcher.getInstance().callView("Asset", request);
-            	break;
-            case 10:
-            	assetService.insertAsset( (Asset)request.get("asset") );
-            	break;
-            	
-            case 11:
-            	assetService.DeleteAsset((Integer) request.get("idAsset") );
-            	break;
-            case 12:
-            	assetService.UpdateAsset(request);
-            	break;            
-        }
-    }
-}
-*/
+    

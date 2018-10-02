@@ -33,7 +33,8 @@ public class UserAssetDAO {
              preparedStatement.setInt(1, idUser);
              preparedStatement.setInt(2, idAsset);
              preparedStatement.setString(3, idData);
-             return preparedStatement.execute();
+             preparedStatement.execute();
+             return true;
          }
          catch (SQLException e) {
              GestoreEccezioni.getInstance().gestisciEccezione(e);
@@ -117,8 +118,8 @@ public class UserAssetDAO {
             preparedStatement.setInt(2, userAsset.getIdasset());
             preparedStatement.setString(3, userAsset.getOrainizio());
             preparedStatement.setString(4, userAsset.getOrafine());
-            
-            return preparedStatement.execute();
+            preparedStatement.execute();
+            return true;
         }
         catch (SQLException e) {
             GestoreEccezioni.getInstance().gestisciEccezione(e);

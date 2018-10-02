@@ -65,5 +65,4 @@ public class HomeView implements View {
         return scanner.nextLine();
     }
 
-
 }
