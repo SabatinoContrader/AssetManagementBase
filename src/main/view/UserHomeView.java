@@ -28,7 +28,30 @@ public class UserHomeView implements View {
     	System.out.println("");
         System.out.println("----- LISTA UTENTI -----");
         System.out.println();
-        this.listUser.forEach(user -> System.out.println(user));
+        //this.listUser.forEach(user -> System.out.println(user));
+        System.out.format("+----------+-----------------------+------------+------------+------------+------------+-------------------------------+--------------+-------------+%n");
+		System.out.format("| IDutente |UserName               | password   | Nome       |Cognome     |Telefono    |  e-mail                       | partitaIva   |RUOLO        |%n");
+        System.out.format("+----------+-----------------------+------------+------------+------------+------------+-------------------------------+--------------+-------------+%n");
+		String leftAlignFormat2 ="| %-8s | %-21s | %-10s | %-10s | %-10s | %-10s | %-29s | %-12s | %-11s |%n";
+		for (User report : this.listUser) {
+			int id = report.getIdutente();
+            String usN = report.getUsername();
+			String passW = report.getPassword();
+			String nome = report.getNome();
+			String cogn = report.getCognome();
+			String tel = report.getTelefono();
+			String email = report.getMail();
+			String piva = report.getPartitaiva();
+			String ruolo = report.getRuolo();
+            
+            try{
+            	System.out.format(leftAlignFormat2, id ,usN,passW,nome,cogn,tel,email,piva,ruolo);
+            }catch (Exception e) {
+				// TODO: handle exception
+			}
+            System.out.format("+----------+-----------------------+------------+------------+------------+------------+-------------------------------+--------------+-------------+%n");
+
+		}
         System.out.println();
     }
 

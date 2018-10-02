@@ -27,7 +27,25 @@ public class AssetHomeView implements View {
     	System.out.println();
     	System.out.println("----- ASSET DISPONIBILI -----");
         System.out.println();
-        this.listAsset.forEach(asset -> System.out.println(asset));
+        System.out.format("+------+---------+--------------+----------------------------------------------------------------------------------------------+%n");
+		System.out.format("| ID   |  TIPO   | PREZZO       | DESCRIZIONE                                                                                  |%n");
+		System.out.format("+------+---------+--------------+----------------------------------------------------------------------------------------------+%n");
+		String leftAlignFormat ="| %-4s | %-7s | %-12s | %-92s |%n";
+        //this.listAsset.forEach(asset -> System.out.println(asset));
+		for (Asset report : this.listAsset) {
+			int id = report.getId();
+            String tipo = report.getTipo();
+			double prezzo = report.getPrezzo();
+			String description = report.getDescrizione();
+            
+            try{
+            	System.out.format(leftAlignFormat, id ,tipo,prezzo,description);
+            }catch (Exception e) {
+				// TODO: handle exception
+			}
+			System.out.format("+------+---------+--------------+----------------------------------------------------------------------------------------------+%n");
+
+		}
         System.out.println();
 
     }

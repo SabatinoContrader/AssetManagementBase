@@ -32,11 +32,53 @@ public class UserAssetHomeView implements View {
     	System.out.println("");
     	System.out.println("----- Asset assegnati -----");
         System.out.println();
-        this.listUserAsset.forEach(userasset -> System.out.println(userasset));
+        System.out.format("+--------+---------+------------------------+-------------------------------+%n");
+		System.out.format("| IDuser | IDasset | ORAinizio              | ORAfine                       |%n");
+		System.out.format("+--------+---------+------------------------+-------------------------------+%n");
+		String leftAlignFormat ="| %-6s | %-7s | %-22s | %-29s |%n";
+        //this.listUserAsset.forEach(userasset -> System.out.println(userasset));
+		for (UserAsset report : this.listUserAsset) {
+			int id = report.getIduser();
+            int idA = report.getIdasset();
+			String oraI = report.getOrainizio();
+			String oraF = report.getOrafine();
+            
+            try{
+            	System.out.format(leftAlignFormat, id ,idA,oraI,oraF);
+            }catch (Exception e) {
+				// TODO: handle exception
+			}
+    		System.out.format("+--------+---------+------------------------+-------------------------------+%n");
+
+		}
         System.out.println();
         System.out.println("I clienti con un asset prenotato sono:");
         System.out.println();
-        this.users.forEach(user -> System.out.println(user.stampa()));
+        //this.users.forEach(user -> System.out.println(user.stampa()));
+        System.out.format("+----------+-----------------------+------------+------------+--------------+%n");
+		System.out.format("| IDutente |UserName               | Nome       |Cognome     | partitaIva   |%n");
+        System.out.format("+----------+-----------------------+------------+------------+--------------+%n");
+		String leftAlignFormat2 ="| %-8s | %-21s | %-10s | %-10s | %-12s |%n";
+		for (User report : this.users) {
+			int id = report.getIdutente();
+            String usN = report.getUsername();
+			//String passW = report.getPassword();
+			String nome = report.getNome();
+			String cogn = report.getCognome();
+			//String tel = report.getTelefono();
+			//String email = report.getMail();
+			String piva = report.getPartitaiva();
+			//String ruolo = report.getRuolo();
+			//System.out.println(ruolo);
+            
+            try{
+            	System.out.format(leftAlignFormat2, id ,usN,nome,cogn,piva);
+            }catch (Exception e) {
+				// TODO: handle exception
+			}
+            System.out.format("+----------+-----------------------+------------+------------+--------------+%n");
+
+		}
     }
 
     public void showOptions() {
