@@ -33,17 +33,18 @@ public class HomeView implements View {
         System.out.println("1) Gestione Utenti");
         System.out.println("2) Gestione Asset");
         System.out.println("3) Gestione Utenti Asset");
-        System.out.println("4) Logout");
+        System.out.println("4) Gestione Badge");
+        System.out.println("5) Logout");
         
         this.choice = Integer.parseInt(getInput());
     }
 
     public void submit() {
     	this.request = new Request();
-        if (choice < 1 || choice > 4) {
+        if (choice < 1 || choice > 5) {
         	MainDispatcher.getInstance().callAction("Home", "doControl", null);
         }
-        else if (choice == 4) {
+        else if (choice == 5) {
             MainDispatcher.getInstance().callAction("Login", "doControl", null);
         }
         else if (choice == 1) {
@@ -57,6 +58,10 @@ public class HomeView implements View {
         else if (choice == 3) {
         	this.request.put("choice", "usersAssetsManagement");
         	MainDispatcher.getInstance().callAction("UserAsset", "doControl", this.request);
+        }
+        else if (choice == 4) {
+        	this.request.put("choice", "badgesManagement");
+        	MainDispatcher.getInstance().callAction("Badge", "doControl", this.request);
         }
     }
 
