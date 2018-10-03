@@ -112,13 +112,14 @@ public class MovimentoController implements Controller {
     	String par=request.get("path").toString();
     	String storico=request.get("nome").toString();
     	File f=new File(par+"\\"+storico+".xls");
-
-		UserAssetService users = new UserAssetService();
+    	String iduser = request.get("iduser").toString();
+    	
+		MovimentoService users = new MovimentoService();
 		try {
 	    	wfont = new WritableFont(WritableFont.createFont("Arial"), 12, WritableFont.BOLD, true,
 	        UnderlineStyle.NO_UNDERLINE, jxl.format.Colour.RED);
 	    	wc = new WritableFont(WritableFont.createFont("Arial"), 10, WritableFont.NO_BOLD, false,
-	    	        UnderlineStyle.NO_UNDERLINE, jxl.format.Colour.BLACK);
+	    	UnderlineStyle.NO_UNDERLINE, jxl.format.Colour.BLACK);
 	    
 	        wcfFC = new WritableCellFormat(wfont);
 	        wC = new WritableCellFormat(wc);
@@ -141,17 +142,33 @@ public class MovimentoController implements Controller {
 			mysheet.addCell(new Label(1,0,"ID Asset",wcfFC));
 			mysheet.addCell(new Label(2,0,"Ora Inizio",wcfFC));
 			mysheet.addCell(new Label(3,0,"Ora Fine",wcfFC));
-			for(int i=1; i<=users.getAllUsersAssets().size(); i++) {
+			if (iduser.equalsIgnoreCase("")) {
+			for(int i=1; i<=users.getAllMovimenti().size(); i++) {
 				for(int j=0; j<4; j++) {
-					l=new Label(0,i, String.valueOf(users.getAllUsersAssets().get(i-1).getIdasset()),wC );
-					l2=new Label(1,i, String.valueOf(users.getAllUsersAssets().get(i-1).getIduser()),wC );
-					l3=new Label(2,i, users.getAllUsersAssets().get(i-1).getOrainizio(),wC);
-					l4=new Label(3,i, users.getAllUsersAssets().get(i-1).getOrafine(),wC);
+					l=new Label(0,i, String.valueOf(users.getAllMovimenti().get(i-1).getIdbadgereader()),wC );
+					l2=new Label(1,i, String.valueOf(users.getAllMovimenti().get(i-1).getIdbadge()),wC );
+					l3=new Label(2,i, users.getAllMovimenti().get(i-1).getDatainizio(),wC);
+					l4=new Label(3,i, users.getAllMovimenti().get(i-1).getDatafine(),wC);
 					mysheet.addCell(l);
 					mysheet.addCell(l2);
 					mysheet.addCell(l3);
 					mysheet.addCell(l4);
 				}
+			}
+			}else if (! iduser.equalsIgnoreCase("")) {
+				for(int i=1; i<=users.getAllUserMovimenti(iduser).size(); i++) {
+					for(int j=0; j<4; j++) {
+						l=new Label(0,i, String.valueOf(users.getAllUserMovimenti(iduser).get(i-1).getIdbadgereader()),wC );
+						l2=new Label(1,i, String.valueOf(users.getAllUserMovimenti(iduser).get(i-1).getIdbadge()),wC );
+						l3=new Label(2,i, users.getAllUserMovimenti(iduser).get(i-1).getDatainizio(),wC);
+						l4=new Label(3,i, users.getAllUserMovimenti(iduser).get(i-1).getDatafine(),wC);
+						mysheet.addCell(l);
+						mysheet.addCell(l2);
+						mysheet.addCell(l3);
+						mysheet.addCell(l4);
+					}
+				}
+			
 			}
 			myexel.write();	
 			myexel.close();

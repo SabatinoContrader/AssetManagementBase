@@ -114,9 +114,9 @@ public class UserAssetHomeView implements View {
             	request.put("path", path);
             	request.put("nome", nome);
             	System.out.println("Se si vuole esportare i movimenti relativi ad un utente specifico inserire l'id, altrimenti premere invio");
-            	String iduser = null;
+            	String iduser = "";
             	iduser = getInput();
-            	if (iduser != null){
+            	if (iduser != ""){
             		request.put("iduser", iduser);
             	}
         	}

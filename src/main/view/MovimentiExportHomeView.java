@@ -50,18 +50,24 @@ public class MovimentiExportHomeView implements View {
         		MainDispatcher.getInstance().callAction("Movimento", "doControl", request); 
         	}
         	else if (this.choice == 2) {
-        		request.put("choice", "export");
-            	System.out.println("Inserire percorso dove si vuole esportare");
-            	String path= getInput();
-            	System.out.println("Inserire nome file di output");
-            	String nome= getInput();
-            	request.put("path", path);
-            	request.put("nome", nome);
-        		MainDispatcher.getInstance().callAction("Movimento", "doControl", request); 
-        	}
-        	       		
-        }
+            	request.put("choice", "export");
+               	System.out.println("Inserire percorso dove si vuole esportare");
+               	String path= getInput();
+               	System.out.println("Inserire nome file di output");
+               	String nome= getInput();
+               	request.put("path", path);
+               	request.put("nome", nome);
+               	System.out.println("Se si vuole esportare i movimenti relativi ad un utente specifico inserire l'id, altrimenti premere invio");
+               	String iduser = "";
+               	iduser = getInput();
+               	if (iduser != ""){
+               		request.put("iduser", iduser);
+               	}
+           		MainDispatcher.getInstance().callAction("Movimento", "doControl", request); 
+           	}
+        }	       		
     }
+    
 
     public String getInput() {
         Scanner scanner = new Scanner(System.in);

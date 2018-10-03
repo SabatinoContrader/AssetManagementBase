@@ -16,7 +16,7 @@ import java.util.List;
 
 public class MovimentoDAO {
 
-    private final String QUERY_ALLMOV = "select * from movimento ";
+    private final String QUERY_ALLMOV = "select * from movimento";
     private final String QUERY_ALLUSERMOV = "SELECT * from movimento as m,assegnazione as a where m.idbadge=a.idbadge and a.iduser=?";
     private final String QUERY_SELIDB = "select ";
     private final String QUERY_INSMOV = "insert into movimento(idbadgereader,idbadge,datainizio,datafine) values (?,?,?,?) ";
