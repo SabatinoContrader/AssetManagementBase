@@ -30,10 +30,10 @@ public class MovimentoHomeView implements View{
         System.out.println("----- LISTA MOVIMENTI -----");
         System.out.println();
         //this.listUser.forEach(user -> System.out.println(user));
-        System.out.format("+--------------- +----------------+-------------------------+------------------------+%n");
-		System.out.format("| IDbadgereader  | Idbadge        | Datainizio              | Datafine               |%n");
-		System.out.format("+----------------+----------------+-------------------------+------------------------+%n");
-		String leftAlignFormat2 ="| %-14s | %-15s| %-24s| %-23s|%n";
+        System.out.format("+--------------- +----------------+----------------------------+---------------------------+%n");
+		System.out.format("| IDbadgereader  | Idbadge        | Datainizio                 | Datafine                  |%n");
+		System.out.format("+----------------+----------------+----------------------------+---------------------------+%n");
+		String leftAlignFormat2 ="| %-14s | %-15s| %-27s| %-26s|%n";
 		for (Movimento report : this.listMovimento) {
 			int idBadgereader = report.getIdbadgereader();
 			int idBadge = report.getIdbadge();
@@ -44,7 +44,7 @@ public class MovimentoHomeView implements View{
             }catch (Exception e) {
 				// TODO: handle exception
 			}
-            System.out.format("+----------------+----------------+-------------------------+------------------------+%n");
+            System.out.format("+----------------+----------------+----------------------------+---------------------------+%n");
 
 		}
         System.out.println();
@@ -67,7 +67,8 @@ public class MovimentoHomeView implements View{
             MainDispatcher.getInstance().callAction("Movimento", "doControl", this.request);
         }
         else if (choice == 4) {
-            MainDispatcher.getInstance().callAction("Home", "doControl", null);
+          	this.request.put("choice", "logs");
+            MainDispatcher.getInstance().callAction("Menu", "doControl", this.request);
         }
         else {
         	Request request = new Request();

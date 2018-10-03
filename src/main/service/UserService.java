@@ -31,8 +31,8 @@ public class UserService {
         return this.userDAO.insertUser(user);
     }
     
-    public boolean deleteUser(String username) {
-    	return this.userDAO.deleteUser(username);
+    public boolean deleteUser(int idUser) {
+    	return this.userDAO.deleteUser(idUser);
     }
     
     public List<User> getAllUsersN(){

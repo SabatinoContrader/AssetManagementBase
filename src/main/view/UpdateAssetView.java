@@ -42,7 +42,7 @@ public class UpdateAssetView implements View{
    	 		case 3: campo="descrizione";break;
    	 	}
    	 	
-   	 	System.out.println("Inserisci il nuovo "+ campo +" dell'asset:");
+   	 	System.out.println("Inserisci il nuovo campo "+ campo +" dell'asset:");
    	 	String newData = getInput();
    	 	this.request = new Request();
    	 	this.request.put("idAsset", idAsset);

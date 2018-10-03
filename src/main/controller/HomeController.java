@@ -19,9 +19,6 @@ public class HomeController implements Controller {
             String nomeUtente = request.get("nomeUtente").toString();
             String password = request.get("password").toString();
  
-            if(request.get("myuser") instanceof User) {
-            	userService.insertUser((User)request.get("myuser"));
-            }
             if (loginService.login(nomeUtente, password,"segretaria")) {
                 MainDispatcher.getInstance().callView("Home", request);
             }

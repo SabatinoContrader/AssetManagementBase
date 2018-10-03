@@ -3,21 +3,26 @@ package main.controller;
 import main.MainDispatcher;
 import main.model.Asset;
 import main.service.AssetService;
+import main.service.BadgeReaderService;
 
 public class AssetController implements Controller {
 	
 	private AssetService assetService;
 	private String message;
+	private BadgeReaderService badgeReaderService;
 	
     @Override
     public void doControl(Request request) {
     	this.assetService = new AssetService();
+    	this.badgeReaderService = new BadgeReaderService();
     	this.message = "";
     	String choice = request.get("choice").toString();
         if (choice != null) {
         	switch (choice) {
             case "assetsManagement":
             	request.put("visualizzaAssets", this.assetService.getAllAssets());
+            	request.put("visualizzaBadgeReader", this.badgeReaderService.getAllBadgeReaders());
+            	
             	MainDispatcher.getInstance().callView("AssetHome", request);
             	break;
             case "insert":
@@ -38,6 +43,7 @@ public class AssetController implements Controller {
             	}
             	request.put("message", this.message);
             	request.put("visualizzaAssets", this.assetService.getAllAssets());
+            	request.put("visualizzaBadgeReader", this.badgeReaderService.getAllBadgeReaders());
             	MainDispatcher.getInstance().callView("AssetHome", request);
             	break;
             case "deleteAsset":
@@ -49,6 +55,7 @@ public class AssetController implements Controller {
             	}
             	request.put("message", this.message);
             	request.put("visualizzaAssets", this.assetService.getAllAssets());
+            	request.put("visualizzaBadgeReader", this.badgeReaderService.getAllBadgeReaders());
             	MainDispatcher.getInstance().callView("AssetHome", request);
             	break;
             case "updateAsset":
@@ -60,6 +67,7 @@ public class AssetController implements Controller {
             	}
             	request.put("message", this.message);
             	request.put("visualizzaAssets", this.assetService.getAllAssets());
+            	request.put("visualizzaBadgeReader", this.badgeReaderService.getAllBadgeReaders());
             	MainDispatcher.getInstance().callView("AssetHome", request);
             	break;
             }
