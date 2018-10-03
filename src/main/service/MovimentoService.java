@@ -23,6 +23,9 @@ public class MovimentoService {
     public List<Movimento> getAllMovimenti () {
         return this.movimentoDAO.getAllMovimenti();
     }
+    public List<Movimento> getAllUserMovimenti (String iduser) {
+        return this.movimentoDAO.getAllUserMovimenti(iduser);
+    }
   /*  public List<BadgeReader> getAllBadgeReaders () {
         return (((BadgeReaderDAO) this.badgeReaderDAO).getBadgeReaders());
     }

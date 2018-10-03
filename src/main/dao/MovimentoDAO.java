@@ -17,6 +17,7 @@ import java.util.List;
 public class MovimentoDAO {
 
     private final String QUERY_ALLMOV = "select * from movimento ";
+    private final String QUERY_ALLUSERMOV = "SELECT * from movimento as m,assegnazione as a where m.idbadge=a.idbadge and a.iduser=?";
     private final String QUERY_SELIDB = "select ";
     private final String QUERY_INSMOV = "insert into movimento(idbadgereader,idbadge,datainizio,datafine) values (?,?,?,?) ";
     private final String QUERY_DELMOV = "delete from movimento where idbadgereader=? and idbadge=? and datainizio=?";
@@ -60,7 +61,26 @@ public class MovimentoDAO {
         }
         return movimenti;
     }
-    
+    public List<Movimento> getAllUserMovimenti(String iduser) {
+        List<Movimento> movimenti = new ArrayList<>();
+        Connection connection = ConnectionSingleton.getInstance();
+        try {
+           Statement statement = connection.createStatement();
+           ResultSet resultSet = statement.executeQuery("SELECT * from movimento as m,assegnazione as a where m.idbadge=a.idbadge and a.iduser="+iduser);
+           while (resultSet.next()) {
+        	   int idBadgeReader = resultSet.getInt("idbadgereader");
+        	   int idbadge = resultSet.getInt("idbadge");
+        	   String datainizio = resultSet.getString("datainizio");
+        	   String datafine = resultSet.getString("datafine");
+        	   
+               movimenti.add(new Movimento(idBadgeReader,idbadge,datainizio,datafine));
+           }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return movimenti;
+    }
     public boolean deleteMovimento(int idbadgereader, int idbadge, String datainizio) {
    	 Connection connection = ConnectionSingleton.getInstance();
         try {

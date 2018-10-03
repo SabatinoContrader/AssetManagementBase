@@ -56,7 +56,7 @@ public class UserAssetHomeView implements View {
         System.out.println();
         //this.users.forEach(user -> System.out.println(user.stampa()));
         System.out.format("+----------+-----------------------+------------+------------+--------------+%n");
-		System.out.format("| IDutente |UserName               | Nome       |Cognome     | partitaIva   |%n");
+		System.out.format("| IDutente | UserName              | Nome       | Cognome    | partitaIva   |%n");
         System.out.format("+----------+-----------------------+------------+------------+--------------+%n");
 		String leftAlignFormat2 ="| %-8s | %-21s | %-10s | %-10s | %-12s |%n";
 		for (User report : this.users) {
@@ -113,6 +113,12 @@ public class UserAssetHomeView implements View {
             	String nome= getInput();
             	request.put("path", path);
             	request.put("nome", nome);
+            	System.out.println("Se si vuole esportare i movimenti relativi ad un utente specifico inserire l'id, altrimenti premere invio");
+            	String iduser = null;
+            	iduser = getInput();
+            	if (iduser != null){
+            		request.put("iduser", iduser);
+            	}
         	}
         	else if (this.choice == 3) {
         		request.put("choice",  "delete");
