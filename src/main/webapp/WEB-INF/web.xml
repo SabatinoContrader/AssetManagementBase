@@ -20,59 +20,25 @@
 	</servlet>
 
 	<servlet>
-		<servlet-name>BookServlet</servlet-name>
-		<servlet-class>com.virtualpairprogrammers.servlets.BookServlet</servlet-class>
+		<servlet-name>UserServlet</servlet-name>
+		<servlet-class>com.virtualpairprogrammers.servlets.UserServlet</servlet-class>
 	</servlet>
 
 	<servlet>
-		<servlet-name>CarServlet</servlet-name>
-		<servlet-class>com.virtualpairprogrammers.servlets.CarServlet</servlet-class>
+		<servlet-name>BadgeServlet</servlet-name>
+		<servlet-class>com.virtualpairprogrammers.servlets.BadgeServlet</servlet-class>
 	</servlet>
 
 	<servlet>
-		<servlet-name>ExtensionStopServlet</servlet-name>
+		<servlet-name>UserAssetServlet</servlet-name>
 		<servlet-class>com.virtualpairprogrammers.servlets.ExtensionStopServlet</servlet-class>
 	</servlet>
 
 	<servlet>
-		<servlet-name>FindCarPlaceServlet</servlet-name>
+		<servlet-name>AssetServlet</servlet-name>
 		<servlet-class>com.virtualpairprogrammers.servlets.FindCarPlaceServlet</servlet-class>
 	</servlet>
 
-	<servlet>
-		<servlet-name>ManagementCarPlaceServlet</servlet-name>
-		<servlet-class>com.virtualpairprogrammers.servlets.ManagementCarPlaceServlet</servlet-class>
-	</servlet>
-
-	<servlet>
-		<servlet-name>ManagementSlotServlet</servlet-name>
-		<servlet-class>com.virtualpairprogrammers.servlets.ManagementSlotServlet</servlet-class>
-	</servlet>
-
-	<servlet>
-		<servlet-name>ReportServlet</servlet-name>
-		<servlet-class>com.virtualpairprogrammers.servlets.ReportServlet</servlet-class>
-	</servlet>
-
-	<servlet>
-		<servlet-name>SignupServlet</servlet-name>
-		<servlet-class>com.virtualpairprogrammers.servlets.SignupServlet</servlet-class>
-	</servlet>
-	
-	<servlet>
-		<servlet-name>UsefulNumbersServlet</servlet-name>
-		<servlet-class>com.virtualpairprogrammers.servlets.UsefulNumbersServlet</servlet-class>
-	</servlet>
-	
-	<servlet>
-		<servlet-name>MarkersServlet</servlet-name>
-		<servlet-class>com.virtualpairprogrammers.servlets.MarkersServlet</servlet-class>
-	</servlet>
-	
-	<servlet>
-		<servlet-name>LegislationServlet</servlet-name>
-		<servlet-class>com.virtualpairprogrammers.servlets.LegislationServlet</servlet-class>
-	</servlet>
 
 	<servlet-mapping>
 		<servlet-name>LoginServlet</servlet-name>
@@ -86,59 +52,25 @@
 	</servlet-mapping>
 
 	<servlet-mapping>
-		<servlet-name>BookServlet</servlet-name>
-		<url-pattern>/BookServlet</url-pattern>
+		<servlet-name>UserServlet</servlet-name>
+		<url-pattern>/UserServlet</url-pattern>
 	</servlet-mapping>
 
 	<servlet-mapping>
-		<servlet-name>CarServlet</servlet-name>
-		<url-pattern>/CarServlet</url-pattern>
+		<servlet-name>BadgeServlet</servlet-name>
+		<url-pattern>/BadgeServlet</url-pattern>
 	</servlet-mapping>
 
 	<servlet-mapping>
-		<servlet-name>ExtensionStopServlet</servlet-name>
-		<url-pattern>/ExtensionStopServlet</url-pattern>
+		<servlet-name>UserAssetpServlet</servlet-name>
+		<url-pattern>/UserAssetServlet</url-pattern>
 	</servlet-mapping>
 
 	<servlet-mapping>
-		<servlet-name>FindCarPlaceServlet</servlet-name>
-		<url-pattern>/FindCarPlaceServlet</url-pattern>
+		<servlet-name>AssetServlet</servlet-name>
+		<url-pattern>/AssetServlet</url-pattern>
 	</servlet-mapping>
 
-	<servlet-mapping>
-		<servlet-name>ManagementCarPlaceServlet</servlet-name>
-		<url-pattern>/ManagementCarPlaceServlet</url-pattern>
-	</servlet-mapping>
-
-	<servlet-mapping>
-		<servlet-name>ManagementSlotServlet</servlet-name>
-		<url-pattern>/ManagementSlotServlet</url-pattern>
-	</servlet-mapping>
-
-	<servlet-mapping>
-		<servlet-name>ReportServlet</servlet-name>
-		<url-pattern>/ReportServlet</url-pattern>
-	</servlet-mapping>
-
-	<servlet-mapping>
-		<servlet-name>SignupServlet</servlet-name>
-		<url-pattern>/SignupServlet</url-pattern>
-	</servlet-mapping>
-	
-	<servlet-mapping>
-		<servlet-name>UsefulNumbersServlet</servlet-name>
-		<url-pattern>/UsefulNumbersServlet</url-pattern>
-	</servlet-mapping>
-	
-	<servlet-mapping>
-		<servlet-name>MarkersServlet</servlet-name>
-		<url-pattern>/MarkersServlet</url-pattern>
-	</servlet-mapping>
-	
-	<servlet-mapping>
-		<servlet-name>LegislationServlet</servlet-name>
-		<url-pattern>/LegislationServlet</url-pattern>
-	</servlet-mapping>
 	
 
 	<session-config>

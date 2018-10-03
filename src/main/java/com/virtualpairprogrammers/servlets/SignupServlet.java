@@ -29,17 +29,16 @@ public class SignupServlet extends HttpServlet {
 		else if (result.equals("registed")){
 			String username = request.getParameter("username");
 			String password = request.getParameter("password");
-			String name = request.getParameter("name");
-			String surname = request.getParameter("surname");
-			String birthdate = request.getParameter("birthdate");
-			String birthplace = request.getParameter("birthplace");
-			String address = request.getParameter("address");
-			boolean handicapped = Boolean.valueOf(request.getParameter("handicapped"));
-			String type = "driver";
+			String nome = request.getParameter("nome");
+			String cognome = request.getParameter("cognome");
+			String telefono = request.getParameter("telefono");
+			String mail = request.getParameter("mail");
+			String partitaiva = request.getParameter("partitaiva");
+			String ruolo = request.getParameter("ruolo");
+			//String type = "driver";
 			
 			
-			User newUser = new User(username, password, type, name, surname, birthdate, birthplace, address, handicapped);
-
+			User newUser = new User(0, username, password,nome,cognome,telefono,mail,partitaiva,ruolo);
             if (userService.insertUser(newUser)) {
             	session.removeAttribute("feedback");
             	request.setAttribute("feedback", "Registrazione effettuata con successo");

@@ -1,5 +1,5 @@
 <%@ page import="java.util.List"%>
-<%@ page import="com.virtualpairprogrammers.domain.Car"%>
+<%@ page import="com.virtualpairprogrammers.domain.Asset"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,30 +14,34 @@
 <body>
 
 <div class="container">
-  <h1>Lista auto</h1>
+  <h1>Lista asset</h1>
      </br>     
   <table class="table table-striped table-medium">
     <thead>
 	
 	<%
-		List<Car> cars = (List<Car>) request.getAttribute("cars");
+		List<Asset> assets = (List<Asset>) request.getAttribute("assets");
 	%>
 	
       <tr>
-        <th>Targa</th>
-			<th>Nome</th>
-			<th></th>
+        <th>Asset</th>
+			<th>Id</th>
+			<th>Tipo</th>
+			<th>Prezzo</th>
+			<th>Descrizione</th>
       </tr>
     </thead>
     <tbody>
 	<%
-			for (Car car : cars) {
+			for (Asset asset : assets) {
 		%>
 		<tr>
-			<td><%=car.getLicensePlate()%></td>
-			<td><%=car.getName()%></td>
+			<td><%=asset.getId()%></td>
+			<td><%=asset.getTipo()%></td>
+			<td><%=asset.getPrezzo()%></td>
+			<td><%=asset.getDescrizione()%></td>
 			<td><a
-				href="CarServlet?richiesta=removeCar&id=<%=car.getId_car()%>">Elimina</a></td>
+				href="AssetServlet?richiesta=removeAsset&id=<%=asset.getId()%>">Elimina</a></td>
 		</tr>
 		<%
 			}
@@ -50,7 +54,7 @@
 	
 
 	
-	<a class="btn btn-lg btn-primary btn-block submit-button" href="CarServlet?richiesta=addCar">Aggiungi auto</a></br>
+	<a class="btn btn-lg btn-primary btn-block submit-button" href="AssetServlet?richiesta=addCar">Aggiungi asset</a></br>
 	<a class="btn btn-lg btn-primary btn-block back-button" href="HomeServlet">Indietro</a></br>
 	
 	</p>

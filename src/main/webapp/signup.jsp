@@ -22,17 +22,19 @@
       
 	  <input type="text" name = "username" class="form-control form-control-lg" id="username" class="form-control" placeholder="Username" required autofocus></br>
       
-	 <input type="password" name = "password" class="form-control form-control-lg" id="inputPassword" class="form-control" placeholder="Password" required></br>
+	  <input type="password" name = "password" class="form-control form-control-lg" id="inputPassword" class="form-control" placeholder="Password" required></br>
      
-	  <input type="text" name = "name" class="form-control form-control-lg" id="name" class="form-control" placeholder="Name" required autofocus></br>
+	  <input type="text" name = "nome" class="form-control form-control-lg" id="nome" class="form-control" placeholder="Nome" required autofocus></br>
       
-	  <input type="text" name = "surname" class="form-control form-control-lg" id="surname" class="form-control" placeholder="surname" required autofocus></br>
+	  <input type="text" name = "cogname" class="form-control form-control-lg" id="cognome" class="form-control" placeholder="Cogname" required autofocus></br>
       
-	  <input type="date" name = "birthdate" id="birthdate" class="form-control form-control-lg" class="form-control" placeholder="birthdate" required autofocus></br>
+	  <input type="date" name = "teleofno" id="telefono" class="form-control form-control-lg" class="form-control" placeholder="Telefono" required autofocus></br>
       
-	  <input type="text" name = "birthplace" class="form-control form-control-lg" id="birthplace" class="form-control" placeholder="birthplace" required autofocus></br>
-      
-	  <input type="text" name = "address" id="address" class="form-control form-control-lg" placeholder="address" required autofocus></br>
+	  <input type="text" name = "mail" class="form-control form-control-lg" id="mail" class="form-control" placeholder="Mail" required autofocus></br>
+	  
+	  <input type="text" name = "partitaiva" class="form-control form-control-lg" id="partitaiva" class="form-control" placeholder="Partitaiva" required autofocus></br>
+	  
+	  <input type="text" name = "ruolo" class="form-control form-control-lg" id="ruolo" class="form-control" placeholder="Ruolo" required autofocus></br>
 	  
 	  
 	  <input type="text" name="richiesta" value="registed" hidden></p>

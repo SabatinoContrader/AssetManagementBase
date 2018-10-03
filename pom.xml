@@ -11,7 +11,7 @@
 	<groupId>com.virtualpairprogrammers</groupId>
 
 	<!-- ArtifactId - the name of this project -->
-	<artifactId>pcarpet</artifactId>
+	<artifactId>AssetManagementBase</artifactId>
 
 	<!-- The current version -->
 	<version>1.0</version>
@@ -21,10 +21,10 @@
 
 	<!-- This is optional, used for any local names for the project. Can be 
 		"softer" than the artifactId -->
-	<name>Hpcarpet</name>
+	<name>HAssetMangementBase</name>
 
 	<!-- The website for the project -->
-	<url>http://pcarpet.virtualpairprogrammers.com</url>
+	<url>http://AssetManagmentBase.virtualpairprogrammers.com</url>
 
 	<!-- And now, a list of Maven projects that we depend upon -->
 	<dependencies>
@@ -76,7 +76,7 @@
 
 	</dependencies>
 	<build>
-		<finalName>pcarpet</finalName>
+		<finalName>AssetManagementBase</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -94,7 +94,7 @@
 				<configuration>
 					<url>http://localhost:8080/manager</url>
 					<server>TomcatServer</server>
-					<path>/pcarpet</path>
+					<path>/managementbase</path>
 				</configuration>
 			</plugin>
 			<plugin>

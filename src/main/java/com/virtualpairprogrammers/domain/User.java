@@ -2,110 +2,220 @@ package com.virtualpairprogrammers.domain;
 
 import java.time.LocalDate;
 
+
 public class User {
-    private String username;  //primary key
+	private int idutente;
+    private String username;
     private String password;
-    private String type;
-    private String name;
-    private String surname;
-    private String birthdate;
-    private String birthplace;
-    private String address;
-    private boolean handicapped;
+    private String nome;
+    private String cognome;
+    private String telefono;
+    private String mail;
+    private String partitaiva;
+    private String ruolo;
 
-    public User(String username, String password, String type, String name, String surname, String birthdate, String birthplace, String address, boolean handicapped) {
+    public User(int idutente, String username, String password, String nome, String cognome, String telefono, 
+    		String mail, String partitaiva, String ruolo) {
+        this.idutente = idutente;
         this.username = username;
         this.password = password;
-        this.type = type;
-        this.name = name;
-        this.surname = surname;
-        this.birthdate = birthdate;
-        this.birthplace = birthplace;
-        this.address = address;
-        this.handicapped = handicapped;
+        this.nome = nome;
+        this.cognome = cognome;
+        this.telefono = telefono;
+        this.mail = mail;
+        this.partitaiva = partitaiva;
+        this.ruolo = ruolo;
     }
 
-    public User(String username, String password, String type) {
-        this.username = username;
-        this.password = password;
-        this.type = type;
+    public User(int idutente, String username, String nome, String cognome, String partitaiva) {
+    	this.idutente=idutente;
+    	this.username = username;
+    	this.nome = nome;
+        this.cognome = cognome;
+        this.partitaiva = partitaiva;
+    }
+    
+    
+    
+
+    public int getIdutente() {
+		return idutente;
+	}
+
+    
+    
+	public void setIdutente(int idutente) {
+		this.idutente = idutente;
+	}
+
+
+
+
+
+	public String getUsername() {
+		return username;
+	}
+
+
+
+
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+
+
+
+
+	public String getPassword() {
+		return password;
+	}
+
+
+
+
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+
+
+
+
+	public String getNome() {
+		return nome;
+	}
+
+
+
+
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+
+
+
+
+	public String getCognome() {
+		return cognome;
+	}
+
+
+
+
+
+	public void setCognome(String cognome) {
+		this.cognome = cognome;
+	}
+
+
+
+
+
+	public String getTelefono() {
+		return telefono;
+	}
+
+
+
+
+
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
+
+
+
+
+
+	public String getMail() {
+		return mail;
+	}
+
+
+
+
+
+	public void setMail(String mail) {
+		this.mail = mail;
+	}
+
+
+
+
+
+	public String getPartitaiva() {
+		return partitaiva;
+	}
+
+
+
+
+
+	public void setPartitaiva(String partitaiva) {
+		this.partitaiva = partitaiva;
+	}
+
+
+
+
+
+	public String getRuolo() {
+		return ruolo;
+	}
+
+
+
+
+
+	public void setRuolo(String ruolo) {
+		this.ruolo = ruolo;
+	}
+
+	public String getType() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+    	
+    
+
+
+
+
+	@Override
+    public boolean equals(Object o) {
+		
+		if(this==o)return true;
+		if(!(this instanceof User)) return false;
+		
+		User u=(User)o;
+		
+		if(idutente==u.idutente) return true;
+		
+		return false;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    public String getBirthdate() {
-        return birthdate;
-    }
-
-    public void setBirthdate(String birthdate) {
-        this.birthdate = birthdate;
-    }
-
-    public String getBirthplace() {
-        return birthplace;
-    }
-
-    public void setBirthplace(String birthplace) {
-        this.birthplace = birthplace;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public boolean isHandicapped() {
-        return handicapped;
-    }
-
-    public void setHandicapped(boolean handicapped) {
-        this.handicapped = handicapped;
+    @Override
+    public int hashCode() {
+        int result;
+        result = nome != null ? nome.hashCode() : 0;
+        result += cognome != null ? cognome.hashCode() : 0;;
+        result = 31 * result + (username != null ? username.hashCode() : 0);
+        return result;
     }
 
     @Override
     public String toString() {
-        return "username: " + username + "\npassword: " + password + "\ntype: " + type + "\nname: " + name + "\nsurname: " + surname + "\nbirthdate: " + birthdate + "\nbirthplace: " + birthplace + "\naddress: " + address + "\nhandicapped: " + handicapped;
-    }
+        return "1)ID Utente: "+idutente+"\n2)Username: " + username + "\n3)Password: "+password+"\n4)Nome: " + nome + "\n5)Cognome: "+cognome+"\n6)Telefono: "+telefono+
+        		"\n7)Mail: "+mail+"\n8)Partita Iva: "+partitaiva+"\n9)Ruolo: "+ruolo + "\n";
 
+    }
+    public String stampa() {
+    return "\nId Utente"+idutente+"\nUsername: "+username+"\nNome: "+nome+"\nCognome: "+cognome+"\nPartita iva: "+partitaiva+"\n";
+    }
 }
+

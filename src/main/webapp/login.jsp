@@ -11,7 +11,7 @@
     %>
 
 
-<title>PCARPET</title>
+<title>AMEBA</title>
 
 <!-- Bootstrap core CSS -->
 <link href="bootstrap.min.css" rel="stylesheet">
@@ -22,7 +22,7 @@
 
 <body class="text-center">
 	<form class="form-signin" action="LoginServlet" method="post">
-		<h1 class="h3 mb-3 font-weight-normal">PCARPET</h1>
+		<h1 class="h3 mb-3 font-weight-normal">AMEBA</h1>
 		<h2 class="h3 mb-3 font-weight-normal">Login</h2>
 		<label for="inputUser" class="sr-only">Username</label> <input
 			type="text" name="username" id="inputUser" class="form-control"
@@ -38,8 +38,7 @@
 		</p>
 		<button class="btn btn-lg btn-primary btn-block" type="submit">Sign
 			in</button>
-		</br> <a href="SignupServlet?richiesta=register">Prima volta su
-			PCARPET? Iscriviti </a>
+		</br> <a href="SignupServlet?richiesta=register">Ti piace il nostro lavoro? Iscriviti </a>
 	</form>
 </body>
 </html>
