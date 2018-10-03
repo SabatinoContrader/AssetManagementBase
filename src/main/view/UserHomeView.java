@@ -72,7 +72,8 @@ public class UserHomeView implements View {
             MainDispatcher.getInstance().callAction("User", "doControl", this.request);
         }
         else if (choice == 4) {
-            MainDispatcher.getInstance().callAction("Home", "doControl", null);
+        	this.request.put("choice", "customers");
+            MainDispatcher.getInstance().callAction("Menu", "doControl", this.request);
         }
         else {
         	Request request = new Request();

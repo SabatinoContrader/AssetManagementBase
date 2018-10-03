@@ -30,49 +30,40 @@ public class HomeView implements View {
         System.out.println("");
         System.out.println("-------MENU-------");
         System.out.println("");
-        System.out.println("1) Gestione Utenti");
-        System.out.println("2) Gestione Asset");
-        System.out.println("3) Gestione Utenti Asset");
-        System.out.println("4) Gestione Badge");
-        System.out.println("5) Gestione Assegnazioni");
-        System.out.println("6) Gestione Badge Reader");
-        System.out.println("7) Logout");
+        System.out.println("1) My Assets");
+        System.out.println("2) Customers");
+        System.out.println("3) Bookings");
+        System.out.println("4) Logs");
+        System.out.println("5) Logout");
         
         this.choice = Integer.parseInt(getInput());
     }
 
     public void submit() {
     	this.request = new Request();
-        if (choice < 1 || choice > 7) {
+        if (choice < 1 || choice > 5) {
         	MainDispatcher.getInstance().callAction("Home", "doControl", null);
         }
-        else if (choice == 7) {
+        else if (choice == 5) {
             MainDispatcher.getInstance().callAction("Login", "doControl", null);
         }
         else if (choice == 1) {
-        	this.request.put("choice", "usersManagement");
-            MainDispatcher.getInstance().callAction("User", "doControl", this.request);
+        	this.request.put("choice", "myAssets");
+            MainDispatcher.getInstance().callAction("Menu", "doControl", this.request);
         }
         else if (choice == 2) {
-        	this.request.put("choice", "assetsManagement");
-        	MainDispatcher.getInstance().callAction("Asset", "doControl", this.request);
+        	this.request.put("choice", "customers");
+        	MainDispatcher.getInstance().callAction("Menu", "doControl", this.request);
         }
         else if (choice == 3) {
-        	this.request.put("choice", "usersAssetsManagement");
-        	MainDispatcher.getInstance().callAction("UserAsset", "doControl", this.request);
+        	this.request.put("choice", "bookings");
+        	MainDispatcher.getInstance().callAction("Menu", "doControl", this.request);
         }
         else if (choice == 4) {
-        	this.request.put("choice", "badgesManagement");
-        	MainDispatcher.getInstance().callAction("Badge", "doControl", this.request);
+        	this.request.put("choice", "logs");
+        	MainDispatcher.getInstance().callAction("Menu", "doControl", this.request);
         }
-        else if (choice == 5) {
-        	this.request.put("choice", "assegnazioneManagement");
-        	MainDispatcher.getInstance().callAction("Assegnazione", "doControl", this.request);
-        }
-        else if (choice == 6) {
-        	this.request.put("choice", "badgeReaderManagement");
-        	MainDispatcher.getInstance().callAction("BadgeReader", "doControl", this.request);
-        }
+      
     }
 
     public String getInput() {

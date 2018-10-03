@@ -24,11 +24,11 @@ public class DeleteUserView implements View{
 
     @Override
     public void showOptions() {    	
-    	System.out.println("Inserisci lo username dell'utente da eliminare:");
-        System.out.println("Username:");
-        String username = getInput();
+    	System.out.println("Inserisci l'id dell'utente da eliminare:");
+        System.out.println("IdUser:");
+        int idUser = Integer.parseInt(getInput());
         this.request = new Request();
-        this.request.put("delUser",username);
+        this.request.put("delUser",idUser);
     	this.request.put("choice", "deleteUser");
     }
 

@@ -41,7 +41,7 @@ public class UserController implements Controller {
         		MainDispatcher.getInstance().callView("UserHome", request);
             	break;
             case "deleteUser":
-            	if (this.userService.deleteUser(request.get("delUser").toString())) {
+            	if (this.userService.deleteUser((int)request.get("delUser"))) {
             		this.message = "Cancellazione utente avvenuta correttamente";
             	}
             	else {

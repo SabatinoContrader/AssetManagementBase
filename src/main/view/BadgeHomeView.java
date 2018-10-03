@@ -28,10 +28,10 @@ public class BadgeHomeView implements View{
         System.out.println("----- LISTA BADGE -----");
         System.out.println();
         //this.listUser.forEach(user -> System.out.println(user));
-        System.out.format("+----------+-----------------------+------------------+%n");
-		System.out.format("| IDbadge  | Descrizione           | Tipologia        |%n");
-        System.out.format("+----------+-----------------------+------------------+%n");
-		String leftAlignFormat2 ="| %-8s | %-21s | %-16s |%n";
+        System.out.format("+----------+--------------------------+------------------+%n");
+		System.out.format("| IDbadge  | 1) Descrizione           | 2) Tipologia     |%n");
+        System.out.format("+----------+--------------------------+------------------+%n");
+		String leftAlignFormat2 ="| %-8s | %-24s | %-16s |%n";
 		for (Badge report : this.listBadge) {
 			int idBadge = report.getIdBadge();
 			String tipologia = report.getTipologia();
@@ -42,7 +42,7 @@ public class BadgeHomeView implements View{
             }catch (Exception e) {
 				// TODO: handle exception
 			}
-            System.out.format("+----------+-----------------------+------------------+%n");
+            System.out.format("+----------+--------------------------+------------------+%n");
 
 		}
         System.out.println();
@@ -65,7 +65,8 @@ public class BadgeHomeView implements View{
             MainDispatcher.getInstance().callAction("Badge", "doControl", this.request);
         }
         else if (choice == 4) {
-            MainDispatcher.getInstance().callAction("Home", "doControl", null);
+        	this.request.put("choice", "customers");
+            MainDispatcher.getInstance().callAction("Menu", "doControl", this.request);
         }
         else {
         	Request request = new Request();

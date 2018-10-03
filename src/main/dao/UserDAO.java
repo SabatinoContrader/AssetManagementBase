@@ -15,7 +15,7 @@ public class UserDAO {
 	
 	private final String QUERY_ALL = "select * from user";
     private final String QUERY_INSERT = "insert into user (iduser, username, password, nome, cognome, telefono, mail, partitaiva, ruolo) values (?,?,?,?,?,?,?,?,?)";
-    private final String QUERY_DELETE = "delete from user where username=?";
+    private final String QUERY_DELETE = "delete from user where iduser=?";
     private final String QUERY_CLIENTI = "select * from user where ruolo='cliente'";
     private final String QUERY_CLIENTIASS= "select distinct u.iduser,username,nome,cognome,partitaiva from user as u join userasset as us on u.iduser=us.iduser where ruolo='cliente'";
     //private final String QUERY_UPDATE = "update user set "+param+"=? where idutente=?";
@@ -117,11 +117,11 @@ public class UserDAO {
 
     }
     
-    public boolean deleteUser(String username) {
+    public boolean deleteUser(int idUser) {
         Connection connection = ConnectionSingleton.getInstance();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(QUERY_DELETE);
-            preparedStatement.setString(1, username);
+            preparedStatement.setInt(1, idUser);
             preparedStatement.execute();
             return true;
         }

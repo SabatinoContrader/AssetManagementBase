@@ -38,7 +38,7 @@ public class UpdateBadgeView implements View{
    	 		case 1: campo="descrizione";break;
    	 	}
    	 	
-   	 	System.out.println("Inserisci il nuovo "+ campo +" del badge:");
+   	 	System.out.println("Inserisci il nuovo campo "+ campo +" del badge:");
    	 	String newData = getInput();
    	 	this.request = new Request();
    	 	this.request.put("idBadge", idBadge);
