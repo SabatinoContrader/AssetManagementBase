@@ -29,10 +29,10 @@ public class UserHomeView implements View {
         System.out.println("----- LISTA UTENTI -----");
         System.out.println();
         //this.listUser.forEach(user -> System.out.println(user));
-        System.out.format("+----------+-----------------------+------------+------------+------------+------------+-------------------------------+--------------+-------------+%n");
-		System.out.format("| IDutente |UserName               | password   | Nome       |Cognome     |Telefono    |  e-mail                       | partitaIva   |RUOLO        |%n");
-        System.out.format("+----------+-----------------------+------------+------------+------------+------------+-------------------------------+--------------+-------------+%n");
-		String leftAlignFormat2 ="| %-8s | %-21s | %-10s | %-10s | %-10s | %-10s | %-29s | %-12s | %-11s |%n";
+        System.out.format("+----------+-------------------------+--------------+--------------+--------------+--------------+---------------------------------+----------------------+------------------+%n");
+        System.out.format("| IDutente | 1)UserName              | 2)Password   | 3)Nome       | 4)Cognome    | 5)Telefono   | 6)E-mail                        | 7)Partita Iva        | 8)Ruolo          |%n");
+        System.out.format("+----------+-------------------------+--------------+--------------+--------------+--------------+---------------------------------+----------------------+------------------+%n");
+		String leftAlignFormat2 ="| %-8s | %-23s | %-12s | %-12s | %-12s | %-12s | %-31s | %-20s | %-16s |%n";
 		for (User report : this.listUser) {
 			int id = report.getIdutente();
             String usN = report.getUsername();
@@ -49,7 +49,7 @@ public class UserHomeView implements View {
             }catch (Exception e) {
 				// TODO: handle exception
 			}
-            System.out.format("+----------+-----------------------+------------+------------+------------+------------+-------------------------------+--------------+-------------+%n");
+            System.out.format("+----------+-------------------------+--------------+--------------+--------------+--------------+---------------------------------+----------------------+------------------+%n");
 
 		}
         System.out.println();

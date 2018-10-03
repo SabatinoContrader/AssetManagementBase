@@ -29,9 +29,9 @@ public class BadgeHomeView implements View{
         System.out.println();
         //this.listUser.forEach(user -> System.out.println(user));
         System.out.format("+----------+-----------------------+------------------+%n");
-		System.out.format("| IDbadge  |Descrizione            | Tipologia        |%n");
+		System.out.format("| IDbadge  | Descrizione           | Tipologia        |%n");
         System.out.format("+----------+-----------------------+------------------+%n");
-		String leftAlignFormat2 ="| %-8s | %-21s | %-10s |%n";
+		String leftAlignFormat2 ="| %-8s | %-21s | %-16s |%n";
 		for (Badge report : this.listBadge) {
 			int idBadge = report.getIdBadge();
 			String tipologia = report.getTipologia();
@@ -42,7 +42,7 @@ public class BadgeHomeView implements View{
             }catch (Exception e) {
 				// TODO: handle exception
 			}
-            System.out.format("+----------+-----------------------+-------------------+%n");
+            System.out.format("+----------+-----------------------+------------------+%n");
 
 		}
         System.out.println();

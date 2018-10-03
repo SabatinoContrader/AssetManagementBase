@@ -29,7 +29,7 @@ public class InsertBadgeView implements View{
     	System.out.println("descrizione");
     	String descrizione= getInput();
     	this.request = new Request();
-    	this.request.put("newBadge",new Badge(idBadge,tipologia,descrizione));
+    	this.request.put("newBadge",new Badge(idBadge,descrizione,tipologia));
     	this.request.put("choice", "insertBadge");
     }
     

@@ -55,20 +55,26 @@ public class UpdateUserView implements View{
     	System.out.println("Inserisci il numero del campo che vuoi modificare:");
     	int num=Integer.parseInt(getInput());
     	String campo="";
-
+if (num <1 || num > 8)
+{
+	while (num <1 || num > 8) {
+	System.out.println("il numero deve essere compreso tra 1 e 8");
+	System.out.println("inserire nuovamente la scelta:");
+	num = Integer.parseInt(getInput());
+	}
+}
     	switch(num) {
-    		case 1: campo="idutente";break;
-    		case 2: campo="username";break;
-    		case 3: campo="password";break;
-    		case 4: campo="nome";break;
-    		case 5: campo="cognome";break;
-    		case 6: campo="telefono";break;
-    		case 7: campo="mail";break;
-    		case 8: campo="partitaiva";break;
-    		case 9: campo="ruolo";break;
+    		case 1: campo="username";break;
+    		case 2: campo="password";break;
+    		case 3: campo="nome";break;
+    		case 4: campo="cognome";break;
+    		case 5: campo="telefono";break;
+    		case 6: campo="mail";break;
+    		case 7: campo="partitaiva";break;
+    		case 8: campo="ruolo";break;
     	}
 
-    	System.out.println("Inserisci il nuovo "+ campo +" dell'utente:");
+    	System.out.println("Inserisci il nuovo campo "+ campo +" dell'utente:");
     	String newData=getInput();
 
     	this.request = new Request();

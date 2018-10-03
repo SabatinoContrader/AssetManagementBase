@@ -62,9 +62,7 @@ public class AssetHomeView implements View {
 
     public void submit() {
         if (choice < 1 || choice > 4) {
-        	String username = this.request.get("username").toString();
         	this.request = new Request();
-        	this.request.put("username", username);
         	this.request.put("choice", "assetsManagement");
             MainDispatcher.getInstance().callAction("Asset", "doControl", this.request);
         }

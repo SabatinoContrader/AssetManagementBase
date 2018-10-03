@@ -145,12 +145,13 @@ public class UserDAO {
             preparedStatement.setInt(2, (Integer)request.get("idUtente"));
             preparedStatement.execute();
             return true;
+            
         }
+            
         catch (SQLException e) {
             GestoreEccezioni.getInstance().gestisciEccezione(e);
             return false;
-        }
-
+            }
     }
     
 }
