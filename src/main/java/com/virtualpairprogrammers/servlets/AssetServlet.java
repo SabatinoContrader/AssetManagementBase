@@ -54,6 +54,23 @@ public class AssetServlet extends HttpServlet {
 	                     }
 	            	}
 	                break;
+	            case "eliminaAsset":
+	                
+	                this.assetService.deleteAsset(Integer.parseInt(request.getParameter("id")));
+	                this.allAssets = this.assetService.getAllAssets();
+               	 	request.setAttribute("allAssets", this.allAssets);
+               	 	getServletContext().getRequestDispatcher("/asset.jsp").forward(request,response);
+	                break;
+	            case "Indietro":
+	                getServletContext().getRequestDispatcher("/homeAsset.jsp").forward(request,response);
+	                break;
+	            case "ModificaAsset":
+	                this.assetService.updateAsset(request);
+	                //session.setAttribute("prodotto", prodotto);
+	                
+	                getServletContext().getRequestDispatcher("/insertAsset.jsp").forward(request,response);
+	                //response.sendRedirect("insertProdotto.jsp");
+	                break;
 //	            case "update":
 //	                MainDispatcher.getInstance().callView("UpdateAsset", request);
 //	                break;

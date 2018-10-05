@@ -90,7 +90,7 @@ public class AssetDAO {
         }	
     }
     
-    public boolean UpdateAsset(HttpServletRequest request) {
+    public boolean updateAsset(HttpServletRequest request) {
     	 Connection connection = ConnectionSingleton.getInstance();
          try {
          	 param=(String)request.getAttribute("campo");

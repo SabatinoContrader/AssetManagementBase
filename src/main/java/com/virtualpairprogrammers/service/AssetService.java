@@ -29,8 +29,11 @@ public class AssetService {
     }
     
     public boolean updateAsset(HttpServletRequest request) {
-    	return this.assetDAO.UpdateAsset(request);
+    	return this.assetDAO.updateAsset(request);
     }
+
+	
+	
 }
 
 

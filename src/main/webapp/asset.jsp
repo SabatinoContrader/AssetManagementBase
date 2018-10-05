@@ -11,18 +11,17 @@
     <input type="submit" value="insert" name="richiesta">
 </form>
 
-<form action="ProdottoServlet" method="post">
+<form action="AssetServlet" method="post">
  <table border="2">
  <tr>
    <td>
       Categoria:
    </td>
-   <td>
-   </td>
+  
    </td>
    </tr>
      <tr>
-        <th></th>
+       
          <th>
              ID
          </th>
@@ -36,18 +35,12 @@
          <th>
              DESCRIZIONE
          </th>
-         <th>
-          </th>
-         <th>
-          </th>
+         
 
      </tr>
         <%for (Asset asset : allAssets) { %>
      <tr>
-         <td>
-             <input type="checkbox" name="products" value="<%= asset.getId()%>"/>
-         </td>
-
+        
          <td>
              <%= asset.getId()%>
          </td>
@@ -65,16 +58,16 @@
          </td>
 
           <td>
-             <a href="ProdottoServlet?richiesta=ModificaProdotto&id=<%=  asset.getId()%>">Modifica</a>
+             <a href="AssetServlet?richiesta=ModificaProdotto&id=<%=  asset.getId()%>">Modifica</a>
          </td>
          <td>
-             <a href="ProdottoServlet?richiesta=EliminaProdotto&id=<%= asset.getId()%>">Elimina</a>
+             <a href="AssetServlet?richiesta=eliminaAsset&id=<%= asset.getId()%>">Elimina</a>
          </td>
 
      </tr>
      <% }%>
  </table>
-<input type="submit" value="insertAsset" name="richiesta"> <a href="home.jsp">Home <h3><a href="insertProdotto.jsp">Inserisci Prodotto</a></h3>
+<input type="submit" value="Indietro" name="richiesta">
 </form>
  <h2></h2>
  <h2></h2>
