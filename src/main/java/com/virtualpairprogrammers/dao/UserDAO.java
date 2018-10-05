@@ -1,10 +1,10 @@
 package com.virtualpairprogrammers.dao;
 
 
-import com.virtualpairprogrammers.domain.User;
-import com.virtualpairprogrammers.servlets.ConnectionSingleton;
-import com.virtualpairprogrammers.servlets.GestoreEccezioni;
-import com.virtualpairprogrammers.servlets.Request;
+import com.virtualpairprogrammers.model.User;
+import com.virtualpairprogrammers.utils.ConnectionSingleton;
+import com.virtualpairprogrammers.utils.GestoreEccezioni;
+//import com.virtualpairprogrammers.utils.Request;
 
 import java.sql.*;
 
@@ -137,20 +137,20 @@ public class UserDAO {
 
     }
     
-    public boolean udpateUser(Request request) {
-        Connection connection = ConnectionSingleton.getInstance();
-        try {
-            param=(String)request.get("campo");
-        	PreparedStatement preparedStatement = connection.prepareStatement("update user set "+param+"=? where iduser=?");
-            preparedStatement.setString(1, (String)request.get("newData"));
-            preparedStatement.setInt(2, (Integer)request.get("idUtente"));
-            preparedStatement.execute();
-            return true;
-        }
-        catch (SQLException e) {
-            GestoreEccezioni.getInstance().gestisciEccezione(e);
-            return false;
-        }
+//    public boolean udpateUser(Request request) {
+//        Connection connection = ConnectionSingleton.getInstance();
+//        try {
+//            param=(String)request.get("campo");
+//        	PreparedStatement preparedStatement = connection.prepareStatement("update user set "+param+"=? where iduser=?");
+//            preparedStatement.setString(1, (String)request.get("newData"));
+//            preparedStatement.setInt(2, (Integer)request.get("idUtente"));
+//            preparedStatement.execute();
+//            return true;
+//        }
+//        catch (SQLException e) {
+//            GestoreEccezioni.getInstance().gestisciEccezione(e);
+//            return false;
+//        }
         /*public List<User> getAllClienti () {
         List<User> listUsers = new ArrayList<>();
         Connection connection = ConnectionSingleton.getInstance();
@@ -199,4 +199,4 @@ public class UserDAO {
 
     }
     
-}
+

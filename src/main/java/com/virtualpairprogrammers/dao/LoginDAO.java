@@ -1,7 +1,7 @@
 package com.virtualpairprogrammers.dao;
 
-import com.virtualpairprogrammers.servlets.ConnectionSingleton;
-import com.virtualpairprogrammers.servlets.GestoreEccezioni;
+import com.virtualpairprogrammers.utils.ConnectionSingleton;
+import com.virtualpairprogrammers.utils.GestoreEccezioni;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -20,6 +20,7 @@ public class LoginDAO {
             statement.setString(1, username);
             statement.setString(2, password);
             return statement.executeQuery().next();
+            
         }
         catch (SQLException e) {
             GestoreEccezioni.getInstance().gestisciEccezione(e);
