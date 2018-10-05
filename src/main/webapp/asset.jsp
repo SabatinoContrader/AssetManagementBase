@@ -7,10 +7,8 @@
  </head>
  <body>
 <h1>Benvenuto <%= request.getSession().getAttribute("utente")%></h1>
-<form action="ProdottoServlet" method="post">
-    <input type="text" name="colonna">
-    <input type="text" name="campoRiga">
-    <input type="submit" value="SearchCategory" name="richiesta">
+<form action="AssetServlet" method="post">
+    <input type="submit" value="insert" name="richiesta">
 </form>
 
 <form action="ProdottoServlet" method="post">
@@ -76,12 +74,12 @@
      </tr>
      <% }%>
  </table>
-<input type="submit" value="SellProducts" name="richiesta"> <a href="home.jsp">Home <h3><a href="insertProdotto.jsp">Inserisci Prodotto</a></h3>
+<input type="submit" value="insertAsset" name="richiesta"> <a href="home.jsp">Home <h3><a href="insertProdotto.jsp">Inserisci Prodotto</a></h3>
 </form>
  <h2></h2>
  <h2></h2>
  <form action="" method="post">
- <!-- <h3><a href="insertProdotto.jsp">1. - Inserisci un nuovo Prodotto</a></h3> -->
+ <!-- <h3><a href="insertProdotto.jsp">1. - Inserisci nuovo Asset</a></h3> -->
  <!-- <input type="text" value="Scelta" name="richiesta">
  <button type = "submit" value = "Vai" name = "pulsante">GO</button> -->
  <h3></h3>

@@ -13,6 +13,11 @@
 	</servlet>
 	
 	<servlet>
+		<servlet-name>AssetServlet</servlet-name>
+		<servlet-class>com.virtualpairprogrammers.servlets.AssetServlet</servlet-class>
+	</servlet>
+	
+	<servlet>
 		<servlet-name>MenuServlet</servlet-name>
 		<servlet-class>com.virtualpairprogrammers.servlets.MenuServlet</servlet-class>
 	</servlet>
@@ -40,6 +45,11 @@
 	<servlet-mapping>
 		<servlet-name>LoginTraderServlet</servlet-name>
 		<url-pattern>/LoginTraderServlet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>AssetServlet</servlet-name>
+		<url-pattern>/AssetServlet</url-pattern>
 	</servlet-mapping>
 
 	<servlet-mapping>

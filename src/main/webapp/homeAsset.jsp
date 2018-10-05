@@ -8,8 +8,8 @@
      <h2>    <h2>
 
      <h3>1. Assets</h3>
-     <form action="MenuServlet" method="post">
-     <input type="submit" value="Asset" name="richiesta">
+     <form action="AssetServlet" method="post">
+     <input type="submit" value="assetsManagement" name="richiesta">
      </form>
      
      <h3>2. Badge Readers</h3>
