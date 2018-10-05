@@ -13,7 +13,7 @@ public class LoginServicertt {
     }
 
     public boolean login (String username, String password) {
-        Utente utente = userDAO.l.getByNomeUtente(username);
+        Utente utente = userDAO.getByNomeUtente(username);
         if(utente == null){
             return false;
         }else{

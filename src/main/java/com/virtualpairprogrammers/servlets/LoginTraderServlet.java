@@ -22,8 +22,6 @@ public class LoginTraderServlet extends HttpServlet {
         if (request != null) {
         String nomeUtente = request.getParameter("username").toString();
         String password = request.getParameter("password").toString();
-        System.out.println(nomeUtente);
-        System.out.println(password);
         if (loginService.login(nomeUtente, password)) {
             session.setAttribute("utente", nomeUtente);
             //response.sendRedirect("home.jsp");

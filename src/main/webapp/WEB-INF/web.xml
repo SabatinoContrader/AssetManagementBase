@@ -11,6 +11,11 @@
 		<servlet-name>LoginTraderServlet</servlet-name>
 		<servlet-class>com.virtualpairprogrammers.servlets.LoginTraderServlet</servlet-class>
 	</servlet>
+	
+	<servlet>
+		<servlet-name>MenuServlet</servlet-name>
+		<servlet-class>com.virtualpairprogrammers.servlets.MenuServlet</servlet-class>
+	</servlet>
 
 	<servlet>
 		<servlet-name>ProdottoServlet</servlet-name>
@@ -45,6 +50,11 @@
 	<servlet-mapping>
 		<servlet-name>LogoutServlet</servlet-name>
 		<url-pattern>/LogoutServlet</url-pattern>
+	</servlet-mapping>
+	
+		<servlet-mapping>
+		<servlet-name>MenuServlet</servlet-name>
+		<url-pattern>/MenuServlet</url-pattern>
 	</servlet-mapping>
 
 	<servlet-mapping>
