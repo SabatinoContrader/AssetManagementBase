@@ -41,6 +41,26 @@ public class AssetDAO {
         }
         return assets;
     }
+    public List<Asset> getAsset (int id1) {
+        List<Asset> assets = new ArrayList<>();
+        Connection connection = ConnectionSingleton.getInstance();
+        try {
+           Statement statement = connection.createStatement();
+           ResultSet resultSet = statement.executeQuery("select * from asset where idasset="+id1);
+           while (resultSet.next()) {
+        	   int id = resultSet.getInt("idasset");
+        	   String tipo = resultSet.getString("tipo");
+        	   double prezzo = resultSet.getDouble("prezzo");
+               String descrizione = resultSet.getString("descrizione");
+               assets.add(new Asset(id,tipo,prezzo,descrizione));
+           }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return assets;
+    }
+    
     public List<Asset> getAllAssetsN () {
         List<Asset> assets = new ArrayList<>();
         Connection connection = ConnectionSingleton.getInstance();
@@ -90,13 +110,20 @@ public class AssetDAO {
         }	
     }
     
-    public boolean updateAsset(HttpServletRequest request) {
+    public boolean updateAsset(HttpServletRequest richiesta) {
     	 Connection connection = ConnectionSingleton.getInstance();
          try {
-         	 param=(String)request.getAttribute("campo");
+        	 
+         	 param=richiesta.getParameter("campo");
+         	
          	 PreparedStatement preparedStatement = connection.prepareStatement("update asset set "+param+"=? where idasset=?");
-             preparedStatement.setString(1, (String)request.getAttribute("newData"));
-             preparedStatement.setInt(2, (Integer)request.getAttribute("idAsset"));
+
+         	 
+         	 preparedStatement.setString(1, richiesta.getParameter("newData"));
+         	 
+
+             preparedStatement.setInt(2,(Integer.parseInt(richiesta.getParameter("idAsset"))));
+           
              preparedStatement.execute();
              return true;
          }
@@ -106,4 +133,18 @@ public class AssetDAO {
          }
     	
     }
+    public boolean updateAsset(int idAsset) {
+   	 Connection connection = ConnectionSingleton.getInstance();
+        try {
+        	
+        	PreparedStatement preparedStatement = connection.prepareStatement("select asset where idasset=?");
+        	preparedStatement.setInt(1,idAsset);
+            preparedStatement.execute();
+            return true;
+        }
+        catch (SQLException e) {
+            GestoreEccezioni.getInstance().gestisciEccezione(e);
+            return false;
+        }   	
+   }	
 }

@@ -8,18 +8,18 @@
      <h2>    <h2>
 
      <h3>1. Logs</h3>
-     <form action="ProdottoServlet" method="post">
-     <input type="submit" value="ViewListProduct" name="richiesta">
+     <form action="MovimentoServlet" method="post">
+     <input type="submit" value="movimentiManagement" name="richiesta">
      </form>
      
      <h3>2. Export</h3>
-     <form action="ProdottoServlet" method="post">
-     <input type="submit" value="ViewListProduct" name="richiesta">
+     <form action="MovimentoServlet" method="post">
+     <input type="submit" value="export" name="richiesta">
      </form>
      
      <h3>3. Indietro</h3>
-     <form action="ProdottoServlet" method="post">
-     <input type="submit" value="ViewListProduct" name="richiesta">
+     <form action="MovimentoServlet" method="post">
+     <input type="submit" value="indietro" name="richiesta">
      </form>
      
        <h3>4.logout<h3>

@@ -16,18 +16,18 @@
      <form action="MenuServlet" method="post">
      <input type="submit" value="CustomersMenu" name="richiesta">
      </form>
-     
+     <!-- 
      <h3>3. Bookings</h3>
+     <form action="movimentoServlet" method="post">
+     <button type="submit" value="assegnazione" name="richiesta">Assegnazione</button>
+     </form>
+      -->
+     <h3>3. Logs</h3>
      <form action="MenuServlet" method="post">
-     <input type="submit" value="LogsMenu" name="richiesta">
+     <button type="submit" value="LogsMenu" name="richiesta">Logs</button>
      </form>
      
-     <h3>4. Logs</h3>
-     <form action="MenuServlet" method="post">
-     <input type="submit" value="LogsMenu" name="richiesta">
-     </form>
-     
-     <h3>4.logout<h3>
+     <h3>4. logout<h3>
      <form action="LogoutServlet" method="post">
      <input type="submit" value="Logout" name="Logout">
      </form>

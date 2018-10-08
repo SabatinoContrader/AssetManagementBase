@@ -25,6 +25,7 @@ public class AssetServlet extends HttpServlet {
 	 private AssetService assetService;
      private List<Asset> allAssets;
      
+     
 	 public void service (HttpServletRequest request, HttpServletResponse response) throws ServletException,IOException {
 		 String scelta = request.getParameter("richiesta");
 	        HttpSession session = request.getSession(true);
@@ -64,13 +65,25 @@ public class AssetServlet extends HttpServlet {
 	            case "Indietro":
 	                getServletContext().getRequestDispatcher("/homeAsset.jsp").forward(request,response);
 	                break;
-	            case "ModificaAsset":
+	            case "IndietroHome":
+	                this.allAssets = this.assetService.getAllAssets();
+               	 	request.setAttribute("allAssets", this.allAssets);
+	                getServletContext().getRequestDispatcher("/asset.jsp").forward(request,response);
+	                break;
+	            case "update":
+	              int id=Integer.parseInt(request.getParameter("id"));
+	                this.allAssets = this.assetService.getAsset(id);
+	                 request.setAttribute("allAssets", this.allAssets);
+	            	 getServletContext().getRequestDispatcher("/updateAsset.jsp").forward(request,response);
+	            	 break;
+	            case "updateAsset":
 	                this.assetService.updateAsset(request);
-	                //session.setAttribute("prodotto", prodotto);
-	                
-	                getServletContext().getRequestDispatcher("/insertAsset.jsp").forward(request,response);
+	                this.allAssets = this.assetService.getAllAssets();
+               	 	request.setAttribute("allAssets", this.allAssets);         
+	                getServletContext().getRequestDispatcher("/asset.jsp").forward(request,response);
 	                //response.sendRedirect("insertProdotto.jsp");
 	                break;
+	                
 //	            case "update":
 //	                MainDispatcher.getInstance().callView("UpdateAsset", request);
 //	                break;

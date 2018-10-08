@@ -13,13 +13,7 @@
 
 <form action="AssetServlet" method="post">
  <table border="2">
- <tr>
-   <td>
-      Categoria:
-   </td>
-  
-   </td>
-   </tr>
+
      <tr>
        
          <th>
@@ -58,7 +52,7 @@
          </td>
 
           <td>
-             <a href="AssetServlet?richiesta=ModificaProdotto&id=<%=  asset.getId()%>">Modifica</a>
+             <a href="AssetServlet?richiesta=update&id=<%=  asset.getId()%>">Modifica</a>
          </td>
          <td>
              <a href="AssetServlet?richiesta=eliminaAsset&id=<%= asset.getId()%>">Elimina</a>

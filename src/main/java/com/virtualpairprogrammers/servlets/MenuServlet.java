@@ -31,16 +31,13 @@ public class MenuServlet extends HttpServlet {
             case "CustomersMenu":
             	response.sendRedirect("homeCustomers.jsp");
                 break;
+            case "Indietro":
+            	response.sendRedirect("home.jsp");
+                break;
             case "LogsMenu":
             	response.sendRedirect("homeLogs.jsp");
                 break;
-            case "Asset":
-            	List<Asset> allAssets = this.assetService.getAllAssets();
-                request.setAttribute("allAssets", allAssets);
-                getServletContext().getRequestDispatcher("/asset.jsp").forward(request,response);
-            	//response.sendRedirect("assets.jsp");
-                break;
-            
+        
         }
 
     }

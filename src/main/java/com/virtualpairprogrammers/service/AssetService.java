@@ -17,6 +17,11 @@ public class AssetService {
     public List<Asset> getAllAssets () {
         return this.assetDAO.getAllAssets();
     }
+    
+    public List<Asset> getAsset (int id) {
+        return this.assetDAO.getAsset(id);
+    }
+    
     public List<Asset> getAllAssetsN () {
         return this.assetDAO.getAllAssetsN();
     }
@@ -31,9 +36,7 @@ public class AssetService {
     public boolean updateAsset(HttpServletRequest request) {
     	return this.assetDAO.updateAsset(request);
     }
-
-	
-	
+      	
 }
 
 

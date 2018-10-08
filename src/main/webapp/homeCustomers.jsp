@@ -8,21 +8,26 @@
      <h2>    <h2>
 
      <h3>1. Users</h3>
-     <form action="ProdottoServlet" method="post">
-     <input type="submit" value="ViewListProduct" name="richiesta">
+     <form action="CustomersServlet" method="post">
+     <button type="submit" value="usersManagement" name="richiesta"> Management Users</button>
      </form>
      
      <h3>2. Badges</h3>
-     <form action="ProdottoServlet" method="post">
-     <input type="submit" value="ViewListProduct" name="richiesta">
+     <form action="BadgeServlet" method="post">
+     <button type="submit" value="badgesManagement" name="richiesta"> Management badge</button>
      </form>
      
-     <h3>3. Indietro</h3>
-     <form action="ProdottoServlet" method="post">
-     <input type="submit" value="ViewListProduct" name="richiesta">
+     <h3>3. Assegnazione Badges</h3>
+     <form action="AssegnazioneServlet" method="post">
+     <button type="submit" value="assegnazioneManagement" name="richiesta"> Management Assegnazione</button>
      </form>
      
-       <h3>4.logout<h3>
+     <h3>4. Indietro</h3>
+     <form action="CustomersServlet" method="post">
+     <input type="submit" value="indietro" name="richiesta">
+     </form>
+     
+       <h3>5.logout<h3>
      <form action="LogoutServlet" method="post">
      <input type="submit" value="Logout" name="Logout">
      </form>
