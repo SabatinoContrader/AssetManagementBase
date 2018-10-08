@@ -19,7 +19,22 @@
      <form action="" method="post">
      <input type="submit" value="SearchProduct" name="richiesta">
      </form>
-
+     
+     <h3>4. Gestione Utente</h3>
+     
+     <form action="CustomersServlet" method="post">
+     <input type="submit" value="usersManagement" name="richiesta">
+	 </form>
+	 
+	 <h3>5. Gestione Badge</h3>
+     
+     <form action="BadgeServlet" method="post">
+     <input type="submit" value="badgesManagement" name="richiesta">
+	 </form>
+	
+     
+     
+     
      <h3>4.logout<h3>
      <form action="LogoutServlet" method="post">
      <input type="submit" value="Logout" name="Logout">
