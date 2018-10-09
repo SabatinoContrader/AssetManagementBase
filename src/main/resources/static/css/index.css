@@ -1,0 +1,160 @@
+/********************************************* Romina.css **********************************************************/
+
+.img-responsive,
+.thumbnail > img,
+.thumbnail a > img,
+.carousel-inner > .item > img,
+.carousel-inner > .item > a > img {
+  display: block;
+  width: 100%;
+  height: 75%;
+}
+.transition-timer-carousel .carousel-caption {
+  background: -moz-linear-gradient(top,  rgba(0,0,0,0) 0%, rgba(0,0,0,0.1) 4%, rgba(0,0,0,0.5) 32%, rgba(0,0,0,1) 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(4%,rgba(0,0,0,0.1)), color-stop(32%,rgba(0,0,0,0.5)), color-stop(100%,rgba(0,0,0,1))); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.1) 4%,rgba(0,0,0,0.5) 32%,rgba(0,0,0,1) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.1) 4%,rgba(0,0,0,0.5) 32%,rgba(0,0,0,1) 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.1) 4%,rgba(0,0,0,0.5) 32%,rgba(0,0,0,1) 100%); /* IE10+ */
+  background: linear-gradient(to bottom,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.1) 4%,rgba(0,0,0,0.5) 32%,rgba(0,0,0,1) 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#000000',GradientType=0 ); /* IE6-9 */
+  width: 100%;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  text-align: left;
+  padding-top: 5px;
+  padding-left: 15%;
+  padding-right: 15%;
+}
+.transition-timer-carousel .carousel-caption .carousel-caption-header {
+  margin-top: 10px;
+  font-size: 24px;
+}
+
+@media (min-width: 970px) {
+  /* Lower the font size of the carousel caption header so that our caption
+  doesn't take up the full image/slide on smaller screens */
+  .transition-timer-carousel .carousel-caption .carousel-caption-header {
+    font-size: 36px;
+  }
+}
+.transition-timer-carousel .carousel-indicators {
+  bottom: 0px;
+  margin-bottom: 5px;
+}
+.transition-timer-carousel .carousel-control {
+  z-index: 11;
+}
+.transition-timer-carousel .transition-timer-carousel-progress-bar {
+  height: 5px;
+  background-color: #5cb85c;
+  width: 0%;
+  margin: -5px 0px 0px 0px;
+  border: none;
+  z-index: 11;
+  position: relative;
+}
+.transition-timer-carousel .transition-timer-carousel-progress-bar.animate{
+  /* We make the transition time shorter to avoid the slide transitioning
+  before the timer bar is "full" - change the 4.25s here to fit your
+  carousel's transition time */
+  -webkit-transition: width 4.25s linear;
+  -moz-transition: width 4.25s linear;
+  -o-transition: width 4.25s linear;
+  transition: width 4.25s linear;
+}
+/*********************************************************************************************************************************************************/
+
+/* Makes images fully responsive */
+
+/*.img-responsive,
+.thumbnail > img,
+.thumbnail a > img,
+.carousel-inner > .item > img,
+.carousel-inner > .item > a > img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* ------------------- Carousel Styling ------------------- */
+
+/*.carousel-inner {
+
+}
+
+.carousel-caption {
+  background-color: rgba(0,0,0,.5);
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  padding: 0 0 10px 25px;
+  color: #fff;
+  text-align: left;
+}
+
+.carousel-indicators {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  width: 100%;
+  z-index: 15;
+  margin: 0;
+  padding: 0 25px 25px 0;
+  text-align: right;
+}
+
+.carousel-control.left,
+.carousel-control.right {
+  background-image: none;
+}
+
+
+/* ------------------- Section Styling - Not needed for carousel styling ------------------- */
+
+/*.section-white {
+   padding: 10px 0;
+}
+
+.section-white {
+  background-color: #fff;
+  color: #555;
+}
+
+@media screen and (min-width: 768px) {
+
+  .section-white {
+     padding: 1.5em 0;
+  }
+
+}
+
+@media screen and (min-width: 992px) {
+
+  .container {
+    max-width: 800px;
+  }
+
+}*/
+
+.jumbotron
+{
+	background:none;
+}
+.jumbotron h2 
+{
+	text-align:center;
+}
+.jumbotron h1
+{
+   /* padding-left: 100px;*/
+	margin-left:10%;
+}
+.jumbotron h4
+{
+    margin-left: 5%;
+}
+
