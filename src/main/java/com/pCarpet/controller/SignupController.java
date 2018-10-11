@@ -42,7 +42,7 @@ public class SignupController {
 		boolean handicapped = Boolean.valueOf(request.getParameter("handicapped"));
 		String type = "driver";		
 		
-		User newUser = new User(username, password, type, name, surname, birthdate, birthplace, address, handicapped);
+		User newUser = new User(0,username, password, type, "", "", "", "", "");
 
         if (userService.insertUser(newUser))
         {

@@ -24,7 +24,7 @@
 		Customers Home
 		</h1>
 		<a class="btn btn-lg btn-primary btn-block"
-			href="/Home/homeAssBadRead">Users</a></br> 
+			href="/HomeUser/showUsers">Users</a></br> 
 		<a class="btn btn-lg btn-primary btn-block"
 			href="/Home/ext">Badges</a></br>
 					<a class="btn btn-lg btn-primary btn-block"

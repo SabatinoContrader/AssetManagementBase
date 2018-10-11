@@ -35,11 +35,11 @@ public class LoginController {
 			String type = "";
 			User user = userService.getLoggedUser();
 			type = user.getRuolo();
-			if (type.equals("Segretaria"))
+			if (type.equals("segretaria"))
 				return "homeSegretaria";
-			else if (type.equals("Cliente"))
+			else if (type.equals("cliente"))
 				return "homeCliente";
-			else if (type.equals("Amministratore"))
+			else if (type.equals("amministratore"))
 				return "homeAdmin";
 			else
 				return "index";
