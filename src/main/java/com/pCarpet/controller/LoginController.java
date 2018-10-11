@@ -34,13 +34,13 @@ public class LoginController {
 			isLogged = true;
 			String type = "";
 			User user = userService.getLoggedUser();
-			type = user.getType();
-			if (type.equals("driver"))
-				return "homeDriver";
-			else if (type.equals("gestore"))
-				return "homeOwner";
-			else if (type.equals("cop"))
-				return "homeCop";
+			type = user.getRuolo();
+			if (type.equals("Segretaria"))
+				return "homeSegretaria";
+			else if (type.equals("Cliente"))
+				return "homeCliente";
+			else if (type.equals("Amministratore"))
+				return "homeAdmin";
 			else
 				return "index";
 		}

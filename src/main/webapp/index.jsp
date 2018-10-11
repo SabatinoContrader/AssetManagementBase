@@ -10,7 +10,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>PCARPET</title>
+<title>AMEBA LOGIN PAGE</title>
 
 <!-- Bootstrap core CSS -->
 <link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -22,7 +22,7 @@
 
 <body class="text-center">
 	<form class="form-signin" action="/Login/loginControl" method="post">
-		<h1 class="h3 mb-3 font-weight-normal">PCARPET</h1>
+		<h1 class="h3 mb-3 font-weight-normal">AMEBA LOGIN PAGE</h1>
 		<h2 class="h3 mb-3 font-weight-normal">Login</h2>
 		<label for="inputUser" class="sr-only">Username</label> <input
 			type="text" name="username" id="inputUser" class="form-control"
@@ -49,7 +49,6 @@
 
 		<button class="btn btn-lg btn-primary btn-block" type="submit">Sign
 			in</button>
-		</br> <a href="/Signup/register">Prima volta su PCARPET? Iscriviti </a>
 	</form>
 </body>
 </html>

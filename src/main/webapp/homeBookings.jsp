@@ -9,7 +9,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>PCARPET</title>
+<title>AMEBA</title>
 
 <!-- Bootstrap core CSS -->
 <link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -21,24 +21,18 @@
 <body class="text-center">
 	<form class="form-signin">
 		<h1 class="h3 mb-3 font-weight-normal">
-			<b>DRIVER</b>
+		Bookings Home
 		</h1>
 		<a class="btn btn-lg btn-primary btn-block"
-			href="/FindCarPlace/showSlot">Trova parcheggio</a></br> 
+		href="/Home/homeAssBadRead">Inserisci Prenotazione</a></br> 
 		<a class="btn btn-lg btn-primary btn-block"
-			href="/ExtensionStop/extensionStops">Prolunga sosta</a></br> 
-		<a class="btn btn-lg btn-primary btn-block" href="/Car/carsList">Aggiungi/Rimuovi
-			auto</a></br> 
+		href="/Home/ext">Visualizzazione Prenotazioni</a></br>
 		<a class="btn btn-lg btn-primary btn-block"
-			href="/Report/driver/reports">Invia segnalazione</a></br> 
+		href="/Home/homeAssBadRead">Modifica Prenotazione</a></br>
 		<a class="btn btn-lg btn-primary btn-block"
-			href="/Report/driver/ownerReport">Segnalazioni del gestore</a></br> 
-		<a class="btn btn-lg btn-primary btn-block"
-			href="/Payment/paymentList">Pagamenti</a></br> 
-		<a class="btn btn-lg btn-primary btn-block" href="/UsefulNumber/userNumbers">Numeri
-			utili</a></br> 
-		<a class="btn btn-lg btn-primary btn-block"
-			href="/Legislation/legislations">Normative</a></br> 
+		href="/Home/homeAssBadRead">Elimina Prenotazione</a></br>
+			 
+		<a class="btn btn-lg btn-primary btn-block" href="/Home/homeDirectory?scelta=indietro">Indietro</a></br> 
 		<a class="btn btn-lg btn-primary btn-block" href="/Login/logoutControl">Logout</a></br>
 
 	</form>

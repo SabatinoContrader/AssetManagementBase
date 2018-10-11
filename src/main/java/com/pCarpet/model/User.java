@@ -21,34 +21,37 @@ import lombok.Setter;
 @Entity
 public class User {
 	
-	@Id
-	@Column
-    private String username;  
-	
-	@Column
-	@NotNull
-    private String password;
-	
-	@Column
-	@NotNull
-    private String type;
-	
-	@Column
-    private String name;
-	
-	@Column
-    private String surname;
-	
-	@Column
-    private String birthdate;
-	
-	@Column
-    private String birthplace;
-	
-	@Column
-    private String address;
-	
-	@Column
-    private Boolean handicapped;
+		
+		@Id
+		@Column
+		@NotNull
+	    private int iduser;
+		
+		@Column
+		@NotNull
+	    private String username;  
+		
+		@Column
+		@NotNull
+	    private String password;
+		
+		@Column
+	    private String nome;
+		
+		@Column
+	    private String cognome;
+		
+		@Column
+	    private String telefono;
+		
+		@Column
+	    private String mail;
+		
+		@Column
+	    private String partitaiva;
+		
+		@Column
+	    private String ruolo;
 
-}
+	}
+
