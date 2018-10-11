@@ -37,4 +37,9 @@ public class MovimentoService {
     public boolean deleteMovimento (int idBadgeReader, int idBadge, String datainizio) {
         return this.movimentoDAO.deleteMovimento(idBadgeReader, idBadge, datainizio);
     }
+    
+    public boolean updateMovimento (int idBadgeReader, int idBadge, String dataInizio, String dataFine) {
+    	return this.movimentoDAO.udpateMovimento(idBadgeReader, idBadge, dataInizio, dataFine);
+    }
+    
 }

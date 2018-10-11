@@ -2,6 +2,7 @@ package main.dao;
 
 import main.ConnectionSingleton;
 import main.controller.GestoreEccezioni;
+import main.controller.Request;
 import main.model.Badge;
 //import main.model.BadgeReader;
 import main.model.Movimento;
@@ -21,6 +22,7 @@ public class MovimentoDAO {
     private final String QUERY_SELIDB = "select ";
     private final String QUERY_INSMOV = "insert into movimento(idbadgereader,idbadge,datainizio,datafine) values (?,?,?,?) ";
     private final String QUERY_DELMOV = "delete from movimento where idbadgereader=? and idbadge=? and datainizio=?";
+    private final String QUERY_UPDATE = "UPDATE movimento SET datafine=? WHERE idbadgereader=? AND idbadge=? AND datainizio=?";
     
     public boolean assMovimento(int idBadgeReader, int idBadge, String datainizio, String datafine) {
     	 Connection connection = ConnectionSingleton.getInstance();
@@ -98,23 +100,42 @@ public class MovimentoDAO {
             return false;
         }
    }
-public boolean insertMovimento(Movimento movimento) {
-    Connection connection = ConnectionSingleton.getInstance();
-    try {
-        PreparedStatement preparedStatement = connection.prepareStatement(QUERY_INSMOV);
-        preparedStatement.setInt(1, movimento.getIdbadgereader());
-        preparedStatement.setInt(2, movimento.getIdbadge());
-        preparedStatement.setString(3, movimento.getDatainizio());
-        preparedStatement.setString(4, movimento.getDatafine());
-        preparedStatement.execute();
-        return true;
+    
+    public boolean insertMovimento(Movimento movimento) {
+    	Connection connection = ConnectionSingleton.getInstance();
+    	try {
+    		PreparedStatement preparedStatement = connection.prepareStatement(QUERY_INSMOV);
+    		preparedStatement.setInt(1, movimento.getIdbadgereader());
+    		preparedStatement.setInt(2, movimento.getIdbadge());
+    		preparedStatement.setString(3, movimento.getDatainizio());
+    		preparedStatement.setString(4, movimento.getDatafine());
+    		preparedStatement.execute();
+    		return true;
+    	}
+    	catch (SQLException e) {
+    		GestoreEccezioni.getInstance().gestisciEccezione(e);
+    		return false;
+    	}
     }
-    catch (SQLException e) {
-        GestoreEccezioni.getInstance().gestisciEccezione(e);
-        return false;
+    
+    public boolean udpateMovimento(int idbadgereader, int idbadge, String datainizio, String datafine) {
+        Connection connection = ConnectionSingleton.getInstance();
+        try {
+        	PreparedStatement preparedStatement = connection.prepareStatement(QUERY_UPDATE);
+        	preparedStatement.setString(1, datafine);
+        	preparedStatement.setInt(2, idbadgereader);
+            preparedStatement.setInt(3, idbadge);
+            preparedStatement.setString(4, datainizio);
+            preparedStatement.execute();
+            return true;
+        }
+            
+        catch (SQLException e) {
+            GestoreEccezioni.getInstance().gestisciEccezione(e);
+            return false;
+        }
     }
-
-}
+    
 }
 
     /*
