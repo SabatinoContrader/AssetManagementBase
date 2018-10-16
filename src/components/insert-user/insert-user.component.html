@@ -1,0 +1,67 @@
+<h1 style="text-align: center; margin-bottom: 3%;">Registrazione Nuovo Utente</h1>
+<br>
+<div class="container">
+    <form [formGroup]="userForm" novalidate>
+        <div class="form-group">
+            <label class="center-block">Username:
+                <input  class="form-control" formControlName="username" placeholder="Inserisci username" required >
+            </label>
+
+            <label class="center-block">Password:
+                <input  class="form-control" formControlName="password" placeholder="Inserisci password"required >
+
+            </label>
+
+            <label class="center-block">Nome:
+                <input class="form-control" formControlName="firstname" placeholder="Inserisci nome" required>
+            </label>
+
+            <label class="center-block">Cognome:
+                <input class="form-control" formControlName="lastname" placeholder="Inserisci cognome" required>
+            </label>
+
+            <label class="center-block">Data di nascita:
+                <input class="form-control" formControlName="dateofbirth" placeholder="Inserisci data di nascita" required>
+            </label>
+
+            <label class="center-block">Codice fiscale:
+                <input  class="form-control" formControlName="fiscalcode" placeholder="Inserisci codice fiscale"required >
+            </label>
+
+            <label class="center-block">Ragione sociale:
+                <input class="form-control" formControlName="businessname" placeholder="Inserisci ragione sociale" required>
+
+            </label>
+
+            <label class="center-block">Partita Iva:
+                <input  class="form-control" formControlName="vat" placeholder="Inserisci partita iva" required>
+            </label>
+
+
+            <label class="center-block">Comune:
+                <input  class="form-control" formControlName="municipality" placeholder="Inserisci comune"  required>
+            </label>
+
+            <label class="center-block">Post:
+                <input  class="form-control" formControlName="post" placeholder="Inserisci post" required>
+            </label>
+
+            <label class="center-block">Città:
+                <input class="form-control" formControlName="city" placeholder="Inserisci città" required>
+            </label>
+
+            <label class="center-block">Indirizzo:
+                <input class="form-control" formControlName="address" placeholder="Inserisci indirizzo" required>
+            </label>
+
+            <label class="center-block">Telefono:
+                <input class="form-control" formControlName="telephone" placeholder="Inserisci telefono"required >
+            </label>
+
+        </div>
+        <input type="submit" (click)="submit()" value="Registrati" />
+    </form>
+    <div *ngIf="insertSuccess">
+        {{esito}}
+    </div>
+</div>

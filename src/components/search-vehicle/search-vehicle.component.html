@@ -1,0 +1,96 @@
+
+<fieldset>
+
+    <form [formGroup]="vehicleSearchForm" *ngIf="!insertSuccess">
+        <h2>Cerca il tuo veicolo</h2>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-10 col-sm-8 col-md-6 col-lg-6">
+                    <div class="form-group">
+                        <label class="center-block">Brand:
+                            <input class="form-control" formControlName="brand" placeholder="Inserisci produttore" >
+                        </label>
+                        <label class="center-block">Model:
+                            <input class="form-control" formControlName="model"placeholder="Inserisci modello" >
+                        </label>
+                        <label class="center-block">Fuel:
+                            <input class="form-control" formControlName="fuel" placeholder="Inserisci alimentazione" >
+                        </label>
+                        <label class="center-block">Version:
+                            <input class="form-control" formControlName="version" placeholder="Inserisci versione" >
+                        </label>
+                        <label class="center-block">Capacity:
+                            <input class="form-control" formControlName="capacity" placeholder="Inserisci cilindrata" >
+                        </label>
+                    </div>
+
+                    <!-- <input   type="submit" (click)="submit()" value="Invia" /> -->
+                    <button type="submit" class="btn btn-default" (click)="submit()" value="Invia">Conferma</button>
+                </div>
+            </div>
+        </div>
+
+    </form>
+</fieldset>
+
+<div *ngIf="insertSuccess">
+    <div>
+    <h2>Pneumatici compatibili</h2>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Modello</th>
+            <th>Produttore</th>
+            <th>Prezzo</th>
+            <th>Larghezza</th>
+            <th>Altezza</th>
+            <th>Diametro</th>
+            <th>Peso</th>
+            <th>Velocità</th>
+            <th>Tipo Veicolo</th>
+            <th>Stagione</th>
+            <th>Quantità</th>
+
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr *ngFor="let gomma of gommeVehicle">
+            <td>{{ gomma.model }}</td>
+            <td>{{ gomma.manufacturer }}</td>
+            <td>{{ gomma.price }}</td>
+            <td>{{ gomma.width }}</td>
+            <td>{{ gomma.height}}</td>
+            <td>{{ gomma.diameter}}</td>
+            <td>{{ gomma.weight}}</td>
+            <td>{{ gomma.speed}}</td>
+            <td>{{ gomma.typeVehicle}}</td>
+            <td>{{ gomma.season}}</td>
+            <td>{{ gomma.quantity}}</td>
+        </tr>
+        </tbody>
+    </table>
+    </div>
+
+</div>
+
+<!--<div *ngIf="insertSuccess">
+    <table border="1" cellpadding="2" cellspacing="0" style="width: 40%">
+    <thead>
+    <tr>
+        <th>Model</th>
+        <th>manufacturer</th>
+        <th>Price</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr *ngFor="let gomma of gomme">
+        <td>{{ gomma.model }}</td>
+        <td>{{ gomma.manufacturer }}</td>
+        <td>{{ gomma.price }}</td>
+    </tr>
+    </tbody>
+    </table>
+</div>-->
