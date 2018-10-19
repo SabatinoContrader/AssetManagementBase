@@ -34,7 +34,11 @@ public class PrenotazioneService {
 		this.assetService = assetService;
 	}
 
-  
+    public List getAllExportPrenotazioni() {
+    	
+    	return this.prenotazioneRepository.getAllExportPrenotazioni();
+    	
+    }
 	
     public List<PrenotazioneDTO> getAllPrenotazioni () {
     	

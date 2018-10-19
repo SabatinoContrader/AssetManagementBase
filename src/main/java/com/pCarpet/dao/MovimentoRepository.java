@@ -23,7 +23,9 @@ public class MovimentoRepository {
     private final String QUERY_SELIDB = "select ";
     private final String QUERY_INSMOV = "insert into movimento(idbadgereader,idbadge,datainizio,datafine) values (?,?,?,?) ";
     private final String QUERY_DELMOV = "delete from movimento where idbadgereader=? and idbadge=? and datainizio=?";
-    
+    private final String EXPORT_ALLUSER = "select u.iduser,u.ragioneSociale, a.nome, a.cognome, m.datainizio, m.datafine, ass.idasset, ass.tipo, ass.prezzo, ass.descrizione from user as u, movimento as m, assegnazione as a, badgereader as b, asset as ass where a.iduser=u.iduser and a.idbadge=m.idbadge and m.idbadgereader=b.idbadgereader and b.idasset=ass.idasset";
+    private final String EXPORT_USER = "select u.iduser,u.ragioneSociale, a.nome, a.cognome, m.datainizio, m.datafine, ass.idasset, ass.tipo, ass.prezzo, ass.descrizione from user as u, movimento as m, assegnazione as a, badgereader as b, asset as ass where a.iduser=u.iduser and a.idbadge=m.idbadge and m.idbadgereader=b.idbadgereader and b.idasset=ass.idasset and u.iduser=?";
+
     public boolean assMovimento(int idBadgeReader, int idBadge, String datainizio, String datafine) {
     	 Connection connection = ConnectionSingleton.getInstance();
          try {
@@ -63,6 +65,7 @@ public class MovimentoRepository {
         }
         return movimenti;
     }
+    
     public List<Movimento> getAllUserMovimenti(String iduser) {
         List<Movimento> movimenti = new ArrayList<>();
         Connection connection = ConnectionSingleton.getInstance();
@@ -117,6 +120,96 @@ public boolean insertMovimento(Movimento movimento) {
     }
 
 }
+
+
+public List getAllExportMovimenti() {
+    List list = new ArrayList();
+    Connection connection = ConnectionSingleton.getInstance();
+    try {
+       Statement statement = connection.createStatement();
+       ResultSet resultSet = statement.executeQuery(EXPORT_ALLUSER);
+       while (resultSet.next()) {
+    	   int iduser = resultSet.getInt("iduser");
+    	   
+    	   String ragioneSociale = resultSet.getString("ragioneSociale");
+    	   String nome = resultSet.getString("nome");
+    	   String cognome = resultSet.getString("cognome");
+    	   
+    	   int idasset = resultSet.getInt("idasset");
+    	   String tipo = resultSet.getString("tipo");
+    	   double prezzo = resultSet.getDouble("prezzo");
+    	   String descrizione = resultSet.getString("descrizione");
+    	   
+    	   String datainizio = resultSet.getString("datainizio");
+    	   String datafine = resultSet.getString("datafine");
+    	   
+    	   
+    	   
+           list.add(iduser);
+           list.add(ragioneSociale);
+           list.add(nome);
+           list.add(cognome);
+           
+           list.add(idasset);
+           list.add(tipo);
+           list.add(prezzo);
+           list.add(descrizione);
+           
+           list.add(datainizio);
+           list.add(datafine);
+           
+       }
+    }
+    catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return list;
+}
+
+public List getExportMovimento(String iduser1) {
+    List list = new ArrayList();
+    Connection connection = ConnectionSingleton.getInstance();
+    try {
+       Statement statement = connection.createStatement();
+       ResultSet resultSet = statement.executeQuery("select u.iduser,u.ragioneSociale, a.nome, a.cognome, m.datainizio, m.datafine, ass.idasset, ass.tipo, ass.prezzo, ass.descrizione from user as u, movimento as m, assegnazione as a, badgereader as b, asset as ass where a.iduser=u.iduser and a.idbadge=m.idbadge and m.idbadgereader=b.idbadgereader and b.idasset=ass.idasset and u.iduser="+iduser1);
+       while (resultSet.next()) {
+    	   int iduser = resultSet.getInt("iduser");
+    	   
+    	   String ragioneSociale = resultSet.getString("ragioneSociale");
+    	   String nome = resultSet.getString("nome");
+    	   String cognome = resultSet.getString("cognome");
+    	   
+    	   int idasset = resultSet.getInt("idasset");
+    	   String tipo = resultSet.getString("tipo");
+    	   double prezzo = resultSet.getDouble("prezzo");
+    	   String descrizione = resultSet.getString("descrizione");
+    	   
+    	   String datainizio = resultSet.getString("datainizio");
+    	   String datafine = resultSet.getString("datafine");
+    	   
+    	   
+    	   
+           list.add(iduser);
+           list.add(ragioneSociale);
+           list.add(nome);
+           list.add(cognome);
+           
+           list.add(idasset);
+           list.add(tipo);
+           list.add(prezzo);
+           list.add(descrizione);
+           
+           list.add(datainizio);
+           list.add(datafine);
+           
+       }
+    }
+    catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return list;
+}
+
 }
 
     /*

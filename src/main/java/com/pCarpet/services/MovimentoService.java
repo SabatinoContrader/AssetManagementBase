@@ -67,6 +67,20 @@ public class MovimentoService {
     	
         return mDTO;
     }
+    
+    
+    public List getAllExportMovimenti() {
+    	
+    	return this.movimentoRepository.getAllExportMovimenti();
+    	
+    }
+    
+    public List getExportMovimento(String iduser1) {
+    	
+    	return this.movimentoRepository.getExportMovimento(iduser1);
+    	
+    }
+    
   /*  public List<BadgeReader> getAllBadgeReaders () {
         return (((BadgeReaderDAO) this.badgeReaderDAO).getBadgeReaders());
     }

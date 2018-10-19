@@ -1,4 +1,4 @@
-CREATE DATABASE  IF NOT EXISTS `contrader` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */;
+﻿CREATE DATABASE  IF NOT EXISTS `contrader` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */;
 USE `contrader`;
 -- MySQL dump 10.13  Distrib 8.0.11, for Win64 (x86_64)
 --
@@ -156,7 +156,7 @@ CREATE TABLE `badgereader` (
 
 LOCK TABLES `badgereader` WRITE;
 /*!40000 ALTER TABLE `badgereader` DISABLE KEYS */;
-INSERT INTO `badgereader` VALUES (3,'SBR badge reader di prossimità','RadioFrequenze',15,1),(5,'HELIOS antideflagrante','E_Ex-d',16,1),(12,'HELIOS antideflagrante','W',NULL,1);
+INSERT INTO `badgereader` VALUES (3,'SBR badge reader di prossimità','RadioFrequenze',15,1),(5,'HELIOS antideflagrante','E_Ex-d',16,1),(12,'HELIOS antideflagrante','W',12,1);
 /*!40000 ALTER TABLE `badgereader` ENABLE KEYS */;
 UNLOCK TABLES;
 

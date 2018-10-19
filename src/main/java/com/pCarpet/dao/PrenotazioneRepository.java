@@ -29,6 +29,8 @@ public class PrenotazioneRepository{
 	private final String QUERY_ALL = "select * from prenotazione";
 	private final String QUERY_ALLID = "select * from prenotazione where iduser=? and idasset=? and orainizio=?";
 	private final String QUERY_ALLUTILIZZO= "SELECT b.idasset,m.idbadge,m.datainizio,m.datafine FROM movimento AS m LEFT OUTER JOIN badgereader AS b ON m.idbadgereader=b.idbadgereader";
+	private final String EXPORT_ALLUSER="select u.iduser,u.ragioneSociale, p.orainizio, p.orafine, ass.idasset, ass.tipo, ass.prezzo, ass.descrizione from user as u, asset as ass, prenotazione as p where u.iduser=p.iduser and ass.idasset=p.idasset";
+	
 	
 	public PrenotazioneRepository() {
 		
@@ -55,6 +57,45 @@ public class PrenotazioneRepository{
 	        
 	        return listPrenotazione;
 	}
+	
+	
+	public List getAllExportPrenotazioni(){
+		 List list = new ArrayList();
+	     Connection connection = ConnectionSingleton.getInstance();
+	     try {
+	        Statement statement = connection.createStatement();
+	        ResultSet resultSet = statement.executeQuery(EXPORT_ALLUSER);
+	        while (resultSet.next()) {
+	           int iduser = resultSet.getInt("iduser");
+	     	   
+	     	   String ragioneSociale = resultSet.getString("ragioneSociale");
+	     	   int idasset = resultSet.getInt("idasset");
+	     	   String tipo = resultSet.getString("tipo");
+	     	   double prezzo = resultSet.getDouble("prezzo");
+	     	   String descrizione = resultSet.getString("descrizione");
+	     	   
+	     	   String orainizio = resultSet.getString("orainizio");
+	     	   String orafine = resultSet.getString("orafine");
+	        	   
+	           list.add(iduser);
+	           list.add(ragioneSociale);
+	           list.add(idasset);
+	           list.add(tipo);
+	           list.add(prezzo);
+	           list.add(descrizione);
+	           list.add(orainizio);
+	           list.add(orafine);
+	        }
+	     }
+	     catch (SQLException e) {
+	         e.printStackTrace();
+	     }
+	        
+	     return list;
+	}
+	
+	
+	
 	
 	public Prenotazione getPrenotazione(int iduser, int idasset, String orainizio){
 		 //List<Prenotazione> listPrenotazione = new ArrayList<>();
