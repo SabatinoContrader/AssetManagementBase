@@ -8,12 +8,10 @@
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.1/jquery-ui.min.js"></script>   
     <!-- jquery validazioni //-->   
 <script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery.validate/1.7/jquery.validate.js"></script>   
-<script type="text/javascript" src="/css/validation_reg.js">
-
-
-
-
+<script type="text/javascript" src="/validate/validation_user.js">
 </script>  
+ <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.min.js" type="text/javascript"></script>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 <!-- Bootstrap core CSS -->
@@ -23,7 +21,7 @@
 <body>
  <h2>Inserisci i dati dell'utente</h2>
  
- </br>
+ <br>
  
      <form action="/HomeUser/showUsers" method="post" id="form_register">
      
@@ -42,9 +40,13 @@
      	
      	<tr><th>Mail:</th> <td> <input type = "text" id = "mail" name ="mail" placeholder = "inserisci mail"></td></tr>
      	
-     	<tr><th>Partita iva:</th> <td> <input type = "text" id = "user" name ="partitaiva" placeholder = "inserisci partita iva"></td></tr>
+     	<tr><th>Partita iva:</th> <td> <input type = "text" id = "partitaiva" class="partitaiva" name ="partitaiva" placeholder = "inserisci partita iva"></td></tr>
      	
-     	<tr><th>Ruolo:</th> <td> <input type = "text" id = "user" name ="ruolo" placeholder = "inserisci ruolo"></td></tr>
+     	<tr><th>Ruolo:</th> <td><select id="ruolo" name = "ruolo">
+		<option value ="segretaria">Segretaria</option>
+		<option value ="cliente">Cliente</option>
+		<option value ="owner">Owner</option>
+		</select></td></tr>
 
 		<tr><th>Nome Abbonamento:</th> <td>
 		<select id="user" name = "nomeAbb">
@@ -60,7 +62,7 @@
      	<%-- <a class="btn btn-lg btn-primary btn-block"
 			href="/HomeUser/showUsers?choice=insertUser&User=${u}">Inserisci</a> --%>
 			
-		<button class="btn lg btn-primary" type="submit" value="insert" name="choice">Inserisci</button>
+		<button class="btn lg btn-primary" type="submit"  value="insert" name="choice">Inserisci</button>
 		
 		<a class="btn lg btn-primary" 
 		href="/HomeUser/showUsers?choice=indietroManagementUser">Indietro</a></br>

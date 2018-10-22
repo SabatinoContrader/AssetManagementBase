@@ -4,6 +4,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>   
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.1/jquery-ui.min.js"></script>   
+    <!-- jquery validazioni //-->   
+<script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery.validate/1.7/jquery.validate.js"></script>   
+<script type="text/javascript" src="/validate/validation_asset.js"></script>
+
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 
@@ -17,7 +24,7 @@
  
  </br>
  
-<form action="/Asset/homeAsset" method="post">
+<form action="/Asset/homeAsset" method="post" id="form_register">
         
 <table class="border rcorners">	
 
@@ -78,10 +85,9 @@
 		</td>
 		
 		<td>
-			<input type = "radio" value="prezzo" name="campo">Prezzo
+			<input type = "radio" value="prezzo" id="prezzo" name="campo">Prezzo
 		</td>
 		
-	
 		
 		
 <!--  		<td>
@@ -100,7 +106,7 @@
 <h4>Inserisci il valore del nuovo campo:</h4></th> 
 </tr><tr>
 <td>
-<input type = "text" id = "nuovoCampo" name ="nuovoCampo" placeholder = "inserisci nuovo campo" required autofocus>
+<input type = "text" id = "prezzo" name ="nuovoCampo" placeholder = "inserisci nuovo campo" required autofocus>
 </td>
 </tr>
 </table>		

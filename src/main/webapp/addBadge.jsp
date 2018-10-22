@@ -3,6 +3,12 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>   
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.1/jquery-ui.min.js"></script>   
+    <!-- jquery validazioni //-->   
+<script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery.validate/1.7/jquery.validate.js"></script>   
+<script type="text/javascript" src="/validate/validation_badge.js">
+</script>  
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 <link href="/css/bootstrap.min.css" rel="stylesheet">
@@ -13,16 +19,19 @@
 
 
 	<h3>Inserisci i dati del badge</h3>
-     <form action="/Badge/addBadge" method="post">
+     <form action="/Badge/addBadge" method="post" id= badge_insert>
      	
      	 <table>
      	 
      	 <tr><th><h4>Inserimento Badge</h4></th><td class="imgB"></td><td></td> </tr>
      	 <tr>
-     	<th>Descrizione: </th><td><input type = "text" id = "user" name ="descrizione" placeholder = "inserisci descrizione"></td></tr>
+     	<th>Descrizione: </th><td><input type = "text" id = "user" name ="descrizione" placeholder = "inserisci descrizione" ></td></tr>
      	<tr>
-     	<th>
-     	Tipologia:</th><td> <input type = "text" id = "user" name ="tipologia" placeholder = "inserisci tipologia"></td></tr>
+     	<tr><th>Tipologia:</th> <td>
+		<select id="user" name = "tipologia">
+		<option value ="PVC_ISO7810">PVC_ISO7810</option>
+		</select>
+		</td></tr>
      	
 		</table>
 		<table>

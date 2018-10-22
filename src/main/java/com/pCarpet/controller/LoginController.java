@@ -71,7 +71,7 @@ public class LoginController {
 			model.addAttribute("feedback", "wrong");
 			//return "index";
 		}
-		return null;
+		return "index";
 	}
 	
 	@RequestMapping(value = "/logoutControl", method = RequestMethod.GET)

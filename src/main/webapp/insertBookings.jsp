@@ -8,6 +8,16 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>   
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.1/jquery-ui.min.js"></script>   
+    <!-- jquery validazioni //-->   
+<script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery.validate/1.7/jquery.validate.js"></script>   
+<script type="text/javascript" src="/validate/validation_prenot.js">
+
+
+
+
+</script> 
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 
@@ -120,7 +130,7 @@
 
 
 
-	<form width="400" class="form-signin" action="/HomePrenotazione/showPrenotazione" method="post">
+	<form class="form-signin" action="/HomePrenotazione/showPrenotazione" method="post" id="form_prenot">
      
      <div id="container">
      <div id="left">
@@ -201,11 +211,11 @@
   	 
      <table id="mytable">
      	<tr><td>
-     	<h4>ID UTENTE: <input type = "text" id = "user" name ="iduser" placeholder = "Inserisci ID utente" required autofocus></h4>
+     	<h4>ID UTENTE: <input type = "text" id = "iduser" name ="iduser" placeholder = "Inserisci ID utente" ></h4>
      	</td>
      	
      	<td>
-     	<h4>ID ASSET: <input type = "text" id = "user" name ="idasset" placeholder = "Inserisci ID asset" required autofocus></h4>
+     	<h4>ID ASSET: <input type = "text" id = "idasset" name ="idasset" placeholder = "Inserisci ID asset" ></h4>
      	</td>
      	
      	<td>

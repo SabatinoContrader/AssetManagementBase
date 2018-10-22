@@ -25,7 +25,6 @@ public class UserConverter{
 
 
 	public static UserDTO covertToDTO(User entity) {
-		System.out.println("cazzoentity:"+entity);
 		UserDTO userDTO=new UserDTO();
 		userDTO.setIduser(entity.getIduser());
 		userDTO.setRagioneSociale(entity.getRagioneSociale());

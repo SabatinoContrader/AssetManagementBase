@@ -139,11 +139,17 @@ public class AssetRepository {
         try {
         	String param="";
         	param=(String)request.getParameter("campo");
+        	
        	 int id=Integer.parseInt(request.getParameter("id"));
        	//System.out.println(id);
         	PreparedStatement preparedStatement = connection.prepareStatement("update asset set "+param+"=? where idasset=?");
             
-        	preparedStatement.setString(1, request.getParameter("nuovoCampo"));
+        	String prezzoS=request.getParameter("nuovoCampo");
+        	if(param.equals("prezzo")) {
+        		prezzoS=prezzoS.replace(',', '.');
+        	}
+        	
+        	preparedStatement.setString(1, prezzoS);
         	preparedStatement.setInt(2,id);
        //     preparedStatement.setInt(2, Integer.parseInt(request.getParameter("id")));
             preparedStatement.execute();

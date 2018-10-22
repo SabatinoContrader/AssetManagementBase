@@ -103,7 +103,9 @@ public class AssetController {
 			case "insert":
 					String tipo=request.getParameter("tipo");
 					String descrizione=request.getParameter("descrizione");
-					double prezzo=Double.parseDouble(request.getParameter("prezzo"));
+					String prezzoS=request.getParameter("prezzo");
+					prezzoS=prezzoS.replace(',', '.');
+					double prezzo=Double.parseDouble(prezzoS);
 					AssetDTO a =new AssetDTO(0,tipo,descrizione,prezzo);
 					
 					assetService.insertAsset(a);

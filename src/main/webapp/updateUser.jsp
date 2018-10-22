@@ -10,6 +10,9 @@
 <!-- Bootstrap core CSS -->
 <link href="/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="/css/pcarpet.css">
+
+<script>var flag=false;</script>
+
 </head>
 <body>
 
@@ -125,7 +128,7 @@
 			<input type = "radio" value="ruolo" name="campo">Ruolo
 		</td>
 		<td>
-			<input type = "radio" value="nomeAbb" name="campo">Nome Abbonamento
+			<input type = "radio" value="nomeAbb" id="rr" name="campo">Nome Abbonamento
 		</td>
 		
 		
@@ -142,13 +145,19 @@
 
 </br>
 
-<h4>Inserisci il valore del nuovo campo: 
+<h4>Inserisci il valore del nuovo campo:
+
 <input type = "text" id = "nuovoCampo" name ="nuovoCampo" placeholder = "inserisci nuovo campo" required autofocus></h4>
 		
 </br>
 
+
+<script>
+document.getElementById("mod").setAttribute("disabled", true);
+</script>
+
 <input type="hidden" name="id" value="${user.iduser}"/>
-<button class="btn btn-lg btn-primary" type="submit" value="update" name="choice">Effettua Modifica</button>
+<button class="btn btn-lg btn-primary" type="submit" id="mod" value="update" name="choice">Effettua Modifica</button>
 
 <a class="btn btn-lg btn-primary" 
 		href="/HomeUser/showUsers?choice=indietroManagementUser">Indietro</a></br>

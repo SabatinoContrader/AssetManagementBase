@@ -31,7 +31,8 @@ public class PrenotazioneController {
 	private PrenotazioneService prenotazioneService;
 	private AssetService assetService;
 	private UserService userService;
-	
+	private List<UserDTO> listUser;
+	private List<AssetDTO> listAssets;
 	
 	private boolean isLogged = false;
 	
@@ -50,8 +51,7 @@ public class PrenotazioneController {
 	public String loginControl(HttpServletRequest request, Model model ) {
 		
 		List<PrenotazioneDTO> listPrenotazione;
-		List<UserDTO> listUser;
-		List<AssetDTO> listAssets;		
+				
 		String choice=request.getParameter("choice");
 		
 		if(choice != null) {
@@ -181,11 +181,13 @@ public class PrenotazioneController {
 					}
 					
 					
-					
+					listUser = userService.getAllUsers();
+					listAssets = assetService.getAllAssets();
 					listPrenotazione = prenotazioneService.getAllPrenotazioni();
 					listPrenotazione = aggiornaPrenotazioni(listPrenotazione);
 					model.addAttribute("listPrenotazione", listPrenotazione);
-
+					model.addAttribute("listAssets", listAssets);
+					model.addAttribute("listUsers", listUser);
 					
 					return "insertBookings";
 					
@@ -283,10 +285,13 @@ public class PrenotazioneController {
 //						orainizio=request.getParameter("id3");
 //						
 //						PrenotazioneDTO p= prenotazioneService.getPrenotazione(iduser, idasset, orainizio);
-						
+						listUser = userService.getAllUsers();
+						listAssets = assetService.getAllAssets();
 						listPrenotazione = prenotazioneService.getAllPrenotazioni();
 						listPrenotazione = aggiornaPrenotazioni(listPrenotazione);
 						model.addAttribute("listPrenotazione", listPrenotazione);
+						model.addAttribute("listAssets", listAssets);
+						model.addAttribute("listUsers", listUser);
 						
 						//model.addAttribute("p", p);
 						model.addAttribute("feedback", "success");
@@ -295,9 +300,13 @@ public class PrenotazioneController {
 					}else {
 						System.out.println("non corretto");
 						
+						listUser = userService.getAllUsers();
+						listAssets = assetService.getAllAssets();
 						listPrenotazione = prenotazioneService.getAllPrenotazioni();
 						listPrenotazione = aggiornaPrenotazioni(listPrenotazione);
 						model.addAttribute("listPrenotazione", listPrenotazione);
+						model.addAttribute("listAssets", listAssets);
+						model.addAttribute("listUsers", listUser);
 						
 						model.addAttribute("feedback", "wrong");
 						return "insertBookings";

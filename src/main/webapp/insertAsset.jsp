@@ -4,6 +4,12 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>   
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.1/jquery-ui.min.js"></script>   
+    <!-- jquery validazioni //-->   
+<script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery.validate/1.7/jquery.validate.js"></script>   
+<script type="text/javascript" src="/validate/validation_asset.js"></script>
 <meta charset="ISO-8859-1">
 <title>Inserimento Asset</title>
 <!-- Bootstrap core CSS -->
@@ -15,7 +21,7 @@
  
  </br>
  
-     <form action="/Asset/homeAsset?scelta=insert" method="post">
+     <form action="/Asset/homeAsset?scelta=insert" method="post" id="form_register">
      
      	
      
@@ -24,9 +30,9 @@
      
      	<tr><th>Tipo:</th> <td><input type = "text" id = "asset" name ="tipo" placeholder = "inserisci il tipo" required autofocus></td></tr>
      	
-     	<tr><th>Descrizione:</th> <td><input type = "text" id = "asset" name ="descrizione" placeholder = "inserisci la descrizione" required autofocus></td></tr>
+     	<tr><th>Descrizione:</th> <td><input type = "text" id = "descrizione" name ="descrizione" placeholder = "inserisci la descrizione" required autofocus></td></tr>
      	
-     	<tr><th>Prezzo:</th> <td><input type = "text" id = "asset" name ="prezzo" placeholder = "inserisci il prezzo" required autofocus></td></tr>
+     	<tr><th>Prezzo:</th> <td><input type = "text" id = "prezzo" name ="prezzo" placeholder = "inserisci il prezzo" required autofocus></td></tr>
      	
 
 		<%-- ${Asset a = new Asset(0,tipo,descrizione, prezzo)}
