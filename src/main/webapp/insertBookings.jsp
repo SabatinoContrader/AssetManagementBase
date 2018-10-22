@@ -2,6 +2,8 @@
     pageEncoding="ISO-8859-1"%>
     <%@ page import="java.util.List"%>
 <%@ page import="com.pCarpet.dto.PrenotazioneDTO"%>
+<%@ page import="com.pCarpet.dto.AssetDTO"%>
+<%@ page import="com.pCarpet.dto.UserDTO"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -20,7 +22,104 @@
 	<h2><center>Inserisci la tua prenotazione</center></h2>
  
  </br>
- 
+ 		<table class="border rcorners" align="left">	
+	<tr><th><h4>ASSETS</h4></th><td></td><td></td><td></td></tr>
+	<tr>
+        
+         <th>
+             Id Asset
+         </th>
+
+         <th>
+             Descrizione
+         </th>
+         
+         <th>
+             Tipo
+         </th>
+         
+         <th>
+             Prezzo
+         </th>
+
+     </tr>
+	<!--  $allassets collegato a riga 37 di asset controller -->
+        <c:forEach items="${listAssets}" var="asset">
+     	
+         <td>
+             
+             	<c:out value="${asset.idAsset}"></c:out>
+             
+         </td>
+		
+		<td>
+            <c:out value="${asset.tipo}"></c:out>
+         </td>
+         
+         <td>
+            <c:out value="${asset.descrizione}"></c:out>
+         </td>
+
+         <td>
+             <c:out value="${asset.prezzo}"></c:out>
+         </td>		
+     </tr>
+     </c:forEach>	
+     
+     
+</table>
+
+ 		<table class="border rcorners" align=right">	
+	<tr><th><h4>USERS</h4></th><td></td><td></td><td class="userimg"></td></tr>
+	<tr>
+        
+         <th>
+             Id User
+         </th>
+
+         <th>
+             Username
+         </th>
+         
+         <th>
+             Ragione Sociale
+         </th>
+         
+         <th>
+             Partita iva
+         </th>
+
+     </tr>
+	<!--  $allassets collegato a riga 37 di asset controller -->
+        <c:forEach items="${listUsers}" var="user">
+     	
+         <td>
+             
+             	<c:out value="${user.iduser}"></c:out>
+             
+         </td>
+		
+		<td>
+            <c:out value="${user.username}"></c:out>
+         </td>
+         
+         <td>
+            <c:out value="${user.ragioneSociale}"></c:out>
+         </td>
+
+         <td>
+             <c:out value="${user.partitaiva}"></c:out>
+         </td>		
+     </tr>
+     </c:forEach>	
+</table>
+
+
+
+
+
+
+
 	<form width="400" class="form-signin" action="/HomePrenotazione/showPrenotazione" method="post">
      
      <div id="container">

@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.ui.Model;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -61,7 +62,7 @@ public class MovimentoController{
 	}
 
 	@RequestMapping(value = "/homeMovimento", method = RequestMethod.GET)
-	public String Logs(HttpServletRequest request) {
+	public String Logs(HttpServletRequest request, Model model ) {
 		String scelta= request.getParameter("scelta");
 		if (scelta.equals("movimentoManagement")) {
         	request.setAttribute("visualizzaMovimenti", this.movimentoService.getAllMovimenti());
@@ -78,16 +79,17 @@ public class MovimentoController{
 	
 	
 	@RequestMapping(value = "/homeMovimento", method = RequestMethod.POST)
-	public String LogsExp(HttpServletRequest request)
+	public String LogsExp(HttpServletRequest request, Model model )
 	{
 		String scelta= request.getParameter("richiesta");
 		if (scelta.equals("exportdue")) {
 			if (writeOnExcel(request)) 
         	{
-        		this.message = "Export avvenuto correttamente";
+				model.addAttribute("feedback", "success");
+
         	}
         	else {
-        		this.message = "Errore durante la procedura di export";
+        		model.addAttribute("feedback", "wrong");
         	}
 		}
 		else if(scelta.equals("export"))
@@ -268,8 +270,8 @@ public class MovimentoController{
     					
     					String dataOraF=String.valueOf(list.get(f1+8));
     					
-    					System.out.println("dataF:"+Date.formatDateHour(dataOraF).get(0));
-    					System.out.println("OraF:"+Date.formatDateHour(dataOraF).get(1));
+//    					System.out.println("dataF:"+Date.formatDateHour(dataOraF).get(0));
+//    					System.out.println("OraF:"+Date.formatDateHour(dataOraF).get(1));
     					
     					l13=new Label(12,i,Date.formatDateHour(dataOraF).get(0),wC);
     					l14=new Label(13,i,Date.formatDateHour(dataOraF).get(1),wC);
@@ -330,7 +332,6 @@ public class MovimentoController{
     					mysheetP.addCell(l11);
     					mysheetP.addCell(l12);
     					f2+=8;
-    				//}
     			}
 			
 			}else if (! iduser.equalsIgnoreCase("")) {
@@ -418,8 +419,8 @@ public class MovimentoController{
     					
     					String dataOraF=String.valueOf(listU.get(f1+8));
     					
-    					System.out.println("dataF:"+Date.formatDateHour(dataOraF).get(0));
-    					System.out.println("OraF:"+Date.formatDateHour(dataOraF).get(1));
+//    					System.out.println("dataF:"+Date.formatDateHour(dataOraF).get(0));
+//    					System.out.println("OraF:"+Date.formatDateHour(dataOraF).get(1));
     					
     					l13=new Label(12,i,Date.formatDateHour(dataOraF).get(0),wC);
     					l14=new Label(13,i,Date.formatDateHour(dataOraF).get(1),wC);

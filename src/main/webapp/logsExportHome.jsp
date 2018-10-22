@@ -2,8 +2,10 @@
 <%@ page import="com.pCarpet.dto.UserDTO" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 
+
     pageEncoding="ISO-8859-1"%>
     <%@ page import="java.util.*" %>
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -89,5 +91,20 @@
 </tr>
 </table>
 </form>
+<c:choose>
+     
+			<c:when test="${feedback == 'success'}">
+				<div class="alert alert-success">
+    				<strong>Success!</strong> Export effettuato con successo nella directory selezionata.
+  				</div>
+			</c:when>
+			
+			<c:when test="${feedback == 'wrong'}">
+				<div class="alert alert-danger">
+    				<strong>Error!</strong> Export non riuscito, controlla i dati inseriti e riprova.
+  				</div>
+			</c:when>
+			
+     </c:choose>
 </body>
 </html>

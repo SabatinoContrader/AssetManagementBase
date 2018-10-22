@@ -18,37 +18,53 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.pCarpet.dto.MovimentoDTO;
 import com.pCarpet.dto.PrenotazioneDTO;
+import com.pCarpet.dto.UserDTO;
+import com.pCarpet.dto.AssetDTO;
+import com.pCarpet.services.AssetService;
 import com.pCarpet.services.PrenotazioneService;
+import com.pCarpet.services.UserService;
 
 @Controller
 @RequestMapping("/HomePrenotazione")
 public class PrenotazioneController {
 	
 	private PrenotazioneService prenotazioneService;
+	private AssetService assetService;
+	private UserService userService;
+	
 	
 	private boolean isLogged = false;
 	
 	private PrenotazioneDTO p=null;
+	private UserDTO u=null;
+	private AssetDTO a=null;
 
 	@Autowired
-	public PrenotazioneController(PrenotazioneService prenotazioneService) {
+	public PrenotazioneController(PrenotazioneService prenotazioneService, UserService userService, AssetService assetService) {
 		this.prenotazioneService = prenotazioneService;
+		this.assetService=assetService;
+		this.userService= userService;
 	}
 
 	@RequestMapping(value = "/showPrenotazione", method = RequestMethod.GET)
 	public String loginControl(HttpServletRequest request, Model model ) {
 		
 		List<PrenotazioneDTO> listPrenotazione;
-				
+		List<UserDTO> listUser;
+		List<AssetDTO> listAssets;		
 		String choice=request.getParameter("choice");
 		
 		if(choice != null) {
 			switch(choice) {
 		
 				case "managementPrenotazioni":
+					listUser = userService.getAllUsers();
+					listAssets = assetService.getAllAssets();
 					listPrenotazione = prenotazioneService.getAllPrenotazioni();
 					listPrenotazione = aggiornaPrenotazioni(listPrenotazione);
 					model.addAttribute("listPrenotazione", listPrenotazione);
+					model.addAttribute("listAssets", listAssets);
+					model.addAttribute("listUsers", listUser);
 					return "insertBookings";
 				
 				case "insert":
@@ -117,20 +133,17 @@ public class PrenotazioneController {
 					
 					
 					if(orafine.compareTo(orainizio)<=0) {
-						System.out.println("if1");
 						corretto=false;
 					}
 					
 					
 					if( orainizio.compareTo(formatDataNow(LocalDateTime.now().toString()))<0) {
-						System.out.println("if2");
 						corretto=false;
 					}
 					
 					
 					for(MovimentoDTO u: prenotazioneService.getAllUtilizzo()){
 						if ( u.getIdbadgereader()==idasset && u.getOrafine().equals("0000-00-00 00:00:00") ) {
-							System.out.println("if3");
 							corretto=false;
 						}
 					}
@@ -147,16 +160,10 @@ public class PrenotazioneController {
 							String prenotazioneOrafine = formatDataPoint(p.getOrafine());
 							if( (orainizio.compareTo(prenotazioneOrainizio)>=0 && orainizio.compareTo(prenotazioneOrafine)<0) ||
 							    (orafine.compareTo(prenotazioneOrainizio)>0 && orafine.compareTo(prenotazioneOrafine)<=0) ) {
-								System.out.println("orainizio:"+orainizio);
-								System.out.println("orafine:"+orafine);
-								System.out.println("prenotazioneOrainizio:"+prenotazioneOrainizio);
-								System.out.println("prenotazioneOrafine:"+prenotazioneOrafine);
-								System.out.println("if4");
 								corretto=false;
 							}
 							
 							if( orainizio.compareTo(prenotazioneOrainizio)<=0 && orafine.compareTo(prenotazioneOrafine)>=0 ) {
-								System.out.println("if5");
 								corretto=false;
 								
 							}
@@ -217,20 +224,17 @@ public class PrenotazioneController {
 					
 					
 					if(orafine.compareTo(orainizio)<=0) {
-						System.out.println("orafine minore di orainizio");
 						corretto=false;
 					}
 					
 					
 					if( orainizio.compareTo(formatDataNow(LocalDateTime.now().toString()))<0) {
-						System.out.println("ora inizio minore di now");
 						corretto=false;
 					}
 					
 					
 					for(MovimentoDTO u: prenotazioneService.getAllUtilizzo()){
 						if ( u.getIdbadgereader()==idasset && u.getOrafine().equals("0000-00-00 00:00:00") ) {
-							System.out.println("ENTRATO IN 0000-00-00");
 							corretto=false;
 						}
 					}
@@ -251,13 +255,13 @@ public class PrenotazioneController {
 							
 							if( (orainizio.compareTo(prenotazioneOrainizio)>=0 && orainizio.compareTo(prenotazioneOrafine)<0) ||
 							    (orafine.compareTo(prenotazioneOrainizio)>0 && orafine.compareTo(prenotazioneOrafine)<=0) ) {
-								System.out.println("prenotazione già presente 1");
+//								System.out.println("prenotazione già presente 1");
 								cont1++;
 								
 							}
 							
 							if( orainizio.compareTo(prenotazioneOrainizio)<=0 && orafine.compareTo(prenotazioneOrafine)>=0 ) {
-								System.out.println("prenotazione già presente 2");
+//								System.out.println("prenotazione già presente 2");
 								cont2++;
 								
 								
@@ -273,7 +277,7 @@ public class PrenotazioneController {
 						corretto=false;
 					
 					if(corretto) {
-						System.out.println("corretto");
+//						System.out.println("corretto");
 						prenotazioneService.updatePrenotazione(request);
 						
 //						orainizio=request.getParameter("id3");

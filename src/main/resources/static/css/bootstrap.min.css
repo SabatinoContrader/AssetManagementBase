@@ -41,7 +41,10 @@
 *, ::after, ::before {
 	box-sizing: border-box
 }
-
+.top{
+	top:10px;
+	
+}
 html {
 	font-family: sans-serif;
 	line-height: 1.15;

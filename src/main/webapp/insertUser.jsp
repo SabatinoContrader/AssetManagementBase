@@ -4,6 +4,16 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>   
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.1/jquery-ui.min.js"></script>   
+    <!-- jquery validazioni //-->   
+<script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery.validate/1.7/jquery.validate.js"></script>   
+<script type="text/javascript" src="/css/validation_reg.js">
+
+
+
+
+</script>  
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 <!-- Bootstrap core CSS -->
@@ -15,26 +25,26 @@
  
  </br>
  
-     <form action="/HomeUser/showUsers" method="post">
+     <form action="/HomeUser/showUsers" method="post" id="form_register">
      
      	
      
         <table class="border rcorners">
         <tr><th><h4>Inserimento User</h4></th><td class="userimg"></td><td></td><td></td></tr>
         <tr>
-     	<th>Username:</th> <td><input type = "text" id = "user" name ="username" placeholder = "inserisci username" required autofocus></td></tr>
+     	<th>Username:</th> <td><input type = "text" id = "username" name ="username" placeholder = "inserisci username"></td></tr>
      	
-     	<tr><th>Password:</th> <td> <input type = "password" id = "user" name ="password" placeholder = "inserisci la password" required autofocus></td></tr>
+     	<tr><th>Password:</th> <td> <input type = "password" id = "password" name ="password" placeholder = "inserisci la password"></td></tr>
      	
-     	<tr><th>Ragione Sociale:</th> <td> <input type = "text" id = "user" name ="ragioneSociale" placeholder = "inserisci ragione sociale" required autofocus></td></tr>
+     	<tr><th>Ragione Sociale:</th> <td> <input type = "text" id = "user" name ="ragioneSociale" placeholder = "inserisci ragione sociale"></td></tr>
      	
-     	<tr><th>Telefono:</th> <td> <input type = "text" id = "user" name ="telefono" placeholder = "inserisci telefono" required autofocus></td></tr>
+     	<tr><th>Telefono:</th> <td> <input type = "text" id = "telefono" name ="telefono" placeholder = "inserisci telefono"></td></tr>
      	
-     	<tr><th>Mail:</th> <td> <input type = "text" id = "user" name ="mail" placeholder = "inserisci mail" required autofocus></td></tr>
+     	<tr><th>Mail:</th> <td> <input type = "text" id = "mail" name ="mail" placeholder = "inserisci mail"></td></tr>
      	
-     	<tr><th>Partita iva:</th> <td> <input type = "text" id = "user" name ="partitaiva" placeholder = "inserisci partita iva" required autofocus></td></tr>
+     	<tr><th>Partita iva:</th> <td> <input type = "text" id = "user" name ="partitaiva" placeholder = "inserisci partita iva"></td></tr>
      	
-     	<tr><th>Ruolo:</th> <td> <input type = "text" id = "user" name ="ruolo" placeholder = "inserisci ruolo" required autofocus></td></tr>
+     	<tr><th>Ruolo:</th> <td> <input type = "text" id = "user" name ="ruolo" placeholder = "inserisci ruolo"></td></tr>
 
 		<tr><th>Nome Abbonamento:</th> <td>
 		<select id="user" name = "nomeAbb">
@@ -56,5 +66,6 @@
 		href="/HomeUser/showUsers?choice=indietroManagementUser">Indietro</a></br>
      </table>
      </form>
+     
 </body>
 </html>

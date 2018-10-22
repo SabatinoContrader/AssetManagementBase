@@ -43,10 +43,8 @@ public class LoginController {
 		this.session = request.getSession();
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-		System.out.println(username);
-		System.out.println(password);
 		if (this.userService.login(username, password)) {
-			System.out.println("Loggato");
+			//System.out.println("Loggato");
 			this.user = this.userService.getLoggedUser(username, password);
 			session.setAttribute("user", this.user);
 			if (this.user.getRuolo().equals("segretaria")) {
