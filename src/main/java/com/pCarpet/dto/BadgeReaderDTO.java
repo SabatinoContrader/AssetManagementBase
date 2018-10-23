@@ -2,12 +2,12 @@ package com.pCarpet.dto;
 
 public class BadgeReaderDTO {
 
-	private int idBadgeReader;
-	private int idAsset;
+	private long idBadgeReader;
+	private long idAsset;
 	private String descrizione;
 	private String tipologia;
 	
-	private int idAsset2;
+	private long idAsset2;
 	private String descrizione2;
 	private String tipo2;
 	private double prezzo2;
@@ -16,7 +16,7 @@ public class BadgeReaderDTO {
 		
 	}
 	
-	public BadgeReaderDTO(int idBadgeReader, int idAsset, String descrizione, String tipologia) {
+	public BadgeReaderDTO(long idBadgeReader, long idAsset, String descrizione, String tipologia) {
 		this();
 		this.idBadgeReader = idBadgeReader;
 		this.idAsset = idAsset;
@@ -25,8 +25,8 @@ public class BadgeReaderDTO {
 	}
 	
 	
-	public BadgeReaderDTO(int idBadgeReader, int idAsset, String descrizione, String tipologia, 
-			int idAsset2, String descrizione2, String tipo2, double prezzo2) {
+	public BadgeReaderDTO(long idBadgeReader, long idAsset, String descrizione, String tipologia, 
+			long idAsset2, String descrizione2, String tipo2, double prezzo2) {
 		
 		this();
 		this.idBadgeReader = idBadgeReader;
@@ -41,19 +41,19 @@ public class BadgeReaderDTO {
 		
 	}
 
-	public int getIdBadgeReader() {
+	public long getIdBadgeReader() {
 		return idBadgeReader;
 	}
 
-	public void setIdBadgeReader(int idBadgeReader) {
+	public void setIdBadgeReader(long idBadgeReader) {
 		this.idBadgeReader = idBadgeReader;
 	}
 
-	public int getIdAsset() {
+	public long getIdAsset() {
 		return idAsset;
 	}
 
-	public void setIdAsset(int idAsset) {
+	public void setIdAsset(long idAsset) {
 		this.idAsset = idAsset;
 	}
 
@@ -73,11 +73,11 @@ public class BadgeReaderDTO {
 		this.tipologia = tipologia;
 	}
 
-	public int getIdAsset2() {
+	public long getIdAsset2() {
 		return idAsset2;
 	}
 
-	public void setIdAsset2(int idAsset2) {
+	public void setIdAsset2(long idAsset2) {
 		this.idAsset2 = idAsset2;
 	}
 

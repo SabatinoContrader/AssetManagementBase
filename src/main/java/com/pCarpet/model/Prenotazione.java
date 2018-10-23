@@ -2,15 +2,15 @@ package com.pCarpet.model;
 
 public class Prenotazione {
 
-	private int iduser;
-	private int idasset;
+	private long iduser;
+	private long idasset;
 	private String orainizio;
 	private String orafine;
 	
 	public Prenotazione() {
 	}
 	
-	public Prenotazione(int iduser, int idasset, String orainizio, String orafine) {
+	public Prenotazione(long iduser, long idasset, String orainizio, String orafine) {
 		this();
 		this.iduser=iduser;
 		this.idasset=idasset;
@@ -18,19 +18,19 @@ public class Prenotazione {
 		this.orafine=orafine;
 	}
 
-	public int getIduser() {
+	public long getIduser() {
 		return iduser;
 	}
 
-	public void setIduser(int iduser) {
+	public void setIduser(long iduser) {
 		this.iduser = iduser;
 	}
 
-	public int getIdasset() {
+	public long getIdasset() {
 		return idasset;
 	}
 
-	public void setIdasset(int idasset) {
+	public void setIdasset(long idasset) {
 		this.idasset = idasset;
 	}
 

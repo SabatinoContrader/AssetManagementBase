@@ -1,11 +1,63 @@
 package com.pCarpet.model;
 
-public class Assegnazione {
+import java.io.Serializable;
+import java.util.List;
 
-	private int iduser;
-	private int idbadge;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
+
+//@Data
+
+@Getter
+@Setter
+
+@Entity
+public class Assegnazione{
+	
+	private long iduser;
+	
+//	@ManyToOne
+//	private User user;
+	
+	
+	@OneToMany(mappedBy="assegnazione")
+	private List<User> user;
+	
+	@Id
+	private long idbadge;
+	
+	@JoinColumn(name="idbadge", unique=true)
+	@OneToOne(cascade=CascadeType.ALL)
+	private Badge badge;
+	
+//	@OneToMany(mappedBy="assegnazione")
+//	private List<Badge> listBadge;
+	
+	
+
+	@Column
+	@NotNull
 	private String nome;
+	
+	@Column
+	@NotNull
 	private String cognome;
+	
+	@Column
+	@NotNull
 	private String dataassegnazione;
 	
 	public Assegnazione() {
@@ -13,59 +65,28 @@ public class Assegnazione {
 	}
 	
 	
-	public Assegnazione(int iduser,int idbadge, String dataassegnazione) {
+	public Assegnazione(long iduser,long idbadge, String dataassegnazione) {
 		this();
-    	this.iduser = iduser;
-    	this.idbadge = idbadge;
+		
+    	//badge.setIdBadge(idbadge);
         this.dataassegnazione = dataassegnazione;
+        this.iduser=iduser;
+        //user.setIduser(iduser);
+        this.idbadge=idbadge;
 	}
 	
-    public Assegnazione(int iduser,int idbadge,String nome, String cognome,String dataassegnazione) {
+    public Assegnazione(long iduser,long idbadge,String nome, String cognome,String dataassegnazione) {
     	this();
-    	this.iduser = iduser;
-    	this.idbadge = idbadge;
+        this.iduser=iduser;
+        this.idbadge=idbadge;
+    	//user.setIduser(iduser);
     	this.nome=nome;
     	this.cognome=cognome;
         this.dataassegnazione = dataassegnazione;
     }
-    public int getIdUtente() {
-    	return iduser;
-    }
-    public int getIdBadge() {
-    	return idbadge;
-    }
-   
-    public void setIdUtente(int idUtente) {
-    	this.iduser=idUtente;
-    }
-    public void setIdBadge(int idBadge) {
-    	this.idbadge=idBadge;
-    }
     
-    
-    public String getNome() {
-		return nome;
-	}
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-	public String getCognome() {
-		return cognome;
-	}
-	public void setCognome(String cognome) {
-		this.cognome = cognome;
-	}
-	
-	
-	
-	public String getDataassegnazione() {
-		return dataassegnazione;
-	}
-	public void setDataassegnazione(String dataassegnazione) {
-		this.dataassegnazione = dataassegnazione;
-	}
 	@Override
     public String toString() {
-        return "\nIdUser:" + iduser + "\n1)IdBadge: " + idbadge + "\n2)Nome: "+nome+"\n3)Cognome: "+cognome+"\n4)Data assegnazione: " + dataassegnazione +"\n";
+        return "\nIdUser:" + /*user.getIduser()*/"" + "\n1)IdBadge: " + ""/*badge.getIdBadge()*/ + "\n2)Nome: "+nome+"\n3)Cognome: "+cognome+"\n4)Data assegnazione: " + dataassegnazione +"\n";
     }
 }

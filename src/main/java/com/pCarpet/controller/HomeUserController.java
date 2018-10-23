@@ -91,7 +91,7 @@ public class HomeUserController {
 					return "managementUser";
 				case "update":
 					
-					userService.updateUser(request);
+					userService.updateUser(new UserDTO(35l,"ciao","ciao","ciao","123456","ciao","ciao","cliente","silver"));
 					users = userService.getAllUsers();
 					model.addAttribute("users", users);
 					return "managementUser";

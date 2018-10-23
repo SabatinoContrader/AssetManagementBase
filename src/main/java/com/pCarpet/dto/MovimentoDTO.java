@@ -2,8 +2,8 @@ package com.pCarpet.dto;
 
 public class MovimentoDTO {
 
-	private int idbadgereader;
-	private int idbadge;
+	private long idbadgereader;
+	private long idbadge;
 	private String orainizio;
 	private String orafine;
 	
@@ -12,7 +12,7 @@ public class MovimentoDTO {
 	}
 	
 	
-	public MovimentoDTO(int idbadgereader, int idbadge, String orainizio, String orafine) {
+	public MovimentoDTO(long idbadgereader, long idbadge, String orainizio, String orafine) {
 		this();
 		this.idbadgereader = idbadgereader;
 		this.idbadge = idbadge;
@@ -21,22 +21,22 @@ public class MovimentoDTO {
 	}
 
 
-	public int getIdbadgereader() {
+	public long getIdbadgereader() {
 		return idbadgereader;
 	}
 
 
-	public void setIdbadgereader(int idbadgereader) {
+	public void setIdbadgereader(long idbadgereader) {
 		this.idbadgereader = idbadgereader;
 	}
 
 
-	public int getIdbadge() {
+	public long getIdbadge() {
 		return idbadge;
 	}
 
 
-	public void setIdbadge(int idbadge) {
+	public void setIdbadge(long idbadge) {
 		this.idbadge = idbadge;
 	}
 

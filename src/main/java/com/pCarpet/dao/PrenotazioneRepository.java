@@ -131,8 +131,8 @@ public class PrenotazioneRepository{
 		Connection connection = ConnectionSingleton.getInstance();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(QUERY_INSERT);
-            preparedStatement.setInt(1, p.getIduser());
-            preparedStatement.setInt(2, p.getIdasset());
+            preparedStatement.setLong(1, p.getIduser());
+            preparedStatement.setLong(2, p.getIdasset());
             preparedStatement.setString(3, p.getOrainizio());
             preparedStatement.setString(4, p.getOrafine());
             return preparedStatement.execute();

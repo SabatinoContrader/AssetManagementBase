@@ -2,7 +2,7 @@ package com.pCarpet.dto;
 
 public class UserDTO {
 
-	private int iduser;
+	private long iduser;
     private String username;
     private String password;
     private String ragioneSociale;
@@ -11,14 +11,14 @@ public class UserDTO {
     private String partitaiva;
     private String ruolo;
     private String nomeAbb;
-    private int flag;
+    private long flag;
     
     public UserDTO() {
     	
     }
     
-	public UserDTO(int iduser, String username, String password, String ragioneSociale, String telefono,
-			String mail, String partitaiva, String ruolo, String nomeAbb, int flag) {
+	public UserDTO(long iduser, String username, String password, String ragioneSociale, String telefono,
+			String mail, String partitaiva, String ruolo, String nomeAbb, long flag) {
 		this();
 		this.iduser = iduser;
 		this.username = username;
@@ -32,7 +32,7 @@ public class UserDTO {
 		this.flag=flag;
 	}
 	
-	public UserDTO(int iduser, String username, String password, String ragioneSociale, String telefono,
+	public UserDTO(long iduser, String username, String password, String ragioneSociale, String telefono,
 			String mail, String partitaiva, String ruolo, String nomeAbb) {
 		this();
 		this.iduser = iduser;
@@ -52,7 +52,7 @@ public class UserDTO {
 		this.ruolo=ruolo;
 	}
 	
-	public UserDTO(int idutente, String username,String ragioneSociale,String partitaiva,int flag) {
+	public UserDTO(int idutente, String username,String ragioneSociale,String partitaiva,long flag) {
     	this.iduser=idutente;
     	this.username=username;
     	this.ragioneSociale=ragioneSociale;
@@ -60,10 +60,10 @@ public class UserDTO {
     	this.flag=flag;
     }
 	
-	public int getIduser() {
+	public long getIduser() {
 		return iduser;
 	}
-	public void setIduser(int iduser) {
+	public void setIduser(long iduser) {
 		this.iduser = iduser;
 	}
 	public String getUsername() {
@@ -115,10 +115,10 @@ public class UserDTO {
 	public void setNomeAbb(String nomeAbb) {
 		this.nomeAbb = nomeAbb;
 	}
-	public int getFlag() {
+	public long getFlag() {
 		return flag;
 	}
-	public void setFlag(int flag) {
+	public void setFlag(long flag) {
 		this.flag = flag;
 	}
     

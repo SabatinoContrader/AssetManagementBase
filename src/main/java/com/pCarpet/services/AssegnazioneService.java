@@ -38,7 +38,11 @@ public class AssegnazioneService {
     
     public List<AssegnazioneDTO> getAllAssegnazioni () {
     	
-        List<Assegnazione> lAss= this.assegnaRepository.getAllAssegnazioni();
+        List<Assegnazione> lAss= (List<Assegnazione>)this.assegnaRepository.findAll();
+        
+        for(Assegnazione a: lAss) {
+        	System.out.println("ASSEGNAZIONI (ID BADGE):"+a.getIdbadge());
+        }
         
         List<AssegnazioneDTO> lDTO=new ArrayList<>();
         
@@ -74,15 +78,25 @@ public class AssegnazioneService {
     
     public boolean assegnaBadge(AssegnazioneDTO assegnazioneDTO)
     {
+//    	User utente = this.userRepository.getUser(1);
+//    	utente.getB().add(new Badge(100, "Descrizione", "Tipologia"));
+//    	this.userRepository.u
+//    	return true;
+    	
+    	/*
     	Assegnazione assegnazione=AssegnazioneConverter.converToEntity(assegnazioneDTO);
     	return this.assegnaRepository.assegnaBadge(assegnazione);
+    	*/
+    	return true;
     }
 //    public boolean insertUser (User user) {
 //        return this.userDAO.insertUser(user);
 //    }
 //    
     public boolean deleteAssegnazione(int iduser,int idbadge) {
+    	/*
     	return this.assegnaRepository.deleteAssegnazione(iduser, idbadge);
+    	*/return true;
     }
 //    
 //    public List<User> getAllUsersN(){

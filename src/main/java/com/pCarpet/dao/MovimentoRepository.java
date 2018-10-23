@@ -107,8 +107,8 @@ public boolean insertMovimento(Movimento movimento) {
     Connection connection = ConnectionSingleton.getInstance();
     try {
         PreparedStatement preparedStatement = connection.prepareStatement(QUERY_INSMOV);
-        preparedStatement.setInt(1, movimento.getIdbadgereader());
-        preparedStatement.setInt(2, movimento.getIdbadge());
+        preparedStatement.setLong(1, movimento.getIdbadgereader());
+        preparedStatement.setLong(2, movimento.getIdbadge());
         preparedStatement.setString(3, movimento.getOrainizio());
         preparedStatement.setString(4, movimento.getOrafine());
         preparedStatement.execute();

@@ -7,21 +7,21 @@ import com.pCarpet.model.User;
 public class AssegnazioneDTO {
 
 	//Assegnazione
-	private int iduser;
-	private int idbadge;
+	private long iduser;
+	private long idbadge;
 	private String nome;
 	private String cognome;
 	private String dataassegnazione;
 	
 	//User
-//	private int idUser;
+//	private long idUser;
 //	private String username;
 //	private String ragioneSociale;
 //	private String partitaiva;
-//	private int flag;
+//	private long flag;
 	
 	//Badge
-//	private int idBadge;
+//	private long idBadge;
 //	private String descrizione;
 //	private String tipologia;
 	
@@ -32,14 +32,14 @@ public class AssegnazioneDTO {
 	}
 
 	
-	public AssegnazioneDTO(int iduser, int idbadge, String dataassegnazione) {
+	public AssegnazioneDTO(long iduser, long idbadge, String dataassegnazione) {
 		this();
 		this.iduser=iduser;
 		this.idbadge=idbadge;
 		this.dataassegnazione=dataassegnazione;
 	}
 	
-	public AssegnazioneDTO(int iduser, int idbadge, String nome, String cognome,String dataassegnazione) {
+	public AssegnazioneDTO(long iduser, long idbadge, String nome, String cognome,String dataassegnazione) {
 		this();
 		this.iduser = iduser;
 		this.idbadge = idbadge;
@@ -72,35 +72,35 @@ public class AssegnazioneDTO {
 
 
 
-	public int getIduser() {
+	public long getIduser() {
 		return iduser;
 	}
 
-	public void setIduser(int iduser) {
+	public void setIduser(long iduser) {
 		this.iduser = iduser;
 	}
 	
-//	public int getIdUser() {
+//	public long getIdUser() {
 //		return idUser;
 //	}
 //
-//	public void setIdUser(int idUser) {
+//	public void setIdUser(long idUser) {
 //		this.idUser = idUser;
 //	}
 
-	public int getIdbadge() {
+	public long getIdbadge() {
 		return idbadge;
 	}
 
-	public void setIdbadge(int idbadge) {
+	public void setIdbadge(long idbadge) {
 		this.idbadge = idbadge;
 	}
 	
-//	public int getIdBadge() {
+//	public long getIdBadge() {
 //		return idBadge;
 //	}
 //
-//	public void setIdBadge(int idBadge) {
+//	public void setIdBadge(long idBadge) {
 //		this.idBadge = idBadge;
 //	}
 
@@ -163,12 +163,12 @@ public class AssegnazioneDTO {
 //	}
 //
 //
-//	public int getFlag() {
+//	public long getFlag() {
 //		return flag;
 //	}
 //
 //
-//	public void setFlag(int flag) {
+//	public void setFlag(long flag) {
 //		this.flag = flag;
 //	}
 //

@@ -1,7 +1,7 @@
 package com.pCarpet.model;
 
 public class Asset {
-	private int idAsset;
+	private long idAsset;
 	private String descrizione;
 	private String tipo;
 	private double prezzo;
@@ -10,7 +10,7 @@ public class Asset {
 		
 	}
 	
-	public Asset(int idAsset, String descrizione, String tipo, double prezzo) {
+	public Asset(long idAsset, String descrizione, String tipo, double prezzo) {
 		this();
 		this.idAsset = idAsset;
 		this.descrizione = descrizione;
@@ -18,11 +18,11 @@ public class Asset {
 		this.prezzo=prezzo;
 	}
 	
-	public int getIdAsset() {
+	public long getIdAsset() {
 		return idAsset;
 	}
 	
-	public void setIdAsset(int idAsset) {
+	public void setIdAsset(long idAsset) {
 		this.idAsset = idAsset;
 	}
 	public String getDescrizione() {

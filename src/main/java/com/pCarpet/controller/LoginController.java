@@ -43,11 +43,10 @@ public class LoginController {
 		this.session = request.getSession();
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-		if (this.userService.login(username, password)) {
-			//System.out.println("Loggato");
-			this.user = this.userService.getLoggedUser(username, password);
-			session.setAttribute("user", this.user);
-			if (this.user.getRuolo().equals("segretaria")) {
+		String ruolo = this.userService.login(username, password);
+		if (ruolo!="") {
+			//session.setAttribute("user", this.user);
+			if (ruolo.equals("segretaria")) {
 				
 				
 //				JsonObject utente=new JsonObject();

@@ -297,9 +297,7 @@ public class PrenotazioneController {
 						model.addAttribute("feedback", "success");
 						return "insertBookings";
 						
-					}else {
-						System.out.println("non corretto");
-						
+					}else {						
 						listUser = userService.getAllUsers();
 						listAssets = assetService.getAllAssets();
 						listPrenotazione = prenotazioneService.getAllPrenotazioni();

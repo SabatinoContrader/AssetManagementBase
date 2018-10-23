@@ -30,7 +30,7 @@ public class MovimentoService {
 	
     public List<BadgeDTO> getAllBadges () {
     	
-    	List<Badge> bList=this.badgeRepository.getAllBadges();
+    	List<Badge> bList=(List<Badge>)this.badgeRepository.findAll();
     	
     	List<BadgeDTO> bDTO=new ArrayList<>();
 

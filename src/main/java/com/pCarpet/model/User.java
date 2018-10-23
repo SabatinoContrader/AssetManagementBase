@@ -1,44 +1,145 @@
 package com.pCarpet.model;
 
+import java.util.LinkedList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.annotations.ColumnDefault;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.Builder.Default;
+
+//@Data
+
+@Getter
+@Setter
+//@AllArgsConstructor
+//@RequiredArgsConstructor
+//@NoArgsConstructor
+
+@Entity
 public class User {
-	private int iduser;
-    private String username;
-    private String password;
-    private String ragioneSociale;
-    private String telefono;
-    private String mail;
-    private String partitaiva;
-    private String ruolo;
-    private String nomeAbb;
-    private int flag;
+	
+	public User() {
+		
+	}
+	
+//	@Autowired
+//    public User(int idutente, String username,String ragioneSociale,String partitaiva,int flag) {
+//        this();
+//		this.iduser=idutente;
+//        this.username=username;
+//        this.ragioneSociale=ragioneSociale;
+//        this.partitaiva=partitaiva;
+//        this.flag=flag;
+//    }
+	
 
-    public User() {
-    	
-    }
-    
-    public User(int idutente, String username,String ragioneSociale,String partitaiva,int flag) {
-    	this.iduser=idutente;
-    	this.username=username;
-    	this.ragioneSociale=ragioneSociale;
-    	this.partitaiva=partitaiva;
-    	this.flag=flag;
-    }
-    
-    public User(int idutente, String username, String password, String ragioneSociale, String telefono, 
-    		String mail, String partitaiva, String ruolo, String nomeAbb, int flag) {
-    	this();
-        this.iduser = idutente;
-        this.username = username;
-        this.password = password;
-        this.ragioneSociale = ragioneSociale;
-        this.telefono = telefono;
-        this.mail = mail;
-        this.partitaiva = partitaiva;
-        this.ruolo = ruolo;
-        this.nomeAbb = nomeAbb;
+    public User(long idutente, String username,String ragioneSociale,String partitaiva,int flag) {
+        this();
+		this.iduser=idutente;
+        this.username=username;
+        this.ragioneSociale=ragioneSociale;
+        this.partitaiva=partitaiva;
         this.flag=flag;
     }
+	
+	public User(long idutente, String username, String password,String ragioneSociale,String telefono,String mail,String partitaiva,String ruolo,String nomeAbb,int flag) {
+		this();
+		this.iduser=idutente;
+		this.username=username;
+		this.password=password;
+		this.ragioneSociale=ragioneSociale;
+		this.telefono=telefono;
+		this.mail=mail;
+		this.partitaiva=partitaiva;
+		this.ruolo=ruolo;
+		this.nomeAbb=nomeAbb;
+		this.flag=flag;
+	}
+	
+	@Id
+	@Column
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long iduser;
+	
+	@Column
+	@NotNull
+    private String username;
+	
+	@Column
+	@NotNull
+    private String password;
+	
+	@Column(name="ragionesociale")
+	@NotNull
+    private String ragioneSociale;
+	
+	@Column
+	@NotNull
+    private String telefono;
+	
+	@Column
+	@NotNull
+    private String mail;
+	
+	@Column
+	@NotNull
+    private String partitaiva;
+	
+	@Column
+	@NotNull
+    private String ruolo;
+	
+	@Column(name="nomeabb")
+	@NotNull
+    private String nomeAbb;
+	
+	@Column
+	@NotNull
+    private long flag=1l;
+
+	
+	@ManyToOne
+	private Assegnazione assegnazione;
+	
+//	@OneToMany(mappedBy = "user")
+//	private List<Assegnazione> assegnazione;
+	
+//	@ManyToMany(cascade= {CascadeType.PERSIST,CascadeType.MERGE})
+//	@JoinTable(name="badge_aziendali",joinColumns=@JoinColumn(name="User_iduser"),
+//	inverseJoinColumns=@JoinColumn(name="Badge_idbadge"))
+//	private final List<Badge> b=new LinkedList<>();
+
+
+    
+//    public User(int idutente, String username,String ragioneSociale,String partitaiva,int flag) {
+//    	this.iduser=idutente;
+//    	this.username=username;
+//    	this.ragioneSociale=ragioneSociale;
+//    	this.partitaiva=partitaiva;
+//    	this.flag=flag;
+//    }
+    
+
 
 //    public User(int idutente, String username, String nome, String cognome, String partitaiva) {
 //    	this.iduser=idutente;
@@ -51,157 +152,157 @@ public class User {
     
     
 
-    public int getIduser() {
-		return iduser;
-	}
-
-    
-    
-	public void setIduser(int idutente) {
-		this.iduser = idutente;
-	}
-
-
-
-
-
-	public String getUsername() {
-		return username;
-	}
-
-
-
-
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-
-
-
-
-	public String getPassword() {
-		return password;
-	}
-
-
-
-
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-
-
-
-
-	public String getRagioneSociale() {
-		return ragioneSociale;
-	}
-
-
-
-
-
-	public void setRagioneSociale(String ragioneSociale) {
-		this.ragioneSociale = ragioneSociale;
-	}
-
-
-
-	public String getTelefono() {
-		return telefono;
-	}
-
-
-
-
-
-	public void setTelefono(String telefono) {
-		this.telefono = telefono;
-	}
-
-
-
-
-
-	public String getMail() {
-		return mail;
-	}
-
-
-
-
-
-	public void setMail(String mail) {
-		this.mail = mail;
-	}
-
-
-
-
-
-	public String getPartitaiva() {
-		return partitaiva;
-	}
-
-
-
-
-
-	public void setPartitaiva(String partitaiva) {
-		this.partitaiva = partitaiva;
-	}
-
-
-
-
-
-	public String getRuolo() {
-		return ruolo;
-	}
-
-
-
-
-
-	public void setRuolo(String ruolo) {
-		this.ruolo = ruolo;
-	}
-	public String getNomeAbb() {
-		return nomeAbb;
-	}
-	public void setNomeAbb(String nomeAbb) {
-		this.nomeAbb = nomeAbb;
-	}
-	
-	public int getFlag() {
-		return flag;
-	}
-	
-	public void setFlag(int flag) {
-		this.flag = flag;
-	}
-    	
-    
-
-
-
-
-	@Override
-    public boolean equals(Object o) {
-		
-		if(this==o)return true;
-		if(!(this instanceof User)) return false;
-		
-		User u=(User)o;
-		
-		if(iduser==u.iduser) return true;
-		
-		return false;
-    }
+//    public long getIduser() {
+//		return iduser;
+//	}
+//
+//    
+//    
+//	public void setIduser(long idutente) {
+//		this.iduser = idutente;
+//	}
+//
+//
+//
+//
+//
+//	public String getUsername() {
+//		return username;
+//	}
+//
+//
+//
+//
+//
+//	public void setUsername(String username) {
+//		this.username = username;
+//	}
+//
+//
+//
+//
+//
+//	public String getPassword() {
+//		return password;
+//	}
+//
+//
+//
+//
+//
+//	public void setPassword(String password) {
+//		this.password = password;
+//	}
+//
+//
+//
+//
+//
+//	public String getRagioneSociale() {
+//		return ragioneSociale;
+//	}
+//
+//
+//
+//
+//
+//	public void setRagioneSociale(String ragioneSociale) {
+//		this.ragioneSociale = ragioneSociale;
+//	}
+//
+//
+//
+//	public String getTelefono() {
+//		return telefono;
+//	}
+//
+//
+//
+//
+//
+//	public void setTelefono(String telefono) {
+//		this.telefono = telefono;
+//	}
+//
+//
+//
+//
+//
+//	public String getMail() {
+//		return mail;
+//	}
+//
+//
+//
+//
+//
+//	public void setMail(String mail) {
+//		this.mail = mail;
+//	}
+//
+//
+//
+//
+//
+//	public String getPartitaiva() {
+//		return partitaiva;
+//	}
+//
+//
+//
+//
+//
+//	public void setPartitaiva(String partitaiva) {
+//		this.partitaiva = partitaiva;
+//	}
+//
+//
+//
+//
+//
+//	public String getRuolo() {
+//		return ruolo;
+//	}
+//
+//
+//
+//
+//
+//	public void setRuolo(String ruolo) {
+//		this.ruolo = ruolo;
+//	}
+//	public String getNomeAbb() {
+//		return nomeAbb;
+//	}
+//	public void setNomeAbb(String nomeAbb) {
+//		this.nomeAbb = nomeAbb;
+//	}
+//	
+//	public long getFlag() {
+//		return flag;
+//	}
+//	
+//	public void setFlag(int flag) {
+//		this.flag = flag;
+//	}
+//    	
+//    
+//
+//
+//
+//
+//	@Override
+//    public boolean equals(Object o) {
+//		
+//		if(this==o)return true;
+//		if(!(this instanceof User)) return false;
+//		
+//		User u=(User)o;
+//		
+//		if(iduser==u.iduser) return true;
+//		
+//		return false;
+//    }
 
     @Override
     public int hashCode() {

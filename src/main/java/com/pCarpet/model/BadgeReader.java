@@ -2,8 +2,8 @@ package com.pCarpet.model;
 
 public class BadgeReader {
 	
-	private int idBadgeReader;
-	private int idAsset;
+	private long idBadgeReader;
+	private long idAsset;
 	private String descrizione;
 	private String tipologia;
 	
@@ -11,7 +11,7 @@ public class BadgeReader {
 		
 	}
 	
-	public BadgeReader(int idBadgeReader, int idAsset, String descrizione, String tipologia) {
+	public BadgeReader(long idBadgeReader, long idAsset, String descrizione, String tipologia) {
 		this();
 		this.idBadgeReader = idBadgeReader;
 		this.idAsset=idAsset;
@@ -21,25 +21,25 @@ public class BadgeReader {
 
 	
 
-	public int getIdBadgeReader() {
+	public long getIdBadgeReader() {
 		return idBadgeReader;
 	}
 
 
 
-	public void setIdBadgeReader(int idBadgeReader) {
+	public void setIdBadgeReader(long idBadgeReader) {
 		this.idBadgeReader = idBadgeReader;
 	}
 
 
 
-	public int getIdAsset() {
+	public long getIdAsset() {
 		return idAsset;
 	}
 
 
 
-	public void setIdAsset(int idAsset) {
+	public void setIdAsset(long idAsset) {
 		this.idAsset = idAsset;
 	}
 
@@ -74,8 +74,8 @@ public class BadgeReader {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((descrizione == null) ? 0 : descrizione.hashCode());
-		result = prime * result + idAsset;
-		result = prime * result + idBadgeReader;
+		result = prime * result + Integer.parseInt(idAsset+"");
+		result = prime * result + Integer.parseInt(idBadgeReader+"");
 		result = prime * result + ((tipologia == null) ? 0 : tipologia.hashCode());
 		return result;
 	}

@@ -2,31 +2,31 @@ package com.pCarpet.model;
 
 public class Movimento {
 
-	private int idbadgereader;
-	private int idbadge;
+	private long idbadgereader;
+	private long idbadge;
 	private String orainizio;
 	private String orafine;
 	
-	public Movimento(int idbadgereader, int idbadge, String orainizio, String orafine) {
+	public Movimento(long idbadgereader, long idbadge, String orainizio, String orafine) {
 		this.idbadgereader = idbadgereader;
 		this.idbadge = idbadge;
 		this.orainizio = orainizio;
 		this.orafine = orafine;
 	}
 
-	public int getIdbadgereader() {
+	public long getIdbadgereader() {
 		return idbadgereader;
 	}
 
-	public void setIdbadgereader(int idbadgereader) {
+	public void setIdbadgereader(long idbadgereader) {
 		this.idbadgereader = idbadgereader;
 	}
 
-	public int getIdbadge() {
+	public long getIdbadge() {
 		return idbadge;
 	}
 
-	public void setIdbadge(int idbadge) {
+	public void setIdbadge(long idbadge) {
 		this.idbadge = idbadge;
 	}
 

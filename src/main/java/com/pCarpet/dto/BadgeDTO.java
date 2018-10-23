@@ -2,7 +2,7 @@ package com.pCarpet.dto;
 
 public class BadgeDTO {
 
-	private int idBadge;
+	private long idBadge;
 	private String descrizione;
 	private String tipologia;
 	
@@ -10,7 +10,7 @@ public class BadgeDTO {
 		
 	}
 	
-	public BadgeDTO(int idBadge, String descrizione, String tipologia) {
+	public BadgeDTO(long idBadge, String descrizione, String tipologia) {
 		this();
 		this.idBadge=idBadge;
 		this.descrizione=descrizione;
@@ -18,11 +18,11 @@ public class BadgeDTO {
 		
 	}
 
-	public int getIdBadge() {
+	public long getIdBadge() {
 		return idBadge;
 	}
 
-	public void setIdBadge(int idBadge) {
+	public void setIdBadge(long idBadge) {
 		this.idBadge = idBadge;
 	}
 

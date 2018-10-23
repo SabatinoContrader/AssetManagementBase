@@ -11,8 +11,8 @@ public class AssegnazioneConverter {
 	public static Assegnazione converToEntity(AssegnazioneDTO aDTO) {
 
 		Assegnazione a=new Assegnazione();
-		a.setIdUtente(aDTO.getIduser());
-		a.setIdBadge(aDTO.getIdbadge());
+		a.setIduser(aDTO.getIduser());
+		a.setIdbadge(aDTO.getIdbadge());
 		a.setNome(aDTO.getNome());
 		a.setCognome(aDTO.getCognome());
 		a.setDataassegnazione(aDTO.getDataassegnazione());
@@ -27,8 +27,8 @@ public class AssegnazioneConverter {
 		
 		AssegnazioneDTO aDTO=new AssegnazioneDTO();
 		
-		aDTO.setIduser(a.getIdUtente());
-		aDTO.setIdbadge(a.getIdBadge());
+		aDTO.setIduser(a.getIduser());
+		aDTO.setIdbadge(a.getIdbadge());
 		aDTO.setNome(a.getNome());
 		aDTO.setCognome(a.getCognome());
 		aDTO.setDataassegnazione(a.getDataassegnazione());

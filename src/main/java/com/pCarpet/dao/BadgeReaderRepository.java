@@ -78,10 +78,10 @@ public class BadgeReaderRepository {
         Connection connection = ConnectionSingleton.getInstance();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(QUERY_INSERT);
-            preparedStatement.setInt(1, badgeReader.getIdBadgeReader());
+            preparedStatement.setLong(1, badgeReader.getIdBadgeReader());
             preparedStatement.setString(2, badgeReader.getDescrizione());
             preparedStatement.setString(3, badgeReader.getTipologia());
-            preparedStatement.setInt(4, badgeReader.getIdAsset());
+            preparedStatement.setLong(4, badgeReader.getIdAsset());
             preparedStatement.execute();
             return true;
         }

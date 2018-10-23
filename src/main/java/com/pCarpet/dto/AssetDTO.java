@@ -2,7 +2,7 @@ package com.pCarpet.dto;
 
 public class AssetDTO {
 
-	private int idAsset;
+	private long idAsset;
 	private String descrizione;
 	private String tipo;
 	private double prezzo;
@@ -11,7 +11,7 @@ public class AssetDTO {
 		
 	}
 	
-	public AssetDTO(int idAsset, String descrizione, String tipo, double prezzo) {
+	public AssetDTO(long idAsset, String descrizione, String tipo, double prezzo) {
 		this();
 		this.idAsset = idAsset;
 		this.descrizione = descrizione;
@@ -28,11 +28,11 @@ public class AssetDTO {
 
 	
 	
-	public int getIdAsset() {
+	public long getIdAsset() {
 		return idAsset;
 	}
 
-	public void setIdAsset(int idAsset) {
+	public void setIdAsset(long idAsset) {
 		this.idAsset = idAsset;
 	}
 

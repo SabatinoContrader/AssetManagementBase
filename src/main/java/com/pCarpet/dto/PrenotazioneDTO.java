@@ -6,19 +6,19 @@ import com.pCarpet.model.User;
 
 public class PrenotazioneDTO {
 
-	private int iduser;
-	private int idasset;
+	private long iduser;
+	private long idasset;
 	private String orainizio;
 	private String orafine;
 	
-//	private int iduser2;
+//	private long iduser2;
 //	private String username;
 //	private String ragioneSociale;
 //	private String partitaiva;
-//	private int flag;
+//	private long flag;
 	
 	
-//	private int idasset2;
+//	private long idasset2;
 //	private String descrizione;
 //	private String tipo;
 //	private double prezzo;
@@ -27,7 +27,7 @@ public class PrenotazioneDTO {
 	public PrenotazioneDTO() {
 	}
 	
-	public PrenotazioneDTO(int iduser, int idasset, String orainizio, String orafine) {
+	public PrenotazioneDTO(long iduser, long idasset, String orainizio, String orafine) {
 		this.iduser=iduser;
 		this.idasset=idasset;
 		this.orainizio=orainizio;
@@ -36,7 +36,7 @@ public class PrenotazioneDTO {
 	
 
 
-//	public PrenotazioneDTO(int iduser, int idasset, String orainizio, String orafine, User u, Asset a) {
+//	public PrenotazioneDTO(long iduser, long idasset, String orainizio, String orafine, User u, Asset a) {
 //		this.iduser=iduser;
 //		this.idasset=idasset;
 //		this.orainizio=orainizio;
@@ -82,11 +82,11 @@ public class PrenotazioneDTO {
 //		this.partitaiva = partitaiva;
 //	}
 //
-//	public int getFlag() {
+//	public long getFlag() {
 //		return flag;
 //	}
 //
-//	public void setFlag(int flag) {
+//	public void setFlag(long flag) {
 //		this.flag = flag;
 //	}
 //
@@ -114,38 +114,38 @@ public class PrenotazioneDTO {
 //		this.prezzo = prezzo;
 //	}
 
-	public int getIduser() {
+	public long getIduser() {
 		return iduser;
 	}
 	
-	public void setIduser(int iduser) {
+	public void setIduser(long iduser) {
 		this.iduser=iduser;
 	}
 	
-	public int getIdasset() {
+	public long getIdasset() {
 		return idasset;
 	}
 	
-	public void setIdasset(int idasset) {
+	public void setIdasset(long idasset) {
 		this.idasset=idasset;
 	}
 	
 	
 	
 	
-//	public int getIdUser2() {
+//	public long getIdUser2() {
 //		return iduser2;
 //	}
 //	
-//	public void setIdUser2(int iduser2) {
+//	public void setIdUser2(long iduser2) {
 //		this.iduser2=iduser2;
 //	}
 //	
-//	public int getIdAsset2() {
+//	public long getIdAsset2() {
 //		return idasset2;
 //	}
 //	
-//	public void setIdAsset2(int idasset2) {
+//	public void setIdAsset2(long idasset2) {
 //		this.idasset2=idasset2;
 //	}
 	
