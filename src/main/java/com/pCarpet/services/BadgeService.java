@@ -74,12 +74,12 @@ public class BadgeService {
 	        	listADTO.add(AssegnazioneConverter.convertToDTO(a));
 	        }
 	        ll.addAll(listBDTO);
-	        System.out.println("IMPOSSIBLE:"+ll.size());
 	        
 	        for(BadgeDTO bbDTO:listBDTO) {
 	        	
 	        	for(AssegnazioneDTO aaDTO: listADTO) {
-	        		if(bbDTO.getIdBadge()==aaDTO.getIdbadge()) {
+	        		
+	        		if((bbDTO.getIdBadge()==aaDTO.getIdbadge()) && aaDTO.getFlag()==1l) {
 	        			ll.remove(bbDTO);
 	        		}
 	        	}
@@ -89,12 +89,10 @@ public class BadgeService {
 	    }
 
 	    public boolean insertBadge (BadgeDTO badgeDTO) {
-	    	/*
+	    	
 	    	Badge badge=BadgeConverter.converToEntity(badgeDTO);
 	    	
-	        return this.badgeRepository.insertBadge(badge);
-	        */
-	    	return true;
+	        return this.badgeRepository.save(badge)!=null;
 	    }
 	    public boolean deleteBadge (int idBadge) {
 	    	/*

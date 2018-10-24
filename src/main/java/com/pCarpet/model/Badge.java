@@ -44,6 +44,9 @@ public class Badge {
 	@NotNull
 	private String tipologia;
 	
+	@ManyToOne
+	private Assegnazione assegnazione;
+	
 //	@ManyToMany(mappedBy="b")
 //	List<User> userl=new LinkedList<>();
 	

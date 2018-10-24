@@ -81,11 +81,12 @@ public class AssegnazioneController {
 	public String Asse(HttpServletRequest request) {
 		String scelta= request.getParameter("scelta");
 		if (scelta.equals("insert")) {
-			int id1=Integer.parseInt(request.getParameter("user"));
-        	request.setAttribute("id1", id1);
-        	int id2=Integer.parseInt(request.getParameter("badge"));
-        	request.setAttribute("id2", id2);
-        	request.setAttribute("id", this.assegnazioneService.assegnaBadge(new AssegnazioneDTO(id1,id2,"marco","minervino",LocalDate.now().toString())));
+			long iduser=Integer.parseInt(request.getParameter("user"));
+        	long idbadge=Integer.parseInt(request.getParameter("badge"));
+        	String nome=request.getParameter("nome");
+        	String cognome=request.getParameter("cognome");
+			AssegnazioneDTO a=new AssegnazioneDTO(0l,iduser,idbadge,nome,cognome,LocalDateTime.now().toString(),1l);
+			assegnazioneService.assegnaBadge(a);
         	this.listAssegnazioni = this.assegnazioneService.getAllAssegnazioni();
         	this.listUsers = this.userService.getAllUsers();
         	this.listBadges = this.badgeService.getAllBadgesN();

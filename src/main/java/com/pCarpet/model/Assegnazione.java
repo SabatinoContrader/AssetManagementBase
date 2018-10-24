@@ -3,14 +3,19 @@ package com.pCarpet.model;
 import java.io.Serializable;
 import java.util.List;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
@@ -23,6 +28,8 @@ import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 
 @Entity
 public class Assegnazione{
@@ -32,16 +39,23 @@ public class Assegnazione{
 //	@ManyToOne
 //	private User user;
 	
+	@Id
+	@Column
+	private long idassegnazione;
+	
 	
 	@OneToMany(mappedBy="assegnazione")
 	private List<User> user;
 	
-	@Id
+
 	private long idbadge;
 	
-	@JoinColumn(name="idbadge", unique=true)
-	@OneToOne(cascade=CascadeType.ALL)
-	private Badge badge;
+	@OneToMany(mappedBy="assegnazione")
+	private List<Badge> badge;
+	
+//	@JoinColumn(name="idbadge", unique=true)
+//	@OneToOne(cascade=CascadeType.ALL)
+//	private Badge badge;
 	
 //	@OneToMany(mappedBy="assegnazione")
 //	private List<Badge> listBadge;
@@ -60,30 +74,36 @@ public class Assegnazione{
 	@NotNull
 	private String dataassegnazione;
 	
-	public Assegnazione() {
-		
-	}
+	@Column
+	@NotNull
+    private long flag=1l;
 	
-	
-	public Assegnazione(long iduser,long idbadge, String dataassegnazione) {
-		this();
-		
-    	//badge.setIdBadge(idbadge);
-        this.dataassegnazione = dataassegnazione;
-        this.iduser=iduser;
-        //user.setIduser(iduser);
-        this.idbadge=idbadge;
-	}
-	
-    public Assegnazione(long iduser,long idbadge,String nome, String cognome,String dataassegnazione) {
-    	this();
-        this.iduser=iduser;
-        this.idbadge=idbadge;
-    	//user.setIduser(iduser);
-    	this.nome=nome;
-    	this.cognome=cognome;
-        this.dataassegnazione = dataassegnazione;
-    }
+//	public Assegnazione() {
+//		
+//	}
+//	
+//	
+//	public Assegnazione(long iduser,long idbadge, String dataassegnazione) {
+//		this();
+//		
+//    	//badge.setIdBadge(idbadge);
+//        this.dataassegnazione = dataassegnazione;
+//        this.iduser=iduser;
+//        //user.setIduser(iduser);
+//        this.idbadge=idbadge;
+//	}
+//	
+//    public Assegnazione(long iduser,Badge badge,String nome, String cognome,String dataassegnazione,long flag) {
+//    	this();
+//        this.iduser=iduser;
+//        this.badge=badge;
+//        //this.idbadge=idbadge;
+//    	//user.setIduser(iduser);
+//    	this.nome=nome;
+//    	this.cognome=cognome;
+//        this.dataassegnazione = dataassegnazione;
+//        this.flag= flag;
+//    }
     
 	@Override
     public String toString() {

@@ -13,6 +13,7 @@ import com.pCarpet.model.Badge;
 import com.pCarpet.model.User;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,13 +41,16 @@ public class AssegnazioneService {
     	
         List<Assegnazione> lAss= (List<Assegnazione>)this.assegnaRepository.findAll();
         
-        for(Assegnazione a: lAss) {
-        	System.out.println("ASSEGNAZIONI (ID BADGE):"+a.getIdbadge());
+        List<Assegnazione> la=new LinkedList<Assegnazione>();
+        for(Assegnazione a:lAss) {
+        	if(a.getFlag()==1) {
+        		la.add(a);
+        	}
         }
         
         List<AssegnazioneDTO> lDTO=new ArrayList<>();
         
-        for(Assegnazione a: lAss) {
+        for(Assegnazione a: la) {
         	lDTO.add(AssegnazioneConverter.convertToDTO(a));
         	
         }
@@ -76,27 +80,35 @@ public class AssegnazioneService {
 //    	return this.userDAO.getAllClientiAss();
 //    }
     
-    public boolean assegnaBadge(AssegnazioneDTO assegnazioneDTO)
-    {
-//    	User utente = this.userRepository.getUser(1);
-//    	utente.getB().add(new Badge(100, "Descrizione", "Tipologia"));
-//    	this.userRepository.u
-//    	return true;
-    	
-    	/*
+    public void assegnaBadge(AssegnazioneDTO assegnazioneDTO)
+    {	
     	Assegnazione assegnazione=AssegnazioneConverter.converToEntity(assegnazioneDTO);
-    	return this.assegnaRepository.assegnaBadge(assegnazione);
-    	*/
-    	return true;
+    	//System.out.println("dim"+assegnazione.getBadge().size());
+    	this.assegnaRepository.save(assegnazione);
+    	
+//    	for(Badge a:assegnazione.getBadge()) {
+//    		System.out.println("aaaa"+a.getTipologia());
+//    	}
+    	
     }
 //    public boolean insertUser (User user) {
 //        return this.userDAO.insertUser(user);
 //    }
 //    
-    public boolean deleteAssegnazione(int iduser,int idbadge) {
-    	/*
-    	return this.assegnaRepository.deleteAssegnazione(iduser, idbadge);
-    	*/return true;
+    public void deleteAssegnazione(int iduser,int idbadge) {
+    	List<Assegnazione> listAss =(List<Assegnazione>) this.assegnaRepository.findAll();
+    	Assegnazione b=new Assegnazione();
+    	for(Assegnazione a:listAss) {
+    		if(a.getIdbadge()==idbadge)
+    		{
+    			
+    			b=a;
+    			b.setFlag(0l);
+    		}
+    	}
+    	
+    	this.assegnaRepository.save(b);
+    	
     }
 //    
 //    public List<User> getAllUsersN(){

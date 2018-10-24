@@ -15,17 +15,23 @@
  </head>
  <body class="text-center">
  <table class="bordo rcorners" width="500px">
- <tr><th><h4>ASSEGNAZIONI</h4></th></tr>
+ <tr><th><h4>ASSEGNAZIONI</h4></th><td></td></tr>
      <tr>
          <th>
              ID User
          </th>
 
          <th>
-             ID Badge
+            ID Badge
          </th>
          <th>
-             Data Assegnazione
+            Data Assegnazione
+         </th>
+         <th>
+         	Nome
+         </th>
+         <th>
+        	Cognome
          </th>
        
 
@@ -45,8 +51,12 @@
          <td>
              <%=  ass.getDataassegnazione()%>
          </td>
-
-    
+<td>
+<%=ass.getNome()%>
+</td>
+<td>
+<%= ass.getCognome() %>
+    </td>
           
          <td>
             <a class="btn lg btn-primary" href="/Assegnazione/homeAssegnazione?scelta=rimuovi&idUser=<%=  ass.getIduser()%>&idBadge=<%=ass.getIdbadge() %>">Rimuovi</a>
@@ -62,7 +72,7 @@
  
   <table class="bordo rcorners" width="500px">
      <tr>
-     <th><h4>USERS</h4></th><td></td><td></td><td></td><td></td><td class="userimg"></td></tr>
+     <th><h4>USERS</h4></th><td></td><td></td><td></td><td class="userimg"></td></tr>
      <tr>
      
      	<th>
@@ -75,17 +85,12 @@
              Username
          </th>
          <th>
-             Nome
-         </th>
-         <th>
-             Cognome
+             Ragione Sociale
          </th>
           <th>
              Partita Iva
          </th>
-
-
-     </tr>
+	 </tr>
         <%for (UserDTO u : allUsers) { %>
      <tr>
 	
@@ -120,7 +125,7 @@
  
   <table class="bordo rcorners" width="500" border="0">
   <tr>
-  <th><h5 align="left">BADGES LIBERI</h5></th><td></td><td></td><td class="imgB"></td>
+  <th><h5 align="left">BADGES LIBERI</h5></th><td></td><td></td><td></td><td class="imgB"></td>
   </tr>
      <tr>
      	<th>
@@ -129,9 +134,7 @@
          <th>
              ID Badge
          </th>
-
-
-         <th>
+		<th>
              Descrizione
          </th>
          <th>
@@ -165,6 +168,16 @@
 
      </tr>
      <% }%>
+ </table>
+ <table class="bordo rcorners" width="500" border="0">
+ 	<tr>
+ 	<h3>Inserire nome e cognome dell'utente a cui assegnare il badge</h3>
+ 	</tr>
+ 	<tr>
+ 	<th><h4>Nome:</h4></th><th></th><td> <input type = "text" id = "nome" name ="nome" placeholder = "inserisci nome"></td>
+ 	<th><h4>Cognome:</h4></th><th></th><td> <input type = "text" id = "cognome" name ="cognome" placeholder = "inserisci cognome"></td>
+ 	</tr>
+ 
  </table>
   </br>
 <p align="left">
