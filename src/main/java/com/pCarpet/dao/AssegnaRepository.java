@@ -21,6 +21,10 @@ import org.springframework.stereotype.Repository;
 //@Transactional
 public interface AssegnaRepository extends CrudRepository<Assegnazione, Long> {
 	
+	Assegnazione findByIdbadgeAndFlag(long idbadge,long flag);
+	
+	List<Assegnazione> findAllByIdbadge(long idbadge);
+	
 //	@Modifying
 //	@Query(value= "insert into assegnazione (iduser,idbadge,dataassegnazione,nome,cognome,flag) values (?1,?2,?3,?4,?5,?6)",nativeQuery=true)
 //	public void insert(long iduser, long idbadge,String dataassegnazione, String nome, String cognome,  long flag);

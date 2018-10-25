@@ -20,6 +20,9 @@ public interface BadgeReaderRepository extends CrudRepository<BadgeReader, Long>
 	
 	BadgeReader findByIdAsset(long idasset);
 	
+	BadgeReader findByidBadgeReader(long idBadgeReader);
+	
+	
 //	String param="";
 //	
 //    private final String QUERY_ALL = "select * from badgereader";
