@@ -26,12 +26,15 @@ public class BadgeReaderController {
 	private AssetService assetService;
 	private List<BadgeReaderDTO> allBadgeReader;
 	private List<AssetDTO> allAssets;
+	private List<AssetDTO> allAssets1;
+	
 
 	
 
 	@Autowired
-	public BadgeReaderController(UserService userService,AssetService assetService) {
-	this.assetService = assetService;
+	public BadgeReaderController(AssetService assetService,BadgeReaderService badgeReaderService) {
+		this.assetService = assetService;
+		this.badgeReaderService=badgeReaderService;
 	}
 	
 	@RequestMapping(value = "/homeBadgeReader", method = RequestMethod.POST)
@@ -39,27 +42,24 @@ public class BadgeReaderController {
 		String scelta= request.getParameter("scelta");
 		
 		if (scelta.equals("insert")) {
-			 this.allAssets = this.assetService.getAllAssetsN();
-        	 request.setAttribute("allAssets", this.allAssets);
+			 allAssets1 = this.assetService.getAllAssetsN();
+        	 request.setAttribute("allAssets", allAssets1);
 		return "insertBadgeReader";
 		
 		}
 		else if (scelta.equals("insertbadgereader")) {
 			if (request != null) 
 			{
-                int idbadgereader = 0;
-                String descrizione = request.getParameter("descrizione").toString();
-                String tipologia = request.getParameter("tipologia").toString();
-                int idasset = Integer.parseInt(request.getParameter("idasset").toString());
-                if (badgeReaderService.insertBadgeReader(new BadgeReaderDTO( idbadgereader,idasset, descrizione, tipologia ))) {
-               	 this.allBadgeReader = this.badgeReaderService.getAllBadgeReaders();
-               	 request.setAttribute("visualizzaBadgeReaders", this.allBadgeReader);
-            	return ("badgeReaderHome");
+            long idbadgereader = 0l;
+            String descrizione = request.getParameter("descrizione").toString();
+            String tipologia = request.getParameter("tipologia").toString();
+            long idasset = Integer.parseInt(request.getParameter("idasset"));
+            badgeReaderService.insertBadgeReader(new BadgeReaderDTO( idbadgereader,idasset, descrizione, tipologia )); 
+            this.allBadgeReader = this.badgeReaderService.getAllBadgeReaders();
+            request.setAttribute("visualizzaBadgeReaders", this.allBadgeReader);
+            return ("badgeReaderHome");
                	} 
-                else 
-                {
-                    return ("insertBadgeReader.jsp");
-                }	}}
+              	}
 		else if (scelta.equals("indietro")) {
 			this.allBadgeReader = this.badgeReaderService.getAllBadgeReaders();
             request.setAttribute("visualizzaBadgeReaders", allBadgeReader);
@@ -76,11 +76,11 @@ public class BadgeReaderController {
 	public String AsseBad(HttpServletRequest request) {
 		String scelta= request.getParameter("scelta");
 		//this.assetService = new AssetService();
-    	this.badgeReaderService = new BadgeReaderService();
     	this.message = "";
     	
 		if (scelta.equals("BadgeReaderManagement")) {
 			this.allBadgeReader = this.badgeReaderService.getAllBadgeReaders();
+			
             request.setAttribute("visualizzaBadgeReaders", allBadgeReader);
         	
 			return "badgeReaderHome";}
@@ -104,24 +104,24 @@ public class BadgeReaderController {
              int b=Integer.parseInt(request.getParameter("Badge"));
              request.setAttribute("asset", a);
          	 request.setAttribute("Badge", b);
-              
-         	 if (badgeReaderService.updateBadgeReader(request)) {
-          		this.message = "Aggiornamento asset avvenuto correttamente";
-          	}
-          	else {
-          		this.message = "Errore durante la procedura di aggiornamento asset";
-          	}
-          	request.setAttribute("message", this.message);
-          	request.setAttribute("visualizzaAssets", this.assetService.getAllAssets());
-          	request.setAttribute("visualizzaBadgeReaders", this.badgeReaderService.getAllBadgeReaders());
-          	return "badgeReaderHome";
 		 }
+//         	 if (badgeReaderService.updateBadgeReader(request)) {
+//          		this.message = "Aggiornamento asset avvenuto correttamente";
+//          	}
+//          	else {
+//          		this.message = "Errore durante la procedura di aggiornamento asset";
+//          	}
+//          	request.setAttribute("message", this.message);
+//          	request.setAttribute("visualizzaAssets", this.assetService.getAllAssets());
+//          	request.setAttribute("visualizzaBadgeReaders", this.badgeReaderService.getAllBadgeReaders());
+//          	return "badgeReaderHome";
+//	}
 			
 			if (scelta.equals("Delete"))
-				if(this.badgeReaderService.deleteBadgeReadear(Integer.parseInt(request.getParameter("delBadgeReader"))))
+				this.badgeReaderService.deleteBadgeReadear(Integer.parseInt(request.getParameter("delBadgeReader")));
             		
             		this.message = "Cancellazione asset avvenuto correttamente";
-            	else      	
+            	      	
             	request.setAttribute("message", this.message);
             	this.allBadgeReader = this.badgeReaderService.getAllBadgeReaders();
                 request.setAttribute("visualizzaBadgeReaders", this.allBadgeReader);

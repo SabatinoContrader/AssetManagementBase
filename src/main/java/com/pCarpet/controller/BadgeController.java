@@ -45,14 +45,9 @@ public class BadgeController {
 			case "badgemanagement":
 				return "badgeManagement";
 			case "insert":
-//				users = userService.getAllUsers();
-//				model.addAttribute("users", users);
 				return "addBadge";
 				
 			case "update":
-				//model.addAttribute("badge",badgeService.getBadge(Integer.parseInt(request.getParameter("idbadge"))));
-//				users = userService.getAllUsers();
-//				model.addAttribute("users", users);
 				return "modificaBadge";
 			case "delete":
 				
@@ -72,7 +67,8 @@ public class BadgeController {
 
 
 	@RequestMapping(value = "/removeBadge", method = RequestMethod.GET)
-	public String removeBadge(@RequestParam("id") int idbadge, Model model ) {
+	public String removeBadge(@RequestParam("id") int idbadge, Model model ) 
+	{
 		BadgeDTO badge = badgeService.getBadge(idbadge);
 		return "badgeManagement";}
 	
@@ -80,7 +76,6 @@ public class BadgeController {
 	public String modifiedredirectBadge(HttpServletRequest request, Model model )
 	{
 		int id=Integer.parseInt(request.getParameter("id"));
-		
 		l = badgeService.getBadge(id);
 		request.setAttribute("id1", id);
 		model.addAttribute("badge", l);
@@ -89,8 +84,6 @@ public class BadgeController {
 	
 	@RequestMapping(value = "/addBadge", method = RequestMethod.POST)
 	public String addedBadge(HttpServletRequest request, Model model ) {
-		
-		//int idbadge = Integer.parseInt(request.getParameter("idbadge").toString());
 		String descrizione = request.getParameter("descrizione");
 		String tipologia = request.getParameter("tipologia");
 		
@@ -101,17 +94,19 @@ public class BadgeController {
 		badgeService.insertBadge(badge);
 		List<BadgeDTO> badges = badgeService.getAllBadges();
 		model.addAttribute("badges", badges);
-		//request.setAttribute("badges", badgeService.getAllBadge(badge));
 		return "badgeManagement";
 	}
 
 @RequestMapping(value = "/modificaBadge", method = RequestMethod.POST)
-public String modifiedBadge(HttpServletRequest request, Model model ) {
-	
-    this.badgeService.updateBadge(request);
-    List<BadgeDTO> badges = badgeService.getAllBadges();
+public String modifiedBadge(HttpServletRequest request, Model model )
+{
+	long id=Integer.parseInt(request.getParameter("id"));
+	String descrizione = request.getParameter("descrizione");
+	String tipologia = request.getParameter("tipologia");
+	BadgeDTO badge = new BadgeDTO(id, descrizione, tipologia);
+	badgeService.insertBadge(badge);
+	List<BadgeDTO> badges = badgeService.getAllBadges();
 	model.addAttribute("badges", badges);
-	
 	return "badgeManagement";
  }
 }

@@ -8,7 +8,7 @@ public class AssetConverter{
 	public static Asset converToEntity(AssetDTO assetDTO) {
 
 		Asset a=new Asset();
-		a.setIdAsset(assetDTO.getIdAsset());
+		a.setIdasset(assetDTO.getIdAsset());
 		a.setDescrizione(assetDTO.getDescrizione());
 		a.setPrezzo(assetDTO.getPrezzo());
 		a.setTipo(assetDTO.getTipo());
@@ -21,7 +21,7 @@ public class AssetConverter{
 	public static AssetDTO convertToDTO(Asset a) {
 		
 		AssetDTO aDTO=new AssetDTO();
-		aDTO.setIdAsset(a.getIdAsset());
+		aDTO.setIdAsset(a.getIdasset());
 		aDTO.setDescrizione(a.getDescrizione());
 		aDTO.setTipo(a.getTipo());
 		aDTO.setPrezzo(a.getPrezzo());

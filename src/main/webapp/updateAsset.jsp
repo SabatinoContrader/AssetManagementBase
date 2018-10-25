@@ -7,7 +7,7 @@
 
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>   
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.1/jquery-ui.min.js"></script>   
-    <!-- jquery validazioni //-->   
+    jquery validazioni //   
 <script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery.validate/1.7/jquery.validate.js"></script>   
 <script type="text/javascript" src="/validate/validation_asset.js"></script>
 
@@ -35,34 +35,34 @@
          </th>
 
          <th>
-             Descrizione
-         </th>
-         
-         <th>
              Tipo
          </th>
          
          <th>
              Prezzo
          </th>
+         
+         <th>
+             Descrizione
+         </th>
 
 	</tr>
 	<tr>
 	
         <td>
-            ${asset.idAsset}
+            <input type="text" value="${asset.idAsset}" disabled style="opacity:0.8">
          </td>
 
 		<td>
-             ${asset.tipo}
+             <input type="text" value="${asset.tipo}" name="tipo" style="opacity:0.8">
          </td>
          
          <td>
-             ${asset.descrizione}
+            <input type="text" value="${asset.prezzo}" name="prezzo" style="opacity:0.8">
          </td>
 
          <td>
-             ${asset.prezzo}
+             <input type="text" value="${asset.descrizione}" name="descrizione" style="opacity:0.8">
          </td>
          
      </tr>
@@ -71,45 +71,7 @@
 </table>
 
 </br>
-
-<table>	
-
-	<tr>
 		
-		<td>
-			<input type = "radio" value="tipo" name="campo" >Tipo
-		</td>
-		
-		<td>
-			<input type = "radio" value="descrizione" name="campo">Descrizione
-		</td>
-		
-		<td>
-			<input type = "radio" value="prezzo" id="prezzo" name="campo">Prezzo
-		</td>
-		
-		
-		
-<!--  		<td>
-			<h4>Inserisci l'id dell'utente da modificare: <input type = "text" id = "user" name ="id" placeholder = "inserisci id"></h4>
-		</td>
-		-->
-		
-		
-	</tr>
-
-</table>
-
-</br>
-<table>
-<tr><th>
-<h4>Inserisci il valore del nuovo campo:</h4></th> 
-</tr><tr>
-<td>
-<input type = "text" id = "prezzo" name ="nuovoCampo" placeholder = "inserisci nuovo campo" required autofocus>
-</td>
-</tr>
-</table>		
 </br>
 
 <input type="hidden" name="id" value="${asset.idAsset}"/>

@@ -40,15 +40,15 @@
 	<tr>
 	
         <td>
-            ${badge.idBadge}
+            <input type="text" value="${badge.idBadge}" disabled>
          </td>
 
 		<td>
-             ${badge.descrizione}
+             <input type="text" value="${badge.descrizione}" name="descrizione" style="opacity:0.8">
          </td>
          
          <td>
-             ${badge.tipologia}
+            <input type="text" value="${badge.tipologia}" name="tipologia" style="opacity:0.8">
          </td>
 
          
@@ -57,50 +57,16 @@
      
 </table>
 
-</br>
+<br>
 
-<table>	
-
-	<tr>
-	
-		<td>
-			<input type = "radio" value="tipologia" name="campo">Tipologia
-			
-		</td>
-		
-		<td>
-			<input type = "radio" value="descrizione" name="campo">Descrizione
-		</td>
-		
-		
-		
-<!--  		<td>
-			<h4>Inserisci l'id dell'utente da modificare: <input type = "text" id = "user" name ="id" placeholder = "inserisci id"></h4>
-		</td>
-		-->
-		
-		
-	</tr>
-
-</table>
-
-</br>
+<br>
 <input type="hidden" name="id" value="${badge.idBadge}"/>
+
 <table>
 <tr>
-<th>
-<h4>Inserisci il valore del nuovo campo:</h4></th>
-</tr>
-<tr>
-<td> 
-<input type = "text" id = "nuovoCampo" name ="nuovoCampo" placeholder = "inserisci nuovo campo" required autofocus>
-</td></tr>	
-<tr>
-
-
 <td>
 <p align="left">
-<button class="btn lg btn-primary" type="submit" value="${badge.idBadge}" name="id1">Effettua Modifica</button>
+<button class="btn lg btn-primary" type="submit" value="update" name="choice">Effettua Modifica</button>
 </p>
 </td>
 <td>

@@ -40,14 +40,13 @@ public class AssetController {
 	
 		
 		else if(scelta.equals("update")) {
-			/*
-			System.out.println("TEST-1");
-			
-			System.out.println("RRR:"+request.getParameter("campo").toString());
-			Asset a = this.assetService.getAsset(Integer.parseInt(request.getParameter("id")));
+//			
+//			System.out.println("TEST-1");
+//			
+//			System.out.println("RRR:"+request.getParameter("campo").toString());
+			AssetDTO a = this.assetService.getAsset(Integer.parseInt(request.getParameter("id")));
+//			
 			model.addAttribute("asset", a);
-			*/
-			model.addAttribute("asset",assetService.getAsset(Integer.parseInt(request.getParameter("id"))));
 
 		    return "updateAsset";
 		    /*
@@ -77,8 +76,8 @@ public class AssetController {
 		else if (scelta.equals("insert"))
 			return "insertAsset";
 		else if(scelta.equals("delete")) {
-			
 			assetService.deleteAsset(Integer.parseInt((request.getParameter("id"))));
+			
 			allAssets = assetService.getAllAssets();
 			model.addAttribute("allAssets", allAssets);
 			return "assetHome";
@@ -106,7 +105,7 @@ public class AssetController {
 					String prezzoS=request.getParameter("prezzo");
 					prezzoS=prezzoS.replace(',', '.');
 					double prezzo=Double.parseDouble(prezzoS);
-					AssetDTO a =new AssetDTO(0,tipo,descrizione,prezzo);
+					AssetDTO a =new AssetDTO(0l,tipo,descrizione,prezzo);
 					
 					assetService.insertAsset(a);
 					assets = assetService.getAllAssets();
@@ -116,12 +115,18 @@ public class AssetController {
 			
 				
 			case "update":
-				
-				assetService.updateAsset(request);
-				assets = assetService.getAllAssets();
-				model.addAttribute("allAssets", assets);
-				return "assetHome";
-			
+				long idm = Integer.parseInt(request.getParameter("id"));
+					String tipom=request.getParameter("tipo");
+					String descrizionem=request.getParameter("descrizione");
+					String prezzoSm=request.getParameter("prezzo");
+					prezzoSm=prezzoSm.replace(',', '.');
+					double prezzom=Double.parseDouble(prezzoSm);
+					AssetDTO am =new AssetDTO(idm,tipom,descrizionem,prezzom);
+					
+					assetService.insertAsset(am);
+					List<AssetDTO> Allassets = assetService.getAllAssets();
+					model.addAttribute("allAssets", Allassets);
+					return "assetHome";
 			}
 		
 	

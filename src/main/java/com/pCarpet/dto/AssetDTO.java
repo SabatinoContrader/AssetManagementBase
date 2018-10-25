@@ -11,7 +11,7 @@ public class AssetDTO {
 		
 	}
 	
-	public AssetDTO(long idAsset, String descrizione, String tipo, double prezzo) {
+	public AssetDTO(long idAsset, String tipo, String descrizione, double prezzo) {
 		this();
 		this.idAsset = idAsset;
 		this.descrizione = descrizione;
@@ -19,7 +19,7 @@ public class AssetDTO {
 		this.prezzo=prezzo;
 	}
 	
-	public AssetDTO(String descrizione, String tipo, double prezzo) {
+	public AssetDTO(String tipo, String descrizione, double prezzo) {
 		this();
 		this.descrizione = descrizione;
 		this.tipo = tipo;

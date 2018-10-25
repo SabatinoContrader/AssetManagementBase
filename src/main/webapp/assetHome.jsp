@@ -31,15 +31,15 @@
          </th>
 
          <th>
-             Descrizione
-         </th>
-         
-         <th>
              Tipo
          </th>
          
          <th>
              Prezzo
+         </th>
+         
+         <th>
+             Descrizione
          </th>
          <th>
           </th>
@@ -61,11 +61,11 @@
          </td>
          
          <td>
-            <c:out value="${asset.descrizione}"></c:out>
+            <c:out value="${asset.prezzo}"></c:out>
          </td>
 
          <td>
-             <c:out value="${asset.prezzo}"></c:out>
+             <c:out value="${asset.descrizione}"></c:out>
          </td>
 
          <td>

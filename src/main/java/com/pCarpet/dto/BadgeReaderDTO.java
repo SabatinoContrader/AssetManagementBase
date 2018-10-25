@@ -6,27 +6,28 @@ public class BadgeReaderDTO {
 	private long idAsset;
 	private String descrizione;
 	private String tipologia;
+	private long flag;
 	
-	private long idAsset2;
-	private String descrizione2;
-	private String tipo2;
-	private double prezzo2;
+//	private long idAsset2;
+//	private String descrizione2;
+//	private String tipo2;
+//	private double prezzo2;
 	
 	public BadgeReaderDTO() {
 		
 	}
 	
-	public BadgeReaderDTO(long idBadgeReader, long idAsset, String descrizione, String tipologia) {
+	public BadgeReaderDTO(long idBadgeReader, long idAsset, String descrizione, String tipologia,long flag) {
 		this();
 		this.idBadgeReader = idBadgeReader;
 		this.idAsset = idAsset;
 		this.descrizione = descrizione;
 		this.tipologia = tipologia;
+		this.flag = flag;
 	}
 	
 	
-	public BadgeReaderDTO(long idBadgeReader, long idAsset, String descrizione, String tipologia, 
-			long idAsset2, String descrizione2, String tipo2, double prezzo2) {
+	public BadgeReaderDTO(long idBadgeReader, long idAsset, String descrizione, String tipologia) {
 		
 		this();
 		this.idBadgeReader = idBadgeReader;
@@ -34,10 +35,10 @@ public class BadgeReaderDTO {
 		this.descrizione = descrizione;
 		this.tipologia = tipologia;
 		
-		this.idAsset2=idAsset2;
-		this.descrizione2=descrizione2;
-		this.tipo2=tipo2;
-		this.prezzo2=prezzo2;
+//		this.idAsset2=idAsset2;
+//		this.descrizione2=descrizione2;
+//		this.tipo2=tipo2;
+//		this.prezzo2=prezzo2;
 		
 	}
 
@@ -53,10 +54,18 @@ public class BadgeReaderDTO {
 		return idAsset;
 	}
 
+	public void setFlag(long flag) {
+		this.flag = flag;
+	}
+
+	public long getFlag() {
+		return flag;
+	}
+
 	public void setIdAsset(long idAsset) {
 		this.idAsset = idAsset;
 	}
-
+	
 	public String getDescrizione() {
 		return descrizione;
 	}
@@ -73,37 +82,37 @@ public class BadgeReaderDTO {
 		this.tipologia = tipologia;
 	}
 
-	public long getIdAsset2() {
-		return idAsset2;
-	}
-
-	public void setIdAsset2(long idAsset2) {
-		this.idAsset2 = idAsset2;
-	}
-
-	public String getDescrizione2() {
-		return descrizione2;
-	}
-
-	public void setDescrizione2(String descrizione2) {
-		this.descrizione2 = descrizione2;
-	}
-
-	public String getTipo2() {
-		return tipo2;
-	}
-
-	public void setTipo2(String tipo2) {
-		this.tipo2 = tipo2;
-	}
-
-	public double getPrezzo2() {
-		return prezzo2;
-	}
-
-	public void setPrezzo2(double prezzo2) {
-		this.prezzo2 = prezzo2;
-	}
+//	public long getIdAsset2() {
+//		return idAsset2;
+//	}
+//
+//	public void setIdAsset2(long idAsset2) {
+//		this.idAsset2 = idAsset2;
+//	}
+//
+//	public String getDescrizione2() {
+//		return descrizione2;
+//	}
+//
+//	public void setDescrizione2(String descrizione2) {
+//		this.descrizione2 = descrizione2;
+//	}
+//
+//	public String getTipo2() {
+//		return tipo2;
+//	}
+//
+//	public void setTipo2(String tipo2) {
+//		this.tipo2 = tipo2;
+//	}
+//
+//	public double getPrezzo2() {
+//		return prezzo2;
+//	}
+//
+//	public void setPrezzo2(double prezzo2) {
+//		this.prezzo2 = prezzo2;
+//	}
 	
 	
 	
