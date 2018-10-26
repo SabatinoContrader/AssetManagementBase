@@ -25,6 +25,7 @@ import jxl.write.WritableWorkbook;
 import jxl.write.WriteException;
 import jxl.write.biff.RowsExceededException;
 
+import com.pCarpet.dto.ExportDTO;
 import com.pCarpet.dto.UserDTO;
 import com.pCarpet.model.Movimento;
 import com.pCarpet.model.User;
@@ -111,8 +112,8 @@ public class MovimentoController{
     	File f=new File(par+"\\"+storico+".xls");
     	String iduser = request.getParameter("scelta").toString();
     	
-    	List list= new ArrayList();
-    	List listP = new ArrayList();
+    	List<String> list= new ArrayList<>();
+    	List<ExportDTO> listP = new ArrayList<>();
     	List listU= new ArrayList();
     	listP=prenotazioneService.getAllExportPrenotazioni();
     	list=movimentoService.getAllExportMovimenti();
@@ -297,6 +298,7 @@ public class MovimentoController{
 			
     			int f2=1;
     			for(int i=1; i<=listP.size()/8; i++) {
+    					System.out.println("PRENOTAZIONE FOR:"+listP.get(f2-1));
     					l=new Label(0,i, String.valueOf(listP.get(f2-1)),wC );
     					l2=new Label(1,i, String.valueOf(listP.get(f2)),wC );
     					l3=new Label(2,i,"",blankColour);
@@ -419,8 +421,6 @@ public class MovimentoController{
     					
     					String dataOraF=String.valueOf(listU.get(f1+8));
     					
-//    					System.out.println("dataF:"+Date.formatDateHour(dataOraF).get(0));
-//    					System.out.println("OraF:"+Date.formatDateHour(dataOraF).get(1));
     					
     					l13=new Label(12,i,Date.formatDateHour(dataOraF).get(0),wC);
     					l14=new Label(13,i,Date.formatDateHour(dataOraF).get(1),wC);

@@ -59,35 +59,45 @@
 	<tr>
 	
         <td>
-            ${user.iduser}
+           <input type="text" id = "iduser" value="${user.iduser}" disabled style="opacity:0.8" text-align="center">
          </td>
 
 		<td>
-             ${user.username}
+             <input type="text" id = "username" value="${user.username}" name="username" style="opacity:0.8">
          </td>
          
          <td>
-             ${user.password}
+              <input type="text" id = "nome" value="${user.password}" name="password" style="opacity:0.8">
          </td>
 
          <td>
-             ${user.ragioneSociale}
+              <input type="text" id = "cognome" value="${user.ragioneSociale}" name="ragioneSociale" style="opacity:0.8">
          </td>
 
          <td>
-             ${user.telefono}
+              <input type="text" id = "telefono" value="${user.telefono}" name="telefono" style="opacity:0.8">
          </td>
          <td>
-             ${user.mail}
+              <input type="text" id = "mail" value="${user.mail}" name="mail" style="opacity:0.8">
          </td>
          <td>
-             ${user.partitaiva}
+              <input type="text" id = "partitaiva" value="${user.partitaiva}" name="partitaiva" style="opacity:0.8">
          </td>
          <td>
-            ${user.ruolo}
+             <select id="ruolo" name="ruolo" style="opacity:0.8">
+        <option value="${user.ruolo}">${user.ruolo}</option>
+        <option value ="segretaria">segretaria</option>
+		<option value ="cliente">cliente</option>
+		<option value ="owner">owner</option>
+		</select>
          </td>
           <td>
-            ${user.nomeAbb}
+             <select id="nomeAbb" name="nomeAbb" style="opacity:0.8">
+        <option value="${user.nomeAbb}">${user.nomeAbb}</option>
+        <option value ="gold">gold</option>
+		<option value ="silver">silver</option>
+		<option value ="normale">normale</option>
+		<option value ="business">business</option></select>
          </td>
      </tr>
    
@@ -96,68 +106,9 @@
 
 </br>
 
-<table>	
-
-	<tr>
-	
-		<td>
-			<input type = "radio" value="username" name="campo">Username
-		</td>
-		
-		<td>
-			<input type = "radio" value="password" name="campo">Password
-		</td>
-		
-		<td>
-			<input type = "radio" value="ragioneSociale" name="campo">Ragione Sociale
-		</td>
-		
-		<td>
-			<input type = "radio" value="telefono" name="campo">Telefono
-		</td>
-		
-		<td>
-			<input type = "radio" value="mail" name="campo">Mail
-		</td>
-		
-		<td>
-			<input type = "radio" value="partitaiva" name="campo">Partita Iva
-		</td>
-		
-		<td>
-			<input type = "radio" value="ruolo" name="campo">Ruolo
-		</td>
-		<td>
-			<input type = "radio" value="nomeAbb" id="rr" name="campo">Nome Abbonamento
-		</td>
-		
-		
-		
-<!--  		<td>
-			<h4>Inserisci l'id dell'utente da modificare: <input type = "text" id = "user" name ="id" placeholder = "inserisci id"></h4>
-		</td>
-		-->
-		
-		
-	</tr>
-
-</table>
-
 </br>
-
-<h4>Inserisci il valore del nuovo campo:
-
-<input type = "text" id = "nuovoCampo" name ="nuovoCampo" placeholder = "inserisci nuovo campo" required autofocus></h4>
-		
-</br>
-
-
-<script>
-document.getElementById("mod").setAttribute("disabled", true);
-</script>
-
-<input type="hidden" name="id" value="${user.iduser}"/>
-<button class="btn btn-lg btn-primary" type="submit" id="mod" value="update" name="choice">Effettua Modifica</button>
+<input type="hidden" value="${user.iduser}" name="id">
+<button class="btn btn-lg btn-primary" type="submit" value="update" name="choice">Effettua Modifica</button>
 
 <a class="btn btn-lg btn-primary" 
 		href="/HomeUser/showUsers?choice=indietroManagementUser">Indietro</a></br>

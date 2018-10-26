@@ -15,17 +15,16 @@
 <link rel="stylesheet" type="text/css" href="/css/pcarpet.css">
 </head>
 <body>
-<h2><center>------- INSERT BADGE -------</center></h2>
 
 
 	<h3>Inserisci i dati del badge</h3>
      <form action="/Badge/addBadge" method="post" id= badge_insert>
      	
-     	 <table>
+     	 <table class="border rcorners">
      	 
      	 <tr><th><h4>Inserimento Badge</h4></th><td class="imgB"></td><td></td> </tr>
      	 <tr>
-     	<th>Descrizione: </th><td><input type = "text" id = "user" name ="descrizione" placeholder = "inserisci descrizione" ></td></tr>
+     	<th>Descrizione: </th><td><textarea type = "text" id = "user" name ="descrizione" placeholder = "inserisci descrizione" ></textarea></td></tr>
      	<tr>
      	<tr><th>Tipologia:</th> <td>
 		<select id="user" name = "tipologia">

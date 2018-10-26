@@ -41,6 +41,7 @@ public class Assegnazione{
 	
 	@Id
 	@Column
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long idassegnazione;
 	
 	

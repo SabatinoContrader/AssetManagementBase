@@ -56,7 +56,6 @@ public class BadgeService {
 	    }
 	    
 	    public List<BadgeDTO> getAllBadgesN () {
-	        System.out.println("LISTABADGEREPO:"+((List<Assegnazione>)this.assegnazioneRepository.findAll()).size());
 	        List<Badge> bList=(List<Badge>) this.badgeRepository.findAll();
 	        List<Assegnazione> aList=(List<Assegnazione>) this.assegnazioneRepository.findAll();
 	        
@@ -94,11 +93,10 @@ public class BadgeService {
 	    	
 	        return this.badgeRepository.save(badge)!=null;
 	    }
-	    public boolean deleteBadge (int idBadge) {
-	    	/*
-	    	return this.badgeRepository.DeleteBadge(idBadge);
-	    	*/
-	    	return true;
+	    public void deleteBadge (long idBadge) {
+	    	
+	    	this.badgeRepository.deleteById(idBadge);
+	    	
 	    }
 	    
 	    public boolean updateBadge(HttpServletRequest request) {

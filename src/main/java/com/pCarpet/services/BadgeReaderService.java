@@ -17,15 +17,16 @@ public class BadgeReaderService {
 	private BadgeReaderRepository badgeReaderRepository;
 	
 	@Autowired
-    public BadgeReaderService() {
-        this.badgeReaderRepository = new BadgeReaderRepository();
+    public BadgeReaderService(BadgeReaderRepository badgereaderRepository) {
+        this.badgeReaderRepository = badgereaderRepository;
     }
 
     public List<BadgeReaderDTO> getAllBadgeReaders () {
         
-    	List<BadgeReader> listBadgeReader = this.badgeReaderRepository.getAllBadgeReaders();
+    	List<BadgeReader> listBadgeReader =(List<BadgeReader>) this.badgeReaderRepository.findAll();
         
     	List<BadgeReaderDTO> listDTO=new ArrayList<>();
+    	
     	
     	for(BadgeReader br: listBadgeReader) {
     		listDTO.add(BadgeReaderConverter.convertToDTO(br));
@@ -36,46 +37,46 @@ public class BadgeReaderService {
     }
     
     public List<BadgeReaderDTO> getAllBadgeReadersIdAsset (int idAsset) {
-        List<BadgeReader> brList=this.badgeReaderRepository.getAllBadgeReadersIdAsset(idAsset);
+        BadgeReader brList=(BadgeReader)this.badgeReaderRepository.findByIdAsset(idAsset);
         
         List<BadgeReaderDTO> brDTOList=new ArrayList<>();
         
-        for(BadgeReader br: brList) {
-        	brDTOList.add(BadgeReaderConverter.convertToDTO(br));
-        }
+        //for(BadgeReader br: brList) {
+        	brDTOList.add(BadgeReaderConverter.convertToDTO(brList));
+       // }
         
         return brDTOList;
         
     }
     
-    public List<BadgeReaderDTO> getBadgeReader (int id) {
+    public List<BadgeReaderDTO> getBadgeReader (long id) {
     	
-    	List<BadgeReader> brList=this.badgeReaderRepository.getBadgeReader(id);
+    	BadgeReader brList=(BadgeReader)this.badgeReaderRepository.findById(id).get();
         
         List<BadgeReaderDTO> brDTOList=new ArrayList<>();
         
-        for(BadgeReader br: brList) {
-        	brDTOList.add(BadgeReaderConverter.convertToDTO(br));
-        }
+//        for(BadgeReader br: brList) {
+        	brDTOList.add(BadgeReaderConverter.convertToDTO(brList));
+//        }
         
         return brDTOList;
     	
     }
 
-    public boolean insertBadgeReader (BadgeReaderDTO badgeReaderDTO) {
+    public void insertBadgeReader (BadgeReaderDTO badgeReaderDTO) {
     	
     	BadgeReader badgeReader=BadgeReaderConverter.converToEntity(badgeReaderDTO);
     	
-        return this.badgeReaderRepository.insertBadgeReader(badgeReader);
+        this.badgeReaderRepository.save(badgeReader);
         
     }
     
-    public boolean deleteBadgeReadear (int idBadgeReader) {
-    	return this.badgeReaderRepository.deleteBadgeReadear(idBadgeReader);
+    public void deleteBadgeReadear (long idBadgeReader) {
+    	this.badgeReaderRepository.deleteById(idBadgeReader);
     }
     
-    public boolean updateBadgeReader(HttpServletRequest request) {
-    	return this.badgeReaderRepository.updateBadgeReader(request);
-    }
+//    public void updateBadgeReader(HttpServletRequest request) {
+//    	 this.badgeReaderRepository.save(request);
+//    }
 	
 }

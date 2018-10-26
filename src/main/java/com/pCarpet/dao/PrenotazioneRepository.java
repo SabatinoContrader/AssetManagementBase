@@ -206,7 +206,7 @@ public class PrenotazioneRepository{
         	   String datainizio = resultSet.getString("datainizio");
         	   String datafine = resultSet.getString("datafine");
         	   
-        	   listUtilizzo.add(new Movimento(idasset, idbadge, datainizio,datafine));
+        	   listUtilizzo.add(new Movimento(0l,idasset, idbadge, datainizio,datafine));
            }
         }
         catch (SQLException e) {

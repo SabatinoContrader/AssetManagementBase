@@ -90,8 +90,18 @@ public class HomeUserController {
 					model.addAttribute("users", users);
 					return "managementUser";
 				case "update":
+					long idm=Integer.parseInt(request.getParameter("id"));
+					String usernamem=request.getParameter("username");
+					String passwordm=request.getParameter("password");
+					String ragioneSocialem=request.getParameter("ragioneSociale");
+					String telefonom=request.getParameter("telefono");
+					String mailm=request.getParameter("mail");
+					String partitaivam=request.getParameter("partitaiva");
+					String ruolom=request.getParameter("ruolo");
+					String nomeAbbm=request.getParameter("nomeAbb");
+					UserDTO um=new UserDTO(idm,usernamem,passwordm,ragioneSocialem,telefonom,mailm,partitaivam,ruolom,nomeAbbm);
 					
-					userService.updateUser(new UserDTO(35l,"ciao","ciao","ciao","123456","ciao","ciao","cliente","silver"));
+					userService.insertUser(um);
 					users = userService.getAllUsers();
 					model.addAttribute("users", users);
 					return "managementUser";
