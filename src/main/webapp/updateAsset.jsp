@@ -1,84 +1,89 @@
- <%@ page import="com.virtualpairprogrammers.model.Asset" %>
-<%@ page import="java.util.*" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%@ page import="com.pCarpet.dto.AssetDTO"%>
+<!DOCTYPE html>
 <html>
 <head>
-<% List<Asset> allAssets = (List<Asset>) request.getAttribute("allAssets");%>
-<h1>------Modifica Asset------</h1>     
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>   
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.1/jquery-ui.min.js"></script>   
+<script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery.validate/1.7/jquery.validate.js"></script>   
+<script type="text/javascript" src="/validate/validation_asset.js"></script>
+
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+
+<!-- Bootstrap core CSS -->
+<link href="/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="/css/pcarpet.css">
 </head>
 <body>
-<%int scelta = Integer.parseInt(request.getParameter("id")); %>
 
-<form action="AssetServlet" method="post">
-    
-     <table border="2">
+<h2>Inserisci i dati dell'asset</h2>
+ 
+ </br>
+ 
+<form action="/Asset/homeAsset" method="post" id="form_register">
+        
+<table class="border rcorners">	
 
-     <tr>
-       
+	<tr>
+        
          <th>
-             ID
+             Id Asset
          </th>
 
          <th>
-             TIPO
-         </th>
-         <th>
-             PREZZO
-         </th>
-         <th>
-             DESCRIZIONE
+             Tipo
          </th>
          
+         <th>
+             Prezzo
+         </th>
+         
+         <th>
+             Descrizione
+         </th>
+
+	</tr>
+	<tr>
+	
+        <td>
+            <input type="text" value="${asset.idAsset}" disabled class="labcor">
+         </td>
+
+		<td>
+             <input type="text" value="${asset.tipo}" name="tipo" class="labcor">
+         </td>
+         
+         <td>
+            <input type="text" value="${asset.prezzo}" name="prezzo" class="labcor">
+         </td>
+
+         <td>
+             <input type="text" value="${asset.descrizione}" name="descrizione" class="labcor">
+         </td>
+         
      </tr>
-        <%for (Asset asset : allAssets) { %>
-     <tr>
-        
-         <td>
-             <%= asset.getId()%>
-         </td>
+   
+     
+</table>
 
-         <td>
-             <%=  asset.getTipo()%>
-         </td>
+</br>
+		
+</br>
 
-         <td>
-             <%=  asset.getPrezzo()%>
-         </td>
-
-         <td>
-             <%=  asset.getDescrizione()%>
-         </td>
-
-
-     </tr>
-     <% }%>
- </table>
-    <table>
-    <input type="hidden" name="idAsset" value="<%=scelta %>"> 
- <tr> 
- <td>  
-    <h2>Seleziona il campo:</h2></td>
-    <td><input type="radio" name="campo" value="tipo">Tipo</td>
-    <td><input type="radio" name="campo" value="prezzo">Prezzo</td>
-    <td><input type="radio" name="campo" value="descrizione">Descrizione</td>
-    </tr></table>
-<table>    <tr><td>
-    <h2>Inserisci il nuovo valore del campo</h2></td>
-    <td><input type="text" name="newData" placeholder = "Nuovo valore">
-    
- </td>
- </tr>  
- 
- </table> 
- <table> 
-
-<tr>
-    <input type="submit" value="updateAsset" name="richiesta">
+<input type="hidden" name="id" value="${asset.idAsset}"/>
+<table>
+<tr><td>
+<button class="btn lg btn-primary" type="submit" value="update" name="scelta">Effettua Modifica</button>
+</td><td>
+<a class="btn lg btn-primary" 
+		href="/Asset/homeAsset?scelta=indietro">Indietro</a></br>
+</td>
 </tr>
 </table>
 </form>
- <form action="AssetServlet" method=post>
-<button type="submit" value="IndietroHome" name="richiesta">Indietro</button>
-</form>
+
 </body>
 </html>

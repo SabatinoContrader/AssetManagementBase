@@ -24,9 +24,9 @@
 		Logs Home
 		</h1>
 		<a class="btn btn-lg btn-primary btn-block"
-			href="/Home/homeAssBadRead">Logs</a></br> 
+			href="/Movimento/homeMovimento?scelta=movimentoManagement">Logs</a></br> 
 		<a class="btn btn-lg btn-primary btn-block"
-			href="/Home/ext">Export</a></br>
+			href="/Movimento/homeMovimento?scelta=export">Export</a></br>
 		<a class="btn btn-lg btn-primary btn-block" href="/Home/homeDirectory?scelta=indietro">Indietro</a></br> 
 		<a class="btn btn-lg btn-primary btn-block" href="/Login/logoutControl">Logout</a></br>
 

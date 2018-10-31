@@ -26,35 +26,9 @@ public class HomeController {
 		this.userService = userService;
 	}
 
-	@RequestMapping(value = "/dispatchHome", method = RequestMethod.POST)
-	public String dispatchHomePost(HttpServletRequest request, Model model ) {
+
 		
-		User user = userService.getLoggedUser();
-        String type = user.getRuolo();
-		if (type.equals("Segretaria"))
-			return "homeSegretaria";
-		else if (type.equals("Cliente"))
-			return "homecliente";
-		else if (type.equals("Amministratore"))
-			return "homeAdmin";
-		else
-			return "";
-	}
-	
-	@RequestMapping(value = "/dispatchHome", method = RequestMethod.GET)
-	public String dispatchHomeGet(HttpServletRequest request, Model model ) {
-		
-		User user = userService.getLoggedUser();
-        String type = user.getRuolo();
-		if (type.equals("Segretaria"))
-			return "homeSegretaria";
-		else if (type.equals("Cliente"))
-			return "homeCliente";
-		else if (type.equals("Amministratore"))
-			return "homeAdmin";
-		else
-			return "";
-	}
+
 	
 	@RequestMapping(value = "/homeDirectory", method = RequestMethod.GET)
 	public String AsseBad(HttpServletRequest request) {

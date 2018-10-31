@@ -1,7 +1,6 @@
 package com.pCarpet.controller;
 
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.pCarpet.dto.AbbonamentoDTO;
+import com.pCarpet.dto.UserDTO;
+import com.pCarpet.model.Abbonamento;
 import com.pCarpet.model.User;
+import com.pCarpet.services.AbbonamentoService;
 import com.pCarpet.services.UserService;
 
 @Controller
@@ -19,15 +22,17 @@ public class HomeUserController {
 	
 	private UserService userService;
 	private boolean isLogged = false;
+	private AbbonamentoService abbonamentoService;
 
 	@Autowired
-	public HomeUserController(UserService userService) {
+	public HomeUserController(UserService userService,AbbonamentoService abbonamentoService) {
 		this.userService = userService;
+		this.abbonamentoService=abbonamentoService;
 	}
 
 	@RequestMapping(value = "/showUsers", method = RequestMethod.GET)
 	public String loginControl(HttpServletRequest request, Model model ) {
-		List<User> users = userService.findAll();
+		List<UserDTO> users = userService.getAllUsers();
 		model.addAttribute("users", users);
 				
 		String choice=request.getParameter("choice");
@@ -38,20 +43,24 @@ public class HomeUserController {
 					return "managementUser";
 				
 				case "insert":
-					users = userService.findAll();
-					model.addAttribute("users", users);
+//					users = userService.getAllUsers();
+//					model.addAttribute("users", users);
 					return "insertUser";
 					
 				case "update":
-					model.addAttribute("user",userService.findId(Integer.parseInt(request.getParameter("id"))).get(0));
-					users = userService.findAll();
-					model.addAttribute("users", users);
+					model.addAttribute("user",userService.getUser(Integer.parseInt(request.getParameter("id"))));
+//					users = userService.getAllUsers();
+//					model.addAttribute("users", users);
 					return "updateUser";
 				case "delete":
 					
-					userService.deleteId(Integer.parseInt((request.getParameter("id"))));
-					users = userService.findAll();
+					userService.deleteUser(Integer.parseInt((request.getParameter("id"))));
+					users = userService.getAllUsers();
 					model.addAttribute("users", users);
+					return "managementUser";
+				case "indietro":
+					return "homeCustomers";
+				case "indietroManagementUser":
 					return "managementUser";
 			}
 		}
@@ -63,8 +72,7 @@ public class HomeUserController {
 
 	@RequestMapping(value = "/showUsers", method = RequestMethod.POST)
 	public String loginControlPost(HttpServletRequest request, Model model ) {
-		System.out.println("TEST1: "+request.getParameter("username"));
-		List<User> users = userService.findAll();
+		List<UserDTO> users = userService.getAllUsers();
 		model.addAttribute("users", users);
 			
 		String choice=request.getParameter("choice");
@@ -74,40 +82,36 @@ public class HomeUserController {
 				case "insert":
 					String username=request.getParameter("username");
 					String password=request.getParameter("password");
-					String nome=request.getParameter("nome");
-					String cognome=request.getParameter("cognome");
+					String ragioneSociale=request.getParameter("ragioneSociale");
 					String telefono=request.getParameter("telefono");
 					String mail=request.getParameter("mail");
 					String partitaiva=request.getParameter("partitaiva");
 					String ruolo=request.getParameter("ruolo");
-					User u=new User(0,username,password,nome,cognome,telefono,mail,partitaiva,ruolo);
+					long idAbb=Integer.parseInt(request.getParameter("nomeAbb"));
+					AbbonamentoDTO abb=abbonamentoService.findById(idAbb);
+					
+					UserDTO u=new UserDTO(0,username,password,ragioneSociale,telefono,mail,partitaiva,ruolo,abb);
+					
 					userService.insertUser(u);
+					users = userService.getAllUsers();
+					model.addAttribute("users", users);
 					return "managementUser";
 				case "update":
-					String campo = request.getParameter("campo");
-					String nuovoCampo=request.getParameter("nuovoCampo");
+					long idm=Integer.parseInt(request.getParameter("id"));
+					String usernamem=request.getParameter("username");
+					String passwordm=request.getParameter("password");
+					String ragioneSocialem=request.getParameter("ragioneSociale");
+					String telefonom=request.getParameter("telefono");
+					String mailm=request.getParameter("mail");
+					String partitaivam=request.getParameter("partitaiva");
+					String ruolom=request.getParameter("ruolo");
+					idAbb=Integer.parseInt(request.getParameter("nomeAbb"));
+					abb=abbonamentoService.findById(idAbb);
+					UserDTO um=new UserDTO(idm,usernamem,passwordm,ragioneSocialem,telefonom,mailm,partitaivam,ruolom,abb);
 					
-					
-					System.out.println("TEST CAMPO:"+campo);
-					System.out.println("TEST NUOVOCAMPO:"+nuovoCampo);
-					int iduser=userService.findId(Integer.parseInt(request.getParameter("id"))).get(0).getIduser();
-					System.out.println(iduser);
-					if(campo.equals("nome"))
-						userService.updateNome(iduser,nuovoCampo);
-					else if(campo.equals("username"))
-						userService.updateUsername(iduser,nuovoCampo);
-					else if(campo.equals("password"))
-						userService.updatePassword(iduser,nuovoCampo);
-					else if(campo.equals("telefono"))
-						userService.updateTelefono(iduser,nuovoCampo);
-					else if(campo.equals("cognome"))
-						userService.updateCognome(iduser,nuovoCampo);
-					else if(campo.equals("mail"))
-						userService.updateMail(iduser,nuovoCampo);
-					else if(campo.equals("partitaiva"))
-						userService.updatePartitaIva(iduser,nuovoCampo);
-					else if(campo.equals("ruolo"))
-						userService.updateRuolo(iduser,nuovoCampo);
+					userService.insertUser(um);
+					users = userService.getAllUsers();
+					model.addAttribute("users", users);
 					return "managementUser";
 			}
 		}

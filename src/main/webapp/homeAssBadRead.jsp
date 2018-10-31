@@ -24,14 +24,13 @@
 		Asset & Badge Reader Home
 		</h1>
 		<a class="btn btn-lg btn-primary btn-block"
-			href="/Home/homeAssBadRead">Assets</a></br> 
+			href="/Asset/homeAsset?scelta=AssetManagement">Assets</a></br> 
 		<a class="btn btn-lg btn-primary btn-block"
-			href="/Home/ext">Badge Readers</a></br> 
+			href="/BadgeReader/homeBadgeReader?scelta=BadgeReaderManagement">Badge Readers</a></br>  
 		<a class="btn btn-lg btn-primary btn-block" 
 		href="/Home/homeDirectory?scelta=indietro">Indietro</a></br> 
 		<a class="btn btn-lg btn-primary btn-block" 
 		href="/Login/logoutControl">Logout</a></br>
-
 	</form>
 
 </body>

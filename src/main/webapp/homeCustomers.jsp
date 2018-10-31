@@ -26,12 +26,12 @@
 		<a class="btn btn-lg btn-primary btn-block"
 			href="/HomeUser/showUsers">Users</a></br> 
 		<a class="btn btn-lg btn-primary btn-block"
-			href="/Home/ext">Badges</a></br>
+			href="/Badge/HomeBadge?scelta=badgemanagement">Badges</a></br>
 					<a class="btn btn-lg btn-primary btn-block"
-			href="/Home/homeAssBadRead">Assegnazione Badges</a></br> 
+			href="/Assegnazione/homeAssegnazione?scelta=assegnazioneManagement">Assegnazione Badges</a></br> 
 		<a class="btn btn-lg btn-primary btn-block" href="/Home/homeDirectory?scelta=indietro">Indietro</a></br> 
-		<a class="btn btn-lg btn-primary btn-block" href="/Login/logoutControl">Logout</a></br>
-
+<a class="btn btn-lg btn-primary btn-block" 
+		href="/Login/logoutControl">Logout</a><br>
 	</form>
 
 </body>

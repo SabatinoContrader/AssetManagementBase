@@ -41,7 +41,10 @@
 *, ::after, ::before {
 	box-sizing: border-box
 }
-
+.top{
+	top:10px;
+	
+}
 html {
 	font-family: sans-serif;
 	line-height: 1.15;
@@ -60,7 +63,11 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav,
 	section {
 	display: block
 }
-
+.trasp
+{
+	opacity:0.5
+	
+}
 body {
 	margin: 0;
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
@@ -211,7 +218,7 @@ svg:not (:root ){
 }
 
 table {
-	border-collapse: collapse
+	
 }
 
 caption {
@@ -223,7 +230,14 @@ caption {
 }
 
 th {
-	text-align: inherit
+	text-align: center
+}
+td {
+	text-align: center
+}
+
+.bordo {
+border: 1.5px solid #000000;
 }
 
 label {
@@ -371,10 +385,44 @@ template {
 .h6, h6 {
 	font-size: 1rem
 }
-
+.userimg{
+width:"178";
+rowspan:"3" ;
+valign:"top";
+align:"right";
+background: url(users.png);
+background-repeat: no-repeat;
+background-position: right top;
+}
 .lead {
 	font-size: 1.25rem;
 	font-weight: 300
+}
+.rcorners {
+    border-radius: 11px 25px;
+    background: url(wood.jpg);
+	background-repeat: repeat;
+}
+.labcor {
+    border-radius: 11px 11px;
+	opacity: 0.8;
+}
+.imgB {
+rowspan:"3" ;
+valign:"top";
+align:"right";
+
+background: url(chip.png);
+background-repeat: no-repeat;
+background-position: right 8px top 5px;
+}
+
+.celle_strette {
+width: 200px;
+}
+
+.celle_larghe {
+width: 150px;
 }
 
 .display-1 {
@@ -2339,7 +2387,7 @@ a.btn.disabled, fieldset:disabled a.btn {
 .btn-primary:hover {
 	color: #fff;
 	background-color: #0069d9;
-	border-color: #0062cc
+	border-color: #ff0000
 }
 
 .btn-primary.focus, .btn-primary:focus {

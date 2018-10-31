@@ -1,17 +1,18 @@
-<%@ page import="com.virtualpairprogrammers.model.BadgeReader" %>
+<%@ page import="com.pCarpet.dto.BadgeReaderDTO" %>
 <%@ page import="java.util.*" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
  <head>
-     <% List<BadgeReader> allBadgeReaders = (List<BadgeReader>) request.getAttribute("visualizzaBadgeReaders");%>
+  <!-- Bootstrap core CSS -->
+<link href="/css/bootstrap.min.css" rel="stylesheet">
+     <% List<BadgeReaderDTO> allBadgeReaders = (List<BadgeReaderDTO>) request.getAttribute("visualizzaBadgeReaders");%>
  </head>
  <body>
-<h2>Sei loggato come <%= request.getSession().getAttribute("utente")%></h2>
-<form action="BadgeReaderServlet" method="post">
-    <input type="submit" value="insert" name="richiesta">
-</form>
 
- <table border="2">
+<form action="/BadgeReader/homeBadgeReader" method="GET">
+ <table class="border rcorners">
+  <tr><th><h4>BADGE READERS</h4></th><TD></TD><TD></TD><TD></TD></tr>
+ 
      <tr>
          <th>
              ID Badge Reader
@@ -29,15 +30,14 @@
 
 
      </tr>
-        <%for (BadgeReader badgeReader : allBadgeReaders) { %>
+        <%for (BadgeReaderDTO badgeReader : allBadgeReaders) { %>
      <tr>
-
          <td>
              <%= badgeReader.getIdBadgeReader()%>
          </td>
 
          <td>
-             <%=  badgeReader.getIdAsset()%>
+             <%=  badgeReader.getAsset().getIdAsset()%>
          </td>
 
          <td>
@@ -48,23 +48,19 @@
              <%=  badgeReader.getTipologia()%>
          </td>
 
-          <td>
-             <a href="BadgeReaderServlet?richiesta=update&id=<%=  badgeReader.getIdBadgeReader()%>">Modifica</a>
-         </td>
-         <td>
-             <a href="BadgeReaderServlet?richiesta=deleteBadgeReader&delBadgeReader=<%= badgeReader.getIdBadgeReader()%>">Elimina</a>
-         </td>
-
+</form>
      </tr>
      <% }%>
  </table>
- <form action="BadgeReaderServlet" method=post>
-<button type="submit" value="indietrohome" name="richiesta">Indietro</button>
+ <table>
+ <form action="/BadgeReader/homeBadgeReader" method=get>
+<tr><td><button type="submit" class="btn lg btn-primary" value="indietro" name="scelta">Indietro</button></td>
 </form>
- <!-- <h3><a href="insertProdotto.jsp">1. - Inserisci nuovo Asset</a></h3> -->
- <!-- <input type="text" value="Scelta" name="richiesta">
- <button type = "submit" value = "Vai" name = "pulsante">GO</button> -->
- <h3></h3>
+<form action="/BadgeReader/homeBadgeReader" method="POST">
+   <td> <button type="submit" class="btn lg btn-primary" value="insert" name="scelta">Inserisci</button></td></tr>
+</form>
+</table>
+
 
  </form>
  </body>

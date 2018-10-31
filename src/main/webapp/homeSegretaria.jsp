@@ -28,7 +28,7 @@
 		<a class="btn btn-lg btn-primary btn-block"
 		href="/Home/homeDirectory?scelta=Customers">Customers</a><br> 
 		<a class="btn btn-lg btn-primary btn-block" 
-		href="/Home/homeDirectory?scelta=Bookings">Bookings</a><br> 
+		href="/HomePrenotazione/showPrenotazione?choice=managementPrenotazioni">Bookings</a><br> 
 		<a class="btn btn-lg btn-primary btn-block" 
 		href="/Home/homeDirectory?scelta=Logs">Logs</a><br> 
 		<a class="btn btn-lg btn-primary btn-block" 

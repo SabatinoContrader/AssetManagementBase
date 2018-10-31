@@ -1,75 +1,96 @@
-<%@ page import="com.pCarpet.model.Asset" %>
-<%@ page import="java.util.*" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="java.util.List"%>
+<%@ page import="com.pCarpet.dto.AssetDTO"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<!DOCTYPE html>
 <html>
- <head>
-     <% List<Asset> allAssets = (List<Asset>) request.getAttribute("allAssets");%>
- </head>
- <body>
-<h1>Benvenuto <%= request.getSession().getAttribute("utente")%></h1>
-<form action="AssetServlet" method="post">
-    <input type="submit" value="insert" name="scelta">
-</form>
+<head>
+<!-- Javascript -->
+<script src="/css/googleApiManagerDriver.js"></script>
+<!-- Bootstrap core CSS -->
+<link href="/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="/css/pcarpet.css">
+</head>
+<body>
 
- <table border="2">
 
-     <tr>
-       
+<form class="form-signin" action="/Asset/homeAsset" method="post">
+
+	<h1 class="element-margin-left">Ecco tutti gli asset</h1>
+
+		
+		
+		
+
+		<table class="border rcorners">	
+	<tr><th><h4>ASSETS</h4></th><td></td><td></td><td></td><td></td><td></td></tr>
+	<tr>
+        
          <th>
-             ID
+             Id Asset
          </th>
 
          <th>
-             TIPO
-         </th>
-         <th>
-             PREZZO
-         </th>
-         <th>
-             DESCRIZIONE
+             Tipo
          </th>
          
+         <th>
+             Prezzo
+         </th>
+         
+         <th>
+             Descrizione
+         </th>
+         <th>
+          </th>
+         <th>
+          </th>
 
      </tr>
-        <%for (Asset asset : allAssets) { %>
-     <tr>
-        
+	<!--  $allassets collegato a riga 37 di asset controller -->
+        <c:forEach items="${allAssets}" var="asset">
+     	
          <td>
-             <%= asset.getId()%>
+             
+             	<c:out value="${asset.idAsset}"></c:out>
+             
+         </td>
+		
+		<td>
+            <c:out value="${asset.tipo}"></c:out>
+         </td>
+         
+         <td>
+            <c:out value="${asset.prezzo}"></c:out>
          </td>
 
          <td>
-             <%=  asset.getTipo()%>
+             <c:out value="${asset.descrizione}"></c:out>
          </td>
 
          <td>
-             <%=  asset.getPrezzo()%>
-         </td>
-
-         <td>
-             <%=  asset.getDescrizione()%>
-         </td>
-
-          <td>
-             <a href="/Asset/assetDirectory?scelta=update&id=<%=  asset.assetId()%>">Modifica</a>
+          
+          <a class="btn lg btn-primary btn-block"
+			href="/Asset/homeAsset?scelta=update&id=${asset.idAsset}">Modifica</a>
          </td>
          <td>
-             <a href="/Asset/assetDirectory?scelta=eliminaAsset&id=<%= asset.assetId()%>">Elimina</a>
+             <a class="btn lg btn-primary btn-block"
+			href="/Asset/homeAsset?scelta=delete&id=${asset.idAsset}">Elimina</a>
          </td>
-
+		
+		
      </tr>
-     <% }%>
- </table>
- </br>
- <form action="/Asset/assetDirectory" method="get"></form>
-<input type="submit" value="indietro" name="scelta">
-</form>
- <h2></h2>
- <h2></h2>
- <form action="" method="post">
+     </c:forEach>	
+     
+     
+</table>
 
- <h3></h3>
+ <a class="btn lg btn-primary" href="/Asset/homeAsset?scelta=insert">
+ 	Inserisci
+ </a>
 
- </form>
- </body>
+<a class="btn lg btn-primary" 
+		href="/Asset/homeAsset?scelta=indietroAssBad">Indietro</a></br> 
+
+</body>
 </html>

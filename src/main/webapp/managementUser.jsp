@@ -1,5 +1,5 @@
 <%@ page import="java.util.List"%>
-<%@ page import="com.pCarpet.model.User"%>
+<%@ page import="com.pCarpet.dto.UserDTO"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
@@ -22,39 +22,41 @@
 		
 		
 
-		<table border="2" class="table-medium">	
-	
+<table class="bordo rcorners" >	
+	     <tr>
+     <th><h4>USERS</h4></th><td></td><td></td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td class="userimg"></td></tr>
+     <tr>
 	<tr>
         
          <th>
-             ID UTENTE
+             ID utente
          </th>
 
          <th>
-             USERNAME
+             Username
          </th>
          
          <th>
-             PASSWORD
+             Password
          </th>
          
          <th>
-             NOME
+             Ragione Sociale
          </th>
          <th>
-             COGNOME
+             Telefono
          </th>
          <th>
-             TELEFONO
+            Email
          </th>
          <th>
-            EMAIL
+             Partita iva
          </th>
          <th>
-             PARTITA IVA
-         </th>
-         <th>
-            RUOLO
+            Ruolo
+          </th>
+          <th>
+            Nome Abbonamento
           </th>
          <th>
           </th>
@@ -70,22 +72,17 @@
              	<c:out value="${user.iduser}"></c:out>
              
          </td>
-		
-		<td>
+		 <td>
             <c:out value="${user.username}"></c:out>
          </td>
-         
-         <td>
+		 <td>
             <c:out value="${user.password}"></c:out>
          </td>
 
          <td>
-             <c:out value="${user.nome}"></c:out>
+             <c:out value="${user.ragioneSociale}"></c:out>
          </td>
 
-         <td>
-             <c:out value="${user.cognome}"></c:out>
-         </td>
 
          <td>
              <c:out value="${user.telefono}"></c:out>
@@ -98,16 +95,17 @@
          </td>
          <td>
              <c:out value="${user.ruolo}"></c:out>
-             
          </td>
-         
          <td>
+             <c:out value="${user.getAbbonamento().getNome()}"></c:out>
+		</td>
+		<td>
           
-          <a class="btn btn-lg btn-primary btn-block"
+          <a class="btn lg btn-primary"
 			href="/HomeUser/showUsers?choice=update&id=${user.iduser}">Modifica</a>
          </td>
          <td>
-             <a class="btn btn-lg btn-primary btn-block"
+             <a class="btn lg btn-primary"
 			href="/HomeUser/showUsers?choice=delete&id=${user.iduser}">Elimina</a>
          </td>
 		
@@ -118,11 +116,14 @@
      
 </table>
 
- <a class="btn btn-lg btn-primary btn-block" href="/HomeUser/showUsers?choice=insert">
+ <a class="btn lg btn-primary" href="/HomeUser/showUsers?choice=insert">
  	Inserisci
  </a>
 
+<a class="btn lg btn-primary"
+		href="/HomeUser/showUsers?choice=indietro">Indietro</a></br> 
 
+</form>
 
 </body>
 </html>

@@ -1,104 +1,81 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    <%@ page import="com.virtualpairprogrammers.model.Badge"%>
-<%@ page import="java.util.*" %>
+<%@ page import="com.pCarpet.dto.UserDTO"%>
 <!DOCTYPE html>
 <html>
 <head>
-<style>
-table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-}
-
-td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
-}
-
-tr:nth-child(even) {
-    background-color: #dddddd;
-}
-</style>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
-<% Badge badge = (Badge) request.getAttribute("allBadges");%>
+
+<!-- Bootstrap core CSS -->
+<link href="/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="/css/pcarpet.css">
 </head>
 <body>
 
-<h2><center>------- UPDATE BADGE -------</center></h2>
-<form action="BadgeServlet?richiesta=home" method="post">
-	<input type="submit" value="HOME" name="richiesta">
-</form>
-
-	
-<form action="BadgeServlet"  method="post">
- <table>	
-	
+<h2>Inserisci i dati del badge</h2>
+ 
+ </br>
+ 
+<form action="/Badge/modificaBadge" method="post">
+        
+<table class="border rcorners">	
+<tr><th><h4>Badges</h4></th><td></td><td class="imgB"></td></tr>
 	<tr>
         
          <th>
-             ID BADGE
+             ID Badge
          </th>
 
          <th>
-             TIPOLOGIA
-         </th>
-         <th>
-             DESCRIZIONE
+             Tipologia
          </th>
          
          <th>
-          </th>
-         <th>
-          </th>
-
-     </tr>
+             Descrizione
+         </th>
+         
+         
+	</tr>
+	<tr>
 	
-     
-     <tr>
         <td>
-        	<%= badge.getIdBadge()%>
-        </td>
+            <input type="text" value="${badge.idBadge}" disabled>
+         </td>
 
 		<td>
-        	<%=  badge.getDescrizione()%>
-        </td>
+             <input type="text" value="${badge.descrizione}" name="descrizione" style="opacity:0.8">
+         </td>
+         
+         <td>
+            <input type="text" value="${badge.tipologia}" name="tipologia" style="opacity:0.8">
+         </td>
 
-        <td>
-        	<%=  badge.getTipologia()%>
-        </td>
+         
      </tr>
-     
+   
      
 </table>
+
+<br>
+
+<br>
+<input type="hidden" name="id" value="${badge.idBadge}"/>
 
 <table>
-
-	<tr>
-		<td>
-			<input type = "radio" value="tipologia" name="campo">Tipologia
-		</td>
-		<td>
-			<input type = "radio" value="descrizione" name="campo">Descrizione
-		</td>
-		
-
-		
-		<td>
-			<h4>Inserisci il valore del nuovo campo: <input type = "text" id = "nuovoCampo" name ="nuovoCampo" placeholder = "inserisci nuovo campo"></h4>
-		</td>
-	</tr>
+<tr>
+<td>
+<p align="left">
+<button class="btn lg btn-primary" type="submit" value="update" name="choice">Effettua Modifica</button>
+</p>
+</td>
+<td>
+<a class="btn lg btn-primary" 
+		href="/Badge/HomeBadge?scelta=indietrobadgemanagement">Indietro</a>
+</td></tr>
 
 </table>
-<%final int a= badge.getIdBadge();%>
-         <input type="hidden" name="Badge" value="<%=a%>"/>
-<button type="submit" value="updateBadge" name="richiesta">Effettua Modifica
-</button>
-
 </form>
-	
+
 </body>
 </html>

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ page import="com.pCarpet.model.User"%>
+<%@ page import="com.pCarpet.dto.UserDTO"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +10,9 @@
 <!-- Bootstrap core CSS -->
 <link href="/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="/css/pcarpet.css">
+
+<script>var flag=false;</script>
+
 </head>
 <body>
 
@@ -17,136 +20,98 @@
  
  </br>
  
-<form action="/HomeUser/showUsers?choice=update" method="post">
+<form action="/HomeUser/showUsers" method="post">
         
-      <table>	
+<table class="bordo rcorners">	
 	<tr>
         
          <th>
-             ID UTENTE
+             Id Utente
          </th>
 
          <th>
-             USERNAME
+             Username
          </th>
          
          <th>
-             PASSWORD
+             Password
          </th>
          
          <th>
-             NOME
+             Ragione Sociale
          </th>
          <th>
-             COGNOME
+             Telefono
          </th>
          <th>
-             TELEFONO
+            Email
          </th>
          <th>
-            EMAIL
+             Partita iva
          </th>
          <th>
-             PARTITA IVA
-         </th>
-         <th>
-            RUOLO
+            Ruolo
           </th>
-
+			 <th>
+            Nome abbonamento
+          </th>
 	</tr>
 	<tr>
 	
         <td>
-            ${user.iduser}
+           <input type="text" id = "iduser" value="${user.iduser}" disabled class="labcor" text-align="center">
          </td>
 
 		<td>
-             ${user.username}
+             <input type="text" id = "username" value="${user.username}" name="username"class="labcor">
          </td>
          
          <td>
-             ${user.password}
+              <input type="text" id = "nome" value="${user.password}" name="password" class="labcor">
          </td>
 
          <td>
-             ${user.nome}
+              <input type="text" id = "cognome" value="${user.ragioneSociale}" name="ragioneSociale" class="labcor">
          </td>
 
          <td>
-             ${user.cognome}
-         </td>
-
-         <td>
-             ${user.telefono}
+              <input type="text" id = "telefono" value="${user.telefono}" name="telefono" class="labcor">
          </td>
          <td>
-             ${user.mail}
+              <input type="text" id = "mail" value="${user.mail}" name="mail" class="labcor">
          </td>
          <td>
-             ${user.partitaiva}
+              <input type="text" id = "partitaiva" value="${user.partitaiva}" name="partitaiva" class="labcor">
          </td>
          <td>
-            ${user.ruolo}
+             <select id="ruolo" name="ruolo" class="labcor">
+        <option value="${user.ruolo}">${user.ruolo}</option>
+        <option value ="segretaria">segretaria</option>
+		<option value ="cliente">cliente</option>
+		<option value ="owner">owner</option>
+		</select>
          </td>
-         
+          <td>
+             <select id="nomeAbb" name="nomeAbb" class="labcor">
+        <option value="${user.getAbbonamento().getNome()}">${user.getAbbonamento().getNome()}</option>
+        <option value ="3">gold</option>
+		<option value ="2">silver</option>
+		<option value ="1">normale</option>
+		<option value ="4">business</option></select>
+         </td>
      </tr>
    
      
 </table>
 
+</br>
 
-<table>
+</br>
+<input type="hidden" value="${user.iduser}" name="id">
+<button class="btn btn-lg btn-primary" type="submit" value="update" name="choice">Effettua Modifica</button>
 
-	<tr>
-	
-		<td>
-			<input type = "radio" value="username" name="campo">Username
-		</td>
-		
-		<td>
-			<input type = "radio" value="password" name="campo">Password
-		</td>
-		
-		<td>
-			<input type = "radio" value="nome" name="campo">Nome
-		</td>
-		
-		<td>
-			<input type = "radio" value="cognome" name="campo">Cognome
-		</td>
-		
-		<td>
-			<input type = "radio" value="telefono" name="campo">Telefono
-		</td>
-		
-		<td>
-			<input type = "radio" value="mail" name="campo">Mail
-		</td>
-		
-		<td>
-			<input type = "radio" value="partitaiva" name="campo">Partita Iva
-		</td>
-		
-		<td>
-			<input type = "radio" value="ruolo" name="campo">Ruolo
-		</td>
-		
-		
-		
-<!--  		<td>
-			<h4>Inserisci l'id dell'utente da modificare: <input type = "text" id = "user" name ="id" placeholder = "inserisci id"></h4>
-		</td>
-		-->
-		<td>
-			<h4>Inserisci il valore del nuovo campo: <input type = "text" id = "nuovoCampo" name ="nuovoCampo" placeholder = "inserisci nuovo campo"></h4>
-		</td>
-	</tr>
-
-</table>
-
-         <input type="hidden" name="id" value="${user.iduser}"/>
-<button type="submit" value="updateUser" name="richiesta">Effettua Modifica
-</button>
+<a class="btn btn-lg btn-primary" 
+		href="/HomeUser/showUsers?choice=indietroManagementUser">Indietro</a></br>
 
 </form>
 

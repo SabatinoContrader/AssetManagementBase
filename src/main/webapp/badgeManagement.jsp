@@ -1,97 +1,76 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-    <%@ page import="com.virtualpairprogrammers.model.Badge"%>
-<%@ page import="java.util.*" %>
+<%@ page import="java.util.List"%>
+<%@ page import="com.pCarpet.dto.BadgeDTO"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
-
-<style>
-table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-}
-
-td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
-}
-
-tr:nth-child(even) {
-    background-color: #dddddd;
-}
-</style>
-
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-<% List<Badge> allBadge = (List<Badge>) request.getAttribute("allBadges");%>
+<!-- Javascript -->
+<script src="/css/googleApiManagerDriver.js"></script>
+<!-- Bootstrap core CSS -->
+<link href="/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<h2><center>------- MANAGEMENT BADGE -------</center></h2>
-<form action="BadgeServlet?richiesta=home" method="post">
-	<input type="submit" value="HOME" name="richiesta">
-</form>
+<form class="form-signin" action="/Badge/HomeBadge" method="post">
+	<h1 class="element-margin-left">Elenco badges</h1>
 	
-<form action="BadgeServlet" method="post">
- <table>	
+<table class="border rcorners">	
 	
+	
+	<tr><th><h4>Badges</h4></th><td></td><td></td><td></td><td class="imgB"></td></tr>
 	<tr>
         
          <th>
-             ID BADGE
+             ID badge
          </th>
 
          <th>
-             TIPOLOGIA
-         </th>
-         <th>
-             DESCRIZIONE
+             Tipologia
          </th>
          
          <th>
-          </th>
-         <th>
-          </th>
-
-     </tr>
-	
-        <%for (Badge badge : allBadge) { %>
+              Descrizione
+         </th>
+         </tr>
+          <c:forEach items="${badges}" var="badge">
      	
          <td>
              
-             	<%= badge.getIdBadge()%>
+             	<c:out value="${badge.idBadge}"></c:out>
              
          </td>
-
+		
 		<td>
-             <%=  badge.getDescrizione()%>
+            <c:out value="${badge.descrizione}"></c:out>
          </td>
-
-         <td>
-             <%=  badge.getTipologia()%>
-         </td>
-
          
          <td>
-             <a href="BadgeServlet?richiesta=update&id=<%= badge.getIdBadge() %>">Modifica</a>
+            <c:out value="${badge.tipologia}"></c:out>
+         </td>
+                  </td>
+         
+         <td>
+          
+          <a class="btn lg btn-primary btn-block"
+			href="/Badge/modificaBadgeRedirect?id=${badge.idBadge}">Modifica</a>
          </td>
          <td>
-             <a href="BadgeServlet?richiesta=deleteBadge&id=<%= badge.getIdBadge() %>"  >
-             	Elimina
-             </a>
+             <a class="btn lg btn-primary btn-block"
+			href="/Badge/HomeBadge?scelta=delete&id=${badge.idBadge}">Elimina</a>
          </td>
-
      </tr>
-     <% }%>
-     
+     </c:forEach>	
+     </table>
+<table>
+<tr><td>
+ <a class="btn lg btn-primary" 
+ href="/Badge/HomeBadge?scelta=insert&id=${badge.idBadge}">Inserisci</a>
+</td>
+<td>
+<a class="btn lg btn-primary" 
+		href="/Badge/HomeBadge?scelta=indietro">Indietro</a>
+</td></tr>
 </table>
-<a href="BadgeServlet?richiesta=insert" >
-             	Inserisci
-</a>
-</form>
-	
-	
 </body>
+     
 </html>
