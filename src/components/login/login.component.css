@@ -2,18 +2,29 @@ body {
 	text-align: center;
     font-family: Arial, Helvetica, sans-serif;
 
-    background-image: url('D:\Angular\AmebaAngular\src\assets\images\userLogin.jpg');
+    
+    background-image: url('D:/Angular/AmebaAngular/src/assets/images/userLogin.png');
     background-repeat: no-repeat;
     background-size: 200px;
     background-position-x: center;
+    background-position-y: 100px;
+    
     
 }
+/*
+.userimg{
+    width:"178";
+    background: url('D:\Angular\AmebaAngular\src\assets\images\userLogin.png');
+    background-repeat: no-repeat;
+    background-position: right top;
+    }
+    */
 form {
 	border: 3px solid #f1f1f1;
 	box-shadow: 0px 2px 5px 3px #888888;
 	width: 800px;
 	display: inline-block;
-	margin-top: 100px;
+	margin-top: 50px;
 }
 
 input[type=text], input[type=password] {
