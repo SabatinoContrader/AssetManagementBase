@@ -2,22 +2,26 @@ package com.pCarpet.controller;
 
 
 import com.pCarpet.dto.BadgeDTO;
+import com.pCarpet.dto.UserDTO;
 import com.pCarpet.services.BadgeService;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.ui.Model;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 
 
 
 
 
-@Controller
+@RestController
+@CrossOrigin
 @RequestMapping("/Badge")
 public class BadgeController {
 
@@ -33,8 +37,38 @@ public class BadgeController {
 		this.badgeService = badgeService;
 	}
 	
+	
+	@RequestMapping(value = "/showBadges", method = RequestMethod.GET)
+	public List<BadgeDTO> getAllBadges(HttpServletRequest request, Model model ) {
+		return this.badgeService.getAllBadges();
+	}
+	
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public List<BadgeDTO> deleteControl(HttpServletRequest request, Model model ) {
+		int id=Integer.parseInt(request.getParameter("id"));
+		this.badgeService.deleteBadge(id);
+		List<BadgeDTO> badges = badgeService.getAllBadges();
+		return badges;
+	}
+	
+	@RequestMapping(value = "/modify", method = RequestMethod.GET)
+	public List<BadgeDTO> modifyControl(HttpServletRequest request, Model model ) {
+		System.out.println("TEST1");
+		long id=Integer.parseInt(request.getParameter("idbadge"));
+		System.out.println("TEST2:"+id);
+		String tipologia=request.getParameter("tipologia");
+		System.out.println("TEST3 TIPOLOGIA:"+tipologia);
+		String descrizione=request.getParameter("descrizione");
+		System.out.println("TEST4 DESCRIZIONE:"+descrizione);
+		BadgeDTO badgeDTO = new BadgeDTO(id,descrizione,tipologia,1);
+		this.badgeService.insertBadge(badgeDTO);
+		List<BadgeDTO> badges = badgeService.getAllBadges();
+		return badges;
+	}
+	
 	@RequestMapping(value = "/HomeBadge", method = RequestMethod.GET)
 	public String getBadges(HttpServletRequest request, Model model ) {
+		/*
 		List<BadgeDTO> badges = badgeService.getAllBadges();
 		model.addAttribute("badges", badges);
 
@@ -63,6 +97,8 @@ public class BadgeController {
 	}
 	
 	return "badgeManagement";
+	*/
+		return "";
 }
 
 

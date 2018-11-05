@@ -54,7 +54,39 @@
 </td>
 <td><button type="submit" value="export" class="btn lg btn-primary" name="richiesta">Esporta</button>
 </td></tr>
+
 </table>
+
+</br>
+</br>
+
+<table class="border rcorners">
+	<tr></tr>
+	<tr>
+	<th>
+    	ID BadgeReader
+    </th>
+    
+    <th>
+    	ID Badge
+    </th>
+		<td>
+			<input type="text" id="badgereader" name="badgereader" class="rcorners">
+		</td>
+		<td>
+			<input type="text" id="badge" name="badge" class="rcorners">
+		</td>
+	</tr>
+</table>
+
+</br>
+
+<table>
+	<tr>
+	<button type="submit" value="insServer" class="btn lg btn-primary" name="richiesta">Effettua inserimento</button>
+	</tr>
+</table>
+
 </form>
  <!-- <h3><a href="insertProdotto.jsp">1. - Inserisci nuovo Asset</a></h3> -->
  <!-- <input type="text" value="Scelta" name="richiesta">

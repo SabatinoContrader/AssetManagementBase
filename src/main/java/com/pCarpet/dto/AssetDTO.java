@@ -1,5 +1,7 @@
 package com.pCarpet.dto;
 
+import java.net.URL;
+
 public class AssetDTO {
 
 	private long idAsset;
@@ -7,10 +9,13 @@ public class AssetDTO {
 	private String tipo;
 	private double prezzo;
 	private long flag;
+	private URL url;
 	
 	public AssetDTO() {
 		
 	}
+	
+	
 	
 	public AssetDTO(long idAsset, String tipo, String descrizione, double prezzo, long flag) {
 		this();
@@ -28,7 +33,13 @@ public class AssetDTO {
 		this.prezzo=prezzo;
 	}
 
-	
+	public AssetDTO(String tipo, String descrizione, double prezzo, URL url) {
+		this();
+		this.descrizione = descrizione;
+		this.tipo = tipo;
+		this.prezzo=prezzo;
+		this.url=url;
+	}
 	
 	public long getIdAsset() {
 		return idAsset;
@@ -69,6 +80,19 @@ public class AssetDTO {
 	public void setPrezzo(double prezzo) {
 		this.prezzo = prezzo;
 	}
+
+
+
+	public URL getUrl() {
+		return url;
+	}
+
+
+
+	public void setUrl(URL url) {
+		this.url = url;
+	}
+
 	
 	
 	

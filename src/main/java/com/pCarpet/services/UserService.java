@@ -38,6 +38,8 @@ public class UserService {
     public String login (String username, String password) {
     	List<User> l=(List<User>) this.userRepository.findAll();
     	for(User u: l) {
+    		System.out.println("TEST1:"+username);
+    		System.out.println("TEST2:"+u.getUsername());
     		if(username.equals(u.getUsername()) && password.equals(u.getPassword())) {
     			
     			return u.getRuolo();

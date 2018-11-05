@@ -9,5 +9,4 @@ import com.pCarpet.model.Abbonamento;
 public interface AbbonamentoRepository extends CrudRepository<Abbonamento, Long>{
 
 	
-	
 }

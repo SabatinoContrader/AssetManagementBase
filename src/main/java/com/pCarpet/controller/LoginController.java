@@ -1,6 +1,6 @@
 package com.pCarpet.controller;
 
-import com.google.gson.JsonObject;
+
 import com.pCarpet.dto.AbbonamentoDTO;
 import com.pCarpet.dto.AssetDTO;
 import com.pCarpet.dto.StatoDTO;
@@ -10,25 +10,31 @@ import com.pCarpet.services.AssetService;
 import com.pCarpet.services.StatoService;
 import com.pCarpet.services.UserService;
 
-import net.sf.json.JSONArray;
-
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URL;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.ws.rs.POST;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 
 import org.springframework.ui.Model;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 
 //@Controller
-@Controller
+@RestController
+@CrossOrigin
 @RequestMapping("/Login")
 public class LoginController {
 
@@ -46,11 +52,11 @@ public class LoginController {
 		this.statoService=statoService;
 		this.assetService=assetService;
 	}
-
+	//@POST
 	@RequestMapping(value = "/loginControl", method = RequestMethod.POST)
-	public String loginControl(HttpServletRequest request, Model model ) {
-		
-		
+	@CrossOrigin
+	public List<UserDTO> loginControl(HttpServletRequest request, Model model) {
+	
 		defaultAbb("normale",100);
 		defaultAbb("silver",200);
 		defaultAbb("gold",300);
@@ -60,24 +66,37 @@ public class LoginController {
 		defaultStato("attivo");
 		
 		defaultAsset();
-		
-		JSONArray j=null;
-		
+		List<UserDTO> lUserDTO=new ArrayList<>();
+		lUserDTO=this.userService.getAllUsers();
+		return lUserDTO;
+		/*
 		this.session = request.getSession();
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		String ruolo = this.userService.login(username, password);
 		if (ruolo!="") {
-			//session.setAttribute("user", this.user);
 			if (ruolo.equals("segretaria")) {
 				
+				   
+				   
+//				UserDTO userDTO=new UserDTO("patrizia","segretaria");
+//				List<UserDTO> listuserDTO = new ArrayList<UserDTO>();
+//				listuserDTO.add(userDTO);
 				
-//				JsonObject utente=new JsonObject();
-//				utente.addProperty(username, password);
-//	
-//				
-//				return utente.toString();
-				return "homeSegretaria";
+				List<UserDTO> listuserDTO = userService.getAllUsers();
+				        
+//				        URI uri = uriInfo.getAbsolutePathBuilder().path(String.valueOf(assDTO.getIdAsset())).build();
+//				        return Response.created(uri)
+//				                .entity(assDTO)
+//				                .build();
+				
+				
+				
+				
+				//AssetDTO assDTO=new AssetDTO("prova1","prova2",5,url,"porcaputtana");
+				return listuserDTO;
+				
+				//return "homeSegretaria";
 			}	
 			else if (this.user.getRuolo().equals("cliente")) {
 				//return "homeCliente";
@@ -93,7 +112,10 @@ public class LoginController {
 			model.addAttribute("feedback", "wrong");
 			//return "index";
 		}
-		return "index";
+		return null;
+		//return "index";
+		 * 
+		 */
 	}
 	
 	@RequestMapping(value = "/logoutControl", method = RequestMethod.GET)

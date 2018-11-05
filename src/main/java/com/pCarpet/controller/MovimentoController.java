@@ -9,6 +9,7 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.UnknownHostException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -80,6 +81,10 @@ public class MovimentoController{
 	private BadgeService badgeService;
 	public static final int PORT = 1050; 
 	
+	private String badgereader;
+	private String badge;
+	
+	
 	@Autowired
 	public MovimentoController(UserService userService, MovimentoService movimentoService, PrenotazioneService prenotazioneService,AssegnazioneService assegnazioneService,BadgeReaderService badgereaderService,BadgeService badgeService) throws IOException {
 		this.userService = userService;
@@ -89,7 +94,7 @@ public class MovimentoController{
 		this.assegnazioneService=assegnazioneService;
 		this.badgereaderService=badgereaderService;
 		this.badgeService=badgeService;
-		Server();
+		
 		
 	
 	}
@@ -112,8 +117,7 @@ public class MovimentoController{
 	
 	
 	@RequestMapping(value = "/homeMovimento", method = RequestMethod.POST)
-	public String LogsExp(HttpServletRequest request, Model model )
-	{
+	public String LogsExp(HttpServletRequest request, Model model ){
 		String scelta= request.getParameter("richiesta");
 		if (scelta.equals("exportdue")) {
 			if (writeOnExcel(request)) 
@@ -127,16 +131,31 @@ public class MovimentoController{
 		}
 		else if(scelta.equals("export"))
 		{
-	this.allUsers = this.userService.getAllUsers();
-	request.setAttribute("visualizzaUsers", allUsers);
-    	return "logsExportHome";
+			
+			this.allUsers = this.userService.getAllUsers();
+			request.setAttribute("visualizzaUsers", allUsers);
+			return "logsExportHome";
 		}
-		else if(scelta.equals("indietroHome"))
+		else if(scelta.equals("indietroHome")) {
 			return "homeLogs";
+		}
+		else if(scelta.equals("insServer")) {
+			badgereader=request.getParameter("badgereader");
+			badge=request.getParameter("badge");
+			
+			try {
+				//Server();
+				Client();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
 		this.allUsers = this.userService.getAllUsers();
 		request.setAttribute("visualizzaUsers", allUsers);
 		return "logsExportHome";
-		}
+	}
 	
 	public boolean writeOnExcel(HttpServletRequest request) {
     	String par=request.getParameter("dir").toString();
@@ -534,7 +553,8 @@ public String formatData(String oldDate) {
 		
 		
 	}
-public void Server() throws IOException {
+
+	public void Server() throws IOException {
 	
 
 	ServerSocket serverSocket = new ServerSocket(PORT);
@@ -556,18 +576,20 @@ public void Server() throws IOException {
 	  BufferedWriter bw = new BufferedWriter(osw);
 	    out = new PrintWriter(bw, true);
 	//ciclo di ricezione dal client e invio di risposta
-	while(true) {
+	    
+	//while(true) {
 		
 	      String badgereader = in.readLine();
-	      if(badgereader.equals("END")) break;
+	      //if(badgereader.equals("END")) break;
 	      System.out.println("Echoing: "+ badgereader);
 	      out.println(badgereader);
 	      String badge = in.readLine();
-	      if(badge.equals("END")) break;
+	      //if(badge.equals("END")) break;
 	      System.out.println("Echoing: "+ badge);
 	      out.println(badge);
 	      simulatore(badgereader,badge);
-	 }
+	 //}
+	
 	 }
 	catch
 	 (IOException e) {System.err.println("Accept failed");
@@ -579,9 +601,68 @@ public void Server() throws IOException {
 	  in.close();
 	  clientSocket.close();
 	  serverSocket.close();
-	 }
+	 }//server
 
-	
+	public void Client() throws IOException {
+		/* Lanciando il programma senza argomenti si ottiene il local loopback IP address,
+		  per testarlo in locale (client e server sulla stessa macchina), altrimenti
+		  si possono passare da linea di comando l’indirizzo o il nome della macchina remota */
+		 
+		  Socket socket=null;
+		  BufferedReader in=null, stdIn=null;
+		  PrintWriter out=null;
+		  String addr="192.168.2.79";
+		  try
+		 {
+		// creazione socket
+		    socket = new
+		    //Socket("addr", 1050);
+		    		
+		    Socket(addr, 1050);
+		    System.out.println("EchoClient: started");
+		System.out.println("Client Socket: "+ socket);
+		// creazione stream di input da socket
+		    InputStreamReader isr = new InputStreamReader( socket.getInputStream());
+		    in = new BufferedReader(isr);
+		// creazione stream di output su socket
+		    OutputStreamWriter osw = new OutputStreamWriter( socket.getOutputStream());
+		  BufferedWriter bw = new BufferedWriter(osw);
+		    out = new PrintWriter(bw, true);
+		// creazione stream di input da tastiera
+		    stdIn = new BufferedReader(new InputStreamReader(System.in));
+		    //String badgeReader = null;
+		    //String badge = null;
+		// ciclo di lettura da tastiera, invio al server e stampa risposta
+		   // while(true){
+		    	//System.out.println("Insersci il BadgeReader:");
+		    	//badgeReader = stdIn.readLine();
+		        out.println(badgereader);
+		        //if (badgereader.equals("END")) break;
+		        System.out.println("Echo: "+ in.readLine());
+		        
+		        //System.out.println("Insersci il Badge:");
+		        //badge = stdIn.readLine();
+		        out.println(badge);
+		        //if (badge.equals("END")) break;
+		        System.out.println("Echo: "+ in.readLine());
+		     //}
+		  }
+		catch
+		 (UnknownHostException e) {
+		    System.err.println("Don’t know about host "+ addr);
+		    System.exit(1);
+		  } 
+		catch
+		 (IOException e) {
+		      System.err.println("Couldn’t get I/O for the connection to: "+ addr);
+		      System.exit(1);
+		    }
+		  System.out.println("EchoClient: closing...");
+		  out.close();
+		  in.close();
+		  stdIn.close();
+		  socket.close();
+	}//client
 
 	
 	public void simulatore(String badgereader, String badge) {
@@ -689,7 +770,7 @@ public void Server() throws IOException {
 	        }
 	        
 		
-	}
+	}//simulatore
 
 
 }
