@@ -1,0 +1,68 @@
+body {
+	text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+
+    background-image: url('D:\Angular\AmebaAngular\src\assets\images\userLogin.jpg');
+    background-repeat: no-repeat;
+    background-size: 200px;
+    background-position-x: center;
+    
+}
+form {
+	border: 3px solid #f1f1f1;
+	box-shadow: 0px 2px 5px 3px #888888;
+	width: 800px;
+	display: inline-block;
+	margin-top: 100px;
+}
+
+input[type=text], input[type=password] {
+    width: 30%;
+    padding: 12px 20px;
+	margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+	box-sizing: border-box;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+	width: 30%;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+/* Immagine centrata */
+.imgcontainer {
+    text-align: center;
+    margin: 24px 0 12px 0;
+}
+
+/* Immagine con bordo rotondo */
+img.avatar {
+    width: 40%;
+    border-radius: 50%;
+}
+
+span {
+	color:red;
+	font-family: 'Times New Roman', Times, serif;
+	margin-left: 8px;
+}
+
+:disabled{
+	background-color:gray;
+	opacity: 0.8;
+}
+
+.img{
+    
+}
+

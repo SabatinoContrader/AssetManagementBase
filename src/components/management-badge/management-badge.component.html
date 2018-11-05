@@ -1,0 +1,67 @@
+<body>
+  <app-menu-customer></app-menu-customer>
+  
+  <form #f='ngForm'>
+    
+  <table class="bordo corners" width="1185px">	
+    
+    
+    <tr><th><h1>Badges</h1></th><td></td><td></td><td></td><td class="imgB"></td></tr>
+    <hr width=339% size=4 color=red>
+    <tr>
+          
+      <th>
+        ID badge
+      </th>
+  
+      <th>
+        Descrizione
+      </th>
+           
+      <th>
+        Tipologia
+      </th>
+    </tr>
+            
+    <tr *ngFor="let badge of badges; let idx=index;">
+          
+      <td>
+        <input type="text" value="{{badge.idBadge}}" class="labcor labtext" size="2" disabled>
+      </td>
+      
+      <td>
+        <input name="descrizione" [value]="badges[idx].descrizione" (input)="badges[idx].descrizione=$event.target.value" type="text" class="labcor labtext" size="10" [disabled]="disabledRow[idx]">
+      </td>
+           
+      <td>
+          <input name="tipologia" [value]="badges[idx].tipologia" (input)="badges[idx].tipologia=$event.target.value" type="text" class="labcor labtext" size="10" [disabled]="disabledRow[idx]">
+      </td>
+                    
+      <div *ngIf="visButton">
+        <td>
+          <Button class="button button1" (click)="modify($event, idx)">Modifica</Button>
+        </td>
+           
+        <td>
+          <Button class="button button3" (click)="delete($event, badge.idBadge)">Elimina</Button>
+        </td>
+      </div>
+
+
+      
+
+      <div *ngIf="!disabledRow[idx]">
+          <td>   
+            <Button class="button button1" (click)="apply($event, idx, badge.idBadge,f)">Applica</Button>
+          </td>
+          <td>   
+            <Button class="button button3" (click)="annulla($event)">Annulla</Button>
+          </td>
+      </div>
+
+    </tr>	
+    
+  </table>
+  
+  </form>
+</body>

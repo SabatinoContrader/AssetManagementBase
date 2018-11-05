@@ -1,0 +1,124 @@
+<body>
+    <app-menu-customer></app-menu-customer>
+
+<form #f='ngForm'>
+  <table class="bordo corners" width="1200px">
+      
+    <tr>
+      <th>
+        <h1>USERS</h1></th><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td class="userimg"></td>
+    </tr>
+    <hr width=1063% size=4 color=red>
+    <tr>
+      
+      <th>
+        ID utente
+      </th>
+      <th>
+        Username
+      </th>
+    
+      <th>
+        Password
+      </th>
+    
+      <th>
+        Ragione Sociale
+      </th>
+      <th>
+        Telefono
+      </th>
+      <th>
+        Email
+      </th>
+      <th>
+        Partita Iva
+      </th>
+      <th>
+        Ruolo
+      </th>
+      <th>
+        Nome Abbonamento
+      </th>
+      <th>
+      </th>
+      <th>
+      </th>
+   
+    </tr>
+
+
+     
+    
+    <tr *ngFor="let user of utenti; let idx = index;">
+        
+      <td>
+    
+        <input type="text" value="{{user.iduser}}" class="labcor labtext" size="2" disabled>
+    
+      </td>
+      <td>
+          <input name="username" [value]="utenti[idx].username" (input)="utenti[idx].username=$event.target.value" type="text" class="labcor labtext" size="10" [disabled]="disabledRow[idx]">
+      </td>
+      <td>
+          <input name="password" [value]="utenti[idx].password" (input)="utenti[idx].password=$event.target.value" type="text" class="labcor labtext" size="10" [disabled]="disabledRow[idx]">
+      </td>
+    
+      <td>
+        <!--Se uso direttamente [(ngModel)] mi fa vedere in tutte le righe l'ultimo valore dell'array utenti, per questo l'ho
+        sdoppiato. idx mi permette, invece, di ottente l'indice (number) del ciclo.-->
+          <input name="ragioneSociale" [value]="utenti[idx].ragioneSociale" (input)="utenti[idx].ragioneSociale=$event.target.value" type="text"  class="labcor labtext" size="10" [disabled]="disabledRow[idx]">
+      </td>
+    
+      <td>
+          <input name="telefono" [value]="utenti[idx].telefono" (input)="utenti[idx].telefono=$event.target.value" type="text" class="labcor labtext" size="10" [disabled]="disabledRow[idx]">
+      </td>
+      <td>
+          <input name="mail" [value]="utenti[idx].mail" (input)="utenti[idx].mail=$event.target.value" type="text" class="labcor labtext" size="15" [disabled]="disabledRow[idx]">
+      </td>
+      <td>
+          <input name="partitaiva" [value]="utenti[idx].partitaiva" (input)="utenti[idx].partitaiva=$event.target.value" type="text" class="labcor labtext" size="11" [disabled]="disabledRow[idx]">
+      </td>
+      <td>
+          <input name="ruolo" [value]="utenti[idx].ruolo" (input)="utenti[idx].ruolo=$event.target.value" type="text" class="labcor labtext" size="12" [disabled]="disabledRow[idx]">
+      </td>
+      <td>
+          <!--Il tag select non ha un value quindi, in automatico, l'evento (input) resta in ascolto su tutti gli <option> di quel
+          <select>-->
+          <select id="user" name = "abbonamento" [disabled]="disabledRow[idx]" class="labcor labtext" (input)="utenti[idx].abbonamento.id=$event.target.value">
+            <option value ="3" [selected]="utenti[idx].abbonamento.nome=='gold'">gold</option>
+            <option value ="2" [selected]="utenti[idx].abbonamento.nome=='silver'">silver</option>
+            <option value ="1" [selected]="utenti[idx].abbonamento.nome=='normale'">normale</option>
+          <option value ="4"  [selected]="utenti[idx].abbonamento.nome=='business'">business</option></select>
+
+      </td>
+    
+      <div *ngIf="visButton">
+      <td>   
+        <Button class="button button1" (click)="modify($event, idx)">Modifica</Button>
+       </td>
+       <td>
+        <Button class="button button3" (click)="delete($event, user.iduser)">Elimina</Button>
+       </td>
+      </div>
+
+      <div *ngIf="!disabledRow[idx]">
+        <td>   
+          <Button class="button button1" (click)="apply($event,idx, user.iduser,f)">Applica</Button>
+        </td>
+        <td>   
+            <Button class="button button3" (click)="annulla($event)">Annulla</Button>
+          </td>
+      </div>
+      
+          
+      
+
+    </tr>
+    
+     
+    
+  </table>
+  
+  </form>
+  </body>
