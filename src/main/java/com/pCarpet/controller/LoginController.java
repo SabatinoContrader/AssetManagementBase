@@ -1,6 +1,6 @@
 package com.pCarpet.controller;
 
-import com.google.gson.JsonObject;
+//import com.google.gson.JsonObject;
 import com.pCarpet.dto.AbbonamentoDTO;
 import com.pCarpet.dto.AssetDTO;
 import com.pCarpet.dto.StatoDTO;
@@ -10,7 +10,7 @@ import com.pCarpet.services.AssetService;
 import com.pCarpet.services.StatoService;
 import com.pCarpet.services.UserService;
 
-import net.sf.json.JSONArray;
+//import net.sf.json.JSONArray;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
