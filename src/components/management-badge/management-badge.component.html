@@ -3,7 +3,7 @@
   
   <form #f='ngForm'>
     
-  <table class="bordo corners" width="1185px">	
+  <table class="bordo corners" width="1185px">	 
     
     
     <tr><th><h1>Badges</h1></th><td></td><td></td><td></td><td class="imgB"></td></tr>
@@ -60,6 +60,37 @@
       </div>
 
     </tr>	
+
+
+    <tr *ngIf="visInsert">
+
+        <td>
+            <input type="text" value="-" class="labcor labtext" size="2" disabled>
+          </td>
+          
+          <td>
+            <input name="descrizione" value="" (input)="insertBadge.descrizione=$event.target.value" type="text" class="labcor labtext" size="10" [disabled]="disabledRow[idx]">
+          </td>
+               
+          <td>
+              <input name="tipologia" value="" (input)="insertBadge.tipologia=$event.target.value" type="text" class="labcor labtext" size="10" [disabled]="disabledRow[idx]">
+          </td>
+
+        <div *ngIf="visInsert">
+            <td>   
+              <Button class="button button1" (click)="applyInsert($event)">Applica</Button>
+            </td>
+            <td>   
+                <Button class="button button3" (click)="annulla($event)">Annulla</Button>
+              </td>
+        </div>
+
+    </tr>
+
+    <td></td><td></td><td></td>
+    <br/>
+    <Button class="button button1" (click)="insert($event)" style="padding: 1.5% 14%;">Inserisci</Button>
+
     
   </table>
   

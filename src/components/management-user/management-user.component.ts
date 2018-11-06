@@ -16,22 +16,23 @@ export class ManagementUserComponent implements OnInit {
 
   
   utenti = new Array<User>();
+  insertUtente = new User(0,"","","","","","cliente","",new Abbonamento(3,"",0),null);
   disabledRow = new Array<boolean>();
   visButton=true;
+  visInsert;
 
 
   constructor(private userService: UserService) { }
 
   ngOnInit() {
-   
-    this.userService.getAllUsers().subscribe((response)=>{
 
+    this.userService.getAllUsers().subscribe((response)=>{
       //Ottenimento di tutti gli utenti dal DB
       this.utenti=response;
 
 
       //Tutte le righe disabilitate
-      for(let i=0; i<response.length;i++){
+      for(let i=0; i<=response.length;i++){
         this.disabledRow[i]=true;
       }
 
@@ -43,12 +44,14 @@ export class ManagementUserComponent implements OnInit {
         console.log(this.utenti[0].partitaIva);
       }
       */
-     
-    });
-    
-    //Bottoni visibili
-    this.visButton=true;  
 
+
+      //Bottoni visibili
+      this.visButton=true;  
+
+      //Riga insert non generata
+      this.visInsert=false;
+    });
     
     
   }
@@ -65,7 +68,7 @@ export class ManagementUserComponent implements OnInit {
   }
 
   //idx è il perfetto indice dell'array utenti (non id!).
-  apply(c:String,idx:number,id:number,f: NgForm):void{
+  applyModify(c:String,idx:number,id:number):void{
     this.disabledRow[idx]=true;
     this.visButton=true;
     this.userService.modify(id,this.utenti[idx].username,this.utenti[idx].password, 
@@ -79,6 +82,30 @@ export class ManagementUserComponent implements OnInit {
 
   annulla(f:String,id:number):void{
     this.ngOnInit();
+  }
+
+  insert(f:string):void{
+    this.visButton=false;
+    this.visInsert=true;
+    //this.utenti.push(new User(0,"","","","","","","",new Abbonamento(3,"",0),null));
+    
+  } 
+
+  applyInsert(c:String):void{
+    
+    //this.visButton=true;
+    //this.utenti[idx+1].username
+    this.userService.insert(0,this.insertUtente.username,this.insertUtente.password, 
+                            this.insertUtente.ragioneSociale, this.insertUtente.telefono, 
+                            this.insertUtente.mail, this.insertUtente.partitaiva, this.insertUtente.ruolo, 
+                            this.insertUtente.abbonamento.id)
+                            .subscribe((response)=>{
+                              this.utenti=response;
+                            });    
+    //this.visInsert=false;
+
+    this.ngOnInit();
+  
   }
 
 

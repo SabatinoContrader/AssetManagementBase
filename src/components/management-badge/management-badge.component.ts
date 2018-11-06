@@ -13,18 +13,25 @@ export class ManagementBadgeComponent implements OnInit {
   constructor(private badgeService: BadgeService) { }
 
   badges = new Array<Badge>();
+  insertBadge = new Badge(0,"","");
   disabledRow = new Array<boolean>();
-  visButton=true;
+  visButton=true; 
+  visInsert;
 
   ngOnInit() { 
     this.badgeService.getAllBadges().subscribe((response)=>{
       this.badges=response;
 
-      for(let i=0; i<response.length;i++){
+      for(let i=0; i<=response.length;i++){
         this.disabledRow[i]=true;
       }
     });
+    
+    //Bottoni visibili
     this.visButton=true;
+
+    //Riga insert non generata
+    this.visInsert=false;
   }
 
   delete(f:string, id:number) :void{
@@ -48,6 +55,27 @@ export class ManagementBadgeComponent implements OnInit {
 
   annulla(f:String):void{
     this.ngOnInit();
+  }
+
+  insert(f:string):void{
+    this.visButton=false;
+    this.visInsert=true;
+    //this.utenti.push(new User(0,"","","","","","","",new Abbonamento(3,"",0),null));
+    
+  } 
+
+  applyInsert(c:String):void{
+    
+    //this.visButton=true;
+    //this.utenti[idx+1].username
+    this.badgeService.insert(0,this.insertBadge.tipologia,this.insertBadge.descrizione)
+                            .subscribe((response)=>{
+                              this.badges=response;
+                            });    
+    //this.visInsert=false;
+
+    this.ngOnInit();
+  
   }
 
 

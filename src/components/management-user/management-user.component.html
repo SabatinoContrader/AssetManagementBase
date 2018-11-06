@@ -1,14 +1,18 @@
+<html>
 <body>
+  <!--<div style="width: 100%">-->
+<div>
     <app-menu-customer></app-menu-customer>
-
+  </div>
+<div>
 <form #f='ngForm'>
-  <table class="bordo corners" width="1200px">
+  <table class="bordo rcorner">
       
     <tr>
       <th>
         <h1>USERS</h1></th><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td class="userimg"></td>
     </tr>
-    <hr width=1063% size=4 color=red>
+    <hr size=4 color=red>
     <tr>
       
       <th>
@@ -80,7 +84,13 @@
           <input name="partitaiva" [value]="utenti[idx].partitaiva" (input)="utenti[idx].partitaiva=$event.target.value" type="text" class="labcor labtext" size="11" [disabled]="disabledRow[idx]">
       </td>
       <td>
+          <select id="ruolo" name="ruolo" class="labcor labtext" [disabled]="disabledRow[idx]" (input)="utenti[idx].ruolo=$event.target.value">
+              <option value="cliente" [selected]="utenti[idx].ruolo=='gold'">cliente</option>
+              <option value="segretaria" [selected]="utenti[idx].ruolo=='segretaria'">segretaria</option>
+          </select>
+          <!--
           <input name="ruolo" [value]="utenti[idx].ruolo" (input)="utenti[idx].ruolo=$event.target.value" type="text" class="labcor labtext" size="12" [disabled]="disabledRow[idx]">
+          -->
       </td>
       <td>
           <!--Il tag select non ha un value quindi, in automatico, l'evento (input) resta in ascolto su tutti gli <option> di quel
@@ -104,21 +114,87 @@
 
       <div *ngIf="!disabledRow[idx]">
         <td>   
-          <Button class="button button1" (click)="apply($event,idx, user.iduser,f)">Applica</Button>
+          <Button class="button button1" (click)="applyModify($event,idx, user.iduser)">Applica</Button>
         </td>
         <td>   
             <Button class="button button3" (click)="annulla($event)">Annulla</Button>
           </td>
       </div>
       
+    </tr>
+    <!--utenti[idx+1].username
+    {{utenti[utenti.length-1].iduser + 1}}-->
+    <tr *ngIf="visInsert">
+
+        <td>
+          <input type="text" value="-" class="labcor labtext" size="2" disabled>
+        </td>
+        <td> 
+          <input name="username" value="" (input)="insertUtente.username=$event.target.value" type="text"
+            class="labcor labtext" size="10">
+        </td>
+        <td>
+          <input name="password" value="" (input)="insertUtente.password=$event.target.value" type="text"
+            class="labcor labtext" size="10">
+        </td>
+        
+        <td>
+          <input name="ragioneSociale" value="" (input)="insertUtente.ragioneSociale=$event.target.value"
+            type="text" class="labcor labtext" size="10">
+        </td>
+        
+        <td> 
+          <input name="telefono" value="" (input)="insertUtente.telefono=$event.target.value" type="text"
+            class="labcor labtext" size="10">
+        </td>
+        <td>
+          <input name="mail" value="" (input)="insertUtente.mail=$event.target.value" type="text" class="labcor labtext"
+            size="15">
+        </td>
+        <td>
+          <input name="partitaiva" value="" (input)="insertUtente.partitaiva=$event.target.value" type="text"
+            class="labcor labtext" size="11">
+        </td>
+        <td>
+          <select id="ruolo" name="ruolo" class="labcor labtext" (input)="insertUtente.ruolo=$event.target.value">
+              <option value="cliente" selected>cliente</option>
+              <option value="segretaria">segretaria</option>
+          </select>
           
-      
+          <!--
+          <input name="ruolo" value="" (input)="insertUtente.ruolo=$event.target.value" type="text" class="labcor labtext"
+            size="12">
+          -->  
+        </td>
+        <td>
+          <select id="abbonamento" name="abbonamento" class="labcor labtext" (input)="insertUtente.abbonamento.id=$event.target.value">
+            <option value="3" selected>gold</option>
+            <option value="2">silver</option>
+            <option value="1">normale</option>
+            <option value="4">business</option>
+          </select>
+         
+        </td> 
+
+        <div *ngIf="visInsert">
+            <td>   
+              <Button class="button button1" (click)="applyInsert($event)">Applica</Button>
+            </td>
+            <td>   
+                <Button class="button button3" (click)="annulla($event)">Annulla</Button>
+              </td>
+        </div>
 
     </tr>
-    
-     
+    <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+    <br/>
+    <Button class="button button1" (click)="insert($event)" style="padding: 4% 33%;">Inserisci</Button> 
     
   </table>
   
   </form>
+</div>
+
+<!--</div>-->
   </body>
+  </html>

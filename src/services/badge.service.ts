@@ -5,7 +5,7 @@ import { Badge } from '../models/Badge';
 import {Observable, of, BehaviorSubject, pipe} from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root' 
 })
 export class BadgeService {
 
@@ -34,6 +34,13 @@ export class BadgeService {
 
   modify(idbadge:number, tipologia:string, descrizione:string): Observable<Badge[]>{
     return this.http.get<Badge[]>('http://localhost:8080/Badge/modify?idbadge='+idbadge+'&tipologia='+tipologia+'&descrizione='+
+    descrizione)
+    .pipe(tap((response) => console.log(response), catchError(this.handleError('modify error', {})))
+    );
+  }
+
+  insert(idbadge:number, tipologia:string, descrizione:string): Observable<Badge[]>{
+    return this.http.get<Badge[]>('http://localhost:8080/Badge/insert?idbadge='+idbadge+'&tipologia='+tipologia+'&descrizione='+
     descrizione)
     .pipe(tap((response) => console.log(response), catchError(this.handleError('modify error', {})))
     );

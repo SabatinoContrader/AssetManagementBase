@@ -17,8 +17,18 @@ export class MenuCustomerComponent implements OnInit {
     this.router.navigateByUrl('/managementUser');
   }
 
-  redirectManagementBadge(): void{
+  redirectManagementBadge(): void{ 
     this.router.navigateByUrl('/managementBadge')
-  }
+  } 
 
+  redirectIndietro(): void{
+    if(this.router.routerState.snapshot.url=="/homeCustomer"){
+      this.router.navigateByUrl("/homeSegretaria");
+    }else{
+      this.router.navigateByUrl("/homeCustomer");
+    }
+
+    
+  }
+ 
 }

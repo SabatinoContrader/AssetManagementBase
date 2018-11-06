@@ -59,6 +59,16 @@ export class UserService {
     );
   }
 
+
+  insert(iduser:number, username:string, password:string, ragioneSociale:string, telefono:string, mail:string, partitaIva:string,
+        ruolo:string, idAbb:number): Observable<User[]>{
+      return this.http.get<User[]>('http://localhost:8080/HomeUser/insert?iduser='+iduser+'&username='+username+'&password='+password+
+      '&ragioneSociale='+ragioneSociale+'&telefono='+telefono+'&mail='+mail+'&partitaIva='+partitaIva+'&ruolo='+ruolo+'&idAbb='+
+      idAbb)
+      .pipe(tap((response) => console.log(response), catchError(this.handleError('insert error', {})))
+      );
+  }
+
   signup(user: User): Observable <boolean> {
     return this.http.post<boolean>('http://localhost:58708/api/signupUser', user)
     .pipe(tap( (response) => console.log("Utente"), catchError(this.handleError("login error", {})))
