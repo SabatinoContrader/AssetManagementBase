@@ -96,6 +96,7 @@ public class HomeUserController {
 		List<UserDTO> users = userService.getAllUsers();
 		String username=request.getParameter("username");
 		String password = request.getParameter("password");
+	
 		for(UserDTO u: users) {
 			if(u.getUsername().equals(username) && u.getPassword().equals(password)) {
 				return u;

@@ -22,8 +22,10 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import jxl.Workbook;
 import jxl.format.Alignment;
@@ -60,7 +62,8 @@ import com.pCarpet.services.PrenotazioneService;
 import com.pCarpet.services.UserService;
 import com.pCarpet.utils.Date;
 
-@Controller
+@RestController
+@CrossOrigin
 @RequestMapping("/Movimento")
 
 public class MovimentoController{
@@ -100,6 +103,7 @@ public class MovimentoController{
 	}
 
 	@RequestMapping(value = "/homeMovimento", method = RequestMethod.GET)
+	@CrossOrigin
 	public String Logs(HttpServletRequest request, Model model ) {
 		String scelta= request.getParameter("scelta");
 		if (scelta.equals("movimentoManagement")) {
@@ -187,14 +191,9 @@ public class MovimentoController{
 	        WritableCellFormat blankColour = new WritableCellFormat(blank);
 	    	blankColour.setBackground(Colour.GRAY_50);
 	        
-	        
-	        
-			WritableWorkbook myexel = Workbook.createWorkbook(f);
-			
-			
-			
-			
-			
+	
+	    	WritableWorkbook myexel = Workbook.createWorkbook(f);
+		
 			if (iduser.equalsIgnoreCase("")) {
 				
 				WritableSheet mysheet = myexel.createSheet("Utilizzo", 0);
