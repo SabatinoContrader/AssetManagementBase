@@ -1,3 +1,5 @@
+import { ManagementAssetsComponent } from './../components/management-assets/management-assets.component';
+import { HomeAssetComponent } from './../components/home-asset/home-asset.component';
 import { HomeSegretariaComponent } from './../components/home-segretaria/home-segretaria.component';
 import { LoginComponent } from './../components/login/login.component';
 import { HomeCustomerComponent } from './../components/home-customer/home-customer.component';
@@ -14,9 +16,12 @@ const routes: Routes = [
     { path: 'homeSegretaria', component: HomeSegretariaComponent },
     { path: 'login', component: LoginComponent },
     { path: 'homeCustomer', component: HomeCustomerComponent},
+    { path: 'homeAsset', component: HomeAssetComponent},
     { path: 'managementUser', component: ManagementUserComponent},
-    { path: 'managementBadge', component: ManagementBadgeComponent}
+    { path: 'managementBadge', component: ManagementBadgeComponent},
+    { path: 'managementAssets', component: ManagementAssetsComponent}
 
+    
 ];
 
 @NgModule({

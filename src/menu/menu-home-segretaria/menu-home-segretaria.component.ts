@@ -16,5 +16,7 @@ export class MenuHomeSegretariaComponent implements OnInit {
   redirectHomeCustomer(): void{
     this.router.navigateByUrl('/homeCustomer');
   }
-
+  redirectHomeAsset(): void{
+    this.router.navigateByUrl('/homeAsset');
+  }
 }

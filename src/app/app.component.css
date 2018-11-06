@@ -18,6 +18,7 @@ td{
 }
 
 .labtext {
+    align-content: center;
     text-align: center;
 }
 
@@ -99,14 +100,6 @@ td{
         background-color: #555555;
         color: white;
     }
-
-
-
-
-
-
-
-
 
     body {
         font-family: "Lato", sans-serif;
@@ -202,4 +195,4 @@ td{
   
   */
   
-  
+    

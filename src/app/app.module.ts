@@ -1,3 +1,7 @@
+import { ManagementAssetsComponent } from './../components/management-assets/management-assets.component';
+
+import { MenuAssetComponent } from './../menu/menu-asset/menu-asset.component';
+import { HomeAssetComponent } from './../components/home-asset/home-asset.component';
 import { BadgeService } from 'src/services/badge.service';
 import { HomeCustomerComponent } from './../components/home-customer/home-customer.component';
 import { UserService } from './../services/user.service';
@@ -23,8 +27,11 @@ import { ManagementBadgeComponent } from '../components/management-badge/managem
     LoginComponent,
     HomeSegretariaComponent,
     HomeCustomerComponent,
+    HomeAssetComponent,
     ManagementUserComponent,
+    ManagementAssetsComponent,
     MenuCustomerComponent,
+    MenuAssetComponent,
     MenuHomeSegretariaComponent,
     ManagementBadgeComponent
   ],
