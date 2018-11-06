@@ -53,18 +53,26 @@ public class BadgeController {
 	
 	@RequestMapping(value = "/modify", method = RequestMethod.GET)
 	public List<BadgeDTO> modifyControl(HttpServletRequest request, Model model ) {
-		System.out.println("TEST1");
 		long id=Integer.parseInt(request.getParameter("idbadge"));
-		System.out.println("TEST2:"+id);
 		String tipologia=request.getParameter("tipologia");
-		System.out.println("TEST3 TIPOLOGIA:"+tipologia);
 		String descrizione=request.getParameter("descrizione");
-		System.out.println("TEST4 DESCRIZIONE:"+descrizione);
 		BadgeDTO badgeDTO = new BadgeDTO(id,descrizione,tipologia,1);
 		this.badgeService.insertBadge(badgeDTO);
 		List<BadgeDTO> badges = badgeService.getAllBadges();
 		return badges;
 	}
+	
+	@RequestMapping(value = "/insert", method = RequestMethod.GET)
+	public List<BadgeDTO> insertControl(HttpServletRequest request, Model model ) {
+		long id=0;
+		String tipologia=request.getParameter("tipologia");
+		String descrizione=request.getParameter("descrizione");
+		BadgeDTO badgeDTO = new BadgeDTO(id,descrizione,tipologia,1);
+		this.badgeService.insertBadge(badgeDTO);
+		List<BadgeDTO> badges = badgeService.getAllBadges();
+		return badges;
+	}
+	
 	
 	@RequestMapping(value = "/HomeBadge", method = RequestMethod.GET)
 	public String getBadges(HttpServletRequest request, Model model ) {

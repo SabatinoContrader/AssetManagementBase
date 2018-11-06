@@ -71,6 +71,25 @@ public class HomeUserController {
 		return users;
 	}
 	
+	@RequestMapping(value = "/insert", method = RequestMethod.GET)
+	public List<UserDTO> insertControl(HttpServletRequest request, Model model ) {
+		System.out.println("TEST");
+		long iduser=0;
+		String username=request.getParameter("username");
+		String password=request.getParameter("password");
+		String ragioneSociale=request.getParameter("ragioneSociale");
+		String telefono=request.getParameter("telefono");
+		String mail=request.getParameter("mail");
+		String partitaiva=request.getParameter("partitaIva");
+		String ruolo=request.getParameter("ruolo");
+		long idAbb=Integer.parseInt(request.getParameter("idAbb"));
+		AbbonamentoDTO abb=abbonamentoService.findById(idAbb);
+		UserDTO uDTO = new UserDTO(iduser,username,password,ragioneSociale,telefono,mail,partitaiva,ruolo,abb);
+		this.userService.insertUser(uDTO);
+		List<UserDTO> users = this.userService.getAllUsers();
+		return users;
+	}
+	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	@CrossOrigin
 	public UserDTO loginControl(HttpServletRequest request, Model model ) {
