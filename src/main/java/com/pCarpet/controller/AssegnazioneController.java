@@ -17,11 +17,14 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 
-@Controller
+@RestController
+@CrossOrigin
 @RequestMapping("/Assegnazione")
 public class AssegnazioneController {
     private AssegnazioneService assegnazioneService;
@@ -40,6 +43,50 @@ public class AssegnazioneController {
 		this.badgeService = badgeService;
 	}
 
+	
+	@RequestMapping(value = "/showAss", method = RequestMethod.GET)
+	public List<AssegnazioneDTO> assControl(HttpServletRequest request) {
+		return this.assegnazioneService.getAllAssegnazioni();
+	}
+	
+	
+	@RequestMapping(value = "/showBagesN", method = RequestMethod.GET)
+	public List<BadgeDTO> bagesNControl(HttpServletRequest request) {
+		return this.badgeService.getAllBadgesN();
+	}
+	
+	
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public List<AssegnazioneDTO> deleteControl(HttpServletRequest request) {
+		int iduser=Integer.parseInt(request.getParameter("iduser"));
+		int idbadge=Integer.parseInt(request.getParameter("idbadge"));
+		this.assegnazioneService.deleteAssegnazione(iduser, idbadge);
+		List<AssegnazioneDTO> ass = assegnazioneService.getAllAssegnazioni();
+		return ass;
+	}
+	
+	
+	
+	@RequestMapping(value = "/insert", method = RequestMethod.GET)
+	public List<AssegnazioneDTO> insertControl(HttpServletRequest request) {
+		int iduser=Integer.parseInt(request.getParameter("iduser"));
+		int idbadge=Integer.parseInt(request.getParameter("idbadge"));
+		String nome=request.getParameter("nome");
+    	String cognome=request.getParameter("cognome");
+		
+		UserDTO userDTO = this.userService.getUser(iduser);
+    	BadgeDTO badgeDTO = this.badgeService.getBadge(idbadge);
+		AssegnazioneDTO a=new AssegnazioneDTO(0l,userDTO,badgeDTO,nome,cognome,LocalDateTime.now().toString(),1l);
+		assegnazioneService.assegnaBadge(a);
+    	this.listAssegnazioni = this.assegnazioneService.getAllAssegnazioni();
+    	//this.listUsers = this.userService.getAllUsers();
+    	this.listBadges = this.badgeService.getAllBadgesN();
+    	
+    	
+    	//List<T> assAndBadges= this.listAssegnazioni;
+
+		return this.listAssegnazioni;
+	}
 	
 	
 	@RequestMapping(value = "/homeAssegnazione", method = RequestMethod.GET)

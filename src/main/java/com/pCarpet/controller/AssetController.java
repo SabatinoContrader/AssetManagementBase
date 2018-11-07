@@ -53,7 +53,7 @@ public class AssetController {
 	
 	@RequestMapping(value = "/modify", method = RequestMethod.GET)
 	public List<AssetDTO> modifyControl(HttpServletRequest request, Model model ) {
-		;
+		
 		long id=Integer.parseInt(request.getParameter("idasset"));
 		
 		String descrizione=request.getParameter("descrizone");
