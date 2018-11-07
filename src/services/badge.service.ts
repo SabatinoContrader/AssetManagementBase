@@ -16,7 +16,7 @@ export class BadgeService {
       console.error(error);
       console.log('${operation} failed: ${error.message}');
       return of(result as T);
-    };
+    }; 
   }
 
 
@@ -25,6 +25,7 @@ export class BadgeService {
     .pipe(tap((response) => console.log(response), catchError(this.handleError('get all badges error', {})))
     );
   }
+  
 
   delete(id:number): Observable<Badge[]>{
     return this.http.get<Badge[]>('http://localhost:8080/Badge/delete?id='+id)
@@ -40,10 +41,12 @@ export class BadgeService {
   }
 
   insert(idbadge:number, tipologia:string, descrizione:string): Observable<Badge[]>{
+    
     return this.http.get<Badge[]>('http://localhost:8080/Badge/insert?idbadge='+idbadge+'&tipologia='+tipologia+'&descrizione='+
-    descrizione)
+          descrizione)
     .pipe(tap((response) => console.log(response), catchError(this.handleError('modify error', {})))
     );
+    
   }
 
 

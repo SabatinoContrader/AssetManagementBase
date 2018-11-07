@@ -1,5 +1,8 @@
 import { ManagementAssetsComponent } from './../components/management-assets/management-assets.component';
 import { HomeAssetComponent } from './../components/home-asset/home-asset.component';
+
+import { ManagementAssegnazionebadgeComponent } from '../components/management-assegnazionebadge/management-assegnazionebadge.component';
+
 import { HomeSegretariaComponent } from './../components/home-segretaria/home-segretaria.component';
 import { LoginComponent } from './../components/login/login.component';
 import { HomeCustomerComponent } from './../components/home-customer/home-customer.component';
@@ -19,7 +22,8 @@ const routes: Routes = [
     { path: 'homeAsset', component: HomeAssetComponent},
     { path: 'managementUser', component: ManagementUserComponent},
     { path: 'managementBadge', component: ManagementBadgeComponent},
-    { path: 'managementAssets', component: ManagementAssetsComponent}
+    { path: 'managementAssets', component: ManagementAssetsComponent},
+    { path: 'managementAssegnazionebadge', component: ManagementAssegnazionebadgeComponent}
 
     
 ];

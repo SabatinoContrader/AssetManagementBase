@@ -46,7 +46,6 @@ export class ManagementBadgeComponent implements OnInit {
   }
 
   apply(c:String,idx:number,id:number,f: NgForm):void{
-    console.log("TEST1:"+id);
     this.disabledRow[idx]=true;
     this.visButton=true;
     this.badgeService.modify(id,this.badges[idx].tipologia,this.badges[idx].descrizione)

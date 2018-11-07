@@ -28,7 +28,12 @@ export class MenuCustomerComponent implements OnInit {
       this.router.navigateByUrl("/homeCustomer");
     }
 
-    
+  }
+
+
+  redirectManagementAssegnazionebadge():void{
+    console.log("ARRIVATO");
+    this.router.navigateByUrl("/managementAssegnazionebadge");
   }
  
 }

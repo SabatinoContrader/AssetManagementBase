@@ -2,6 +2,7 @@ import { ManagementAssetsComponent } from './../components/management-assets/man
 
 import { MenuAssetComponent } from './../menu/menu-asset/menu-asset.component';
 import { HomeAssetComponent } from './../components/home-asset/home-asset.component';
+import { AssegnazionebadgeService } from './../services/assegnazionebadge.service';
 import { BadgeService } from 'src/services/badge.service';
 import { HomeCustomerComponent } from './../components/home-customer/home-customer.component';
 import { UserService } from './../services/user.service';
@@ -19,7 +20,7 @@ import { ManagementUserComponent } from '../components/management-user/managemen
 import { MenuCustomerComponent } from '../menu/menu-customer/menu-customer.component';
 import { MenuHomeSegretariaComponent } from '../menu/menu-home-segretaria/menu-home-segretaria.component';
 import { ManagementBadgeComponent } from '../components/management-badge/management-badge.component';
-
+import { ManagementAssegnazionebadgeComponent } from '../components/management-assegnazionebadge/management-assegnazionebadge.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { ManagementBadgeComponent } from '../components/management-badge/managem
     MenuCustomerComponent,
     MenuAssetComponent,
     MenuHomeSegretariaComponent,
-    ManagementBadgeComponent
+    ManagementBadgeComponent,
+    ManagementAssegnazionebadgeComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +47,7 @@ import { ManagementBadgeComponent } from '../components/management-badge/managem
       libraries: ["places"]
     })*/
   ],
-  providers: [UserService,BadgeService],
+  providers: [UserService,BadgeService,AssegnazionebadgeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

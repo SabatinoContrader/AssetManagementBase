@@ -1,0 +1,221 @@
+<app-menu-customer></app-menu-customer>
+
+<html>
+
+  <body>
+    
+      <table class="bordo corners" width="50%">	 
+          <tr><th><h1>ASSEGNAZIONI</h1></th><td></td></tr>
+          <!--<hr width=339% size=4 color=red>-->
+          <tr>
+              <th>
+                  ID User
+              </th>
+     
+              <th>
+                 ID Badge
+              </th>
+              
+              <th>
+                Nome
+              </th>
+              <th>
+               Cognome
+              </th>
+
+              <th>
+                  Data Assegnazione
+               </th>
+          </tr>
+         
+          <tr *ngFor="let ass of assbadges; let idx=index;">
+              
+            <td>
+              <input type="text" [value]="assbadges[idx].user.iduser" class="labcor labtext" size="2" disabled>
+            </td>
+
+            <td>
+                <input type="text" [value]="assbadges[idx].badge.idBadge" class="labcor labtext" size="2" disabled>
+            </td>
+            
+            <td>
+                <input name="nome" [value]="assbadges[idx].nome" (input)="assbadges[idx].nome=$event.target.value" type="text" class="labcor labtext" size="10" [disabled]="disabledRow[idx]">
+            </td>
+
+            <td>
+                <input name="cognome" [value]="assbadges[idx].cognome" (input)="assbadges[idx].cognome=$event.target.value" type="text" class="labcor labtext" size="10" [disabled]="disabledRow[idx]">
+            </td>
+
+            <td> 
+                <input type="datetime-local" value="2018-06-11T12:00:00" id="exampleInput" name="input" class="labcor"
+                placeholder="yyyy-MM-dd" min="2018-11-06" [value]="assbadges[idx].dataassegnazione"
+                (input)="assbadges[idx].dataassegnazione=$event.target.value" disabled/>
+              
+            </td>
+            
+            
+            <div *ngIf="visButton">                 
+              <td>
+                <Button class="button button3" (click)="delete($event, assbadges[idx].user.iduser,assbadges[idx].badge.idBadge)">Elimina</Button>
+              </td>
+            </div>
+
+          </tr>	
+          <tr>
+          <td></td><td></td><td></td><td></td><td></td>
+          <td>
+            
+          </td>   
+        </tr>
+      </table>
+       
+    <div class="divBadge">   
+      <table>
+        <tr>
+          <th>
+            <h1>Badges</h1></th><td></td><td></td><td></td><td class="imgB"></td>
+        </tr>
+
+        <hr width=100% size=4 color=red>
+        <tr>
+
+          <th>
+            
+          </th>
+
+          <th>
+            ID badge
+          </th>
+        
+          <th>
+            Descrizione
+          </th>
+        
+          <th>
+            Tipologia
+          </th>
+        </tr>
+        
+        <tr *ngFor="let badge of badges; let idx=index;">
+        
+          <td>
+              <input type="radio" name="selIdBadge" (input)="insertArray[0]=badge.idBadge"/>
+          </td>
+
+          <td>
+            <input type="text" value="{{badge.idBadge}}" class="labcor labtext" size="2" disabled>
+          </td>
+        
+          <td>
+            <input name="descrizione" [value]="badges[idx].descrizione" (input)="badges[idx].descrizione=$event.target.value"
+              type="text" class="labcor labtext" size="10" disabled>
+          </td>
+        
+          <td>
+            <input name="tipologia" [value]="badges[idx].tipologia" (input)="badges[idx].tipologia=$event.target.value" type="text"
+              class="labcor labtext" size="10" disabled>
+          </td>
+        
+        </tr>
+        
+      </table>
+    </div>
+
+
+
+    <br/><br/>
+
+
+    <div class="divUser">
+        <table>
+      
+            <tr>
+              <th>
+                <h1>USERS</h1></th><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td class="userimg"></td>
+            </tr>
+            <hr size=4 color=red>
+            <tr>
+
+              <th>
+            
+              </th>
+              
+              <th>
+                ID utente
+              </th>
+              <th>
+                Username
+              </th>
+            
+              <th>
+                Ragione Sociale
+              </th>
+              
+              <th>
+                Partita Iva
+              </th>
+              
+              <th>
+              </th>
+              <th>
+              </th>
+           
+            </tr>
+        
+        
+             
+            
+            <tr *ngFor="let user of utenti; let idx = index;">
+                
+              <td>
+                <input type="radio" name="selIdUser" (input)="insertArray[1]=user.iduser"/>
+              </td>
+
+              <td>
+                <input type="text" value="{{user.iduser}}" class="labcor labtext" size="2" disabled>
+              </td>
+              <td>
+                  <input name="username" [value]="utenti[idx].username" (input)="utenti[idx].username=$event.target.value" type="text" class="labcor labtext" size="10" disabled>
+              </td>
+             
+            
+              <td>
+                  <input name="ragioneSociale" [value]="utenti[idx].ragioneSociale" (input)="utenti[idx].ragioneSociale=$event.target.value" type="text"  class="labcor labtext" size="10" disabled>
+              </td>
+            
+              <td>
+                  <input name="partitaiva" [value]="utenti[idx].partitaiva" (input)="utenti[idx].partitaiva=$event.target.value" type="text" class="labcor labtext" size="11" disabled>
+              </td>
+
+            </tr>
+        </table>
+    </div>
+
+    
+    <table class="nomeCognome">
+      <tr>
+        <th>
+          Nome
+        </th>
+        <th>
+          Cognome
+        </th>
+      </tr>
+      <tr>
+        <td>
+          <input type="text" [value]="insertArray[2]" (input)="insertArray[2]=$event.target.value" class="labcor labtext" size="10">
+        </td>
+        <td>
+          <input type="text" [value]="insertArray[3]" (input)="insertArray[3]=$event.target.value" class="labcor labtext" size="10">
+        </td>
+        <td>
+          <Button class="button button1" (click)="insert($event, insertArray[0], insertArray[1], insertArray[2], insertArray[3])">Inserisci</Button>
+        </td>
+      </tr>
+      
+    </table>
+
+  </body>
+
+</html>
+

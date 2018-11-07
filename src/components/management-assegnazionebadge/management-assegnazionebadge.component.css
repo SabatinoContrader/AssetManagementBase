@@ -1,0 +1,23 @@
+td,th{
+    text-align: center;
+}
+table{
+    display: flex;
+    text-align: left;
+}
+.divBadge{
+    position:absolute;
+    left:0px;
+    top:50%;
+    width:50%;
+}
+.divUser{
+    position:absolute;
+    left:400px;
+    top:50%;
+    width: 50%;
+}
+.nomeCognome{
+    position: absolute;
+    top:85%;
+}
