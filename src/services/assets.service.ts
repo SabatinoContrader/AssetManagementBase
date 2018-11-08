@@ -25,6 +25,12 @@ export class AssetsService {
     .pipe(tap((response) => console.log(response), catchError(this.handleError('get all badges error', {})))
     );
   }
+  getAllAssetsN(): Observable <Asset[]>{
+    return this.http.get<Asset[]>('http://localhost:8080/BadgeReader/showAssetsN', )
+    .pipe(tap((response) => console.log(response), catchError(this.handleError('get all assets error', {})))
+    );
+  }
+  
 
   delete(idAsset:number): Observable<Asset[]>{
     return this.http.get<Asset[]>('http://localhost:8080/Asset/delete?id='+idAsset)

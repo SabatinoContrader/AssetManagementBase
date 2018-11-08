@@ -2,11 +2,11 @@ import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-menu-asset',
-  templateUrl: './menu-asset.component.html',
-  styleUrls: ['./menu-asset.component.css','../../app/app.component.css']
+  selector: 'app-menu-badgereader',
+  templateUrl: './menu-badgereader.component.html',
+  styleUrls: ['./menu-badgereader.component.css','../../app/app.component.css']
 })
-export class MenuAssetComponent implements OnInit {
+export class MenuBadgereaderComponent implements OnInit {
 
   constructor(private router: Router) { }
 
@@ -16,6 +16,7 @@ export class MenuAssetComponent implements OnInit {
     this.router.navigateByUrl('/managementAssets');
   }
   redirectManagementBadgeReader(): void{
+    
     this.router.navigateByUrl('/managementBadgeReader');
   }
   redirectIndietro(): void{

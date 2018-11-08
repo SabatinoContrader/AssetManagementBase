@@ -1,0 +1,135 @@
+<body>
+  <app-menu-badgereader></app-menu-badgereader>
+  
+  <form #f='ngForm'>
+    
+  <div style="text-align: center; width: 600px" class="bordo">	
+    
+    <table style="border-collapse:collapse;">
+    <caption>
+      <h2>BadgeReaders</h2>
+    </caption>
+    <tr class="border_bottom">
+        <th>
+        ID Badge Reader
+      </th>
+  
+      <th>
+        ID Asset
+      </th>
+
+      <th>
+        Descrizione
+      </th>
+           
+      <th>
+        Tipologia
+      </th>
+
+    </tr>
+  
+    <tr *ngFor="let badgereader of badgereaders; let idx=index;">
+          
+      <td>
+        <input type="text" value="{{badgereader.idBadgeReader}}" class="labcor labtext" size="5"  disabled>
+      </td>
+      
+      <td>
+        <input type="text" value="{{badgereader.asset.idAsset}}" class="labcor labtext" size="5" disabled>
+      </td>
+
+      <td>
+        <input name="descrizione" [value]="badgereader.descrizione" (input)="badgereader.descrizione=$event.target.value" type="text" class="labcor labtext"  [disabled]="disabledRow[idx]">
+      </td>
+           
+      <td>
+          <input name="tipologia" [value]="badgereader.tipologia" (input)="badgereader.tipologia=$event.target.value" type="text" class="labcor labtext"  [disabled]="disabledRow[idx]">
+      </td>
+      
+    </tr>
+  </table>
+  </div>
+  <table>
+    <tr>
+        <Button class="button button1" (click)="insert($event)" style="padding: 4% 28%;">Inserisci</Button> 
+        </tr>
+  </table>
+<div *ngIf="visInsert" style="border-collapse:collapse;text-align: center; width: 600px;" class="bordo corners">
+  <table >
+       <tr><h1>Seleziona Asset</h1></tr>
+
+  </table>
+  <table style="border-collapse:collapse;">
+      <caption>   
+      <h2>Assets Disponibili</h2>
+         </caption>
+        <tr  class="border_bottom">
+          <th>
+          </th>
+          <th>
+            ID assets
+          </th>
+      
+          <th>
+            Descrizione
+          </th>
+               
+          <th>
+            Tipo
+          </th>
+          <th>
+            Prezzo
+          </th>
+        </tr>
+                
+        <tr *ngFor="let asset of assets; let idx=index;">
+          <td>
+            <input type="radio" name="idasset" (input)="idasset=asset.idAsset">
+          </td>
+          <td>
+            <input name="idasset" [value]="asset.idAsset" (input)="assets[idx].descrizione=$event.target.value" type="text" class="labcor labtext" size="2" [disabled]="disabledRow[idx]">
+
+          </td>
+          <td>
+            <input name="descrizione" [value]="assets[idx].descrizione" (input)="assets[idx].descrizione=$event.target.value" type="text" class="labcor labtext"  [disabled]="disabledRow[idx]">
+          </td>
+               
+          <td>
+              <input name="tipo" [value]="assets[idx].tipo" (input)="assets[idx].tipo=$event.target.value" type="text" class="labcor labtext" [disabled]="disabledRow[idx]">
+          </td>
+          <td>
+            <input name="prezzo" [value]="assets[idx].prezzo" (input)="assets[idx].prezzo=$event.target.value" type="text" class="labcor labtext"  [disabled]="disabledRow[idx]">
+        </td>
+        </tr> 
+  </table>
+  <table class="bordo" style="align-content:center;">
+    <caption>
+    <p>Inserire Dati nuovo Badge Reader</p>
+  </caption>
+    <tr>
+      <th>Descrizione</th> <th>Tipologia</th>
+    </tr>
+    <tr>
+
+          <td>
+            <input name="descrizione" value="" (input)="insertBadgeReader.descrizione=$event.target.value" type="text"
+              class="labcor labtext">
+          </td>
+
+          <td> 
+              <input name="tipologia" value="" (input)="insertBadgeReader.tipologia=$event.target.value" type="text"
+                class="labcor labtext">
+            </td>        
+            <td>   
+              <Button class="button button1" (click)="applyInsert($event,insertBadgeReader.descrizione,insertBadgeReader.tipologia)">Applica</Button>
+            </td>
+            <td>   
+              <Button class="button button3" (click)="annulla($event)">Annulla</Button>
+            </td>
+    </tr>
+
+    </table>
+  </div>
+    </form>
+    </body>
+  

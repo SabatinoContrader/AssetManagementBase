@@ -1,3 +1,7 @@
+import { BookingsService } from './../services/bookings.service';
+import { BadgereaderService } from './../services/badgereader.service';
+import { MenuBadgereaderComponent } from './../menu/menu-badgereader/menu-badgereader.component';
+import { ManagementBadgereaderComponent } from './../components/management-badgereader/management-badgereader.component';
 import { ManagementAssetsComponent } from './../components/management-assets/management-assets.component';
 import { MenuAssetComponent } from './../menu/menu-asset/menu-asset.component';
 import { HomeAssetComponent } from './../components/home-asset/home-asset.component';
@@ -22,7 +26,6 @@ import { ManagementBadgeComponent } from '../components/management-badge/managem
 import { ManagementAssegnazionebadgeComponent } from '../components/management-assegnazionebadge/management-assegnazionebadge.component';
 import { HomeBookingsComponent } from '../components/home-bookings/home-bookings.component';
 import { MenuBookingComponent } from '../menu/menu-booking/menu-booking.component';
-import {BookingsService} from '../services/bookings.service';
 
 @NgModule({
   declarations: [
@@ -32,10 +35,12 @@ import {BookingsService} from '../services/bookings.service';
     HomeCustomerComponent,
     HomeAssetComponent,
     ManagementUserComponent,
+    ManagementBadgereaderComponent,
     ManagementAssetsComponent,
     MenuCustomerComponent,
     MenuAssetComponent,
     MenuHomeSegretariaComponent,
+    MenuBadgereaderComponent,
     ManagementBadgeComponent,
     ManagementAssegnazionebadgeComponent,
     HomeBookingsComponent,
@@ -51,7 +56,9 @@ import {BookingsService} from '../services/bookings.service';
       libraries: ["places"]
     })*/
   ],
-  providers: [UserService, BadgeService, AssegnazionebadgeService, BookingsService],
+
+  providers: [UserService,BadgeService,AssegnazionebadgeService,BadgereaderService,BookingsService],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

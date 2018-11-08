@@ -1,3 +1,4 @@
+import { ManagementBadgereaderComponent } from './../components/management-badgereader/management-badgereader.component';
 import { ManagementAssetsComponent } from './../components/management-assets/management-assets.component';
 import { HomeAssetComponent } from './../components/home-asset/home-asset.component';
 
@@ -25,7 +26,10 @@ const routes: Routes = [
     { path: 'managementBadge', component: ManagementBadgeComponent},
     { path: 'managementAssets', component: ManagementAssetsComponent},
     { path: 'managementAssegnazionebadge', component: ManagementAssegnazionebadgeComponent},
-    { path: 'managementBookings', component: HomeBookingsComponent}
+    { path: 'managementBookings', component: HomeBookingsComponent},
+    { path: 'managementBadgeReader', component: ManagementBadgereaderComponent}
+    
+
 ];
 
 @NgModule({
