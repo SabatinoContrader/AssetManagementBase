@@ -1,4 +1,5 @@
 import { ManagementBadgereaderComponent } from './../components/management-badgereader/management-badgereader.component';
+import { ManagementMovimentoComponent } from '../components/management-movimento/management-movimento.component';
 import { ManagementAssetsComponent } from './../components/management-assets/management-assets.component';
 import { HomeAssetComponent } from './../components/home-asset/home-asset.component';
 
@@ -27,7 +28,9 @@ const routes: Routes = [
     { path: 'managementAssets', component: ManagementAssetsComponent},
     { path: 'managementAssegnazionebadge', component: ManagementAssegnazionebadgeComponent},
     { path: 'managementBookings', component: HomeBookingsComponent},
-    { path: 'managementBadgeReader', component: ManagementBadgereaderComponent}
+    { path: 'managementBadgeReader', component: ManagementBadgereaderComponent},
+    { path: 'homeLog', component: ManagementMovimentoComponent }
+
     
 
 ];

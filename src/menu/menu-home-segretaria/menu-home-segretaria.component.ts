@@ -22,4 +22,10 @@ export class MenuHomeSegretariaComponent implements OnInit {
     redirectHomeBooking(): void{
         this.router.navigateByUrl('/managementBookings');
     }
+
+
+  redirectHomeLog(): void{
+    this.router.navigateByUrl('/homeLog');
+  }
+
 }

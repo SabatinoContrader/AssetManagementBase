@@ -1,0 +1,48 @@
+<!--INSERIRE IL SELECTOR DEL MENU-->
+
+<body>
+
+  <div>
+    <h2>Lista Movimenti</h2>
+    <table>
+
+      <tr>
+        <!--
+        <th>
+          ID Badge Reader
+        </th>
+         -->
+        <th>
+          ID Badge
+        </th>
+        <th>
+          Data inizio
+        </th>
+        <th>
+          Data fine
+        </th>
+     </tr>
+     
+     <tr *ngFor="let mov of movimenti">
+       <!--
+       <td>
+         {{mov.badgeReader}}
+       </td>
+       -->
+        <td>
+          <p>{{mov.badge.idBadge}}</p>
+        </td>
+        <td>
+          <p>{{mov.orainizio}}</p>
+        </td>
+        <td>
+          <p>{{mov.orafine}}</p>
+        </td>
+        
+     </tr>
+
+    </table>
+
+  </div>
+
+</body>

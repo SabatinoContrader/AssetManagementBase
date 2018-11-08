@@ -2,6 +2,7 @@ import { BookingsService } from './../services/bookings.service';
 import { BadgereaderService } from './../services/badgereader.service';
 import { MenuBadgereaderComponent } from './../menu/menu-badgereader/menu-badgereader.component';
 import { ManagementBadgereaderComponent } from './../components/management-badgereader/management-badgereader.component';
+import { MovimentoService } from './../services/movimento.service';
 import { ManagementAssetsComponent } from './../components/management-assets/management-assets.component';
 import { MenuAssetComponent } from './../menu/menu-asset/menu-asset.component';
 import { HomeAssetComponent } from './../components/home-asset/home-asset.component';
@@ -26,6 +27,8 @@ import { ManagementBadgeComponent } from '../components/management-badge/managem
 import { ManagementAssegnazionebadgeComponent } from '../components/management-assegnazionebadge/management-assegnazionebadge.component';
 import { HomeBookingsComponent } from '../components/home-bookings/home-bookings.component';
 import { MenuBookingComponent } from '../menu/menu-booking/menu-booking.component';
+import { ManagementMovimentoComponent } from '../components/management-movimento/management-movimento.component';
+
 
 @NgModule({
   declarations: [
@@ -44,7 +47,8 @@ import { MenuBookingComponent } from '../menu/menu-booking/menu-booking.componen
     ManagementBadgeComponent,
     ManagementAssegnazionebadgeComponent,
     HomeBookingsComponent,
-    MenuBookingComponent
+    MenuBookingComponent,
+    ManagementMovimentoComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +61,7 @@ import { MenuBookingComponent } from '../menu/menu-booking/menu-booking.componen
     })*/
   ],
 
-  providers: [UserService,BadgeService,AssegnazionebadgeService,BadgereaderService,BookingsService],
+  providers: [UserService,BadgeService,AssegnazionebadgeService,BadgereaderService,BookingsService,MovimentoService],
 
   bootstrap: [AppComponent]
 })
