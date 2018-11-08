@@ -13,23 +13,29 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.pCarpet.dto.MovimentoDTO;
 import com.pCarpet.dto.PrenotazioneDTO;
 import com.pCarpet.dto.UserDTO;
 import com.pCarpet.dto.AssetDTO;
+import com.pCarpet.dto.BadgeReaderDTO;
 import com.pCarpet.services.AssetService;
+import com.pCarpet.services.MovimentoService;
 import com.pCarpet.services.PrenotazioneService;
 import com.pCarpet.services.UserService;
 
-@Controller
+@RestController
+@CrossOrigin
 @RequestMapping("/HomePrenotazione")
 public class PrenotazioneController {
 	
 	private PrenotazioneService prenotazioneService;
 	private AssetService assetService;
+	private MovimentoService movimentoService;
 	private UserService userService;
 	private List<UserDTO> listUser;
 	private List<AssetDTO> listAssets;
@@ -41,89 +47,36 @@ public class PrenotazioneController {
 	private AssetDTO a=null;
 	
 	private long idP;
+	List<PrenotazioneDTO> listPrenotazione;
+	boolean corretto=true;
 
 	@Autowired
-	public PrenotazioneController(PrenotazioneService prenotazioneService, UserService userService, AssetService assetService) {
+	public PrenotazioneController(MovimentoService movimentoService, PrenotazioneService prenotazioneService, UserService userService, AssetService assetService) {
 		this.prenotazioneService = prenotazioneService;
 		this.assetService=assetService;
 		this.userService= userService;
+		this.movimentoService= movimentoService;
 	}
 
 	@RequestMapping(value = "/showPrenotazione", method = RequestMethod.GET)
-	public String loginControl(HttpServletRequest request, Model model ) {
+	public List<PrenotazioneDTO> loginControl(HttpServletRequest request, Model model ) {
 		
 		List<PrenotazioneDTO> listPrenotazione;
-				
-		String choice=request.getParameter("choice");
-		
-		if(choice != null) {
-			switch(choice) {
-		
-				case "managementPrenotazioni":
-					listUser = userService.getAllUsers();
-					listAssets = assetService.getAllAssets();
 					listPrenotazione = prenotazioneService.getAllPrenotazioni();
 					listPrenotazione = aggiornaPrenotazioni(listPrenotazione);
-					model.addAttribute("listPrenotazione", listPrenotazione);
-					model.addAttribute("listAssets", listAssets);
-					model.addAttribute("listUsers", listUser);
-					return "insertBookings";
-				
-				case "insert":
-					listPrenotazione = prenotazioneService.getAllPrenotazioni();
-					listPrenotazione = aggiornaPrenotazioni(listPrenotazione);
-					model.addAttribute("listPrenotazione", listPrenotazione);
-					return "insertBookings";
-					
-				case "update":
-					//model.addAttribute("user",userService.getUser(Integer.parseInt(request.getParameter("id"))));
-					idP=Integer.parseInt(request.getParameter("idP"));
-//					int idasset=Integer.parseInt(request.getParameter("idA"));
-//					String orainizio=request.getParameter("idO");
-					
-					p=prenotazioneService.getPrenotazione(idP);
-					//prenotazioneService.updatePrenotazione(request);
-					model.addAttribute("p",p);
-					return "updateBookings";
-					
-				case "indietro":
-					listUser = userService.getAllUsers();
-					listAssets = assetService.getAllAssets();
-					listPrenotazione = prenotazioneService.getAllPrenotazioni();
-					listPrenotazione = aggiornaPrenotazioni(listPrenotazione);
-					model.addAttribute("listPrenotazione", listPrenotazione);
-					model.addAttribute("listAssets", listAssets);
-					model.addAttribute("listUsers", listUser);
-					return "insertBookings";
-					
-				case "indietroManagementBookings":
-					listPrenotazione = prenotazioneService.getAllPrenotazioni();
-					listPrenotazione = aggiornaPrenotazioni(listPrenotazione);
-					model.addAttribute("listPrenotazione", listPrenotazione);
-					return "homeSegretaria";
-			}
-		}
-		
-		return "insertBookings";
+					return listPrenotazione;
 	}
 	
-	
-	@RequestMapping(value = "/showPrenotazione", method = RequestMethod.POST)
-	public String loginControlPost(HttpServletRequest request, Model model ) {
+	@RequestMapping(value = "/insert", method = RequestMethod.GET)
+	public List<PrenotazioneDTO> insertControl(HttpServletRequest request ) {
 		
 		List<PrenotazioneDTO> listPrenotazione = prenotazioneService.getAllPrenotazioni();
 		listPrenotazione = aggiornaPrenotazioni(listPrenotazione);
-		model.addAttribute("listPrenotazione", listPrenotazione);
 			
-		String choice=request.getParameter("choice");
-	
-		if(choice != null) {
-			switch(choice) {
-				case "insert":
-					
-					int iduser=Integer.parseInt(request.getParameter("iduser"));
+					idP=Integer.parseInt(request.getParameter("id"));
+					int iduser=Integer.parseInt(request.getParameter("id1"));
 					UserDTO userDTO = this.userService.getUser(iduser);
-					int idasset=Integer.parseInt(request.getParameter("idasset"));
+					int idasset=Integer.parseInt(request.getParameter("id2"));
 					AssetDTO assetDTO = this.assetService.getAsset(idasset);
 					String oldOrainizio=request.getParameter("orainizio");
 					System.out.println("TEST:"+oldOrainizio);
@@ -135,7 +88,7 @@ public class PrenotazioneController {
 					listPrenotazione = prenotazioneService.getAllPrenotazioni();
 					listPrenotazione = aggiornaPrenotazioni(listPrenotazione);
 					
-					boolean corretto=true;
+					corretto=true;
 					
 					
 					if(orafine.compareTo(orainizio)<=0) {
@@ -148,10 +101,18 @@ public class PrenotazioneController {
 					}
 					
 					
-					for(MovimentoDTO u: prenotazioneService.getAllUtilizzo()){
-						if ( u.getBadgereader().getIdBadgeReader()==idasset && formatData(u.getOrafine()).equals("0000-00-00 00:00:00") ) {
-							corretto=false;
-						}
+					for(BadgeReaderDTO u: prenotazioneService.getAllBadgeReader()){
+							if ( u.getAsset().getIdAsset()==idasset) {
+							
+								for(MovimentoDTO mDTO: movimentoService.getAllMovimenti()) {
+							
+									if	(mDTO.getBadgereader().getIdBadgeReader()==u.getIdBadgeReader() && formatData(mDTO.getOrafine()).equals("0000-00-00 00:00:00")) 
+									{
+						
+										corretto=false;
+									}
+								}	
+							}
 					}
 					
 					
@@ -180,45 +141,33 @@ public class PrenotazioneController {
 					}
 					
 					if(corretto) {
-						
-						
-						
-						
 						PrenotazioneDTO p=new PrenotazioneDTO(0l,userDTO,assetDTO,request.getParameter("orainizio"),request.getParameter("orafine"));
 						prenotazioneService.insertPrenotazione(p);
-						model.addAttribute("feedback", "success");
-					}else {
-						model.addAttribute("feedback", "wrong");
+					
 					}
 					
 					
-					listUser = userService.getAllUsers();
-					listAssets = assetService.getAllAssets();
 					listPrenotazione = prenotazioneService.getAllPrenotazioni();
 					listPrenotazione = aggiornaPrenotazioni(listPrenotazione);
-					
-					model.addAttribute("listPrenotazione", listPrenotazione);
-					model.addAttribute("listAssets", listAssets);
-					model.addAttribute("listUsers", listUser);
-					
-					return "insertBookings";
-					
-				case "update":
+					return listPrenotazione; 
+			}
+			
+		
+		@RequestMapping(value = "/update", method = RequestMethod.GET)
+		public List<PrenotazioneDTO> updatePrenotazione(HttpServletRequest request, Model model ) {
 					
 					
-					orainizio=formatData(request.getParameter("orainizio"));
-					request.setAttribute("orainizio",request.getParameter("orainizio"));
 					
-					orafine=formatData(request.getParameter("orafine"));
+			String orainizio=formatData(request.getParameter("orainizio"));
+			request.setAttribute("orainizio",request.getParameter("orainizio"));
+					
+				String	orafine=formatData(request.getParameter("orafine"));
 					request.setAttribute("orafine",request.getParameter("orafine"));
-					
-					System.out.println(request.getParameter("id1"));
-					System.out.println(request.getParameter("id2"));
-					
-					iduser=Integer.parseInt(request.getParameter("id1"));
-					idasset=Integer.parseInt(request.getParameter("id2"));
-					
-					System.out.println(idP);
+					idP=Integer.parseInt(request.getParameter("id"));
+					p=prenotazioneService.getPrenotazione(idP);
+					long iduser=Integer.parseInt(request.getParameter("id1"));
+					long idasset=Integer.parseInt(request.getParameter("id2"));
+
 					
 					
 					UserDTO user1DTO = this.userService.getUser(iduser);
@@ -248,11 +197,19 @@ public class PrenotazioneController {
 					}
 					
 					
-					for(MovimentoDTO u: prenotazioneService.getAllUtilizzo()){
-						if ( u.getBadgereader().getIdBadgeReader()==idasset && u.getOrafine().equals("0000-00-00 00:00:00") ) {
-							corretto=false;
+					for(BadgeReaderDTO u: prenotazioneService.getAllBadgeReader()){
+						if ( u.getAsset().getIdAsset()==idasset) {
+						
+							for(MovimentoDTO mDTO: movimentoService.getAllMovimenti()) {
+						
+								if	(mDTO.getBadgereader().getIdBadgeReader()==u.getIdBadgeReader() && formatData(mDTO.getOrafine()).equals("0000-00-00 00:00:00")) 
+								{
+					
+									corretto=false;
+								}
+							}	
 						}
-					}
+				}
 					
 					
 					
@@ -309,35 +266,13 @@ public class PrenotazioneController {
 						
 						//model.addAttribute("p", p);
 						model.addAttribute("feedback", "success");
-						return "insertBookings";
+						return listPrenotazione;
 						
-					}else {						
-						listUser = userService.getAllUsers();
-						listAssets = assetService.getAllAssets();
-						listPrenotazione = prenotazioneService.getAllPrenotazioni();
-						listPrenotazione = aggiornaPrenotazioni(listPrenotazione);
-						model.addAttribute("listPrenotazione", listPrenotazione);
-						model.addAttribute("listAssets", listAssets);
-						model.addAttribute("listUsers", listUser);
-						
-						model.addAttribute("feedback", "wrong");
-						return "insertBookings";
-					}
-					
-					
-					
-					
-					
-					
-					
-				
-					
-			}
+					}						
+				return null;
+			
 		}
 	
-		return "homeBookings";
-		
-	}
 	
 	
 	
@@ -346,7 +281,6 @@ public class PrenotazioneController {
 	//NEW DATE
 	//String --> yyyy-mm-gg hh:mm:ss (es. 2018-09-29 10:29:00)
 	public String formatData(String oldDate) {
-		
 		StringTokenizer st=new StringTokenizer(oldDate,"/.-T: ");
 		String newDate="";
 		
@@ -374,16 +308,16 @@ public class PrenotazioneController {
 				newDate+=":";
 			}else {
 				newDate+=tk;
-			}//if
+			}
 			
-		}//while
+		}
 		
 		newDate+=":00";
 		
 		return newDate;
 		
 		
-	}//formatData
+	}
 	
 	
 	

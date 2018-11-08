@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pCarpet.converter.AssetConverter;
+import com.pCarpet.converter.BadgeReaderConverter;
 import com.pCarpet.converter.MovimentoConverter;
 import com.pCarpet.converter.PrenotazioneConverter;
 import com.pCarpet.converter.UserConverter;
@@ -20,6 +21,7 @@ import com.pCarpet.dao.MovimentoRepository;
 import com.pCarpet.dao.PrenotazioneRepository;
 import com.pCarpet.dao.UserRepository;
 import com.pCarpet.dto.AssetDTO;
+import com.pCarpet.dto.BadgeReaderDTO;
 import com.pCarpet.dto.MovimentoDTO;
 import com.pCarpet.dto.PrenotazioneDTO;
 import com.pCarpet.dto.UserDTO;
@@ -149,10 +151,6 @@ public class PrenotazioneService {
     	Prenotazione p = PrenotazioneConverter.converToEntity(pDTO);
         return this.prenotazioneRepository.save(p)!=null;
     }
-    
-    public void deleteUser(int iduser, int idasset, String orainizio) {
-    	this.prenotazioneRepository.deleteByUserAndAssetAndOrainizio(iduser, idasset, orainizio);
-    }
    
     
     public boolean updatePrenotazione(PrenotazioneDTO pDTO) {
@@ -160,36 +158,36 @@ public class PrenotazioneService {
     	return this.prenotazioneRepository.save(P)!=null;
     }
     
-    public List<MovimentoDTO> getAllUtilizzo(){
+    
+    //Restituisce tutti i badge reader con associato un movimento
+    public List<BadgeReaderDTO> getAllBadgeReader(){
     	
     	List<Movimento> mList =(List<Movimento>)this.movimentoRepository.findAll();
     	List<BadgeReader> bList = (List<BadgeReader>) this.badgeReaderRepository.findAll();
     	//List<Asset> aList = (List<Asset>) this.assetRepository.findAll();
     	List<Movimento> mm = new LinkedList<>();
-    	List<MovimentoDTO> mDTOList = new ArrayList<>();
+    	List<BadgeReaderDTO> bDTOList = new ArrayList<>();
     	Asset a = new Asset();
-    	BadgeReader br=new BadgeReader();
+    	List<BadgeReader> br=new LinkedList<>();
     	for(Movimento m: mList) 
     	{
-    		
     		for(BadgeReader b: bList) {
     		if(m.getBadgereader().getIdBadgeReader()==b.getIdBadgeReader()) {
-    			br = b;
+    			br.add(b);
     		}
-    			
+    			}
     		
-    		}
-    		long idasset= a.getIdasset();
-    		Assegnazione assegnazione=assegnazioneRepository.findById(7l).get();
+    		//long idasset= a.getIdasset();
+    		//Assegnazione assegnazione=assegnazioneRepository.findById(7l).get();
+    	//	Assegnazione assegnazione = new Assegnazione();
     		
-    		
-    		Movimento mov=new Movimento(0l,br,m.getBadge(),m.getOrainizio(),m.getOrafine(),assegnazione);
-    		mm.add(mov);
+    //		Movimento mov=new Movimento(0l,br,m.getBadge(),m.getOrainizio(),m.getOrafine(),assegnazione);
+    	//	mm.add(mov);
     		
     	}
-    	for(Movimento m: mm)
-    		mDTOList.add(MovimentoConverter.convertToDTO(m));
-    	return mDTOList;
+    	for(BadgeReader bb: br)
+    		bDTOList.add(BadgeReaderConverter.convertToDTO(bb));
+    	return bDTOList;
     }
 	
 }
