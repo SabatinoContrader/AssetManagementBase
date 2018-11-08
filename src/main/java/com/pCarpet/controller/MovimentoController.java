@@ -102,6 +102,12 @@ public class MovimentoController{
 	
 	}
 
+	@RequestMapping(value = "/showMovimenti", method = RequestMethod.GET)
+	@CrossOrigin
+	public List<MovimentoDTO> movimentiControl(HttpServletRequest request, Model model ) {
+		return this.movimentoService.getAllMovimenti();
+	}
+	
 	@RequestMapping(value = "/homeMovimento", method = RequestMethod.GET)
 	@CrossOrigin
 	public String Logs(HttpServletRequest request, Model model ) {
