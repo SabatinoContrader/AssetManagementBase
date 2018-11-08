@@ -2,6 +2,7 @@ import { Asset } from './../../models/Asset';
 import { AssetsService } from './../../services/assets.service';
 import { NgForm } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
+import {async} from 'rxjs/internal/scheduler/async';
 
 @Component({
   selector: 'app-management-assets',
@@ -15,9 +16,10 @@ export class ManagementAssetsComponent implements OnInit {
   assets = new Array<Asset>();
   insertAsset = new Asset(0,"","",null,null);
   disabledRow = new Array<boolean>();
-  visButton=true;
-  visInsert;
-  ngOnInit() { 
+  visButton = true;
+  visInsert = false;
+  ngOnInit() {
+      this.visInsert = false;
     
     this.assetsService.getAllAssets().subscribe((response)=>{
       console.log(response[0].descrizione);
@@ -55,20 +57,19 @@ export class ManagementAssetsComponent implements OnInit {
    insert(f:string,):void{
     this.visButton=false;
     this.visInsert=true;
-    //this.utenti.push(new User(0,"","","","","","","",new Abbonamento(3,"",0),null));
-    
+    this.insertAsset = new Asset(0,"","",null,null);
+
   } 
 
-  applyInsert(c:String,):void{
-    
-    //this.visButton=true;
-    //this.utenti[idx+1].username
+  applyInsert(c: String): void {
+
     this.assetsService.insert(0,this.insertAsset.tipo,this.insertAsset.descrizione, 
-                            this.insertAsset.prezzo,this.insertAsset.flag)
-                            .subscribe((response)=>{
-                              this.assets=response;
-                            });    
-    this.visInsert=false;
+                            this.insertAsset.prezzo, this.insertAsset.flag)
+                            .subscribe(async(response) => {
+                             await(this.assets = response);
+                                this.visInsert = false;
+                            });
+
 
     this.ngOnInit();
   

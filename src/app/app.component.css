@@ -6,7 +6,7 @@ td{
 }
 */
 .rcorners {
-    border-radius: 11px 25px;
+    border-radius: 11px 20px;
     /*
     background: url(wood.jpg);
     background-repeat: repeat;
@@ -25,6 +25,10 @@ td{
 .bordo {
     border: 1.5px solid #000000;
     border-collapse: collapse;
+}
+
+.white{
+    background-color: white;
 }
 
 .form-signin {
@@ -136,7 +140,7 @@ td{
         padding: 0px 10px;
     }
     
-    @media screen and (max-height: 450px) {
+    @media screen and (max-height: 800px) {
         .sidenav {padding-top: 15px;}
         .sidenav a {font-size: 18px;}
     }

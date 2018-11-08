@@ -1,0 +1,217 @@
+<app-menu-booking></app-menu-booking>
+<body style="margin:    0 auto;
+      max-width: 900px;">
+
+<h2 align="center">Home prenotazioni</h2>
+
+<br>
+<div style="text-align: center;color: rebeccapurple;">
+  <table class="bordo">
+
+    <caption><h2>USERS</h2></caption>
+    <tr>
+      <td *ngIf="visInsert">
+
+      </td>
+
+      <th>
+        Id User
+      </th>
+
+      <th>
+        Username
+      </th>
+
+      <th>
+        Ragione Sociale
+      </th>
+
+      <th>
+        Partita iva
+      </th>
+
+    </tr>
+
+
+    <tr *ngFor="let user of users">
+
+      <td *ngIf="visInsert">
+        <input type="radio" name="selIdUser" (input)="insertArray[1]=user.iduser"/>
+      </td>
+      <td>
+
+        {{user.iduser}}
+
+      </td>
+
+      <td>
+        {{user.username}}
+      </td>
+
+      <td>
+        {{user.ragioneSociale}}
+      </td>
+
+      <td>
+        {{user.partitaiva}}
+      </td>
+
+    </tr>
+
+  </table>
+
+<table class="bordo rcorners">
+
+  <caption><h2>ASSETS</h2>
+  </caption>
+    <tr>
+    <td *ngIf="visInsert">
+
+    </td>
+    <th>
+      Id Asset
+    </th>
+
+    <th>
+      Descrizione
+    </th>
+
+    <th>
+      Tipo
+    </th>
+
+    <th>
+      Prezzo
+    </th>
+
+  </tr>
+
+  <tr *ngFor="let asset of assets" >
+<td *ngIf="visInsert">
+  <input type="radio" name="selIdAsset" (input)="insertArray[0]=asset.idAsset"/>
+</td>
+    <td>
+
+      {{asset.idAsset}}
+
+    </td>
+
+    <td>
+      {{asset.tipo}}
+    </td>
+
+    <td>
+      {{asset.descrizione}}
+    </td>
+
+    <td>
+      {{asset.prezzo}}
+    </td>
+  </tr>
+
+
+
+</table>
+
+
+</div>
+
+<br>
+<div class="bordo rcorners" style="width:fit-content;text-align: center;color: white;background-color: #818181">
+
+<form #f='ngForm'>
+
+
+      <table >
+        <caption>
+          <h2>Prenotazioni</h2>
+        </caption>
+
+        <tr>
+
+          <th>
+            ID UTENTE
+          </th>
+
+          <th>
+            ID ASSET
+          </th>
+
+          <th>
+            ORA INIZIO
+          </th>
+
+          <th>
+            ORA FINE
+          </th>
+          <th></th>
+        </tr>
+
+        <tr *ngFor="let prenotazioni of prens; let idx = index;">
+
+          <td>
+
+            {{prenotazioni.user.iduser}}
+
+          </td>
+
+          <td>
+            {{prenotazioni.asset.idAsset}}
+          </td>
+
+          <td>
+            <input type="datetime-local" class="labcor white" [value]='prenotazioni.orainizio' (input)="prenotazioni.orainizio=$event.target.value" [disabled]="disabledRow[idx]">
+          </td>
+
+          <td>
+            <input type="datetime-local" class="labcor white" [value]='prenotazioni.orafine' (input)="prenotazioni.orafine=$event.target.value" [disabled]="disabledRow[idx]">
+          </td>
+            <td *ngIf="visButton">
+              <Button class="button button1" (click)="modify($event, idx)">Modifica</Button>
+            </td>
+          <div *ngIf="!disabledRow[idx]">
+            <td>
+              <Button class="button button1" (click)="apply($event, idx, prenotazioni.user.iduser, prenotazioni.asset.idAsset, prenotazioni.idprenotazione)">Applica</Button>
+            </td>
+            <td>
+              <Button class="button button3" (click)="annulla($event)">Annulla</Button>
+            </td>
+          </div>
+
+          </tr>
+
+
+      </table>
+
+
+    <button *ngIf="visButton" class="button button1" (click)="insert($event)">Inserisci</button>
+
+  <div *ngIf="visInsert" style="text-align: center" >
+    <table>
+      <caption>
+        <h2>inserire dati relativi alla nuova prenotazione</h2>
+      </caption>
+      <tr>
+        <th>Data inizio</th> <th>Data fine</th>
+      </tr>
+    <td>
+      <input type="datetime-local" class="labcor white"  (input)="insertArray[2]=$event.target.value" >
+    </td>
+
+    <td>
+      <input type="datetime-local" class="labcor white"  (input)="insertArray[3]=$event.target.value">
+    </td>
+    <td>
+    <button class="button button1" (click)="applyIns($event)">Applica</button>
+    </td>
+    <td>
+      <button class="button button1" (click)="annulla($event)">Annulla</button>
+    </td>
+    </table>
+  </div>
+</form>
+</div>
+
+
+
+</body>

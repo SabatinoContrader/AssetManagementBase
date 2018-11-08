@@ -9,7 +9,7 @@ import { Badge } from 'src/models/Badge';
 @Component({
   selector: 'app-management-assegnazionebadge',
   templateUrl: './management-assegnazionebadge.component.html',
-  styleUrls: ['./management-assegnazionebadge.component.css','../../app/app.component.css']
+  styleUrls: ['./management-assegnazionebadge.component.css', '../../app/app.component.css']
 })
 export class ManagementAssegnazionebadgeComponent implements OnInit {
 
@@ -21,11 +21,11 @@ export class ManagementAssegnazionebadgeComponent implements OnInit {
   badges = new Array<Badge>();
   utenti = new Array<User>();
   disabledRow = new Array<boolean>();
-  visButton=true; 
+  visButton = true;
   visInsert;
   d = new Date();
 
-  insertArray = new Array<any>(0,0,"","");
+  insertArray = new Array<any>(0 , 0 , '' , '');
   
 
 

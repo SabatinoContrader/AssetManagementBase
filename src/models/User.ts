@@ -15,20 +15,17 @@ export class User{
     flag: Array<Stato>;
 
 
-
     constructor(iduser: number, username: string, password: string, telefono: string, ragioneSociale: string, partitaIva: string, ruolo: string, mail: string, nomeAbb: Abbonamento, flag: Array<Stato>){
-        this.iduser=iduser;
-        this.username=username;
-        this.password=password;
-        this.ragioneSociale=ragioneSociale;
-        this.telefono=telefono;
-        this.mail=mail;
-        this.partitaiva=partitaIva;
-        this.ruolo=ruolo;
-        this.abbonamento=nomeAbb;
-        this.flag=flag;        
+        this.iduser = iduser;
+        this.username = username;
+        this.password = password;
+        this.ragioneSociale = ragioneSociale;
+        this.telefono = telefono;
+        this.mail = mail;
+        this.partitaiva = partitaIva;
+        this.ruolo = ruolo;
+        this.abbonamento = nomeAbb;
+        this.flag = flag;
     }
-
-    
 }
 

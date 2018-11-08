@@ -1,16 +1,20 @@
 <body>
   <app-menu-asset></app-menu-asset>
-  
+
+  <h2 align="center">Home Asset</h2>
+
+  <br>
+  <div class="bordo rcorners" style="width:fit-content;text-align: center;">
   <form #f='ngForm'>
+
+  <table style="border-collapse:collapse;">
     
-  <table style="border-collapse:collapse;" class="bordo corners" width="50%">	
-    
-    
+    <caption>
+    <tr >
+      <th><h1>Assets</h1></th>
+
+    </caption>
     <tr class="border_bottom">
-      <th><h1>Assets</h1></th><td></td><td></td><td></td><td class="imgB"></td>
-    </tr>
-  
-    <tr>
           
       <th>
         ID assets
@@ -58,14 +62,14 @@
 
       
 
-      <div *ngIf="!disabledRow[idx]">
-          <td>   
+      <td *ngIf="!disabledRow[idx]">
+
             <Button class="button button1" (click)="apply($event, idx, asset.idAsset,f)">Applica</Button>
           </td>
-          <td>   
+          <td *ngIf="!disabledRow[idx]">
             <Button class="button button3" (click)="annulla($event)">Annulla</Button>
           </td>
-      </div>
+
 
     </tr>	
     
@@ -79,14 +83,15 @@
       <td>
         <input type="text" value="-" class="labcor labtext" size="2" disabled>
       </td>
+      <td>
+          <input name="descrizione" value="" (input)="insertAsset.descrizione=$event.target.value" type="text"
+                 class="labcor labtext" size="10">
+      </td>
       <td> 
         <input name="tipo" value="" (input)="insertAsset.tipo=$event.target.value" type="text"
           class="labcor labtext" size="10">
       </td>
-      <td>
-        <input name="descrizione" value="" (input)="insertAsset.descrizione=$event.target.value" type="text"
-          class="labcor labtext" size="10">
-      </td>
+
       
       <td>
         <input name="prezzo" value="" (input)="insertAsset.prezzo=$event.target.value"
@@ -95,14 +100,13 @@
     
      
 
-      <div *ngIf="visInsert">
-          <td>   
+
+          <td *ngIf="visInsert">
             <Button class="button button1" (click)="applyInsert($event)">Applica</Button>
           </td>
-          <td>   
+          <td *ngIf="visInsert">
               <Button class="button button3" (click)="annulla($event)">Annulla</Button>
             </td>
-      </div>
 
   </tr>
   <tr>
@@ -110,9 +114,12 @@
   <Button class="button button1" (click)="insert($event)" style="padding: 4% 28%;">Inserisci</Button> 
   </tr>
 
+
+
 </table>
 
 
 
   </form>
+  </div>
 </body>

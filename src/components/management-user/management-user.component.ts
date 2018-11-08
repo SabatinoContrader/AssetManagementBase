@@ -84,12 +84,11 @@ export class ManagementUserComponent implements OnInit {
     this.ngOnInit();
   }
 
-  insert(f:string):void{
-    this.visButton=false;
-    this.visInsert=true;
-    //this.utenti.push(new User(0,"","","","","","","",new Abbonamento(3,"",0),null));
-    
-  } 
+  insert(f: string): void {
+    this.visButton = false;
+    this.visInsert = true;
+      this.insertUtente = new User(0,"","","","","","cliente","",new Abbonamento(3,"",0),null);
+  }
 
   applyInsert(c:String):void{
     

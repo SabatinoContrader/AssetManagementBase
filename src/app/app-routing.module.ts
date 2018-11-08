@@ -11,6 +11,7 @@ import { NgModule } from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import { ManagementUserComponent } from 'src/components/management-user/management-user.component';
 import { ManagementBadgeComponent } from 'src/components/management-badge/management-badge.component';
+import {HomeBookingsComponent} from '../components/home-bookings/home-bookings.component';
 
 
 
@@ -23,9 +24,8 @@ const routes: Routes = [
     { path: 'managementUser', component: ManagementUserComponent},
     { path: 'managementBadge', component: ManagementBadgeComponent},
     { path: 'managementAssets', component: ManagementAssetsComponent},
-    { path: 'managementAssegnazionebadge', component: ManagementAssegnazionebadgeComponent}
-
-    
+    { path: 'managementAssegnazionebadge', component: ManagementAssegnazionebadgeComponent},
+    { path: 'managementBookings', component: HomeBookingsComponent}
 ];
 
 @NgModule({

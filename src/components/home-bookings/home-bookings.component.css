@@ -1,0 +1,45 @@
+.sinistra{
+    width: 300px;
+    left: 0px;
+    top: 60%;
+    position: absolute;
+}
+.sinistraAsset{
+    width: 20%;
+    left: 0%;
+    top: 10%;
+    position: absolute;
+}
+.sinistraUser{
+    width: 20%;
+    left: 30%;
+    top: 10%;
+    position: absolute;
+}
+.insert{
+    width: 300px;
+    left: 0px;
+    top: 40%;
+    position: absolute;
+    height: 200px;
+}
+.divNascosto
+{
+    display:none;
+    float:left;
+    border: 1px solid gray;
+    width: 100px;
+    height: 100px;
+    margin-left: 20px;
+    margin-top: 10px;
+}
+
+.altroDiv
+{
+    display:block;
+    float: right;
+    border: 1px solid gray;
+    width: 200px;
+    height: 80px;
+    margin-right: 50px;
+}

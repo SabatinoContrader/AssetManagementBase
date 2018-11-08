@@ -59,8 +59,7 @@ export class ManagementBadgeComponent implements OnInit {
   insert(f:string):void{
     this.visButton=false;
     this.visInsert=true;
-    //this.utenti.push(new User(0,"","","","","","","",new Abbonamento(3,"",0),null));
-    
+    this.insertBadge = new Badge(0,"","");
   } 
 
   applyInsert(c:String):void{
