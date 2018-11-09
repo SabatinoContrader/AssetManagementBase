@@ -46,14 +46,12 @@ import javax.servlet.http.HttpServletRequest;
     }
 
     public List<AssetDTO> getAllAssets () {
-    	
-    	
     	List<Asset> aList=(List<Asset>)this.assetRepository.findAll();
     	List<Asset> ll=new LinkedList<Asset>();
     	List<AssetDTO> aDTOlist=new ArrayList<>();
     	
         for(Asset u:aList) {
-        	if(u.getFlag()==1) {
+        	if(u.getFlag()==1 && u.getIdasset()!=1l) {
         		ll.add(u);
         	}
         }
@@ -67,33 +65,22 @@ import javax.servlet.http.HttpServletRequest;
     }
     
     public List<AssetDTO> getAllAssetsN () {
-    	
-    	List<Asset> aList=(List<Asset>)this.assetRepository.findAll();
+    	System.out.println(getAllAssets().size());
+    	List<AssetDTO> aList=getAllAssets();
     	List<BadgeReader> bList=(List<BadgeReader>)this.badgeReaderRepository.findAll();
-        
-        
-        
-    	List<AssetDTO> listADTO = new ArrayList<>();
+
         List<BadgeReaderDTO> listBRDTO=new ArrayList<>();
         List<AssetDTO> llAS = new LinkedList<>();
         
          for(BadgeReader b: bList) {
         	listBRDTO.add(BadgeReaderConverter.convertToDTO(b));
          }
-        for(Asset a: aList) {
-        	listADTO.add(AssetConverter.convertToDTO(a));
-        }
-        llAS.addAll(listADTO);
-        for(AssetDTO a:llAS) {
-
-        }
+        llAS.addAll(aList);
         
-        
-        for(AssetDTO aaDTO:listADTO) {
+        for(AssetDTO aaDTO:aList) {
         	
         	for(BadgeReaderDTO brDTO: listBRDTO) {
         		if(aaDTO.getIdAsset()==brDTO.getAsset().getIdAsset()) {
-
         			if(brDTO.getFlag()==1l) {
         				llAS.remove(aaDTO);
         			}
@@ -137,8 +124,6 @@ import javax.servlet.http.HttpServletRequest;
     		 if(br.getAsset().getIdasset()==id) {
     			 br.getAsset().setIdasset(1l);
     			 br.setFlag(2l);
-    			 br.setDescrizione("non associato");
-    			 br.setTipologia("non associato");
     			 badgeReaderRepository.save(br);
     		 }
     		 

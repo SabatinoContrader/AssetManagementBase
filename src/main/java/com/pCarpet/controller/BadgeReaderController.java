@@ -59,6 +59,22 @@ public class BadgeReaderController {
 		List<BadgeReaderDTO> badgereaders = this.badgeReaderService.getAllBadgeReaders();
 		return badgereaders;
 	}
+	
+	@RequestMapping(value = "/associa", method = RequestMethod.GET)
+	public List<BadgeReaderDTO> associaControl(HttpServletRequest request, Model model ) {
+		System.out.println("TEST");
+		long idbadgereader=Integer.parseInt(request.getParameter("idbadger"));
+		long idasset=Integer.parseInt(request.getParameter("idasset"));
+		String descrizione=request.getParameter("descrizione");
+		String tipologia=request.getParameter("tipologia");
+		AssetDTO asset=assetService.getAsset(idasset);
+		long flag=1;
+		BadgeReaderDTO badgereaderDTO = new BadgeReaderDTO(idbadgereader,asset,descrizione,tipologia,flag);
+		this.badgeReaderService.insertBadgeReader(badgereaderDTO);
+		List<BadgeReaderDTO> badgereaders = this.badgeReaderService.getAllBadgeReaders();
+		return badgereaders;
+	}
+	
 	@RequestMapping(value = "/showAssetsN", method = RequestMethod.GET)
 	public List<AssetDTO> Asset(HttpServletRequest request, Model model) {
 	    return this.assetService.getAllAssetsN();
