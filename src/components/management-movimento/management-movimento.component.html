@@ -1,4 +1,4 @@
-<!--INSERIRE IL SELECTOR DEL MENU-->
+<app-menu-booking></app-menu-booking>
 
 <body>
 
@@ -7,11 +7,10 @@
     <table>
 
       <tr>
-        <!--
         <th>
           ID Badge Reader
         </th>
-         -->
+         
         <th>
           ID Badge
         </th>
@@ -24,11 +23,11 @@
      </tr>
      
      <tr *ngFor="let mov of movimenti">
-       <!--
+       
        <td>
-         {{mov.badgeReader}}
+         <p>{{mov.badgereader.idBadgeReader}}</p>
        </td>
-       -->
+       
         <td>
           <p>{{mov.badge.idBadge}}</p>
         </td>

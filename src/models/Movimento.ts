@@ -1,14 +1,16 @@
+import { BadgeReader } from './BadgeReader';
 import { AssegnazioneBadge } from 'src/models/AssegnazioneBadge';
 import { Badge } from './Badge';
+
 export class Movimento{
-    //badgeReader:BadgeReader;
+    badgereader:BadgeReader;
     badge:Badge;
     orainizio:string;
     orafine:string;
     assegnazione:AssegnazioneBadge;
 
-    constructor(/*badgeReader:BadgeReader,*/badge:Badge, orainizio:string, orafine:string, assegnazione:AssegnazioneBadge){
-        //this.badgeReader=badgeReader;
+    constructor(badgereader:BadgeReader, badge:Badge, orainizio:string, orafine:string, assegnazione:AssegnazioneBadge){
+        this.badgereader=badgereader;
         this.badge=badge;
         this.orainizio=orainizio;
         this.orafine=orafine;

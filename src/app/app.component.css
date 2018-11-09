@@ -106,6 +106,17 @@ td{
         color: white;
     }
 
+    .button6 {
+        background-color: white;
+        color: black;
+        border: 2px solid orange;
+    }
+    
+    .button6:hover {
+        background-color: orange;
+        color: white;
+    }
+
     body {
         font-family: "Lato", sans-serif;
     }

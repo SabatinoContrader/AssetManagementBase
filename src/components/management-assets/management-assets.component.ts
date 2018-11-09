@@ -19,7 +19,7 @@ export class ManagementAssetsComponent implements OnInit {
   visButton = true;
   visInsert = false;
   ngOnInit() {
-      this.visInsert = false;
+    this.visInsert = false;
     
     this.assetsService.getAllAssets().subscribe((response)=>{
       console.log(response[0].descrizione);
@@ -67,11 +67,12 @@ export class ManagementAssetsComponent implements OnInit {
                             this.insertAsset.prezzo, this.insertAsset.flag)
                             .subscribe(async(response) => {
                              await(this.assets = response);
-                                this.visInsert = false;
+                                //this.visInsert = false;
+                                this.ngOnInit();
                             });
 
 
-    this.ngOnInit();
+    
   
   }
 }

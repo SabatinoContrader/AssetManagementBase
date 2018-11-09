@@ -1,0 +1,124 @@
+<div>
+    <app-menu-booking></app-menu-booking>
+</div>
+
+<html>
+<body>
+
+ 
+
+<!--Export-->
+<div class="divExport">
+  <h2>Export</h2>
+  <table>
+
+    <tr>
+      <th>
+        Inserire il percorso dove si vuole esportare il file
+      </th>
+    </tr>
+    <tr>
+      <td>
+        <input type="text" (input)="path=$event.target.value">
+      </td>
+    </tr>
+
+    <tr></tr><tr></tr><tr></tr><tr></tr><tr></tr>
+
+    <tr>
+      <th>
+        Inserire il nome del file
+      </th>
+    </tr>
+    <tr>
+      <td>
+        <input type="text" (input)="nameFile=$event.target.value">
+      </td>
+    </tr>
+
+    <tr>
+      <Button class="button button6" (click)="export()">Export</Button>
+      <Button class="button button6" (click)="showUtente()">Scegli Utente</Button>
+    </tr>
+  
+  </table>
+
+</div>
+
+
+
+<!--Visualizzazione Utenti-->
+<div *ngIf="visUtenti" class="divUser">
+  <table>
+
+    <tr>
+      <th>
+        <h1>USERS</h1>
+      </th><td></td><td></td><td></td>
+      <Button class="button button6" (click)="disassocia()">Clear</Button>
+      
+    </tr>
+    <hr size=4 color=red>
+    <tr>
+
+      <th>
+
+      </th>
+
+      <th>
+        ID utente
+      </th>
+      <th>
+        Username
+      </th>
+
+      <th>
+        Ragione Sociale
+      </th>
+
+      <th>
+        Partita Iva
+      </th>
+
+      <th>
+      </th>
+      <th>
+      </th>
+
+    </tr>
+
+
+
+    <input type="radio" name="selIdUser" [checked]="dis" hidden>
+    <tr *ngFor="let user of utenti; let idx = index;">
+      
+      <td>
+        <input type="radio" name="selIdUser" (input)="iduser=user.iduser" />
+      </td>
+
+      <td>
+        <input type="text" value="{{user.iduser}}" class="labcor labtext" size="2" disabled>
+      </td>
+      <td>
+        <input name="username" [value]="utenti[idx].username" (input)="utenti[idx].username=$event.target.value" type="text"
+          class="labcor labtext" size="10" disabled>
+      </td>
+
+
+      <td>
+        <input name="ragioneSociale" [value]="utenti[idx].ragioneSociale" (input)="utenti[idx].ragioneSociale=$event.target.value"
+          type="text" class="labcor labtext" size="10" disabled>
+      </td>
+
+      <td>
+        <input name="partitaiva" [value]="utenti[idx].partitaiva" (input)="utenti[idx].partitaiva=$event.target.value"
+          type="text" class="labcor labtext" size="11" disabled>
+      </td>
+
+    </tr>
+  </table>
+</div>
+
+
+</body>
+</html>

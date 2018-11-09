@@ -14,6 +14,7 @@ import {RouterModule, Routes} from '@angular/router';
 import { ManagementUserComponent } from 'src/components/management-user/management-user.component';
 import { ManagementBadgeComponent } from 'src/components/management-badge/management-badge.component';
 import {HomeBookingsComponent} from '../components/home-bookings/home-bookings.component';
+import { ManagementExportComponent } from 'src/components/management-export/management-export.component';
 
 
 
@@ -29,6 +30,7 @@ const routes: Routes = [
     { path: 'managementAssegnazionebadge', component: ManagementAssegnazionebadgeComponent},
     { path: 'managementBookings', component: HomeBookingsComponent},
     { path: 'managementBadgeReader', component: ManagementBadgereaderComponent},
+    { path: 'managementExport', component: ManagementExportComponent},
     { path: 'homeLog', component: ManagementMovimentoComponent }
 
     

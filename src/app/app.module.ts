@@ -1,3 +1,4 @@
+import { ExportService } from './../services/export.service';
 import { BookingsService } from './../services/bookings.service';
 import { BadgereaderService } from './../services/badgereader.service';
 import { MenuBadgereaderComponent } from './../menu/menu-badgereader/menu-badgereader.component';
@@ -28,6 +29,7 @@ import { ManagementAssegnazionebadgeComponent } from '../components/management-a
 import { HomeBookingsComponent } from '../components/home-bookings/home-bookings.component';
 import { MenuBookingComponent } from '../menu/menu-booking/menu-booking.component';
 import { ManagementMovimentoComponent } from '../components/management-movimento/management-movimento.component';
+import { ManagementExportComponent } from '../components/management-export/management-export.component';
 
 
 @NgModule({
@@ -48,7 +50,8 @@ import { ManagementMovimentoComponent } from '../components/management-movimento
     ManagementAssegnazionebadgeComponent,
     HomeBookingsComponent,
     MenuBookingComponent,
-    ManagementMovimentoComponent
+    ManagementMovimentoComponent,
+    ManagementExportComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +64,7 @@ import { ManagementMovimentoComponent } from '../components/management-movimento
     })*/
   ],
 
-  providers: [UserService,BadgeService,AssegnazionebadgeService,BadgereaderService,BookingsService,MovimentoService],
+  providers: [UserService,BadgeService,AssegnazionebadgeService,BadgereaderService,BookingsService,MovimentoService, ExportService],
 
   bootstrap: [AppComponent]
 })
