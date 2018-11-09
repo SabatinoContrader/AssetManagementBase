@@ -173,8 +173,9 @@ public class MovimentoService {
 
     			User u=this.userRepository.findById(a.getUser().getIduser()).get();
     			BadgeReader br=this.badgeReaderRepository.findById(lMov.get(i).getBadgereader().getIdBadgeReader()).get();
-        		Asset asset=this.assetRepository.findById(br.getAsset().getIdasset()).get();
-    		
+        		//Asset asset=this.assetRepository.findById(br.getAsset().getIdasset()).get();
+    			Asset asset=this.assetRepository.findById(lMov.get(i).getAsset().getIdasset()).get();
+    			
         		System.out.println("Badge movimento: "+lMov.get(i).getBadge().getIdbadge());
         		System.out.println("Badge assegnazione: "+a.getBadge().getIdbadge());
         		
@@ -228,8 +229,9 @@ public class MovimentoService {
     			
     			
     			BadgeReader br=this.badgeReaderRepository.findById(lMov.get(i).getBadgereader().getIdBadgeReader()).get();
-        		Asset asset=this.assetRepository.findById(br.getAsset().getIdasset()).get();
-        		
+        		//Asset asset=this.assetRepository.findById(br.getAsset().getIdasset()).get();
+    			Asset asset=this.assetRepository.findById(lMov.get(i).getAsset().getIdasset()).get();
+    			
         		if(a.getFlag()==1l && u.getStato().getFlag()==1l)
         			l.add(String.valueOf(u.getIduser()));
         		else

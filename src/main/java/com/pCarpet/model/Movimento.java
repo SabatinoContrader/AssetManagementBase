@@ -45,6 +45,10 @@ public class Movimento {
 	private String orafine;
 	
 	@ManyToOne
+	@JoinColumn(name="idasset")
+	private Asset asset;
+	
+	@ManyToOne
 	@JoinColumn(name="idassegnazione")
 	private Assegnazione assegnazione;
 
@@ -66,6 +70,16 @@ public class Movimento {
 		this.badge = badge;
 		this.orainizio = orainizio;
 		this.orafine = orafine;
+	}
+	
+	public Movimento(Long idmovimento, BadgeReader badgereader, Badge badge, String orainizio, String orafine, Asset asset) {
+		this();
+		this.idmovimento = idmovimento;
+		this.badgereader = badgereader;
+		this.badge = badge;
+		this.orainizio = orainizio;
+		this.orafine = orafine;
+		this.asset=asset;
 	}
 	
 	public Movimento() {

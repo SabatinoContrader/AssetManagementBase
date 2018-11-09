@@ -12,6 +12,7 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.StringTokenizer;
@@ -65,7 +66,6 @@ import com.pCarpet.utils.Date;
 @RestController
 @CrossOrigin
 @RequestMapping("/Movimento")
-
 public class MovimentoController{
 	
 	private MovimentoService movimentoService;
@@ -130,14 +130,14 @@ public class MovimentoController{
 	public String LogsExp(HttpServletRequest request, Model model ){
 		String scelta= request.getParameter("richiesta");
 		if (scelta.equals("exportdue")) {
-			if (writeOnExcel(request)) 
-        	{
-				model.addAttribute("feedback", "success");
-
-        	}
-        	else {
-        		model.addAttribute("feedback", "wrong");
-        	}
+//			if (writeOnExcel(request)) 
+//        	{
+//				model.addAttribute("feedback", "success");
+//
+//        	}
+//        	else {
+//        		model.addAttribute("feedback", "wrong");
+//        	}
 		}
 		else if(scelta.equals("export"))
 		{
@@ -167,7 +167,11 @@ public class MovimentoController{
 		return "logsExportHome";
 	}
 	
+	
+	@RequestMapping(value = "/export", method = RequestMethod.GET)
+	@CrossOrigin
 	public boolean writeOnExcel(HttpServletRequest request) {
+		System.out.println("ENTRATOO");
     	String par=request.getParameter("dir").toString();
     	String storico=request.getParameter("name").toString();
     	File f=new File(par+"\\"+storico+".xls");
@@ -199,8 +203,8 @@ public class MovimentoController{
 	        
 	
 	    	WritableWorkbook myexel = Workbook.createWorkbook(f);
-		
-			if (iduser.equalsIgnoreCase("")) {
+
+			if (iduser.equalsIgnoreCase("all")) {
 				
 				WritableSheet mysheet = myexel.createSheet("Utilizzo", 0);
     			WritableSheet mysheetP = myexel.createSheet("Prenotazione", 1);
@@ -321,12 +325,14 @@ public class MovimentoController{
     					l10=new Label(9,i,"",blankColour);
     					
     					String dataOraI=String.valueOf(list.get(f1+7));
-    					dataOraI=formatData(dataOraI);
+    					//dataOraI=formatData(dataOraI); non necessario
+    					
     					l11=new Label(10,i,Date.formatDateHour(dataOraI).get(0),wC);
     					l12=new Label(11,i,Date.formatDateHour(dataOraI).get(1),wC);
     					
     					String dataOraF=String.valueOf(list.get(f1+8));
-    					dataOraF=formatData(dataOraF);
+    					//dataOraF=formatData(dataOraF); non necessario
+    					
 //    					System.out.println("dataF:"+Date.formatDateHour(dataOraF).get(0));
 //    					System.out.println("OraF:"+Date.formatDateHour(dataOraF).get(1));
     					
@@ -354,7 +360,6 @@ public class MovimentoController{
 			
     			int f2=1;
     			for(int i=1; i<=listP.size()/8; i++) {
-    					System.out.println("PRENOTAZIONE FOR:"+listP.get(f2-1));
     					l=new Label(0,i, String.valueOf(listP.get(f2-1)),wC );
     					l2=new Label(1,i, String.valueOf(listP.get(f2)),wC );
     					l3=new Label(2,i,"",blankColour);
@@ -365,14 +370,12 @@ public class MovimentoController{
     					l8=new Label(7,i,"",blankColour);
     					
     					String dataOraI=String.valueOf(listP.get(f2+5));
-    					dataOraI=formatData(dataOraI);
+    					//dataOraI=formatData(dataOraI);
     					l9=new Label(8,i,Date.formatDateHour(dataOraI).get(0),wC);
     					l10=new Label(9,i,Date.formatDateHour(dataOraI).get(1),wC);
     					
     					String dataOraF=String.valueOf(listP.get(f2+6));
-    					dataOraF=formatData(dataOraF);
-    					System.out.println("dataF:"+Date.formatDateHour(dataOraF).get(0));
-    					System.out.println("OraF:"+Date.formatDateHour(dataOraF).get(1));
+    					//dataOraF=formatData(dataOraF);
     					
     					l11=new Label(10,i,Date.formatDateHour(dataOraF).get(0),wC);
     					l12=new Label(11,i,Date.formatDateHour(dataOraF).get(1),wC);

@@ -65,7 +65,6 @@ import javax.servlet.http.HttpServletRequest;
     }
     
     public List<AssetDTO> getAllAssetsN () {
-    	System.out.println(getAllAssets().size());
     	List<AssetDTO> aList=getAllAssets();
     	List<BadgeReader> bList=(List<BadgeReader>)this.badgeReaderRepository.findAll();
 
@@ -75,7 +74,15 @@ import javax.servlet.http.HttpServletRequest;
          for(BadgeReader b: bList) {
         	listBRDTO.add(BadgeReaderConverter.convertToDTO(b));
          }
+
         llAS.addAll(aList);
+
+//        for(AssetDTO a: aList) {
+//        	listADTO.add(AssetConverter.convertToDTO(a));
+//        }
+//        llAS.addAll(listADTO);
+        
+
         
         for(AssetDTO aaDTO:aList) {
         	
