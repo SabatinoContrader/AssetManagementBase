@@ -22,7 +22,10 @@ export class ManagementBadgereaderComponent implements OnInit {
   disabledRow = new Array<boolean>();
   visButton=true;
   visInsert;
+  visAssocia = false;
   idasset: number;
+    idasset1: number;
+  newassocia = new Array<any>();
 
   ngOnInit() {
   
@@ -36,6 +39,7 @@ export class ManagementBadgereaderComponent implements OnInit {
   });
   this.visButton=true;
   this.visInsert=false;
+  this.visAssocia = false;
 
     this.assetsService.getAllAssetsN().subscribe((response)=>{
       console.log(response[0].descrizione);
@@ -58,8 +62,16 @@ export class ManagementBadgereaderComponent implements OnInit {
     this.visInsert=true;
     //this.utenti.push(new User(0,"","","","","","","",new Abbonamento(3,"",0),null));
     
-  } 
-  applyInsert(f:string,descrizione:string, tipologia:string):void{
+  }
+
+    associa(f: string,idx: number): void {
+        this.newassocia = new Array<any>();
+        this.visAssocia = true;
+        this.newassocia.push(this.badgereaders[idx].idBadgeReader);
+      this.newassocia.push(this.badgereaders[idx].descrizione);
+      this.newassocia.push(this.badgereaders[idx].tipologia);
+    }
+    applyInsert(f:string, descrizione:string, tipologia:string):void {
     
     //this.visButton=true;
     //this.utenti[idx+1].username
@@ -74,4 +86,18 @@ export class ManagementBadgereaderComponent implements OnInit {
     
   
   }
+
+    applyAssocia(f:string):void{
+    console.log(this.idasset1)
+        this.badgeReaderService.associa(this.idasset1,this.newassocia[0], this.newassocia[1],this.newassocia[2])
+            .subscribe(async(response)=>{
+                await (this.badgereaders=response);
+
+
+                this.visAssocia=false;
+
+            });
+        this.ngOnInit();
+
+    }
 }

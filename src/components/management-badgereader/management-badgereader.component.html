@@ -34,8 +34,11 @@
         <input type="text" value="{{badgereader.idBadgeReader}}" class="labcor labtext" size="5"  disabled>
       </td>
       
-      <td>
+      <td *ngIf="badgereader.asset.idAsset!=1">
         <input type="text" value="{{badgereader.asset.idAsset}}" class="labcor labtext" size="5" disabled>
+      </td>
+      <td *ngIf="badgereader.asset.idAsset==1">
+        <input type="text" value="-" class="labcor labtext" size="5" disabled>
       </td>
 
       <td>
@@ -45,7 +48,9 @@
       <td>
           <input name="tipologia" [value]="badgereader.tipologia" (input)="badgereader.tipologia=$event.target.value" type="text" class="labcor labtext"  [disabled]="disabledRow[idx]">
       </td>
-      
+      <td *ngIf="badgereader.asset.idAsset==1">
+        <button class="button button5" (click)="associa($event,idx)">Attiva</button>
+      </td>
     </tr>
   </table>
   </div>
@@ -130,6 +135,83 @@
 
     </table>
   </div>
+
+    <div *ngIf="visAssocia" style="border-collapse:collapse;text-align: center; width: 600px;" class="bordo corners">
+      <table >
+        <tr><h1>Seleziona Asset</h1></tr>
+
+      </table>
+      <table style="border-collapse:collapse;">
+        <caption>
+          <h2>Assets Disponibili</h2>
+        </caption>
+        <tr  class="border_bottom">
+          <th>
+          </th>
+          <th>
+            ID assets
+          </th>
+
+          <th>
+            Descrizione
+          </th>
+
+          <th>
+            Tipo
+          </th>
+          <th>
+            Prezzo
+          </th>
+        </tr>
+
+        <tr *ngFor="let asset of assets; let idx=index;">
+          <td>
+            <input type="radio" name="idasset" (input)="idasset1=asset.idAsset">
+          </td>
+          <td>
+            <input name="idasset" [value]="asset.idAsset" (input)="assets[idx].descrizione=$event.target.value" type="text" class="labcor labtext" size="2" [disabled]="disabledRow[idx]">
+
+          </td>
+          <td>
+            <input name="descrizione" [value]="assets[idx].descrizione" (input)="assets[idx].descrizione=$event.target.value" type="text" class="labcor labtext"  [disabled]="disabledRow[idx]">
+          </td>
+
+          <td>
+            <input name="tipo" [value]="assets[idx].tipo" (input)="assets[idx].tipo=$event.target.value" type="text" class="labcor labtext" [disabled]="disabledRow[idx]">
+          </td>
+          <td>
+            <input name="prezzo" [value]="assets[idx].prezzo" (input)="assets[idx].prezzo=$event.target.value" type="text" class="labcor labtext"  [disabled]="disabledRow[idx]">
+          </td>
+        </tr>
+      </table>
+      <table class="bordo" style="align-content:center;">
+        <caption>
+          <p>Inserire Dati nuovo Badge Reader</p>
+        </caption>
+        <tr>
+          <th>Descrizione</th> <th>Tipologia</th>
+        </tr>
+        <tr>
+
+          <td>
+            <input name="descrizione" [value]="newassocia[1]" type="text"
+                   class="labcor labtext">
+          </td>
+
+          <td>
+            <input name="tipologia" [value]="newassocia[2]" type="text"
+                   class="labcor labtext">
+          </td>
+          <td>
+            <Button class="button button1" (click)="applyAssocia($event)">Applica</Button>
+          </td>
+          <td>
+            <Button class="button button3" (click)="annulla($event)">Annulla</Button>
+          </td>
+        </tr>
+
+      </table>
+    </div>
     </form>
     </body>
   

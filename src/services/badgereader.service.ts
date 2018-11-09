@@ -30,4 +30,10 @@ insert(idAsset:number,descrizione:string, tipologia:string): Observable<BadgeRea
   .pipe(tap((response) => console.log(response), catchError(this.handleError('insert error', {})))
   );
 }
+
+    associa(idAsset:number,idbadger: number,descrizione:string, tipologia:string): Observable<BadgeReader[]>{
+        return this.http.get<BadgeReader[]>('http://localhost:8080/BadgeReader/associa?idbadger=' + idbadger + '&idasset='+idAsset+'&tipologia='+tipologia+'&descrizione='+descrizione)
+            .pipe(tap((response) => console.log(response), catchError(this.handleError('insert error', {})))
+            );
+    }
 }
