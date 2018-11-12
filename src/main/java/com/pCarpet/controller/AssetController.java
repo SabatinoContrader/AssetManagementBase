@@ -56,11 +56,10 @@ public class AssetController {
 		
 		long id=Integer.parseInt(request.getParameter("idasset"));
 		
-		String descrizione=request.getParameter("descrizone");
+		String descrizione=request.getParameter("descrizione");
 		
 		String tipo=request.getParameter("tipo");
-		
-		long prezzo= Integer.parseInt(request.getParameter("prezzo"));
+		double prezzo=Double.parseDouble(request.getParameter("prezzo"));
 		
 		AssetDTO assetDTO = new AssetDTO(id,descrizione,tipo,prezzo,1);
 		this.assetService.insertAsset(assetDTO);
@@ -69,11 +68,10 @@ public class AssetController {
 	}
 	@RequestMapping(value = "/insert", method = RequestMethod.GET)
 	public List<AssetDTO> insertControl(HttpServletRequest request, Model model ) {
-		System.out.println("TEST");
 		long idasset=0;
 		String tipo=request.getParameter("tipo");
 		String descrizione=request.getParameter("descrizione");
-		long prezzo=Integer.parseInt(request.getParameter("prezzo"));
+		double prezzo=Double.parseDouble(request.getParameter("prezzo"));
 		AssetDTO assetDTO = new AssetDTO(idasset,tipo,descrizione,prezzo,1);
 		this.assetService.insertAsset(assetDTO);
 		List<AssetDTO> assets = this.assetService.getAllAssets();
@@ -148,7 +146,7 @@ public class AssetController {
 	public String addedAsset(HttpServletRequest request, Model model ) {
 		String descrizione = request.getParameter("descrizione");
 		String tipo = request.getParameter("tipo");
-		long prezzo = Long.parseLong(request.getParameter("prezzo"));
+		double prezzo=Double.parseDouble(request.getParameter("prezzo"));
 		
 		AssetDTO asset = new AssetDTO(0, descrizione, tipo,prezzo,1l);
 		asset.setIdAsset(0);
@@ -167,7 +165,7 @@ public String modifiedAsset(HttpServletRequest request, Model model )
 	long id=Integer.parseInt(request.getParameter("id"));
 	String descrizione = request.getParameter("descrizione");
 	String tipo = request.getParameter("tipo");
-	long prezzo = Long.parseLong(request.getParameter("prezzo"));
+	double prezzo=Double.parseDouble(request.getParameter("prezzo"));
 	AssetDTO asset = new AssetDTO(id, descrizione, tipo,prezzo,1l);
 	assetService.insertAsset(asset);
 	List<AssetDTO> assets = assetService.getAllAssets();
