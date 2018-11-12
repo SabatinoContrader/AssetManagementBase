@@ -57,15 +57,7 @@ public class LoginController {
 	@CrossOrigin
 	public List<UserDTO> loginControl(HttpServletRequest request, Model model) {
 	
-		defaultAbb("normale",100);
-		defaultAbb("silver",200);
-		defaultAbb("gold",300);
-		defaultAbb("business",400);
-		
-		defaultStato("eliminato");
-		defaultStato("attivo");
-		
-		defaultAsset();
+
 		List<UserDTO> lUserDTO=new ArrayList<>();
 		lUserDTO=this.userService.getAllUsers();
 		return lUserDTO;
@@ -129,41 +121,6 @@ public class LoginController {
 	}
 	
 	
-	public void defaultAbb(String nome, double prezzo)
-	{
-		AbbonamentoDTO abb = new AbbonamentoDTO();
-		if(nome.equals("normale"))
-			abb.setId(1l);
-		else if(nome.equals("silver"))
-			abb.setId(2l);
-		else if(nome.equals("gold"))
-			abb.setId(3l);
-		else if(nome.equals("business"))
-			abb.setId(4l);
-		abb.setNome(nome);
-		abb.setPrezzo(prezzo);
-		abbonamentoservice.insertAbb(abb);
-	}
-	
-	public void defaultStato(String value) {
-		StatoDTO sDTO=new StatoDTO();
-		if(value.equals("attivo"))
-			sDTO.setId(1l);
-		else if(value.equals("eliminato"))
-			sDTO.setId(2l);
-		sDTO.setValore(value);
-		statoService.insertStato(sDTO);
-			
-	}
-	
-	public void defaultAsset() {
-		AssetDTO assDTO=new AssetDTO();
-		assDTO.setIdAsset(1l);
-		assDTO.setDescrizione("vuoto");
-		assDTO.setFlag(1l);
-		assDTO.setPrezzo(00);
-		assDTO.setTipo("vuoto");
-		assetService.insertAsset(assDTO);
-	}
+
 	
 }
