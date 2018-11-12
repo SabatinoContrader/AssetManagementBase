@@ -3,6 +3,7 @@ package com.pCarpet.dto;
 
 public class MovimentoDTO {
 
+	private long idmovimento;
 	private BadgeReaderDTO badgereader;
 	private BadgeDTO badge;
 	private String orainizio;
@@ -93,6 +94,16 @@ public class MovimentoDTO {
 
 	public void setAssetDTO(AssetDTO assetDTO) {
 		this.assetDTO = assetDTO;
+	}
+
+
+	public long getIdmovimento() {
+		return idmovimento;
+	}
+
+
+	public void setIdmovimento(long idmovimento) {
+		this.idmovimento = idmovimento;
 	}
 	
 	

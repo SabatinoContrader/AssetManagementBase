@@ -45,6 +45,8 @@ import com.pCarpet.converter.AssegnazioneConverter;
 import com.pCarpet.converter.AssetConverter;
 import com.pCarpet.converter.BadgeConverter;
 import com.pCarpet.converter.BadgeReaderConverter;
+import com.pCarpet.converter.MovimentoConverter;
+import com.pCarpet.dao.MovimentoRepository;
 import com.pCarpet.dto.AssegnazioneDTO;
 import com.pCarpet.dto.AssetDTO;
 import com.pCarpet.dto.BadgeDTO;
@@ -86,6 +88,7 @@ public class MovimentoController{
 	private AssegnazioneService assegnazioneService;
 	private BadgeReaderService badgereaderService;
 	private BadgeService badgeService;
+	private MovimentoRepository movimentoRepository;
 	public static final int PORT = 1050; 
 	
 	private String badgereader;
@@ -93,7 +96,7 @@ public class MovimentoController{
 	
 	
 	@Autowired
-	public MovimentoController(UserService userService, MovimentoService movimentoService, PrenotazioneService prenotazioneService,AssegnazioneService assegnazioneService,BadgeReaderService badgereaderService,BadgeService badgeService,AssetService assetService) throws IOException {
+	public MovimentoController(UserService userService, MovimentoService movimentoService, PrenotazioneService prenotazioneService,AssegnazioneService assegnazioneService,BadgeReaderService badgereaderService,BadgeService badgeService,AssetService assetService, MovimentoRepository movimentoRepository) throws IOException {
 		this.userService = userService;
 		this.movimentoService= movimentoService;
 		this.prenotazioneService= prenotazioneService;
@@ -102,6 +105,8 @@ public class MovimentoController{
 		this.badgereaderService=badgereaderService;
 		this.badgeService=badgeService;
 		this.assetService=assetService;
+		
+		this.movimentoRepository=movimentoRepository;
 		
 		/*
 		try {
@@ -126,6 +131,17 @@ public class MovimentoController{
 	public int[] statisticheControl(HttpServletRequest request, Model model ) {
 		
 		List<MovimentoDTO> mDTO=this.movimentoService.getAllMovimenti();
+		List<MovimentoDTO> mTestDTO=new ArrayList<>();
+		mTestDTO.addAll(mDTO);
+		for(MovimentoDTO m1DTO: mTestDTO) {
+			if(m1DTO.getOrafine().equals("0000-00-00T00:00:00")) {
+				mDTO.remove(m1DTO);
+			}
+		}
+		
+		for(MovimentoDTO cazzDTO: mDTO) {
+		}
+		
 		List<AssetDTO> aDTO=this.assetService.getAllAssets();
 		List<String> date=new LinkedList<>();
 		
@@ -161,9 +177,6 @@ public class MovimentoController{
 			
 		}//for
 		
-		for(int i=0; i<minutes.length; i++) {
-			System.out.println(minutes[i]);
-		}//for
 		return minutes;
 	}
 	
@@ -224,7 +237,6 @@ public class MovimentoController{
 	@RequestMapping(value = "/export", method = RequestMethod.GET)
 	@CrossOrigin
 	public boolean writeOnExcel(HttpServletRequest request) {
-		System.out.println("ENTRATOO");
     	String par=request.getParameter("dir").toString();
     	String storico=request.getParameter("name").toString();
     	File f=new File(par+"\\"+storico+".xls");
@@ -527,13 +539,13 @@ public class MovimentoController{
     					l10=new Label(9,i,"",blankColour);
     					
     					String dataOraI=String.valueOf(listU.get(f1+7));
-    					dataOraI=formatData(dataOraI);
+    					dataOraI=myUtilsDate.formatData(dataOraI);
     					
     					l11=new Label(10,i,myUtilsDate.formatDateHour(dataOraI).get(0),wC);
     					l12=new Label(11,i,myUtilsDate.formatDateHour(dataOraI).get(1),wC);
     					
     					String dataOraF=String.valueOf(listU.get(f1+8));
-    					dataOraF=formatData(dataOraF);
+    					dataOraF=myUtilsDate.formatData(dataOraF);
     					
     					l13=new Label(12,i,myUtilsDate.formatDateHour(dataOraF).get(0),wC);
     					l14=new Label(13,i,myUtilsDate.formatDateHour(dataOraF).get(1),wC);
@@ -576,6 +588,7 @@ public class MovimentoController{
 		
     
 }
+	/*
 public String formatData(String oldDate) {
 		
 		StringTokenizer st=new StringTokenizer(oldDate,"/.-T: ");
@@ -615,7 +628,7 @@ public String formatData(String oldDate) {
 		
 		
 	}
-
+*/
 	public void Server() throws IOException {
 	
 

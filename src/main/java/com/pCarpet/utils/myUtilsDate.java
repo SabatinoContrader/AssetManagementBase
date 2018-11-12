@@ -31,13 +31,16 @@ public class myUtilsDate {
 		
 	}
 	
-	public static int intervalMinute(String d1n, String d2n) {
-		String d1 = formatData(d1n);
-		String d2 = formatData(d2n);
+	public static int intervalMinute(String orainizio, String orafine) {
+		//if(!orafine.equals("0000-00-00T00:00:00")) {
+			
+		
+		String d1 = formatData(orainizio);
+		String d2 = formatData(orafine);
 		
 		
-		DateTimeFormatter dtf1=DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-		DateTimeFormatter dtf2=DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		DateTimeFormatter dtf1=DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+		DateTimeFormatter dtf2=DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 		
 		LocalDateTime ldt1=LocalDateTime.parse(d1, dtf1);
 		LocalDateTime ldt2=LocalDateTime.parse(d2, dtf2);
@@ -45,45 +48,41 @@ public class myUtilsDate {
 		Duration duration=Duration.between(ldt1, ldt2);
 		int diff=Integer.parseInt(String.valueOf(Math.abs(duration.toMinutes())));
 		return diff;
+		//}
+		//return -1;
 	}
 	
-public static String formatData(String oldDate) {
-		
-		StringTokenizer st=new StringTokenizer(oldDate,"/.-T: ");
-		String newDate="";
-		
-		int index=0;
-		
-		while(st.hasMoreTokens()) {
-			index += 1;
-			String tk=st.nextToken();
-			if(tk.length()>=3 && tk.charAt(2)==('.')) {
-				String temp=tk.substring(0, 1);
-				tk=temp+tk.substring(1,2);
+	//Converte da [2018-11-12T12:00:00.587] oppure da [2018-11-12T12:00:00.587] oppure da [2018-11-12 12:00]
+	//in [2018-11-12 12:00]
+	public static String formatData(String oldDate) {
+		String newDate=oldDate;
+		if(!oldDate.matches("[0-9]{4}[-][0-9]{2}[-][0-9]{2}[\\s][0-9]{2}[:][0-9]{2}")) {
+			StringTokenizer st=new StringTokenizer(oldDate,"T:");
+			newDate="";
+				
+			int index=0;
+				
+			while(st.hasMoreTokens()) {
+					
+				String tk=st.nextToken();
+				
+				if(index==1) {
+					newDate+=" ";
+				}
+				else if(index==2) {
+					newDate+=":";
+				}else if(index==3) {
+					break;
+				}
+				
 				newDate+=tk;
-				break;
+				index++;
+					
 			}
-			if(index<3) {
-				newDate+=tk;
-				newDate+="-";
-			}
-			else if(index==3) {
-				newDate+=tk;
-				newDate+=" ";
-			}
-			else if(index<5) {//index<6 se nella data ci sono anche i secondi
-				newDate+=tk;
-				newDate+=":";
-			}else {
-				newDate+=tk;
-			}//if
+		}
 			
-		}//while
-		
-		newDate+=":00";
-		
 		return newDate;
-		
-		
-	}	
+			
+	}
+	
 }
