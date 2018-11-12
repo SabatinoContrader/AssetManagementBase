@@ -45,7 +45,7 @@ export class ManagementStatisticheComponent implements OnInit {
       else
           this.matStats[i][2]=0;
       if(this.somma!=0)
-          this.matStats[i][3]=((this.stats[this.k+1]/this.somma)*100);
+          this.matStats[i][3]=((this.stats[this.k+1]/this.somma)*100).toPrecision(2);
       else
           this.matStats[i][3]=0;
       this.k+=3;
