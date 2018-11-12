@@ -79,12 +79,12 @@ public class MovimentoService {
     }
     
     
-    public boolean updateMovimento(long idmov, long idbadgereader, long idbadge, String orainizio, String orafine, Assegnazione ass) {
+    public boolean updateMovimento(long idmov, long idbadgereader, long idbadge, String orainizio, String orafine, Assegnazione ass, Asset asset) {
     	BadgeReader bb = badgeReaderRepository.findById(idbadgereader).get();
     	Badge bg= badgeRepository.findById(idbadge).get();
     	
     	
-    	Movimento mov = new Movimento(idmov,bb, bg, orainizio, orafine,ass);
+    	Movimento mov = new Movimento(idmov,bb, bg, orainizio, orafine,ass, asset);
     	
     	return this.movimentoRepository.save(mov)!=null;
     	

@@ -42,6 +42,7 @@ import jxl.write.WriteException;
 import jxl.write.biff.RowsExceededException;
 
 import com.pCarpet.converter.AssegnazioneConverter;
+import com.pCarpet.converter.AssetConverter;
 import com.pCarpet.converter.BadgeConverter;
 import com.pCarpet.converter.BadgeReaderConverter;
 import com.pCarpet.dto.AssegnazioneDTO;
@@ -52,6 +53,7 @@ import com.pCarpet.dto.ExportDTO;
 import com.pCarpet.dto.MovimentoDTO;
 import com.pCarpet.dto.UserDTO;
 import com.pCarpet.model.Assegnazione;
+import com.pCarpet.model.Asset;
 import com.pCarpet.model.Badge;
 import com.pCarpet.model.BadgeReader;
 import com.pCarpet.model.Movimento;
@@ -101,7 +103,15 @@ public class MovimentoController{
 		this.badgeService=badgeService;
 		this.assetService=assetService;
 		
-		
+		/*
+		try {
+			Server();
+			//Client();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		*/
 	
 	}
 
@@ -202,13 +212,7 @@ public class MovimentoController{
 			badgereader=request.getParameter("badgereader");
 			badge=request.getParameter("badge");
 			
-			try {
-				//Server();
-				Client();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			
 		}
 		
 		this.allUsers = this.userService.getAllUsers();
@@ -635,7 +639,7 @@ public String formatData(String oldDate) {
 	    out = new PrintWriter(bw, true);
 	//ciclo di ricezione dal client e invio di risposta
 	    
-	//while(true) {
+	while(true) {
 		
 	      String badgereader = in.readLine();
 	      //if(badgereader.equals("END")) break;
@@ -646,7 +650,7 @@ public String formatData(String oldDate) {
 	      System.out.println("Echoing: "+ badge);
 	      out.println(badge);
 	      simulatore(badgereader,badge);
-	 //}
+	 }
 	
 	 }
 	catch
@@ -677,6 +681,7 @@ public String formatData(String oldDate) {
 		    //Socket("addr", 1050);
 		    		
 		    Socket(addr, 1050);
+		   
 		    System.out.println("EchoClient: started");
 		System.out.println("Client Socket: "+ socket);
 		// creazione stream di input da socket
@@ -688,22 +693,22 @@ public String formatData(String oldDate) {
 		    out = new PrintWriter(bw, true);
 		// creazione stream di input da tastiera
 		    stdIn = new BufferedReader(new InputStreamReader(System.in));
-		    //String badgeReader = null;
-		    //String badge = null;
+		    
+		    String badge = null;
 		// ciclo di lettura da tastiera, invio al server e stampa risposta
-		   // while(true){
-		    	//System.out.println("Insersci il BadgeReader:");
-		    	//badgeReader = stdIn.readLine();
+		    while(true){
+		    	System.out.println("Insersci il BadgeReader:");
+		    	badgereader = stdIn.readLine();
 		        out.println(badgereader);
-		        //if (badgereader.equals("END")) break;
+		        if (badgereader.equals("END")) break;
 		        System.out.println("Echo: "+ in.readLine());
 		        
-		        //System.out.println("Insersci il Badge:");
-		        //badge = stdIn.readLine();
+		        System.out.println("Insersci il Badge:");
+		        badge = stdIn.readLine();
 		        out.println(badge);
-		        //if (badge.equals("END")) break;
+		        if (badge.equals("END")) break;
 		        System.out.println("Echo: "+ in.readLine());
-		     //}
+		     }
 		  }
 		catch
 		 (UnknownHostException e) {
@@ -766,8 +771,8 @@ public String formatData(String oldDate) {
 	    	            		break;
 	    	            	}	
 	    	            }
-	        			
-	        			if (movimentoService.updateMovimento(idmov,movimento.getBadgereader().getIdBadgeReader(), movimento.getBadge().getIdBadge(), movimento.getOrainizio(), dateNow,ass)) {
+	        			Asset asset=AssetConverter.converToEntity(movimento.getAssetDTO());
+	        			if (movimentoService.updateMovimento(idmov,movimento.getBadgereader().getIdBadgeReader(), movimento.getBadge().getIdBadge(), movimento.getOrainizio(), dateNow,ass, asset)) {
 	        				message = "Uscita Badge " + idBadge + " Avvenuta Correttamente";
 	        			}
 	        			else {
@@ -814,10 +819,10 @@ public String formatData(String oldDate) {
 	            BadgeReader br = BadgeReaderConverter.converToEntity(bb.get(0));
 	            BadgeDTO bg = badgeService.getBadge(idBadge);
 	            Badge bgg = BadgeConverter.converToEntity(bg);
-	            
+	            Asset asset=br.getAsset();
 	            
 	        	
-	        	Movimento movimento = new Movimento(0l,br, bgg, dateNow,"0000-00-00T00:00:00", ass);
+	        	Movimento movimento = new Movimento(0l,br, bgg, dateNow,"0000-00-00T00:00:00", ass, asset);
 	            if (movimentoService.insert(movimento)) {
 	            	message = "Ingresso Badge " + idBadge + " Avvenuto correttamente";
 	            }

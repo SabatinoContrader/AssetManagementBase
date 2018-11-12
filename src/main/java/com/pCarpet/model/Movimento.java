@@ -52,7 +52,7 @@ public class Movimento {
 	@JoinColumn(name="idassegnazione")
 	private Assegnazione assegnazione;
 
-	public Movimento(Long idmovimento, BadgeReader badgereader, Badge badge, String orainizio, String orafine, Assegnazione assegnazione) {
+	public Movimento(Long idmovimento, BadgeReader badgereader, Badge badge, String orainizio, String orafine, Assegnazione assegnazione, Asset asset) {
 		this();
 		this.idmovimento = idmovimento;
 		this.badgereader = badgereader;
@@ -60,6 +60,7 @@ public class Movimento {
 		this.orainizio = orainizio;
 		this.orafine = orafine;
 		this.assegnazione=assegnazione;
+		this.asset=asset;
 	}
 	
 	
@@ -72,15 +73,7 @@ public class Movimento {
 		this.orafine = orafine;
 	}
 	
-	public Movimento(Long idmovimento, BadgeReader badgereader, Badge badge, String orainizio, String orafine, Asset asset) {
-		this();
-		this.idmovimento = idmovimento;
-		this.badgereader = badgereader;
-		this.badge = badge;
-		this.orainizio = orainizio;
-		this.orafine = orafine;
-		this.asset=asset;
-	}
+	
 	
 	public Movimento() {
 		
