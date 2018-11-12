@@ -51,10 +51,9 @@ export class ManagementUserComponent implements OnInit {
       //Ho scelto di creare un array di HashMap (invece che una matrice) per maggiore chiarezza nel codice. Ad ogni modifica
       //di un campo si accede alla riga corrispondenete (elemento dell'array) e si estra il valore dall'HashMap (idUtente,
       //username, ecc.).
-      
       for(let i=0; i<=response.length;i++){
         this.mapValidator[i]=new Map<string, boolean>();
-        //this.mapValidator[i].set("idUtente",true);
+        //this.mapValidator[i].set("idUtente",true); 
         this.mapValidator[i].set("username",true);
         this.mapValidator[i].set("password",true);
         this.mapValidator[i].set("ragioneSociale",true);

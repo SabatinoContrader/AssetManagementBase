@@ -1,5 +1,8 @@
 td,th{
-    padding-left: 5%;
+    padding-left: 10%;
+}
+input{
+    width: 110%;
 }
 td{
     text-align: center;
@@ -17,7 +20,7 @@ body {
 div {
 	border: 3px solid #f1f1f1;
 	box-shadow: 0px 2px 5px 3px #888888;
-	width: 25%;
+	width: 45%;
 	display: inline-block;
 	margin-top: 10%;
 }

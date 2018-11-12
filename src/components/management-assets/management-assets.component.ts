@@ -18,18 +18,33 @@ export class ManagementAssetsComponent implements OnInit {
   disabledRow = new Array<boolean>();
   visButton = true;
   visInsert = false;
+  validationPrezzo: boolean;
+
+  mapValidator = new Array<Map<string, boolean>>(); 
+
   ngOnInit() {
     this.visInsert = false;
     
-    this.assetsService.getAllAssets().subscribe((response)=>{
-      console.log(response[0].descrizione);
-      this.assets=response;
-      console.log(this.assets[0].descrizione);
+    this.assetsService.getAllAssets().subscribe(async(response)=>{
+      await(this.assets=response);
+      
+      //Tutte le righe disabilitate
       for(let i=0; i<response.length;i++){
         this.disabledRow[i]=true;
       }
+      
+      //Prezzo valido (per l'inserimento)
+      this.validationPrezzo=true;
+      
+
+      for(let i=0; i<=response.length;i++){
+        this.mapValidator[i]=new Map<string, boolean>(); 
+        this.mapValidator[i].set("prezzo",true);
+      }
+      
+      this.visButton=true;
     });
-    this.visButton=true;
+    
   }
 
   delete(f:string, id:number) :void{
@@ -43,7 +58,8 @@ export class ManagementAssetsComponent implements OnInit {
     this.visButton=false;
   }
   apply(c:String,idx:number,id:number,f: NgForm):void{
-    console.log("TEST1:"+id);
+    this.assets[idx].prezzo=parseFloat(this.assets[idx].prezzo.toString().replace(",","."));
+
     this.disabledRow[idx]=true;
     this.visButton=true;
     this.assetsService.modify(id,this.assets[idx].tipo,this.assets[idx].descrizione,this.assets[idx].prezzo)
@@ -52,7 +68,7 @@ export class ManagementAssetsComponent implements OnInit {
 
   annulla(f:String):void{
     this.ngOnInit();
-    this.visInsert=false;
+    this.visInsert=false; 
   }
    insert(f:string,):void{
     this.visButton=false;
@@ -62,7 +78,8 @@ export class ManagementAssetsComponent implements OnInit {
   } 
 
   applyInsert(c: String): void {
-
+    this.insertAsset.prezzo=parseFloat(this.insertAsset.prezzo.toString().replace(",","."));
+    
     this.assetsService.insert(0,this.insertAsset.tipo,this.insertAsset.descrizione, 
                             this.insertAsset.prezzo, this.insertAsset.flag)
                             .subscribe(async(response) => {
@@ -71,8 +88,29 @@ export class ManagementAssetsComponent implements OnInit {
                                 this.ngOnInit();
                             });
 
-
-    
-  
   }
+
+
+  valInsPrezzo(s:string){
+    //Valori accettati: [6] [6.56] [6,56] 
+    if(s.match(/^[0-9]+([.][0-9]{1,2})?([,][0-9]{1,2})?$/i)!=null){
+      //OK
+      this.validationPrezzo=true;
+    }else{
+      //ERROR
+      this.validationPrezzo=false;
+    } 
+  }
+
+  valModPrezzo(s:string, idx:number){
+    //Valori accettati: [6] [6.56] [6,56] 
+    if(s.match(/^[0-9]+([.][0-9]{1,2})?([,][0-9]{1,2})?$/i)!=null){
+      //OK
+      this.mapValidator[idx].set("prezzo",true);
+    }else{
+      //ERROR
+      this.mapValidator[idx].set("prezzo",false);
+    } 
+  }
+
 }

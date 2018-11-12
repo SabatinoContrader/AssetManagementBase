@@ -5,7 +5,6 @@
 
   <br>
   <div class="bordo rcorners" style="width:fit-content;text-align: center;">
-  <form #f='ngForm'>
 
   <table style="border-collapse:collapse;">
     
@@ -30,7 +29,7 @@
       <th>
         Prezzo
       </th>
-    </tr>
+    </tr> 
             
     <tr *ngFor="let asset of assets; let idx=index;">
           
@@ -46,7 +45,9 @@
           <input name="tipo" [value]="assets[idx].tipo" (input)="assets[idx].tipo=$event.target.value" type="text" class="labcor labtext" size="10" [disabled]="disabledRow[idx]">
       </td>
       <td>
-        <input name="prezzo" [value]="assets[idx].prezzo" (input)="assets[idx].prezzo=$event.target.value" type="text" class="labcor labtext" size="10" [disabled]="disabledRow[idx]">
+        <input name="prezzo" [ngStyle]="!mapValidator[idx].get('prezzo') && {'border-color': 'red','color': 'red'}" 
+        [(ngModel)]="assets[idx].prezzo" (ngModelChange)="valModPrezzo($event,idx)"  type="text" class="labcor labtext" size="10"
+        title="Valori accettati: [6] [6.56] [6,56]" [disabled]="disabledRow[idx]">
     </td>
                     
       <div *ngIf="visButton">
@@ -64,7 +65,7 @@
 
       <td *ngIf="!disabledRow[idx]">
 
-            <Button class="button button1" (click)="apply($event, idx, asset.idAsset,f)">Applica</Button>
+            <Button class="button button1" (click)="apply($event, idx, asset.idAsset,f)" [disabled]="!validationPrezzo">Applica</Button>
           </td>
           <td *ngIf="!disabledRow[idx]">
             <Button class="button button3" (click)="annulla($event)">Annulla</Button>
@@ -76,8 +77,6 @@
  
 
 
-  <!--utenti[idx+1].username
-  {{utenti[utenti.length-1].iduser + 1}}-->
   <tr *ngIf="visInsert">
 
       <td>
@@ -94,19 +93,20 @@
 
       
       <td>
-        <input name="prezzo" value="" (input)="insertAsset.prezzo=$event.target.value"
-          type="text" class="labcor labtext" size="10">
+        <input name="prezzo" value="" [ngStyle]="!validationPrezzo && {'border-color': 'red','color': 'red'}" 
+        [(ngModel)]="insertAsset.prezzo" (ngModelChange)="valInsPrezzo($event)" type="text" class="labcor labtext" size="10" 
+        title="Valori accettati: [6] [6.56] [6,56]" required>
       </td>
     
      
 
 
-          <td *ngIf="visInsert">
-            <Button class="button button1" (click)="applyInsert($event)">Applica</Button>
-          </td>
-          <td *ngIf="visInsert">
-              <Button class="button button3" (click)="annulla($event)">Annulla</Button>
-            </td>
+      <td *ngIf="visInsert">
+        <Button class="button button1" (click)="applyInsert($event)" [disabled]="!validationPrezzo">Applica</Button>
+      </td>
+      <td *ngIf="visInsert">
+        <Button class="button button3" (click)="annulla($event)">Annulla</Button>
+      </td>
 
   </tr>
   <tr>
@@ -120,6 +120,6 @@
 
 
 
-  </form>
+
   </div>
 </body>
