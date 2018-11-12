@@ -41,10 +41,13 @@ export class ManagementStatisticheComponent implements OnInit {
       this.matStats[i][0]=this.stats[this.k];
       this.matStats[i][1]=this.stats[this.k+1];
       if(this.stats[this.k+2]!=0)
-      this.matStats[i][2]=(this.stats[this.k+1]/this.stats[this.k+2]);
+          this.matStats[i][2]=(this.stats[this.k+1]/this.stats[this.k+2]);
       else
-      this.matStats[i][2]=0;
-      this.matStats[i][3]=((this.stats[this.k+1]/this.somma)*100);
+          this.matStats[i][2]=0;
+      if(this.somma!=0)
+          this.matStats[i][3]=((this.stats[this.k+1]/this.somma)*100);
+      else
+          this.matStats[i][3]=0;
       this.k+=3;
     }
 

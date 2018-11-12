@@ -1,21 +1,23 @@
-<app-menu-customer></app-menu-customer>
-
 <html>
+<body>
+<div>
+<app-menu-customer></app-menu-customer>
+</div>
 
-  <body>
-    
-      <table class="bordo corners" width="50%">	 
-          <tr><th><h1>ASSEGNAZIONI</h1></th><td></td></tr>
-          <!--<hr width=339% size=4 color=red>-->
-          <tr>
+<div class="bordo rcorners" style="width:fit-content;text-align: center;">
+
+    <table style="border-collapse:collapse;">
+
+        <caption>
+            <th><h1>Assegnazioni</h1></th>
+        </caption>
+        <tr class="border_bottom">
               <th>
                   ID User
               </th>
-     
               <th>
                  ID Badge
               </th>
-              
               <th>
                 Nome
               </th>
@@ -26,6 +28,7 @@
               <th>
                   Data Assegnazione
                </th>
+            <th></th>
           </tr>
          
           <tr *ngFor="let ass of assbadges; let idx=index;">
@@ -56,30 +59,26 @@
             
             <div *ngIf="visButton">                 
               <td>
-                <Button class="button button3" (click)="delete($event, assbadges[idx].user.iduser,assbadges[idx].badge.idBadge)">Elimina</Button>
+                <Button class="button button3" (click)="delete($event, assbadges[idx].user.iduser,assbadges[idx].badge.idBadge)"><img width="20" height="20"  src="../assets/images/remove.jpg" /></Button>
               </td>
             </div>
 
           </tr>	
           <tr>
-          <td></td><td></td><td></td><td></td><td></td>
-          <td>
-            
-          </td>   
-        </tr>
       </table>
-       
-    <div class="divBadge">   
-      <table>
-        <tr>
-          <th>
-            <h1>Badges</h1></th><td></td><td></td><td></td><td class="imgB"></td>
-        </tr>
 
-        <hr width=100% size=4 color=red>
-        <tr>
+</div>
+<br><br><br>
 
-          <th>
+<div>
+    <div class="responsive bordo rcorners" style="text-align: center;">
+      <table  style="border-collapse:collapse;">
+          <caption>
+              <th><h1>Badges</h1></th>
+          </caption>
+          <tr class="border_bottom">
+
+              <th>
             
           </th>
 
@@ -120,22 +119,12 @@
         
       </table>
     </div>
-
-
-
-    <br/><br/>
-
-
-    <div class="divUser">
-        <table>
-      
-            <tr>
-              <th>
-                <h1>USERS</h1></th><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td class="userimg"></td>
-            </tr>
-            <hr size=4 color=red>
-            <tr>
-
+<div class="responsive bordo rcorners" style="width:fit-content;text-align: center;">
+    <table  style="border-collapse:collapse;">
+        <caption>
+            <th><h1>Users</h1></th>
+        </caption>
+        <tr class="border_bottom">
               <th>
             
               </th>
@@ -190,9 +179,9 @@
             </tr>
         </table>
     </div>
-
-    
-    <table class="nomeCognome">
+<br><br><br>
+    <div class="bordo rcorners" style="width: fit-content">
+    <table>
       <tr>
         <th>
           Nome
@@ -214,8 +203,10 @@
       </tr>
       
     </table>
+    </div>
 
+
+</div>
   </body>
 
 </html>
-

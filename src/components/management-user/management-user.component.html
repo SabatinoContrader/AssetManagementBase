@@ -5,16 +5,15 @@
     <app-menu-customer></app-menu-customer>
 </div>
 
-<div>
+<div class="bordo rcorners" style="width:fit-content;text-align: center;">
 
-  <table class="bordo rcorner">
-      
-    <tr>
-      <th>
-        <h1>USERS</h1></th><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td class="userimg"></td>
-    </tr>
-    <hr size=4 color=red>
-    <tr>
+  <table style="border-collapse:collapse;">
+
+      <caption>
+          <th><h1>Users</h1></th>
+          </caption>
+
+      <tr class="border_bottom">
       
       <th>
         ID utente
@@ -26,7 +25,6 @@
       <th>
         Password
       </th>
-    
       <th>
         Ragione Sociale
       </th>
@@ -114,16 +112,16 @@
             <option value ="3" [selected]="utenti[idx].abbonamento.nome=='gold'">gold</option>
             <option value ="2" [selected]="utenti[idx].abbonamento.nome=='silver'">silver</option>
             <option value ="1" [selected]="utenti[idx].abbonamento.nome=='normale'">normale</option>
-          <option value ="4"  [selected]="utenti[idx].abbonamento.nome=='business'">business</option></select>
+            <option value ="4"  [selected]="utenti[idx].abbonamento.nome=='business'">business</option></select>
 
       </td>
     
       <div *ngIf="visButton">
       <td>   
-        <Button class="button button1" (click)="modify($event, idx)">Modifica</Button>
+        <Button class="button button1" (click)="modify($event, idx)"><img width="20" height="20"  src="../assets/images/Edit.png" /></Button>
        </td>
        <td>
-        <Button class="button button3" (click)="delete($event, user.iduser)">Elimina</Button>
+        <Button class="button button3" (click)="delete($event, user.iduser)"><img width="20" height="20"  src="../assets/images/remove.jpg" /></Button>
        </td>
       </div>
 
@@ -132,10 +130,10 @@
           <Button class="button button1" (click)="applyModify($event,idx, user.iduser)"
           [disabled]="!mapValidator[idx].get('username') || !mapValidator[idx].get('password') ||
            !mapValidator[idx].get('ragioneSociale') || !mapValidator[idx].get('telefono') || !mapValidator[idx].get('email') ||
-           !mapValidator[idx].get('partitaIva')">Applica</Button>
+           !mapValidator[idx].get('partitaIva')"><img width="20" height="20"  src="../assets/images/ok.png" /></Button>
         </td>
         <td>   
-            <Button class="button button3" (click)="annulla($event)">Annulla</Button>
+            <Button class="button button3" (click)="annulla($event)"><img width="20" height="20"  src="../assets/images/delete.png" /></Button>
           </td>
       </div>
       
@@ -194,24 +192,22 @@
         </td> 
 
         <!--Se un validationRow[x] resituisce false (nessun match con la regex) il tasto diventa disabilitato-->
-        <div *ngIf="visInsert">
-            <td>   
+
+            <td *ngIf="visInsert">
               <Button class="button button1" (click)="applyInsert($event)" [disabled]=
               "!validationRow[0] || !validationRow[1] || !validationRow[2] || !validationRow[3] || !validationRow[4] || !validationRow[5]
-              || !validationRow[6] || !validationRow[7]|| !validationRow[8]">Applica</Button>
+              || !validationRow[6] || !validationRow[7]|| !validationRow[8]"><img width="20" height="20"  src="../assets/images/ok.png" /></Button>
             </td>
-            <td>   
-                <Button class="button button3" (click)="annulla($event)">Annulla</Button>
+            <td *ngIf="visInsert">
+                <Button class="button button3" (click)="annulla($event)"><img width="20" height="20"  src="../assets/images/delete.png" /></Button>
               </td>
-        </div>
 
     </tr>
-   
-    <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-    <br/>
-    <Button class="button button1" (click)="insert($event)" style="padding: 4% 33%;">Inserisci</Button> 
-    
+
   </table>
+    <Button *ngIf="!visInsert && visButton"  class="button button1" (click)="insert($event)">Inserisci</Button>
+    
+
   
 
 </div>

@@ -14,7 +14,6 @@ import { Badge } from 'src/models/Badge';
 export class ManagementAssegnazionebadgeComponent implements OnInit {
 
   constructor(private assegnazionebadgeService: AssegnazionebadgeService, private badgeService: BadgeService,private userService: UserService) {
-   
    }
 
   assbadges = new Array<AssegnazioneBadge>();

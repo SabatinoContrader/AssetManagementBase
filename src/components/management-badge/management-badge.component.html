@@ -1,14 +1,15 @@
 <body>
+<div>
   <app-menu-customer></app-menu-customer>
-  
-  <form #f='ngForm'>
-    
-  <table class="bordo corners" width="1185px">	 
-    
-    
-    <tr ><th><h1>Badges</h1></th><td></td><td></td><td></td><td class="imgB"></td></tr>
-    <hr width=339% size=4 color=red>
-    <tr>
+</div>
+
+<div class="bordo rcorners" style="width:fit-content;text-align: center;">
+
+    <table style="border-collapse:collapse;">
+        <caption>
+            <th><h1>Badges</h1></th>
+        </caption>
+        <tr class="border_bottom">
           
       <th>
         ID badge
@@ -21,6 +22,8 @@
       <th>
         Tipologia
       </th>
+            <th></th>
+            <th></th>
     </tr>
             
     <tr *ngFor="let badge of badges; let idx=index;">
@@ -37,27 +40,23 @@
           <input name="tipologia" [value]="badges[idx].tipologia" (input)="badges[idx].tipologia=$event.target.value" type="text" class="labcor labtext" size="10" [disabled]="disabledRow[idx]">
       </td>
                     
-      <div *ngIf="visButton">
-        <td>
-          <Button class="button button1" (click)="modify($event, idx)">Modifica</Button>
+
+        <td  *ngIf="visButton">
+          <Button class="button button1" (click)="modify($event, idx)"><img width="20" height="20"  src="../assets/images/Edit.png" /></Button>
         </td>
            
-        <td>
-          <Button class="button button3" (click)="delete($event, badge.idBadge)">Elimina</Button>
+        <td  *ngIf="visButton">
+          <Button class="button button3" (click)="delete($event, badge.idBadge)"><img width="20" height="20"  src="../assets/images/remove.jpg" /></Button>
         </td>
-      </div>
 
 
-      
-
-      <div *ngIf="!disabledRow[idx]">
-          <td>   
-            <Button class="button button1" (click)="apply($event, idx, badge.idBadge,f)">Applica</Button>
+          <td  *ngIf="!disabledRow[idx]">
+            <Button class="button button1" (click)="apply($event, idx, badge.idBadge)"><img width="20" height="20"  src="../assets/images/ok.png" /></Button>
           </td>
-          <td>   
-            <Button class="button button3" (click)="annulla($event)">Annulla</Button>
+          <td  *ngIf="!disabledRow[idx]">
+            <Button class="button button3" (click)="annulla($event)"><img width="20" height="20"  src="../assets/images/delete.png" /></Button>
           </td>
-      </div>
+
 
     </tr>	
 
@@ -78,21 +77,19 @@
 
         <div *ngIf="visInsert">
             <td>   
-              <Button class="button button1" (click)="applyInsert($event)">Applica</Button>
+              <Button class="button button1" (click)="applyInsert($event)"><img width="20" height="20"  src="../assets/images/ok.png" /></Button>
             </td>
             <td>   
-                <Button class="button button3" (click)="annulla($event)">Annulla</Button>
+                <Button class="button button3" (click)="annulla($event)"><img width="20" height="20"  src="../assets/images/delete.png" /></Button>
               </td>
         </div>
 
     </tr>
+    </table>
 
-    <td></td><td></td><td></td>
-    <br/>
-    <Button class="button button1" (click)="insert($event)" style="padding: 1.5% 14%;">Inserisci</Button>
+    <Button *ngIf="!visInsert && visButton" class="button button1" (click)="insert($event)">Inserisci</Button>
 
     
-  </table>
-  
-  </form>
+
+</div>
 </body>
