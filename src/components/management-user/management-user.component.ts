@@ -14,27 +14,55 @@ import { stringify } from '@angular/core/src/render3/util';
   styleUrls: ['./management-user.component.css','../../app/app.component.css']
 })
 export class ManagementUserComponent implements OnInit {
- 
+  
   
   utenti = new Array<User>();
   insertUtente = new User(0,"","","","","","cliente","",new Abbonamento(3,"",0),null);
   disabledRow = new Array<boolean>();
+  validationRow = new Array<boolean>();
   visButton=true;
   visInsert;
 
+  mapValidator = new Array<Map<string, boolean>>(); 
 
-  constructor(private userService: UserService) { }
+  
+
+
+  constructor(private userService: UserService) {}
 
   ngOnInit() {
 
-    this.userService.getAllUsers().subscribe((response)=>{
+    this.userService.getAllUsers().subscribe(async(response)=>{
       //Ottenimento di tutti gli utenti dal DB
-      this.utenti=response;
+      await(this.utenti=response);
 
 
       //Tutte le righe disabilitate
       for(let i=0; i<=response.length;i++){
         this.disabledRow[i]=true;
+      }
+
+      //Tutti gli elementi delle righe validi (per l'inserimento)
+      for(let i=0; i<=8;i++){
+        this.validationRow[i]=true;
+      }
+      
+      //Tutti gli elementi delle righe validi (per la modifica)
+      //Ho scelto di creare un array di HashMap (invece che una matrice) per maggiore chiarezza nel codice. Ad ogni modifica
+      //di un campo si accede alla riga corrispondenete (elemento dell'array) e si estra il valore dall'HashMap (idUtente,
+      //username, ecc.).
+      
+      for(let i=0; i<=response.length;i++){
+        this.mapValidator[i]=new Map<string, boolean>();
+        //this.mapValidator[i].set("idUtente",true);
+        this.mapValidator[i].set("username",true);
+        this.mapValidator[i].set("password",true);
+        this.mapValidator[i].set("ragioneSociale",true);
+        this.mapValidator[i].set("telefono",true);
+        this.mapValidator[i].set("email",true);
+        this.mapValidator[i].set("partitaIva",true);
+        //this.mapValidator[i].set("ruolo",true);
+        //this.mapValidator[i].set("nomeAbbonamento",true);
       }
 
       //PROBLEMA: non fa riferimento al model (di Angular) neanche se specifico l'inserimento variabile per variabile (no aliasing).
@@ -109,4 +137,123 @@ export class ManagementUserComponent implements OnInit {
   }
 
 
-}
+
+
+  //VALIDATORI PER L'INSERIMENTO
+
+  valInsUsername(s:string){
+    //Valori accettati: [qualsiasi] da 3 (escluso) a 10 (escluso) 
+    if(s.match(/^(\S){4,10}$/i)!=null){
+      //OK
+      this.validationRow[1]=true;
+    }else{
+      //ERROR
+      this.validationRow[1]=false;
+    } 
+  }
+
+  valInsPassword(s:string){
+    //Valori accettati: [qualsiasi] da 3 (escluso) a 10 (escluso)
+    if(s.match(/^(\S){4,10}$/i)!=null){
+      //OK
+      this.validationRow[2]=true;
+    }else{
+      //ERROR
+      this.validationRow[2]=false;
+    }  
+  }
+
+  valInsTelefono(s:string){
+    //Numeri accettati: [1234567890] [+391234567890] [+39 1234567890]
+    if(s.match(/^([\+?][0-9]{2}[\s]?)?[0-9]{10}$/i)!=null){
+      //OK
+      this.validationRow[4]=true;
+    }else{
+      //ERROR
+      this.validationRow[4]=false;
+    } 
+  }
+
+  
+
+  valInsMail(s:string){
+    //Valori accettati: [qualsiasi] uno o più volte [@] una volta [qualsiasi] uno o più volte
+    if(s.match(/^(\S)+(@)(\S)+$/i)!=null){
+      //OK
+      this.validationRow[5]=true;
+    }else{
+      //ERROR
+      this.validationRow[5]=false;
+    }  
+  }
+
+  valInsPartitaIva(s:string){
+    //Valori accettati: [12345678901] undici numeri
+    if(s.match(/^[0-9]{11}$/i)!=null){
+      //OK
+      this.validationRow[6]=true;
+    }else{
+      //ERROR
+      this.validationRow[6]=false;
+    }  
+  }
+
+
+
+
+  //VALIDATORI PER LA MODIFICA
+
+  valModUsername(s:string,idx:number){
+    
+    if(s.match(/^(\S){4,10}$/i)!=null){
+      //OK
+      this.mapValidator[idx].set("username",true);
+    }else{
+      //ERROR
+      this.mapValidator[idx].set("username",false);
+    }  
+  }
+
+  valModPassword(s:string,idx:number){
+    
+    if(s.match(/^(\S){4,10}$/i)!=null){
+      //OK
+      this.mapValidator[idx].set("password",true);
+    }else{
+      //ERROR
+      this.mapValidator[idx].set("password",false);
+    }  
+  }
+
+  valModTelefono(s:string,idx:number){
+    if(s.match(/^([\+?][0-9]{2}[\s]?)?[0-9]{10}$/i)!=null){
+      //OK
+      this.mapValidator[idx].set("telefono",true);
+    }else{
+      //ERROR
+      this.mapValidator[idx].set("telefono",false);
+    }  
+  }
+
+  valModEmail(s:string,idx:number){
+    if(s.match(/^(\S)+(@)(\S)+$/i)!=null){
+      //OK
+      this.mapValidator[idx].set("email",true);
+    }else{
+      //ERROR
+      this.mapValidator[idx].set("email",false);
+    }  
+  }
+
+  valModPartitaIva(s:string,idx:number){
+    if(s.match(/^[0-9]{11}$/i)!=null){
+      //OK
+      this.mapValidator[idx].set("partitaIva",true);
+    }else{
+      //ERROR
+      this.mapValidator[idx].set("partitaIva",false);
+    }  
+  }
+
+
+}//ManagementUserComponent

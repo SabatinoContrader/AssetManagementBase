@@ -1,0 +1,34 @@
+<app-menu-booking></app-menu-booking>
+
+<!--
+  <meta charset="utf-8">
+  <title>BiharEconomy</title>
+  <base href="/">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+  -->
+<body>
+    <!--<div id="chart_div"></div>-->
+    <div style="width:30%;text-align: center;" class="bordo rcorner">
+    <table>
+        <caption>Statistiche asset</caption>
+         <tr>
+             <th>Id Asset</th>
+             <th>Minuti totali</th>
+             <th>Utilizzo medio</th>
+             <th>Utilizzo percentuale</th>
+         </tr>  
+        <tr *ngFor="let a of matStats;let idx = index;">
+            <td> {{matStats[idx][0]}}</td>
+            <td> {{matStats[idx][1]}} m</td>
+            <td> {{matStats[idx][2]}} m</td>
+            <td> {{matStats[idx][3]}} %</td>
+        </tr>
+    </table>
+</div>
+</body>
+    

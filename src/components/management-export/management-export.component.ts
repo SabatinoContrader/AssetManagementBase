@@ -37,15 +37,10 @@ export class ManagementExportComponent implements OnInit {
     this.visUtenti=true;
   }
 
-  hideUtente(){
-    this.visUtenti=false;
-  }
-
   disassocia(){
     this.dis=true;
     this.iduser=null;
-    this.hideUtente();
-
+    this.visUtenti=false;
   }
 
   //Se iduser è null restituirà tutti gli utenti altrimenti solo quello selezionato

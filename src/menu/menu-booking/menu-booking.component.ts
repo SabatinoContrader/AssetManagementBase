@@ -17,7 +17,12 @@ export class MenuBookingComponent implements OnInit {
   redirectIndietro(): void {
       this.router.navigateByUrl('/homeSegretaria');
   }
-    redirectHomeExport(): void {
+
+  redirectHomeExport(): void {
         this.router.navigateByUrl('/managementExport');
+    }
+
+    statistiche(): void {
+        this.router.navigateByUrl('/managementStatistiche');
     }
 }

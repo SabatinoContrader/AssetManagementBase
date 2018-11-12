@@ -6,7 +6,7 @@
 </div>
 
 <div>
-<form #f='ngForm'>
+
   <table class="bordo rcorner">
       
     <tr>
@@ -63,29 +63,43 @@
     
       </td>
       <td>
-          <input name="username" [value]="utenti[idx].username" (input)="utenti[idx].username=$event.target.value" type="text" class="labcor labtext" size="10" [disabled]="disabledRow[idx]">
+       
+          <input name="usernameMod" [ngStyle]="!mapValidator[idx].get('username') && {'border-color': 'red','color': 'red'}" 
+          [(ngModel)]="utenti[idx].username" (ngModelChange)="valModUsername($event,idx)" type="text" class="labcor labtext" 
+          size="10" [disabled]="disabledRow[idx]" title="Da 4 a 10 elementi">
+          <!--<p style="color: red" *ngIf="!mapValidator[idx].get('username')">Username sbagliato</p>-->
       </td>
       <td>
-          <input name="password" [value]="utenti[idx].password" (input)="utenti[idx].password=$event.target.value" type="text" class="labcor labtext" size="10" [disabled]="disabledRow[idx]">
+          <input name="passwordMod" [ngStyle]="!mapValidator[idx].get('password') && {'border-color': 'red','color': 'red'}" 
+          (ngModelChange)="valModPassword($event,idx)"  [(ngModel)]="utenti[idx].password" type="text" class="labcor labtext" 
+          size="10" [disabled]="disabledRow[idx]" title="Da 4 a 10 elementi">
       </td>
     
       <td>
         <!--Se uso direttamente [(ngModel)] mi fa vedere in tutte le righe l'ultimo valore dell'array utenti, per questo l'ho
         sdoppiato. idx mi permette, invece, di ottente l'indice (number) del ciclo.-->
-          <input name="ragioneSociale" [value]="utenti[idx].ragioneSociale" (input)="utenti[idx].ragioneSociale=$event.target.value" type="text"  class="labcor labtext" size="10" [disabled]="disabledRow[idx]">
+          <input name="ragioneSocialeMod" [value]="utenti[idx].ragioneSociale" (input)="utenti[idx].ragioneSociale=$event.target.value"
+          type="text"  class="labcor labtext" size="10" [disabled]="disabledRow[idx]">
       </td>
     
       <td>
-          <input name="telefono" [value]="utenti[idx].telefono" (input)="utenti[idx].telefono=$event.target.value" type="text" class="labcor labtext" size="10" [disabled]="disabledRow[idx]">
+          <input name="telefonoMod" [ngStyle]="!mapValidator[idx].get('telefono') && {'border-color': 'red','color': 'red'}" 
+          [(ngModel)]="utenti[idx].telefono" (ngModelChange)="valModTelefono($event,idx)" type="text" class="labcor labtext" size="10" 
+          [disabled]="disabledRow[idx]" title="Valori accettati: [1234567890] [+391234567890] [+39 1234567890]">
+          
       </td>
       <td>
-          <input name="mail" [value]="utenti[idx].mail" (input)="utenti[idx].mail=$event.target.value" type="text" class="labcor labtext" size="15" [disabled]="disabledRow[idx]">
+          <input name="mailMod" [ngStyle]="!mapValidator[idx].get('email') && {'border-color': 'red','color': 'red'}" 
+          [(ngModel)]="utenti[idx].mail" type="text" (ngModelChange)="valModEmail($event,idx)" class="labcor labtext" size="15" 
+          [disabled]="disabledRow[idx]" title="Da 4 a 10 elementi" title="Valori accettati: qualsiasi@qualsiasi">
       </td>
       <td>
-          <input name="partitaiva" [value]="utenti[idx].partitaiva" (input)="utenti[idx].partitaiva=$event.target.value" type="text" class="labcor labtext" size="11" [disabled]="disabledRow[idx]">
+          <input name="partitaivaMod" [ngStyle]="!mapValidator[idx].get('partitaIva') && {'border-color': 'red','color': 'red'}" 
+          [(ngModel)]="utenti[idx].partitaiva" type="text" (ngModelChange)="valModPartitaIva($event,idx)" class="labcor labtext" 
+          size="11" [disabled]="disabledRow[idx]" title="11 numeri">
       </td>
       <td>
-          <select id="ruolo" name="ruolo" class="labcor labtext" [disabled]="disabledRow[idx]" (input)="utenti[idx].ruolo=$event.target.value">
+          <select id="ruoloMod" name="ruoloMod" class="labcor labtext" [disabled]="disabledRow[idx]" (input)="utenti[idx].ruolo=$event.target.value">
               <option value="cliente" [selected]="utenti[idx].ruolo=='gold'">cliente</option>
               <option value="segretaria" [selected]="utenti[idx].ruolo=='segretaria'">segretaria</option>
           </select>
@@ -96,7 +110,7 @@
       <td>
           <!--Il tag select non ha un value quindi, in automatico, l'evento (input) resta in ascolto su tutti gli <option> di quel
           <select>-->
-          <select id="user" name = "abbonamento" [disabled]="disabledRow[idx]" class="labcor labtext" (input)="utenti[idx].abbonamento.id=$event.target.value">
+          <select id="userMod" name = "abbonamentoMod" [disabled]="disabledRow[idx]" class="labcor labtext" (input)="utenti[idx].abbonamento.id=$event.target.value">
             <option value ="3" [selected]="utenti[idx].abbonamento.nome=='gold'">gold</option>
             <option value ="2" [selected]="utenti[idx].abbonamento.nome=='silver'">silver</option>
             <option value ="1" [selected]="utenti[idx].abbonamento.nome=='normale'">normale</option>
@@ -115,7 +129,10 @@
 
       <div *ngIf="!disabledRow[idx]">
         <td>   
-          <Button class="button button1" (click)="applyModify($event,idx, user.iduser)">Applica</Button>
+          <Button class="button button1" (click)="applyModify($event,idx, user.iduser)"
+          [disabled]="!mapValidator[idx].get('username') || !mapValidator[idx].get('password') ||
+           !mapValidator[idx].get('ragioneSociale') || !mapValidator[idx].get('telefono') || !mapValidator[idx].get('email') ||
+           !mapValidator[idx].get('partitaIva')">Applica</Button>
         </td>
         <td>   
             <Button class="button button3" (click)="annulla($event)">Annulla</Button>
@@ -123,20 +140,20 @@
       </div>
       
     </tr>
-    <!--utenti[idx+1].username
-    {{utenti[utenti.length-1].iduser + 1}}-->
-    <tr *ngIf="visInsert">
+   
+    
+    <tr *ngIf="visInsert"> 
 
         <td>
           <input type="text" value="-" class="labcor labtext" size="2" disabled>
         </td>
         <td> 
-          <input name="username" value="" (input)="insertUtente.username=$event.target.value" type="text"
-            class="labcor labtext" size="10">
+          <input name="username" [ngStyle]="!validationRow[1] && {'border-color': 'red','color': 'red'}" [(ngModel)]="insertUtente.username" (ngModelChange)="valInsUsername($event)" type="text"
+            title="Da 4 a 10 elementi" class="labcor labtext" size="10">
         </td>
         <td>
-          <input name="password" value="" (input)="insertUtente.password=$event.target.value" type="text"
-            class="labcor labtext" size="10">
+          <input name="password" [ngStyle]="!validationRow[2] && {'border-color': 'red','color': 'red'}" [(ngModel)]="insertUtente.password" (ngModelChange)="valInsPassword($event)" type="text"
+          title="Da 4 a 10 elementi" class="labcor labtext" size="10">
         </td>
         
         <td>
@@ -145,16 +162,18 @@
         </td>
         
         <td> 
-          <input name="telefono" value="" (input)="insertUtente.telefono=$event.target.value" type="text"
-            class="labcor labtext" size="10">
+          <input name="telefono" [ngStyle]="!validationRow[4] && {'border-color': 'red','color': 'red'}" [(ngModel)]="insertUtente.telefono" (ngModelChange)="valInsTelefono($event)" type="text"
+          title="Valori accettati: [1234567890] [+391234567890] [+39 1234567890]" class="labcor labtext" size="10">
+        </td>
+       
+        <td>
+          <input name="mail" [ngStyle]="!validationRow[5] && {'border-color': 'red','color': 'red'}" [(ngModel)]="insertUtente.mail" (ngModelChange)="valInsMail($event)" type="text" class="labcor labtext"
+          title="Valori accettati: qualsiasi@qualsiasi" size="15">
         </td>
         <td>
-          <input name="mail" value="" (input)="insertUtente.mail=$event.target.value" type="text" class="labcor labtext"
-            size="15">
-        </td>
-        <td>
-          <input name="partitaiva" value="" (input)="insertUtente.partitaiva=$event.target.value" type="text"
-            class="labcor labtext" size="11">
+          <input name="partitaiva" [ngStyle]="!validationRow[6] && {'border-color': 'red','color': 'red'}" 
+          [(ngModel)]="insertUtente.partitaiva" (ngModelChange)="valInsPartitaIva($event)" type="text"
+          title="11 numeri" class="labcor labtext" size="11">
         </td>
         <td>
           <select id="ruolo" name="ruolo" class="labcor labtext" (input)="insertUtente.ruolo=$event.target.value">
@@ -162,10 +181,7 @@
               <option value="segretaria">segretaria</option>
           </select>
           
-          <!--
-          <input name="ruolo" value="" (input)="insertUtente.ruolo=$event.target.value" type="text" class="labcor labtext"
-            size="12">
-          -->  
+ 
         </td>
         <td>
           <select id="abbonamento" name="abbonamento" class="labcor labtext" (input)="insertUtente.abbonamento.id=$event.target.value">
@@ -177,9 +193,12 @@
          
         </td> 
 
+        <!--Se un validationRow[x] resituisce false (nessun match con la regex) il tasto diventa disabilitato-->
         <div *ngIf="visInsert">
             <td>   
-              <Button class="button button1" (click)="applyInsert($event)">Applica</Button>
+              <Button class="button button1" (click)="applyInsert($event)" [disabled]=
+              "!validationRow[0] || !validationRow[1] || !validationRow[2] || !validationRow[3] || !validationRow[4] || !validationRow[5]
+              || !validationRow[6] || !validationRow[7]|| !validationRow[8]">Applica</Button>
             </td>
             <td>   
                 <Button class="button button3" (click)="annulla($event)">Annulla</Button>
@@ -187,13 +206,14 @@
         </div>
 
     </tr>
+   
     <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
     <br/>
     <Button class="button button1" (click)="insert($event)" style="padding: 4% 33%;">Inserisci</Button> 
     
   </table>
   
-  </form>
+
 </div>
 
 <!--</div>-->

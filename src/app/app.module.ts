@@ -1,3 +1,4 @@
+import { StatisticheService } from './../services/statistiche.service';
 import { ExportService } from './../services/export.service';
 import { BookingsService } from './../services/bookings.service';
 import { BadgereaderService } from './../services/badgereader.service';
@@ -30,6 +31,7 @@ import { HomeBookingsComponent } from '../components/home-bookings/home-bookings
 import { MenuBookingComponent } from '../menu/menu-booking/menu-booking.component';
 import { ManagementMovimentoComponent } from '../components/management-movimento/management-movimento.component';
 import { ManagementExportComponent } from '../components/management-export/management-export.component';
+import { ManagementStatisticheComponent } from '../components/management-statistiche/management-statistiche.component';
 
 
 @NgModule({
@@ -51,20 +53,17 @@ import { ManagementExportComponent } from '../components/management-export/manag
     HomeBookingsComponent,
     MenuBookingComponent,
     ManagementMovimentoComponent,
-    ManagementExportComponent
+    ManagementExportComponent,
+    ManagementStatisticheComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    AppRoutingModule/*,
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyAUf_fIZF0iu40Uiwhj3RhFE3Kd1KrWUFw',
-      libraries: ["places"]
-    })*/
+    AppRoutingModule
   ],
 
-  providers: [UserService,BadgeService,AssegnazionebadgeService,BadgereaderService,BookingsService,MovimentoService, ExportService],
+  providers: [UserService,BadgeService,AssegnazionebadgeService,BadgereaderService,BookingsService,MovimentoService, ExportService,StatisticheService],
 
   bootstrap: [AppComponent]
 })
