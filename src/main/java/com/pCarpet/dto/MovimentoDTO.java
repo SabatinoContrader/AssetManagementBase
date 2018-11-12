@@ -8,6 +8,7 @@ public class MovimentoDTO {
 	private String orainizio;
 	private String orafine;
 	private AssegnazioneDTO assDTO;
+	private AssetDTO assetDTO;
 	
 	public MovimentoDTO() {
 		
@@ -21,6 +22,16 @@ public class MovimentoDTO {
 		this.orainizio = orainizio;
 		this.orafine = orafine;
 		this.assDTO=assDTO;
+	}
+	
+	public MovimentoDTO(BadgeReaderDTO badgereader, BadgeDTO badge, String orainizio, String orafine, AssegnazioneDTO assDTO,AssetDTO assetDTO) {
+		this();
+		this.badgereader = badgereader;
+		this.badge = badge;
+		this.orainizio = orainizio;
+		this.orafine = orafine;
+		this.assDTO=assDTO;
+		this.assetDTO=assetDTO;
 	}
 
 
@@ -72,6 +83,16 @@ public class MovimentoDTO {
 
 	public void setAssDTO(AssegnazioneDTO assDTO) {
 		this.assDTO = assDTO;
+	}
+
+
+	public AssetDTO getAssetDTO() {
+		return assetDTO;
+	}
+
+
+	public void setAssetDTO(AssetDTO assetDTO) {
+		this.assetDTO = assetDTO;
 	}
 	
 	

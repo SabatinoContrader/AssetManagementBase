@@ -16,7 +16,7 @@ public class MovimentoConverter {
 		mDTO.setOrainizio(m.getOrainizio());
 		mDTO.setOrafine(m.getOrafine());
 		mDTO.setAssDTO(AssegnazioneConverter.convertToDTO(m.getAssegnazione()));
-		
+		mDTO.setAssetDTO(AssetConverter.convertToDTO(m.getAsset()));
 		return mDTO;
 		
 	}

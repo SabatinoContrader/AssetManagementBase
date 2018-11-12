@@ -12,6 +12,7 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
@@ -44,6 +45,7 @@ import com.pCarpet.converter.AssegnazioneConverter;
 import com.pCarpet.converter.BadgeConverter;
 import com.pCarpet.converter.BadgeReaderConverter;
 import com.pCarpet.dto.AssegnazioneDTO;
+import com.pCarpet.dto.AssetDTO;
 import com.pCarpet.dto.BadgeDTO;
 import com.pCarpet.dto.BadgeReaderDTO;
 import com.pCarpet.dto.ExportDTO;
@@ -61,7 +63,7 @@ import com.pCarpet.services.BadgeService;
 import com.pCarpet.services.MovimentoService;
 import com.pCarpet.services.PrenotazioneService;
 import com.pCarpet.services.UserService;
-import com.pCarpet.utils.Date;
+import com.pCarpet.utils.myUtilsDate;
 
 @RestController
 @CrossOrigin
@@ -89,7 +91,7 @@ public class MovimentoController{
 	
 	
 	@Autowired
-	public MovimentoController(UserService userService, MovimentoService movimentoService, PrenotazioneService prenotazioneService,AssegnazioneService assegnazioneService,BadgeReaderService badgereaderService,BadgeService badgeService) throws IOException {
+	public MovimentoController(UserService userService, MovimentoService movimentoService, PrenotazioneService prenotazioneService,AssegnazioneService assegnazioneService,BadgeReaderService badgereaderService,BadgeService badgeService,AssetService assetService) throws IOException {
 		this.userService = userService;
 		this.movimentoService= movimentoService;
 		this.prenotazioneService= prenotazioneService;
@@ -97,6 +99,7 @@ public class MovimentoController{
 		this.assegnazioneService=assegnazioneService;
 		this.badgereaderService=badgereaderService;
 		this.badgeService=badgeService;
+		this.assetService=assetService;
 		
 		
 	
@@ -106,6 +109,52 @@ public class MovimentoController{
 	@CrossOrigin
 	public List<MovimentoDTO> movimentiControl(HttpServletRequest request, Model model ) {
 		return this.movimentoService.getAllMovimenti();
+	}
+	
+	@RequestMapping(value = "/statistiche", method = RequestMethod.GET)
+	@CrossOrigin
+	public int[] statisticheControl(HttpServletRequest request, Model model ) {
+		
+		List<MovimentoDTO> mDTO=this.movimentoService.getAllMovimenti();
+		List<AssetDTO> aDTO=this.assetService.getAllAssets();
+		List<String> date=new LinkedList<>();
+		
+		//[idAsset,minutiUso, idAsset,minutiUso, idAsset,minutiUso ecc.]
+		int[] minutes = new int[aDTO.size()*3];
+		int cont=0;
+		//Serve per inserire 2 elementi (in uno stesso ciclo) dentro minutes
+		int k=0;
+		
+		for (int j=0; j<aDTO.size(); j++) {
+			int somma=0;
+			for(MovimentoDTO m:mDTO) {
+				if(aDTO.get(j).getIdAsset()==m.getAssetDTO().getIdAsset()) {
+					date.add(m.getOrainizio());
+					date.add(m.getOrafine());
+					cont++;
+				}
+			}//for
+			
+			for (int i=0;i<date.size();i++) {
+				int minuti = myUtilsDate.intervalMinute(date.get(i),date.get(i+1));
+				somma+=minuti;
+				i=i+1;
+			}//for
+			
+			date=new LinkedList<>();
+			
+			minutes[k]=Integer.parseInt(String.valueOf(aDTO.get(j).getIdAsset()));
+			minutes[k+1]=somma;
+			minutes[k+2]=cont;
+			cont=0;
+			k+=3;
+			
+		}//for
+		
+		for(int i=0; i<minutes.length; i++) {
+			System.out.println(minutes[i]);
+		}//for
+		return minutes;
 	}
 	
 	@RequestMapping(value = "/homeMovimento", method = RequestMethod.GET)
@@ -327,8 +376,8 @@ public class MovimentoController{
     					String dataOraI=String.valueOf(list.get(f1+7));
     					//dataOraI=formatData(dataOraI); non necessario
     					
-    					l11=new Label(10,i,Date.formatDateHour(dataOraI).get(0),wC);
-    					l12=new Label(11,i,Date.formatDateHour(dataOraI).get(1),wC);
+    					l11=new Label(10,i,myUtilsDate.formatDateHour(dataOraI).get(0),wC);
+    					l12=new Label(11,i,myUtilsDate.formatDateHour(dataOraI).get(1),wC);
     					
     					String dataOraF=String.valueOf(list.get(f1+8));
     					//dataOraF=formatData(dataOraF); non necessario
@@ -336,8 +385,8 @@ public class MovimentoController{
 //    					System.out.println("dataF:"+Date.formatDateHour(dataOraF).get(0));
 //    					System.out.println("OraF:"+Date.formatDateHour(dataOraF).get(1));
     					
-    					l13=new Label(12,i,Date.formatDateHour(dataOraF).get(0),wC);
-    					l14=new Label(13,i,Date.formatDateHour(dataOraF).get(1),wC);
+    					l13=new Label(12,i,myUtilsDate.formatDateHour(dataOraF).get(0),wC);
+    					l14=new Label(13,i,myUtilsDate.formatDateHour(dataOraF).get(1),wC);
     					
     					mysheet.addCell(l);
     					mysheet.addCell(l2);
@@ -371,14 +420,14 @@ public class MovimentoController{
     					
     					String dataOraI=String.valueOf(listP.get(f2+5));
     					//dataOraI=formatData(dataOraI);
-    					l9=new Label(8,i,Date.formatDateHour(dataOraI).get(0),wC);
-    					l10=new Label(9,i,Date.formatDateHour(dataOraI).get(1),wC);
+    					l9=new Label(8,i,myUtilsDate.formatDateHour(dataOraI).get(0),wC);
+    					l10=new Label(9,i,myUtilsDate.formatDateHour(dataOraI).get(1),wC);
     					
     					String dataOraF=String.valueOf(listP.get(f2+6));
     					//dataOraF=formatData(dataOraF);
     					
-    					l11=new Label(10,i,Date.formatDateHour(dataOraF).get(0),wC);
-    					l12=new Label(11,i,Date.formatDateHour(dataOraF).get(1),wC);
+    					l11=new Label(10,i,myUtilsDate.formatDateHour(dataOraF).get(0),wC);
+    					l12=new Label(11,i,myUtilsDate.formatDateHour(dataOraF).get(1),wC);
     					
     					mysheetP.addCell(l);
     					mysheetP.addCell(l2);
@@ -476,14 +525,14 @@ public class MovimentoController{
     					String dataOraI=String.valueOf(listU.get(f1+7));
     					dataOraI=formatData(dataOraI);
     					
-    					l11=new Label(10,i,Date.formatDateHour(dataOraI).get(0),wC);
-    					l12=new Label(11,i,Date.formatDateHour(dataOraI).get(1),wC);
+    					l11=new Label(10,i,myUtilsDate.formatDateHour(dataOraI).get(0),wC);
+    					l12=new Label(11,i,myUtilsDate.formatDateHour(dataOraI).get(1),wC);
     					
     					String dataOraF=String.valueOf(listU.get(f1+8));
     					dataOraF=formatData(dataOraF);
     					
-    					l13=new Label(12,i,Date.formatDateHour(dataOraF).get(0),wC);
-    					l14=new Label(13,i,Date.formatDateHour(dataOraF).get(1),wC);
+    					l13=new Label(12,i,myUtilsDate.formatDateHour(dataOraF).get(0),wC);
+    					l14=new Label(13,i,myUtilsDate.formatDateHour(dataOraF).get(1),wC);
     					
     					mysheet.addCell(l);
     					mysheet.addCell(l2);
@@ -520,6 +569,7 @@ public class MovimentoController{
 			return false;
 		}	
 		return true;
+		
     
 }
 public String formatData(String oldDate) {
