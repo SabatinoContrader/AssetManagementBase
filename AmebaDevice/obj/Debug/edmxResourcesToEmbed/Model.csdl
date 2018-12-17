@@ -12,6 +12,11 @@
       <End Role="Building" EntitySet="Building" />
       <End Role="Floor" EntitySet="Floor" />
     </AssociationSet>
+    <EntitySet Name="Room" EntityType="Model.Room" />
+    <AssociationSet Name="FloorRoom" Association="Model.FloorRoom">
+      <End Role="Floor" EntitySet="Floor" />
+      <End Role="Room" EntitySet="Room" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Customer">
     <Key>
@@ -39,7 +44,7 @@
     <NavigationProperty Name="Floor" Relationship="Model.BuildingFloor" FromRole="Building" ToRole="Floor" />
   </EntityType>
   <Association Name="CustomerBuilding">
-    <End Type="Model.Customer" Role="Customer" Multiplicity="1" />
+    <End Type="Model.Customer" Role="Customer" Multiplicity="0..1" />
     <End Type="Model.Building" Role="Building" Multiplicity="*" />
   </Association>
   <EntityType Name="Floor">
@@ -50,9 +55,23 @@
     <Property Name="Nome" Type="String" Nullable="false" />
     <Property Name="Descrizione" Type="String" Nullable="false" />
     <NavigationProperty Name="Building" Relationship="Model.BuildingFloor" FromRole="Floor" ToRole="Building" />
+    <NavigationProperty Name="Room" Relationship="Model.FloorRoom" FromRole="Floor" ToRole="Room" />
   </EntityType>
   <Association Name="BuildingFloor">
     <End Type="Model.Building" Role="Building" Multiplicity="1" />
     <End Type="Model.Floor" Role="Floor" Multiplicity="*" />
+  </Association>
+  <EntityType Name="Room">
+    <Key>
+      <PropertyRef Name="RoomId" />
+    </Key>
+    <Property Name="RoomId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nome" Type="String" Nullable="false" />
+    <Property Name="Descrizione" Type="String" Nullable="false" />
+    <NavigationProperty Name="Floor" Relationship="Model.FloorRoom" FromRole="Room" ToRole="Floor" />
+  </EntityType>
+  <Association Name="FloorRoom">
+    <End Type="Model.Floor" Role="Floor" Multiplicity="1" />
+    <End Type="Model.Room" Role="Room" Multiplicity="*" />
   </Association>
 </Schema>

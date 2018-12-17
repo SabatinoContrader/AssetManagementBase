@@ -12,20 +12,12 @@ namespace AmebaDevice
     using System;
     using System.Collections.Generic;
     
-    public partial class Floor
+    public partial class Room
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Floor()
-        {
-            this.Room = new HashSet<Room>();
-        }
-    
-        public int FloorID { get; set; }
+        public int RoomId { get; set; }
         public string Nome { get; set; }
         public string Descrizione { get; set; }
     
-        public virtual Building Building { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Room> Room { get; set; }
+        public virtual Floor Floor { get; set; }
     }
 }

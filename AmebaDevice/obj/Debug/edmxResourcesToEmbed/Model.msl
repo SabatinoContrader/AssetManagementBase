@@ -34,6 +34,15 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Room">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Room)">
+        <MappingFragment StoreEntitySet="Room">
+          <ScalarProperty Name="RoomId" ColumnName="RoomId" />
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+          <ScalarProperty Name="Descrizione" ColumnName="Descrizione" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <AssociationSetMapping Name="CustomerBuilding" TypeName="Model.CustomerBuilding" StoreEntitySet="Building">
       <EndProperty Name="Customer">
         <ScalarProperty Name="CustomerID" ColumnName="Customer_CustomerID" />
@@ -41,6 +50,7 @@
       <EndProperty Name="Building">
         <ScalarProperty Name="BuildingID" ColumnName="BuildingID" />
       </EndProperty>
+      <Condition ColumnName="Customer_CustomerID" IsNull="false" />
     </AssociationSetMapping>
     <AssociationSetMapping Name="BuildingFloor" TypeName="Model.BuildingFloor" StoreEntitySet="Floor">
       <EndProperty Name="Building">
@@ -48,6 +58,14 @@
       </EndProperty>
       <EndProperty Name="Floor">
         <ScalarProperty Name="FloorID" ColumnName="FloorID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FloorRoom" TypeName="Model.FloorRoom" StoreEntitySet="Room">
+      <EndProperty Name="Floor">
+        <ScalarProperty Name="FloorID" ColumnName="Floor_FloorID" />
+      </EndProperty>
+      <EndProperty Name="Room">
+        <ScalarProperty Name="RoomId" ColumnName="RoomId" />
       </EndProperty>
     </AssociationSetMapping>
   </EntityContainerMapping>

@@ -10,6 +10,8 @@
         <AssociationConnector Association="Model.CustomerBuilding" />
         <EntityTypeShape EntityType="Model.Floor" Width="1.5" PointX="7.5" PointY="1.125" />
         <AssociationConnector Association="Model.BuildingFloor" />
+        <EntityTypeShape EntityType="Model.Room" Width="1.5" PointX="10.125" PointY="1.375" />
+        <AssociationConnector Association="Model.FloorRoom" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

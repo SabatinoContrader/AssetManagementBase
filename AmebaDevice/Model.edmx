@@ -9,6 +9,7 @@
     <EntitySet Name="Customer" EntityType="Model.Store.Customer" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Building" EntityType="Model.Store.Building" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Floor" EntityType="Model.Store.Floor" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Room" EntityType="Model.Store.Room" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="CustomerBuilding" Association="Model.Store.CustomerBuilding">
       <End Role="Customer" EntitySet="Customer" />
       <End Role="Building" EntitySet="Building" />
@@ -16,6 +17,10 @@
     <AssociationSet Name="BuildingFloor" Association="Model.Store.BuildingFloor">
       <End Role="Building" EntitySet="Building" />
       <End Role="Floor" EntitySet="Floor" />
+    </AssociationSet>
+    <AssociationSet Name="FloorRoom" Association="Model.Store.FloorRoom">
+      <End Role="Floor" EntitySet="Floor" />
+      <End Role="Room" EntitySet="Room" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Customer">
@@ -39,7 +44,7 @@
     <Property Name="Cap" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Citta" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Interno" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Customer_CustomerID" Type="int" Nullable="false" />
+    <Property Name="Customer_CustomerID" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="Floor">
     <Key>
@@ -50,8 +55,17 @@
     <Property Name="Descrizione" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Building_BuildingID" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="Room">
+    <Key>
+      <PropertyRef Name="RoomId" />
+    </Key>
+    <Property Name="RoomId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nome" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Descrizione" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Floor_FloorID" Type="int" Nullable="false" />
+  </EntityType>
   <Association Name="CustomerBuilding">
-    <End Role="Customer" Type="Model.Store.Customer" Multiplicity="1" />
+    <End Role="Customer" Type="Model.Store.Customer" Multiplicity="0..1" />
     <End Role="Building" Type="Model.Store.Building" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Customer">
@@ -74,6 +88,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FloorRoom">
+    <End Role="Floor" Type="Model.Store.Floor" Multiplicity="1" />
+    <End Role="Room" Type="Model.Store.Room" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Floor">
+        <PropertyRef Name="FloorID" />
+      </Principal>
+      <Dependent Role="Room">
+        <PropertyRef Name="Floor_FloorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -89,6 +115,11 @@
           <AssociationSet Name="BuildingFloor" Association="Model.BuildingFloor">
             <End Role="Building" EntitySet="Building" />
             <End Role="Floor" EntitySet="Floor" />
+          </AssociationSet>
+          <EntitySet Name="Room" EntityType="Model.Room" />
+          <AssociationSet Name="FloorRoom" Association="Model.FloorRoom">
+            <End Role="Floor" EntitySet="Floor" />
+            <End Role="Room" EntitySet="Room" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Customer">
@@ -117,7 +148,7 @@
           <NavigationProperty Name="Floor" Relationship="Model.BuildingFloor" FromRole="Building" ToRole="Floor" />
         </EntityType>
         <Association Name="CustomerBuilding">
-          <End Type="Model.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="Model.Customer" Role="Customer" Multiplicity="0..1" />
           <End Type="Model.Building" Role="Building" Multiplicity="*" />
         </Association>
         <EntityType Name="Floor">
@@ -128,10 +159,24 @@
           <Property Name="Nome" Type="String" Nullable="false" />
           <Property Name="Descrizione" Type="String" Nullable="false" />
           <NavigationProperty Name="Building" Relationship="Model.BuildingFloor" FromRole="Floor" ToRole="Building" />
+          <NavigationProperty Name="Room" Relationship="Model.FloorRoom" FromRole="Floor" ToRole="Room" />
         </EntityType>
         <Association Name="BuildingFloor">
           <End Type="Model.Building" Role="Building" Multiplicity="1" />
           <End Type="Model.Floor" Role="Floor" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Room">
+          <Key>
+            <PropertyRef Name="RoomId" />
+          </Key>
+          <Property Name="RoomId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" Nullable="false" />
+          <Property Name="Descrizione" Type="String" Nullable="false" />
+          <NavigationProperty Name="Floor" Relationship="Model.FloorRoom" FromRole="Room" ToRole="Floor" />
+        </EntityType>
+        <Association Name="FloorRoom">
+          <End Type="Model.Floor" Role="Floor" Multiplicity="1" />
+          <End Type="Model.Room" Role="Room" Multiplicity="*" />
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -172,6 +217,15 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Room">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Room)">
+        <MappingFragment StoreEntitySet="Room">
+          <ScalarProperty Name="RoomId" ColumnName="RoomId" />
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+          <ScalarProperty Name="Descrizione" ColumnName="Descrizione" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <AssociationSetMapping Name="CustomerBuilding" TypeName="Model.CustomerBuilding" StoreEntitySet="Building">
       <EndProperty Name="Customer">
         <ScalarProperty Name="CustomerID" ColumnName="Customer_CustomerID" />
@@ -179,6 +233,7 @@
       <EndProperty Name="Building">
         <ScalarProperty Name="BuildingID" ColumnName="BuildingID" />
       </EndProperty>
+      <Condition ColumnName="Customer_CustomerID" IsNull="false" />
     </AssociationSetMapping>
     <AssociationSetMapping Name="BuildingFloor" TypeName="Model.BuildingFloor" StoreEntitySet="Floor">
       <EndProperty Name="Building">
@@ -186,6 +241,14 @@
       </EndProperty>
       <EndProperty Name="Floor">
         <ScalarProperty Name="FloorID" ColumnName="FloorID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FloorRoom" TypeName="Model.FloorRoom" StoreEntitySet="Room">
+      <EndProperty Name="Floor">
+        <ScalarProperty Name="FloorID" ColumnName="Floor_FloorID" />
+      </EndProperty>
+      <EndProperty Name="Room">
+        <ScalarProperty Name="RoomId" ColumnName="RoomId" />
       </EndProperty>
     </AssociationSetMapping>
   </EntityContainerMapping>

@@ -15,7 +15,8 @@ namespace AmebaDevice.DAL
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Building> Buildings { get; set; }
         public DbSet<Floor> Floors { get; set; }
-   
+        public DbSet<Room> Rooms { get; set; }
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
