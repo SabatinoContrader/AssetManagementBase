@@ -20,12 +20,18 @@ namespace AmebaDevice.DAL
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+            System.Diagnostics.Debug.WriteLine("OnModelCreatinggggg...");
 
             modelBuilder.Entity<Building>()
                 .HasOptional<Customer>(c => c.Customer)
                 .WithMany()
                 .WillCascadeOnDelete(false);
-            
+
+            modelBuilder.Entity<Floor>()
+               .HasOptional<Building>(b => b.Building)
+               .WithMany()
+               .WillCascadeOnDelete(true);
+
         }
 
 

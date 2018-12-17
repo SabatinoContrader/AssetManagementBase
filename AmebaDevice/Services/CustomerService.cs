@@ -3,6 +3,7 @@ using AmebaDevice.DAL;
 using AmebaDevice.DTO;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
@@ -11,10 +12,12 @@ namespace AmebaDevice.Services
     public class CustomerService
     {
         private ModelloDatiDbContext modelloDatiDbContext;
+        private BuildingService buildingService;
 
         public CustomerService()
         {
             modelloDatiDbContext = new ModelloDatiDbContext();
+            buildingService = new BuildingService();
         }
 
         public void Inserisci(String nome, String cognome, String username, String password, String user_role, String email)
@@ -46,8 +49,8 @@ namespace AmebaDevice.Services
 
         public void Delete(int id)
         {
-            Customer c = modelloDatiDbContext.Customers.Find(id);
-            modelloDatiDbContext.Customers.Remove(c);
+            Customer customer = modelloDatiDbContext.Customers.Find(id);
+            modelloDatiDbContext.Customers.Remove(customer);
             modelloDatiDbContext.SaveChanges();
         }
 

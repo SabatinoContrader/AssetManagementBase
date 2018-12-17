@@ -3,6 +3,7 @@ using AmebaDevice.DAL;
 using AmebaDevice.DTO;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
@@ -12,18 +13,17 @@ namespace AmebaDevice.Services
     {
 
         private ModelloDatiDbContext modelloDatiDbContext;
+        private FloorService floorService;
 
         public BuildingService()
         {
             modelloDatiDbContext = new ModelloDatiDbContext();
+            floorService = new FloorService();
         }
 
         
         public void Inserisci(Building b)
         {
-            //Customer c = new Customer() { Nome = "nome", Cognome = "cognome", Username = "username", Password = "password", User_role = "user_role", Email = "email" };
-
-            //modelloDatiDbContext.Buildings.Add(new Building() { Indirizzo = indirizzo, Citta = citta, Cap = cap, Interno = interno,Customer=c });
             modelloDatiDbContext.SaveChanges();
         }
 
@@ -56,9 +56,8 @@ namespace AmebaDevice.Services
 
         public void Delete(int id)
         {
-            Building b = modelloDatiDbContext.Buildings.Find(id);
-
-            modelloDatiDbContext.Buildings.Remove(b);
+            Building building = modelloDatiDbContext.Buildings.Find(id);
+            modelloDatiDbContext.Buildings.Remove(building);
             modelloDatiDbContext.SaveChanges();
         }
 

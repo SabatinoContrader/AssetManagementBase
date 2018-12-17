@@ -57,8 +57,10 @@ namespace AmebaDevice.Controllers
         }
 
         // DELETE: api/Floor/5
-        public void Delete(int id)
+        public string Delete(int id)
         {
+            floorService.Delete(id);
+            return "Il floor con id" + id + " è stato eliminato";
         }
     }
 }

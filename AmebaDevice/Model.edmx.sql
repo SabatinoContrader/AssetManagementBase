@@ -115,7 +115,7 @@ ADD CONSTRAINT [FK_BuildingFloor]
     FOREIGN KEY ([Building_BuildingID])
     REFERENCES [dbo].[Building]
         ([BuildingID])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
+    ON DELETE CASCADE ON UPDATE NO ACTION;
 GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_BuildingFloor'

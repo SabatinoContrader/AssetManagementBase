@@ -40,5 +40,11 @@ namespace AmebaDevice.Services
             return toReturn;
         }
 
+        public void Delete(int id)
+        {
+            Floor f = modelloDatiDbContext.Floors.Find(id);
+            modelloDatiDbContext.Floors.Remove(f);
+            modelloDatiDbContext.SaveChanges();
+        }
     }
 }

@@ -12,14 +12,12 @@ namespace AmebaDevice.Controllers
 {
     public class CustomerController : ApiController
     {
-
-        //private ModelloDatiDbContext modelloDatiDbContext;
+        
         private CustomerService customerService;
 
         public CustomerController()
         {
             customerService = new CustomerService();
-            //modelloDatiDbContext = new ModelloDatiDbContext();
         }
 
         // GET: api/Customer
