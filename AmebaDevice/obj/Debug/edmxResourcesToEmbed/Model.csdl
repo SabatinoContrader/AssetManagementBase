@@ -7,6 +7,11 @@
       <End Role="Customer" EntitySet="Customer" />
       <End Role="Building" EntitySet="Building" />
     </AssociationSet>
+    <EntitySet Name="Floor" EntityType="Model.Floor" />
+    <AssociationSet Name="BuildingFloor" Association="Model.BuildingFloor">
+      <End Role="Building" EntitySet="Building" />
+      <End Role="Floor" EntitySet="Floor" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Customer">
     <Key>
@@ -31,9 +36,23 @@
     <Property Name="Citta" Type="String" Nullable="false" />
     <Property Name="Interno" Type="String" Nullable="false" />
     <NavigationProperty Name="Customer" Relationship="Model.CustomerBuilding" FromRole="Building" ToRole="Customer" />
+    <NavigationProperty Name="Floor" Relationship="Model.BuildingFloor" FromRole="Building" ToRole="Floor" />
   </EntityType>
   <Association Name="CustomerBuilding">
     <End Type="Model.Customer" Role="Customer" Multiplicity="1" />
     <End Type="Model.Building" Role="Building" Multiplicity="*" />
+  </Association>
+  <EntityType Name="Floor">
+    <Key>
+      <PropertyRef Name="FloorID" />
+    </Key>
+    <Property Name="FloorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nome" Type="String" Nullable="false" />
+    <Property Name="Descrizione" Type="String" Nullable="false" />
+    <NavigationProperty Name="Building" Relationship="Model.BuildingFloor" FromRole="Floor" ToRole="Building" />
+  </EntityType>
+  <Association Name="BuildingFloor">
+    <End Type="Model.Building" Role="Building" Multiplicity="1" />
+    <End Type="Model.Floor" Role="Floor" Multiplicity="*" />
   </Association>
 </Schema>

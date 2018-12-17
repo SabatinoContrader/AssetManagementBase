@@ -39,7 +39,9 @@ namespace AmebaDevice.Controllers
         public void Post([FromBody]string value)
         {
         }
+        
 
+        //GET: Inserisci/?nome=<nome>&cognome=<cognome>&username=<username>&password=<password>&user_role=<user_role>&email=<email>
         [HttpGet]
         [Route("Inserisci")]
         public string Inserisci(string nome, string cognome, string username, string password, string user_role, string email)
@@ -48,14 +50,18 @@ namespace AmebaDevice.Controllers
             return "Inserito utente con nome:" + username;
         }
 
+
         // PUT: api/Customer/5
         public void Put(int id, [FromBody]string value)
         {
         }
 
         // DELETE: api/Customer/5
-        public void Delete(int id)
+        public string Delete(int id)
         {
+            customerService.Delete(id);
+            return "Customer con id " + id + " eliminato";
         }
+        
     }
 }

@@ -173,10 +173,12 @@
     </Compile>
     <Compile Include="Controllers\BuildingController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
+    <Compile Include="Controllers\FloorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Converter\BuildingConverter.cs" />
     <Compile Include="Converter\CustomerConverter.cs" />
+    <Compile Include="Converter\FloorConverter.cs" />
     <Compile Include="Customer.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -184,6 +186,10 @@
     <Compile Include="DAL\ModelloDatiDbContext.cs" />
     <Compile Include="DTO\BuildingDTO.cs" />
     <Compile Include="DTO\CustomerDTO.cs" />
+    <Compile Include="DTO\FloorDTO.cs" />
+    <Compile Include="Floor.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -205,6 +211,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\BuildingService.cs" />
     <Compile Include="Services\CustomerService.cs" />
+    <Compile Include="Services\FloorService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />

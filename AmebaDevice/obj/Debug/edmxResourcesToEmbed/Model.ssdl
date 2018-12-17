@@ -3,9 +3,14 @@
   <EntityContainer Name="ModelStoreContainer">
     <EntitySet Name="Customer" EntityType="Model.Store.Customer" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Building" EntityType="Model.Store.Building" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Floor" EntityType="Model.Store.Floor" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="CustomerBuilding" Association="Model.Store.CustomerBuilding">
       <End Role="Customer" EntitySet="Customer" />
       <End Role="Building" EntitySet="Building" />
+    </AssociationSet>
+    <AssociationSet Name="BuildingFloor" Association="Model.Store.BuildingFloor">
+      <End Role="Building" EntitySet="Building" />
+      <End Role="Floor" EntitySet="Floor" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Customer">
@@ -31,6 +36,15 @@
     <Property Name="Interno" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Customer_CustomerID" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="Floor">
+    <Key>
+      <PropertyRef Name="FloorID" />
+    </Key>
+    <Property Name="FloorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nome" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Descrizione" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Building_BuildingID" Type="int" Nullable="false" />
+  </EntityType>
   <Association Name="CustomerBuilding">
     <End Role="Customer" Type="Model.Store.Customer" Multiplicity="1" />
     <End Role="Building" Type="Model.Store.Building" Multiplicity="*" />
@@ -40,6 +54,18 @@
       </Principal>
       <Dependent Role="Building">
         <PropertyRef Name="Customer_CustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="BuildingFloor">
+    <End Role="Building" Type="Model.Store.Building" Multiplicity="1" />
+    <End Role="Floor" Type="Model.Store.Floor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Building">
+        <PropertyRef Name="BuildingID" />
+      </Principal>
+      <Dependent Role="Floor">
+        <PropertyRef Name="Building_BuildingID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

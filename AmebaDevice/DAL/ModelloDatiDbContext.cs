@@ -14,14 +14,24 @@ namespace AmebaDevice.DAL
 
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Building> Buildings { get; set; }
+        public DbSet<Floor> Floors { get; set; }
    
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+
+            modelBuilder.Entity<Building>()
+                .HasOptional<Customer>(c => c.Customer)
+                .WithMany()
+                .WillCascadeOnDelete(false);
+            
         }
 
+
         
+
+
 
     }
 }

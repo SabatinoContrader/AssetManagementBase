@@ -44,5 +44,12 @@ namespace AmebaDevice.Services
             return CustomerConverter.convertToDto(c);
         }
 
+        public void Delete(int id)
+        {
+            Customer c = modelloDatiDbContext.Customers.Find(id);
+            modelloDatiDbContext.Customers.Remove(c);
+            modelloDatiDbContext.SaveChanges();
+        }
+
     }
 }

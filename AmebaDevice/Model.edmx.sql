@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 12/14/2018 16:29:00
+-- Date Created: 12/15/2018 13:50:40
 -- Generated from EDMX file: D:\dotnet\AmebaDevice\AmebaDevice\AmebaDevice\Model.edmx
 -- --------------------------------------------------
 
@@ -59,6 +59,15 @@ CREATE TABLE [dbo].[Building] (
 );
 GO
 
+-- Creating table 'Floor'
+CREATE TABLE [dbo].[Floor] (
+    [FloorID] int IDENTITY(1,1) NOT NULL,
+    [Nome] nvarchar(max)  NOT NULL,
+    [Descrizione] nvarchar(max)  NOT NULL,
+    [Building_BuildingID] int  NOT NULL
+);
+GO
+
 -- --------------------------------------------------
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
@@ -73,6 +82,12 @@ GO
 ALTER TABLE [dbo].[Building]
 ADD CONSTRAINT [PK_Building]
     PRIMARY KEY CLUSTERED ([BuildingID] ASC);
+GO
+
+-- Creating primary key on [FloorID] in table 'Floor'
+ALTER TABLE [dbo].[Floor]
+ADD CONSTRAINT [PK_Floor]
+    PRIMARY KEY CLUSTERED ([FloorID] ASC);
 GO
 
 -- --------------------------------------------------
@@ -92,6 +107,21 @@ GO
 CREATE INDEX [IX_FK_CustomerBuilding]
 ON [dbo].[Building]
     ([Customer_CustomerID]);
+GO
+
+-- Creating foreign key on [Building_BuildingID] in table 'Floor'
+ALTER TABLE [dbo].[Floor]
+ADD CONSTRAINT [FK_BuildingFloor]
+    FOREIGN KEY ([Building_BuildingID])
+    REFERENCES [dbo].[Building]
+        ([BuildingID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_BuildingFloor'
+CREATE INDEX [IX_FK_BuildingFloor]
+ON [dbo].[Floor]
+    ([Building_BuildingID]);
 GO
 
 -- --------------------------------------------------

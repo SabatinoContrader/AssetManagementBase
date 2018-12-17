@@ -51,8 +51,10 @@ namespace AmebaDevice.Controllers
         }
 
         // DELETE: api/Building/5
-        public void Delete(int id)
+        public string Delete(int id)
         {
+            buildingService.Delete(id);
+            return "Building con id " + id + " eliminato";
         }
     }
 }

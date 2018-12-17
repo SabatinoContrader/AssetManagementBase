@@ -14,6 +14,12 @@ namespace AmebaDevice
     
     public partial class Building
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Building()
+        {
+            this.Floor = new HashSet<Floor>();
+        }
+    
         public int BuildingID { get; set; }
         public string Indirizzo { get; set; }
         public string Cap { get; set; }
@@ -21,5 +27,7 @@ namespace AmebaDevice
         public string Interno { get; set; }
     
         public virtual Customer Customer { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Floor> Floor { get; set; }
     }
 }

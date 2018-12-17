@@ -18,7 +18,7 @@ namespace AmebaDevice.Services
             modelloDatiDbContext = new ModelloDatiDbContext();
         }
 
-        //String indirizzo, String citta, String cap, String interno
+        
         public void Inserisci(Building b)
         {
             //Customer c = new Customer() { Nome = "nome", Cognome = "cognome", Username = "username", Password = "password", User_role = "user_role", Email = "email" };
@@ -52,6 +52,14 @@ namespace AmebaDevice.Services
         {
             Building b=modelloDatiDbContext.Buildings.Where(build=>build.BuildingID==id).FirstOrDefault();
             return BuildingConverter.convertToDto(b);
+        }
+
+        public void Delete(int id)
+        {
+            Building b = modelloDatiDbContext.Buildings.Find(id);
+
+            modelloDatiDbContext.Buildings.Remove(b);
+            modelloDatiDbContext.SaveChanges();
         }
 
     }
