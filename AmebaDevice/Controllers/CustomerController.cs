@@ -23,7 +23,6 @@ namespace AmebaDevice.Controllers
         // GET: api/Customer
         public IEnumerable<CustomerDTO> Get()
         {
-            System.Diagnostics.Debug.WriteLine("CustomerNome:" + customerService.Get().Last().getNome());
             return customerService.Get();
         }
 
@@ -40,7 +39,7 @@ namespace AmebaDevice.Controllers
         
 
         //GET: Inserisci/?nome=<nome>&cognome=<cognome>&username=<username>&password=<password>&user_role=<user_role>&email=<email>
-        [HttpGet]
+        [HttpPost]
         [Route("Inserisci")]
         public string Inserisci(string nome, string cognome, string username, string password, string user_role, string email)
         {
@@ -49,9 +48,10 @@ namespace AmebaDevice.Controllers
         }
 
 
-        // PUT: api/Customer/5
-        public void Put(int id, [FromBody]string value)
+        // PUT: api/Customer/5?nome=<nome>&cognome=<cognome>&...
+        public CustomerDTO Put(int id, string nome, string cognome, string username, string password, string user_role, string email)
         {
+            return customerService.Modifica(id, nome, cognome, username, password, user_role, email);
         }
 
         // DELETE: api/Customer/5

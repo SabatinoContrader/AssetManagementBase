@@ -7,10 +7,12 @@ namespace AmebaDevice.DTO
 {
     public class RoomDTO
     {
-        private int id;
-        private String nomeRoom;
-        private String descrizione;
-        private FloorDTO floor;
+
+        public int ID { get; set; }
+        public string NomeRoom{ get; set; }
+        public string Descrizione { get; set; }
+        public FloorDTO Floor { get; set; }
+        
 
         public RoomDTO()
         {
@@ -18,50 +20,12 @@ namespace AmebaDevice.DTO
 
         public RoomDTO(int id, String nomeRoom, String descrizione, FloorDTO floor)
         {
-            this.id = id;
-            this.nomeRoom = nomeRoom;
-            this.descrizione = descrizione;
-            this.floor = floor;
+            this.ID = id;
+            this.NomeRoom = nomeRoom;
+            this.Descrizione = descrizione;
+            this.Floor = floor;
         }
 
-        public int getId()
-        {
-            return id;
-        }
-
-        public void setId(int id)
-        {
-            this.id = id;
-        }
-
-        public String getNomeRoom()
-        {
-            return nomeRoom;
-        }
-
-        public void setNomeRoom(String nomeRoom)
-        {
-            this.nomeRoom = nomeRoom;
-        }
-
-        public String getDescrizione()
-        {
-            return descrizione;
-        }
-
-        public void setDescrizione(String descrizione)
-        {
-            this.descrizione = descrizione;
-        }
-
-        public FloorDTO getFloor()
-        {
-            return floor;
-        }
-
-        public void setFloor(FloorDTO floor)
-        {
-            this.floor = floor;
-        }
+        
     }
 }

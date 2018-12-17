@@ -17,6 +17,20 @@ namespace AmebaDevice.Services
             modelloDatiDbContext = new ModelloDatiDbContext();
         }
 
+
+        public IEnumerable<RoomDTO> Get()
+        {
+            List<RoomDTO> l = new List<RoomDTO>();
+
+            foreach (Room r in modelloDatiDbContext.Rooms)
+            {
+                l.Add(RoomConverter.convertToDto(r));
+            }
+
+            return l;
+        }
+
+
         public void Inserisci(Room r)
         {
             modelloDatiDbContext.SaveChanges();
@@ -42,6 +56,23 @@ namespace AmebaDevice.Services
             modelloDatiDbContext.Rooms.Remove(modelloDatiDbContext.Rooms.Find(id));
             modelloDatiDbContext.SaveChanges();
         }
-       
+
+        public RoomDTO Modifica(int id, String nome, String descrizione, int floorID)
+        {
+            Room room = new Room();
+            foreach (Room r in modelloDatiDbContext.Rooms)
+            {
+                if (r.RoomId == id)
+                {
+                    room = modelloDatiDbContext.Rooms.Where(rr => rr.RoomId == id).FirstOrDefault();
+                    room.Nome = nome;
+                    room.Descrizione = descrizione;
+                    room.Floor = modelloDatiDbContext.Floors.Find(floorID);
+                }
+            }
+            modelloDatiDbContext.SaveChanges();
+            return RoomConverter.convertToDto(room);
+        }
+
     }
 }

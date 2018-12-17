@@ -19,6 +19,18 @@ namespace AmebaDevice.Services
         }
 
 
+        public IEnumerable<FloorDTO> Get()
+        {
+            List<FloorDTO> l = new List<FloorDTO>();
+
+            foreach (Floor f in modelloDatiDbContext.Floors)
+            {
+                l.Add(FloorConverter.convertToDto(f));
+            }
+
+            return l;
+        }
+
         public void Inserisci(Floor f)
         {
             modelloDatiDbContext.SaveChanges();
@@ -45,6 +57,23 @@ namespace AmebaDevice.Services
             Floor f = modelloDatiDbContext.Floors.Find(id);
             modelloDatiDbContext.Floors.Remove(f);
             modelloDatiDbContext.SaveChanges();
+        }
+
+        public FloorDTO Modifica(int id, String nome, String descrizione, int idBuilding)
+        {
+            Floor floor = new Floor();
+            foreach (Floor f in modelloDatiDbContext.Floors)
+            {
+                if (f.FloorID == id)
+                {
+                    floor = modelloDatiDbContext.Floors.Where(ff => ff.FloorID == id).FirstOrDefault();
+                    floor.Nome = nome;
+                    floor.Descrizione = descrizione;
+                    floor.Building = modelloDatiDbContext.Buildings.Find(idBuilding);
+                }
+            }
+            modelloDatiDbContext.SaveChanges();
+            return FloorConverter.convertToDto(floor);
         }
     }
 }

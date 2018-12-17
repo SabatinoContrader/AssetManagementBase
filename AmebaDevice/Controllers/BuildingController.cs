@@ -37,7 +37,7 @@ namespace AmebaDevice.Controllers
         {
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("InserisciB")]
         public String Inserisci(String indirizzo, String cap, String citta, String interno,int id)
         {
@@ -45,9 +45,10 @@ namespace AmebaDevice.Controllers
             return "Il building con indirizzo" + indirizzo + " è stato inserito";
         }
 
-        // PUT: api/Building/5
-        public void Put(int id, [FromBody]string value)
+        // PUT: api/Building/5?indirizzo=<indirizzo>&cap=<cap>&...
+        public BuildingDTO Put(int id, String indirizzo, String cap, String citta, String interno, int customerID)
         {
+            return buildingService.Modifica(id, indirizzo, cap, citta, interno, customerID);
         }
 
         // DELETE: api/Building/5

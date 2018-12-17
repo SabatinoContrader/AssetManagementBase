@@ -61,5 +61,24 @@ namespace AmebaDevice.Services
             modelloDatiDbContext.SaveChanges();
         }
 
+        public BuildingDTO Modifica(int buildingID, String indirizzo, String cap, String citta, String interno, int customerID)
+        {
+            Building building = new Building();
+            foreach (Building b in modelloDatiDbContext.Buildings)
+            {
+                if (b.BuildingID == buildingID)
+                {
+                    building = modelloDatiDbContext.Buildings.Where(bb => bb.BuildingID == buildingID).FirstOrDefault();
+                    building.Indirizzo = indirizzo;
+                    building.Cap = cap;
+                    building.Citta = citta;
+                    building.Interno = interno;
+                    building.Customer = modelloDatiDbContext.Customers.Find(customerID);
+                }
+            }
+            modelloDatiDbContext.SaveChanges();
+            return BuildingConverter.convertToDto(building);
+        }
+
     }
 }

@@ -12,26 +12,26 @@ namespace AmebaDevice.Converter
         public static CustomerDTO convertToDto(Customer c)
         {
             CustomerDTO customerDTO = new CustomerDTO();
-            customerDTO.setId(c.CustomerID);
-            customerDTO.setNome(c.Nome);
-            customerDTO.setCognome(c.Cognome);
-            customerDTO.setEmail(c.Email);
-            customerDTO.setUsername(c.Username);
-            customerDTO.setPassword(c.Password);
-            customerDTO.setUserRole(c.User_role);
+            customerDTO.ID=c.CustomerID;
+            customerDTO.Nome=c.Nome;
+            customerDTO.Cognome=c.Cognome;
+            customerDTO.Email=c.Email;
+            customerDTO.Username=c.Username;
+            customerDTO.Password=c.Password;
+            customerDTO.User_role=c.User_role;
             return customerDTO;
         }
 
-        public Customer convertToCustomer(CustomerDTO c)
+        public static Customer convertToCustomer(CustomerDTO c)
         {
             Customer customer = new Customer();
-            customer.CustomerID = c.getId();
-            customer.Nome = c.getNome();
-            customer.Cognome = c.getCognome();
-            customer.Email = c.getEmail();
-            customer.Username = c.getUsername();
-            customer.Password = c.getPassword();
-            customer.User_role = c.getUserRole();
+            customer.CustomerID = c.ID;
+            customer.Nome = c.Nome;
+            customer.Cognome = c.Cognome;
+            customer.Email = c.Email;
+            customer.Username = c.Username;
+            customer.Password = c.Password;
+            customer.User_role = c.User_role;
             return customer;
         }
 

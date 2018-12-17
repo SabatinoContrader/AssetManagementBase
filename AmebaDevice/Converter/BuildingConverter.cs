@@ -17,9 +17,10 @@ namespace AmebaDevice.Converter
             building.City=b.Citta;
             building.Address = b.Indirizzo;
             building.Interno = b.Interno;
+            
+            if (b.Customer != null)
+                building.CustomerDTO=CustomerConverter.convertToDto(b.Customer);
             /*
-            if (b.getInstaller() != null)
-                building.setInstaller(CustomerConverter.convertToDto(b.getInstaller()));
             if (b.getOwner() != null)
                 building.setOwner(CustomerConverter.convertToDto(b.getOwner()));
                 */
@@ -34,13 +35,14 @@ namespace AmebaDevice.Converter
             building.Citta = b.City;
             building.Indirizzo = b.Address;
             building.Interno = b.Interno;
-            
+
             /*
             if (b.getOwner() != null)
                 building.setOwner(CustomerConverter.convertToCustomer(b.getOwner()));
-            if (b.getInstaller() != null)
-                building.setInstaller(CustomerConverter.convertToCustomer(b.getInstaller()));
                 */
+            if (b.CustomerDTO != null)
+                building.Customer=CustomerConverter.convertToCustomer(b.CustomerDTO);
+                
             return building;
         }
 

@@ -8,13 +8,13 @@ namespace AmebaDevice.DTO
     public class CustomerDTO
     {
 
-        private int ID;
-        private String Nome;
-        private String Cognome;
-        private String Username;
-        private String Password;
-        private String User_role;
-        private String Email;
+        public int ID { get; set; }
+        public String Nome { get; set; }
+        public String Cognome { get; set; }
+        public String Username { get; set; }
+        public String Password { get; set; }
+        public String User_role { get; set; }
+        public String Email { get; set; }
 
         public CustomerDTO()
         {
@@ -33,76 +33,7 @@ namespace AmebaDevice.DTO
             this.User_role = userRole;
         }
 
-        public int getId()
-        {
-            return ID;
-        }
-
-        public String getNome()
-        {
-            return Nome;
-        }
-
-        public String getCognome()
-        {
-            return Cognome;
-        }
         
-        public String getEmail()
-        {
-            return Email;
-        }
-
-        public String getUsername()
-        {
-            return Username;
-        }
-
-        public String getPassword()
-        {
-            return Password;
-        }
-
-        public String getUserRole()
-        {
-            return User_role;
-        }
-
-        public void setId(int id)
-        {
-            this.ID = id;
-        }
-
-        public void setNome(String nome)
-        {
-            this.Nome = nome;
-        }
-
-        public void setCognome(String cognome)
-        {
-            this.Cognome = cognome;
-        }
-        
-
-        public void setEmail(String email)
-        {
-            this.Email = email;
-        }
-
-        public void setUsername(String username)
-        {
-            this.Username = username;
-        }
-
-        public void setPassword(String password)
-        {
-            this.Password = password;
-        }
-
-        public void setUserRole(String userRole)
-        {
-            this.User_role = userRole;
-        }
 
     }
 }

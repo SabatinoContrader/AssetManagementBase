@@ -12,20 +12,20 @@ namespace AmebaDevice.Converter
         public static FloorDTO convertToDto(Floor f)
         {
             FloorDTO floor = new FloorDTO();
-            floor.setId(f.FloorID);
-            floor.setDescrizione(f.Descrizione);
-            floor.setNomeFloor(f.Nome);
-            floor.setBuilding(BuildingConverter.convertToDto(f.Building));
+            floor.ID=f.FloorID;
+            floor.Descrizione=f.Descrizione;
+            floor.NomeFloor=f.Nome;
+            floor.Building=BuildingConverter.convertToDto(f.Building);
             return floor;
         }
 
         public static Floor convertToFloor(FloorDTO f)
         {
             Floor floor = new Floor();
-            floor.FloorID=f.getId();
-            floor.Descrizione=f.getDescrizione();
-            floor.Nome=f.getNomeFloor();
-            floor.Building=BuildingConverter.convertToBuilding(f.getBuilding());
+            floor.FloorID= f.ID;
+            floor.Descrizione=f.Descrizione;
+            floor.Nome=f.NomeFloor;
+            floor.Building=BuildingConverter.convertToBuilding(f.Building);
             return floor;
         }
 

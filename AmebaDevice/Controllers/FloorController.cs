@@ -20,9 +20,9 @@ namespace AmebaDevice.Controllers
         }
 
         // GET: api/Floor
-        public IEnumerable<string> Get()
+        public IEnumerable<FloorDTO> Get()
         {
-            return new string[] { "value1", "value2" };
+            return floorService.Get();
         }
 
         // GET: api/Floor/5
@@ -38,7 +38,7 @@ namespace AmebaDevice.Controllers
             return floorService.getAllByBuilding(idBuilding);
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("InserisciF")]
         public String Inserisci(String nome, String descrizione, int idBuilding)
         {
@@ -51,9 +51,11 @@ namespace AmebaDevice.Controllers
         {
         }
 
-        // PUT: api/Floor/5
-        public void Put(int id, [FromBody]string value)
+
+        // PUT: api/Floor/5?nome=<nome>&descrizione=<descrizione>&...
+        public FloorDTO Put(int id, String nome, String descrizione, int idBuilding)
         {
+            return floorService.Modifica(id, nome, descrizione, idBuilding);
         }
 
         // DELETE: api/Floor/5

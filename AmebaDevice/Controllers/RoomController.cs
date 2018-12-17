@@ -20,9 +20,9 @@ namespace AmebaDevice.Controllers
         }
 
         // GET: api/Room
-        public IEnumerable<string> Get()
+        public IEnumerable<RoomDTO> Get()
         {
-            return new string[] { "value1", "value2" };
+            return roomService.Get();
         }
 
         // GET: api/Room/5
@@ -36,9 +36,10 @@ namespace AmebaDevice.Controllers
         {
         }
 
-        // PUT: api/Room/5
-        public void Put(int id, [FromBody]string value)
+        // PUT: api/Room/5?nome=<nome>&descrizione=<descrizione>&...
+        public RoomDTO Put(int id, String nome, String descrizione, int floorID)
         {
+            return roomService.Modifica(id,nome,descrizione,floorID);
         }
 
         // DELETE: api/Room/5
