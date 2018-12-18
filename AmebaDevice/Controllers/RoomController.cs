@@ -26,9 +26,9 @@ namespace AmebaDevice.Controllers
         }
 
         // GET: api/Room/5
-        public string Get(int id)
+        public RoomDTO Get(int id)
         {
-            return "value";
+            return roomService.Get(id);
         }
 
         // POST: api/Room

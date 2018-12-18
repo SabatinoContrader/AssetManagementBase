@@ -43,6 +43,15 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Thing">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Thing)">
+        <MappingFragment StoreEntitySet="Thing">
+          <ScalarProperty Name="ThingID" ColumnName="ThingID" />
+          <ScalarProperty Name="Num_Uscite" ColumnName="Num_Uscite" />
+          <ScalarProperty Name="Prezzo" ColumnName="Prezzo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <AssociationSetMapping Name="CustomerBuilding" TypeName="Model.CustomerBuilding" StoreEntitySet="Building">
       <EndProperty Name="Customer">
         <ScalarProperty Name="CustomerID" ColumnName="Customer_CustomerID" />
@@ -66,6 +75,23 @@
       </EndProperty>
       <EndProperty Name="Room">
         <ScalarProperty Name="RoomId" ColumnName="RoomId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="CustomerThing" TypeName="Model.CustomerThing" StoreEntitySet="Thing">
+      <EndProperty Name="Customer">
+        <ScalarProperty Name="CustomerID" ColumnName="Customer_CustomerID" />
+      </EndProperty>
+      <EndProperty Name="Thing">
+        <ScalarProperty Name="ThingID" ColumnName="ThingID" />
+      </EndProperty>
+      <Condition ColumnName="Customer_CustomerID" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="BuildingThing" TypeName="Model.BuildingThing" StoreEntitySet="Thing">
+      <EndProperty Name="Building">
+        <ScalarProperty Name="BuildingID" ColumnName="Building_BuildingID" />
+      </EndProperty>
+      <EndProperty Name="Thing">
+        <ScalarProperty Name="ThingID" ColumnName="ThingID" />
       </EndProperty>
     </AssociationSetMapping>
   </EntityContainerMapping>

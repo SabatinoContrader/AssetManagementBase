@@ -18,6 +18,7 @@ namespace AmebaDevice
         public Customer()
         {
             this.Building = new HashSet<Building>();
+            this.Thing = new HashSet<Thing>();
         }
     
         public int CustomerID { get; set; }
@@ -30,5 +31,7 @@ namespace AmebaDevice
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Building> Building { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Thing> Thing { get; set; }
     }
 }

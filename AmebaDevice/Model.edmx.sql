@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 12/17/2018 17:11:19
+-- Date Created: 12/18/2018 09:50:13
 -- Generated from EDMX file: D:\dotnet\AmebaDevice\AmebaDevice\AmebaDevice\Model.edmx
 -- --------------------------------------------------
 
@@ -26,6 +26,12 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_FloorRoom]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Room] DROP CONSTRAINT [FK_FloorRoom];
 GO
+IF OBJECT_ID(N'[dbo].[FK_CustomerThing]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ThingSet] DROP CONSTRAINT [FK_CustomerThing];
+GO
+IF OBJECT_ID(N'[dbo].[FK_BuildingThing]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[ThingSet] DROP CONSTRAINT [FK_BuildingThing];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
@@ -42,6 +48,9 @@ IF OBJECT_ID(N'[dbo].[Floor]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[Room]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Room];
+GO
+IF OBJECT_ID(N'[dbo].[ThingSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ThingSet];
 GO
 
 -- --------------------------------------------------
@@ -89,6 +98,16 @@ CREATE TABLE [dbo].[Room] (
 );
 GO
 
+-- Creating table 'Thing'
+CREATE TABLE [dbo].[Thing] (
+    [ThingID] int IDENTITY(1,1) NOT NULL,
+    [Num_Uscite] nvarchar(max)  NOT NULL,
+    [Prezzo] float  NOT NULL,
+    [Customer_CustomerID] int  NULL,
+    [Building_BuildingID] int  NOT NULL
+);
+GO
+
 -- --------------------------------------------------
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
@@ -115,6 +134,12 @@ GO
 ALTER TABLE [dbo].[Room]
 ADD CONSTRAINT [PK_Room]
     PRIMARY KEY CLUSTERED ([RoomId] ASC);
+GO
+
+-- Creating primary key on [ThingID] in table 'Thing'
+ALTER TABLE [dbo].[Thing]
+ADD CONSTRAINT [PK_Thing]
+    PRIMARY KEY CLUSTERED ([ThingID] ASC);
 GO
 
 -- --------------------------------------------------
@@ -164,6 +189,36 @@ GO
 CREATE INDEX [IX_FK_FloorRoom]
 ON [dbo].[Room]
     ([Floor_FloorID]);
+GO
+
+-- Creating foreign key on [Customer_CustomerID] in table 'Thing'
+ALTER TABLE [dbo].[Thing]
+ADD CONSTRAINT [FK_CustomerThing]
+    FOREIGN KEY ([Customer_CustomerID])
+    REFERENCES [dbo].[Customer]
+        ([CustomerID])
+    ON DELETE SET NULL ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_CustomerThing'
+CREATE INDEX [IX_FK_CustomerThing]
+ON [dbo].[Thing]
+    ([Customer_CustomerID]);
+GO
+
+-- Creating foreign key on [Building_BuildingID] in table 'Thing'
+ALTER TABLE [dbo].[Thing]
+ADD CONSTRAINT [FK_BuildingThing]
+    FOREIGN KEY ([Building_BuildingID])
+    REFERENCES [dbo].[Building]
+        ([BuildingID])
+    ON DELETE CASCADE ON UPDATE CASCADE;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_BuildingThing'
+CREATE INDEX [IX_FK_BuildingThing]
+ON [dbo].[Thing]
+    ([Building_BuildingID]);
 GO
 
 -- --------------------------------------------------

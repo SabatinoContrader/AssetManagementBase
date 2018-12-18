@@ -30,6 +30,12 @@ namespace AmebaDevice.Services
             return l;
         }
 
+        public RoomDTO Get(int id)
+        {
+            Room r = modelloDatiDbContext.Rooms.Find(id);
+            return RoomConverter.convertToDto(r);
+        }
+
 
         public void Inserisci(Room r)
         {

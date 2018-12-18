@@ -26,9 +26,9 @@ namespace AmebaDevice.Controllers
         }
 
         // GET: api/Floor/5
-        public string Get(int id)
+        public FloorDTO Get(int id)
         {
-            return "value";
+            return floorService.Get(id);
         }
 
         [HttpGet]

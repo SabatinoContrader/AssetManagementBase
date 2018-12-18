@@ -5,6 +5,7 @@
     <EntitySet Name="Building" EntityType="Model.Store.Building" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Floor" EntityType="Model.Store.Floor" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Room" EntityType="Model.Store.Room" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Thing" EntityType="Model.Store.Thing" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="CustomerBuilding" Association="Model.Store.CustomerBuilding">
       <End Role="Customer" EntitySet="Customer" />
       <End Role="Building" EntitySet="Building" />
@@ -16,6 +17,14 @@
     <AssociationSet Name="FloorRoom" Association="Model.Store.FloorRoom">
       <End Role="Floor" EntitySet="Floor" />
       <End Role="Room" EntitySet="Room" />
+    </AssociationSet>
+    <AssociationSet Name="CustomerThing" Association="Model.Store.CustomerThing">
+      <End Role="Customer" EntitySet="Customer" />
+      <End Role="Thing" EntitySet="Thing" />
+    </AssociationSet>
+    <AssociationSet Name="BuildingThing" Association="Model.Store.BuildingThing">
+      <End Role="Building" EntitySet="Building" />
+      <End Role="Thing" EntitySet="Thing" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Customer">
@@ -59,6 +68,16 @@
     <Property Name="Descrizione" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Floor_FloorID" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="Thing">
+    <Key>
+      <PropertyRef Name="ThingID" />
+    </Key>
+    <Property Name="ThingID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Num_Uscite" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Prezzo" Type="float" Nullable="false" />
+    <Property Name="Customer_CustomerID" Type="int" Nullable="true" />
+    <Property Name="Building_BuildingID" Type="int" Nullable="false" />
+  </EntityType>
   <Association Name="CustomerBuilding">
     <End Role="Customer" Type="Model.Store.Customer" Multiplicity="0..1" />
     <End Role="Building" Type="Model.Store.Building" Multiplicity="*" />
@@ -92,6 +111,30 @@
       </Principal>
       <Dependent Role="Room">
         <PropertyRef Name="Floor_FloorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CustomerThing">
+    <End Role="Customer" Type="Model.Store.Customer" Multiplicity="0..1" />
+    <End Role="Thing" Type="Model.Store.Thing" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="CustomerID" />
+      </Principal>
+      <Dependent Role="Thing">
+        <PropertyRef Name="Customer_CustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="BuildingThing">
+    <End Role="Building" Type="Model.Store.Building" Multiplicity="1" />
+    <End Role="Thing" Type="Model.Store.Thing" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Building">
+        <PropertyRef Name="BuildingID" />
+      </Principal>
+      <Dependent Role="Thing">
+        <PropertyRef Name="Building_BuildingID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

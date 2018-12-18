@@ -31,6 +31,12 @@ namespace AmebaDevice.Services
             return l;
         }
 
+        public FloorDTO Get(int id)
+        {
+            Floor f = modelloDatiDbContext.Floors.Find(id);
+            return FloorConverter.convertToDto(f);
+        }
+
         public void Inserisci(Floor f)
         {
             modelloDatiDbContext.SaveChanges();

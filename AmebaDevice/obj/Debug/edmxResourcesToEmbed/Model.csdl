@@ -17,6 +17,15 @@
       <End Role="Floor" EntitySet="Floor" />
       <End Role="Room" EntitySet="Room" />
     </AssociationSet>
+    <EntitySet Name="Thing" EntityType="Model.Thing" />
+    <AssociationSet Name="CustomerThing" Association="Model.CustomerThing">
+      <End Role="Customer" EntitySet="Customer" />
+      <End Role="Thing" EntitySet="Thing" />
+    </AssociationSet>
+    <AssociationSet Name="BuildingThing" Association="Model.BuildingThing">
+      <End Role="Building" EntitySet="Building" />
+      <End Role="Thing" EntitySet="Thing" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Customer">
     <Key>
@@ -30,6 +39,7 @@
     <Property Name="Email" Type="String" Nullable="false" />
     <Property Name="User_role" Type="String" Nullable="false" />
     <NavigationProperty Name="Building" Relationship="Model.CustomerBuilding" FromRole="Customer" ToRole="Building" />
+    <NavigationProperty Name="Thing" Relationship="Model.CustomerThing" FromRole="Customer" ToRole="Thing" />
   </EntityType>
   <EntityType Name="Building">
     <Key>
@@ -42,6 +52,7 @@
     <Property Name="Interno" Type="String" Nullable="false" />
     <NavigationProperty Name="Customer" Relationship="Model.CustomerBuilding" FromRole="Building" ToRole="Customer" />
     <NavigationProperty Name="Floor" Relationship="Model.BuildingFloor" FromRole="Building" ToRole="Floor" />
+    <NavigationProperty Name="Thing" Relationship="Model.BuildingThing" FromRole="Building" ToRole="Thing" />
   </EntityType>
   <Association Name="CustomerBuilding">
     <End Type="Model.Customer" Role="Customer" Multiplicity="0..1" />
@@ -73,5 +84,23 @@
   <Association Name="FloorRoom">
     <End Type="Model.Floor" Role="Floor" Multiplicity="1" />
     <End Type="Model.Room" Role="Room" Multiplicity="*" />
+  </Association>
+  <EntityType Name="Thing">
+    <Key>
+      <PropertyRef Name="ThingID" />
+    </Key>
+    <Property Name="ThingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Num_Uscite" Type="String" Nullable="false" />
+    <Property Name="Prezzo" Type="Double" Nullable="false" />
+    <NavigationProperty Name="Customer" Relationship="Model.CustomerThing" FromRole="Thing" ToRole="Customer" />
+    <NavigationProperty Name="Building" Relationship="Model.BuildingThing" FromRole="Thing" ToRole="Building" />
+  </EntityType>
+  <Association Name="CustomerThing">
+    <End Type="Model.Customer" Role="Customer" Multiplicity="0..1" />
+    <End Type="Model.Thing" Role="Thing" Multiplicity="*" />
+  </Association>
+  <Association Name="BuildingThing">
+    <End Type="Model.Building" Role="Building" Multiplicity="1" />
+    <End Type="Model.Thing" Role="Thing" Multiplicity="*" />
   </Association>
 </Schema>

@@ -29,5 +29,6 @@ namespace AmebaDevice
         public virtual DbSet<Building> Building { get; set; }
         public virtual DbSet<Floor> Floor { get; set; }
         public virtual DbSet<Room> Room { get; set; }
+        public virtual DbSet<Thing> Thing { get; set; }
     }
 }

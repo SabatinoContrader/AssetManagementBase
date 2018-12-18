@@ -176,11 +176,13 @@
     <Compile Include="Controllers\FloorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RoomController.cs" />
+    <Compile Include="Controllers\ThingController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Converter\BuildingConverter.cs" />
     <Compile Include="Converter\CustomerConverter.cs" />
     <Compile Include="Converter\FloorConverter.cs" />
     <Compile Include="Converter\RoomConverter.cs" />
+    <Compile Include="Converter\ThingConverter.cs" />
     <Compile Include="Customer.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -190,6 +192,7 @@
     <Compile Include="DTO\CustomerDTO.cs" />
     <Compile Include="DTO\FloorDTO.cs" />
     <Compile Include="DTO\RoomDTO.cs" />
+    <Compile Include="DTO\ThingDTO.cs" />
     <Compile Include="Floor.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -219,6 +222,10 @@
     <Compile Include="Services\CustomerService.cs" />
     <Compile Include="Services\FloorService.cs" />
     <Compile Include="Services\RoomService.cs" />
+    <Compile Include="Services\ThingService.cs" />
+    <Compile Include="Thing.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
